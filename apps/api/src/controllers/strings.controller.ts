@@ -1,8 +1,23 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
+import client from '../config/db';
 //import { faker } from '@faker-js/faker';
-import query from '../db/index';
+
+/**
+ * Query the database using the pool
+ * @param {*} query
+ * @param {*} params
+ *
+ * @see https://node-postgres.com/features/pooling#single-query
+ */
+
+/**
+ * HTTP methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+ * HTTP codes: https://www.w3.org/Protocols/HTTP/HTRESP.html
+ * Postgresql Error codes: https://www.postgresql.org/docs/current/errcodes-appendix.html
+ * async-await pattern for get callback argument
+ */
 
 class StrQuestions {
     public pathStr = '/str/q';
@@ -20,48 +35,28 @@ class StrQuestions {
     }
 
     public str = async (req: Request, res: Response) => {
-        const { method } = req;
-        switch (method) {
-            case 'GET':
-                query('SELECT * FROM js ORDER BY id ASC', (err, results) => {
-                    if (err) {
-                        throw err;
-                    }
-                    res.status(200).json(results.rows);
-                });
-                return;
-            case 'POST' | 'PUT' | 'Delete':
-                return res.status(400).send(`${method} Method Not Allowed`);
-            default:
-                return res.status(405).send(` ${method} Method Not Allowed`);
+        if (req.method === 'GET') {
+            try {
+                const results = await client.query(`SELECT * FROM js`);
+                res.status(200).json({ data: results.rows });
+            } catch {
+                res.status(500).json({ error: "Something went wrong" });
+            }
         }
+        return res.status(400).send({ error: `${req.method} Method Not Allowed` });
     };
 
     public strId = async (req: Request, res: Response) => {
-        const { method } = req;
         const id = req.params.id;
-        switch (method) {
-            case 'GET':
-                query(
-                    'SELECT * FROM js WHERE id = $1',
-                    [id],
-                    (err, results) => {
-                        if (err) {
-                            throw err;
-                        }
-                        res.status(200).json(results.rows);
-                    }
-                );
-                return;
-            case 'POST':
-                return res;
-            case 'PUT':
-                return res;
-            case 'DELETE':
-                return res;
-            default:
-                return res.status(405).send(` ${method} Method Not Allowed`);
+        if (req.method === 'GET') {
+            try {
+                const results = await client.query(`SELECT * FROM js WHERE id =$1`, [id]);
+                res.status(200).json({ data: results.rows });
+            } catch {
+                res.status(500).json({ error: "Something went wrong" });
+            }
         }
+        return res.status(400).send({ error: `${req.method} Method Not Allowed` });
     };
 }
 

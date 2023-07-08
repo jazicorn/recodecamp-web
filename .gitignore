@@ -125,15 +125,6 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-<<<<<<< HEAD
-# yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
-
-=======
 
 ### yarn ###
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
@@ -149,7 +140,6 @@ dist
 !.yarn/versions
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn
->>>>>>> 10b3f13 (created web-app api-app strapi-app)
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
