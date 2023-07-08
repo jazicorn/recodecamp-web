@@ -1,0 +1,26 @@
+{
+  
+  "name": "recodecamp",
+  "private": true,
+  "homepage": "http://jazicorn.github.io/recodecamp",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn workspaces foreach run build",
+    "start": "yarn workspaces foreach run start",
+    "docs": "docsify serve ./docs --port 3001",
+    "deploy:docs": "gh-pages -d docs",
+    "api:start": "yarn workspace api start",
+    "api:dev": "yarn workspace api dev",
+    "api:postinstall": "yarn workspace api postinstall",
+    "api:prepack": "yarn workspace api prepack",
+    "api:postpack": "yarn workspace api postpack",
+    "api:pretty-quick": "yarn workspace api pretty-quick",
+    "web:dev": "yarn workspace web dev",
+    "web:build": "yarn workspace web build",
+    "web:preview": "yarn workspace web preview"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "packageManager": "yarn@3.6.1"
+}

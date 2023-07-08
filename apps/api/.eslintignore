@@ -1,0 +1,27 @@
+docs/
+
+# /node_modules/* in the project root is ignored by default
+/node_modules/*
+
+# build artefacts
+dist/*
+build/*
+coverage/*
+
+# data definition files
+**/*.d.ts
+
+# 3rd party libs
+/src/public/
+
+# custom definition files
+/src/types/
+
+# non ts,js files
+lib/
+
+# ignore generated files for linting
+ ./src/**/*.js
+ tests/**/*.js
+ ./src/**/*.js.map
+ tests/**/*.js.map

@@ -1,0 +1,28 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+<<<<<<< HEAD
+    ],
+=======
+  ],
+>>>>>>> 10b3f13 (created web-app api-app strapi-app)
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+<<<<<<< HEAD
+    "@typescript-eslint/ban-ts-comment": "off"
+=======
+    "@typescript-eslint/no-explicit-any": "off"
+>>>>>>> 10b3f13 (created web-app api-app strapi-app)
+  },
+  "ignorePatterns": ["dist"]
+}

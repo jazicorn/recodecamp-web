@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+.custom-bg {
+  background-image: linear-gradient(
+    295deg,
+    hsl(220deg 13% 91%) 0%,
+    hsl(195deg 32% 79%) 5%,
+    hsl(191deg 42% 64%) 10%,
+    hsl(189deg 47% 55%) 18%,
+    hsl(191deg 40% 78%) 30%,
+    hsl(192deg 37% 93%) 54%,
+    hsl(220deg 13% 98%) 71%,
+    hsl(220deg 13% 95%) 80%,
+    hsl(220deg 13% 92%) 87%,
+    hsl(197deg 29% 82%) 92%,
+    hsl(192deg 40% 68%) 96%,
+    hsl(188deg 62% 45%) 100%
+  );
+}
