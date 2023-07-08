@@ -1,13 +1,13 @@
 'use strict';
-import { Q_Obj } from '../types/types.javascript';
+import { Q } from '../types/types.javascript';
 import { nanoid } from 'nanoid';
 
-export class Question implements Q_Obj {
+export class Question implements Q {
     created_at!: Date;
     updated_at!: Date;
     id!: string;
     language!: string;
-    level!: number;
+    level!: number | null;
     points!: number;
     title!: string | null;
     data!: object | null;
@@ -65,7 +65,7 @@ export class Question implements Q_Obj {
         this.id = id;
     }
     // language
-    public get getLanguage(): string | null {
+    public get getLanguage(): string {
         return this.language;
     }
     public set setLanguage(language: string) {
@@ -79,7 +79,7 @@ export class Question implements Q_Obj {
         this.level = level;
     }
     // points
-    public get getPoints(): number | null {
+    public get getPoints(): number {
         return this.points;
     }
     protected set setPoints(points: number) {

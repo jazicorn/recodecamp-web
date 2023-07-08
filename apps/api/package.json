@@ -7,7 +7,7 @@
     "test:env": "dotenv -e .env.test.local",
     "dev:env": "dotenv -e .env.dev.local",
     "build": "rimraf ./dist && tsc",
-    "start": "yarn build && node dist/index.js",
+    "start": "ts-node dist/index.js",
     "dev": "dotenv -e .env.dev.local nodemon",
     "lint": "eslint . --fix",
     "postinstall": "cd ../.. husky install",

@@ -6,7 +6,7 @@
       "rootDir": "./src",
       "baseUrl": ".",
       "strict": true,
-      "moduleResolution": "bundler",
+      "moduleResolution": "node",
       "esModuleInterop": true,
       "types": ["node"],
       "forceConsistentCasingInFileNames": true,
