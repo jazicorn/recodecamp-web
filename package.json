@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn workspaces foreach run build",
-    "start": "yarn workspace api start && yarn workspace web start",
+    "start": "yarn workspaces foreach run start",
     "docs": "docsify serve ./docs --port 3001",
     "deploy:docs": "gh-pages -d docs",
     "api:start": "yarn workspace api start",
