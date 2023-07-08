@@ -79,7 +79,7 @@ export class Question implements Q {
         this.level = level;
     }
     // points
-    public get getPoints(): number {
+    public get getPoints(): number | null {
         return this.points;
     }
     protected set setPoints(points: number) {
