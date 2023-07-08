@@ -8,7 +8,6 @@
       "strict": true,
       "moduleResolution": "node",
       "esModuleInterop": true,
-      "emitDecoratorMetadata": true,
       "noEmit": false,
       "types": ["node"],
       "forceConsistentCasingInFileNames": true,
