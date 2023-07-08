@@ -8,7 +8,7 @@ export class Question implements Q {
     id!: string;
     language!: string;
     level!: number | null;
-    points!: number;
+    points!: number | null;
     title!: string | null;
     data!: object | null;
     result!: object | null;

@@ -58,13 +58,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const ThemeProvider: React.FC<Props> = ({ children}: React.ReactNode) => {
+export const ThemeProvider: React.FC<Props> = ({ children}: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(themeReducer, initialState);
 
   return (
     <ThemeContext.Provider value={{ state, dispatch }}>
-      {" "}
-      {children}{" "}
+      {children}
     </ThemeContext.Provider>
   );
 };
