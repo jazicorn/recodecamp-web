@@ -6,8 +6,8 @@
   "scripts": {
     "test:env": "dotenv -e .env.test.local",
     "dev:env": "dotenv -e .env.dev.local",
-    "build": "rimraf ./dist && tsc",
-    "start": "ts-node dist/index.js",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "dev": "dotenv -e .env.dev.local nodemon",
     "lint": "eslint . --fix",
     "postinstall": "cd ../.. husky install",
