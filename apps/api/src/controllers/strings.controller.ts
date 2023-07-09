@@ -20,30 +20,32 @@ import client from '../config/db';
  */
 
 class StrQuestions {
-    public pathStr = '/str/q';
-    public pathStrId = '/str/q/:id';
+    public pathStr = '/str';
+    public pathStrId = '/str/:id';
     public router = Router();
     constructor() {
         this.initializeRoutes();
     }
 
     public initializeRoutes() {
-        this.router.get(this.pathStrId, this.strId);
+        this.router.get(this.pathStr, this.str);
         this.router.post(this.pathStrId, this.strId);
         this.router.put(this.pathStrId, this.strId);
-        this.router.delete(this.pathStr, this.str);
+        this.router.delete(this.pathStrId, this.strId);
     }
 
     public str = async (req: Request, res: Response) => {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM js`);
-                res.status(200).json({ data: results.rows });
+                res.status(200).json({ data: 'results.rows' });
             } catch {
                 res.status(500).json({ error: "Something went wrong" });
             }
+        } else {
+            res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
-        return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+
     };
 
     public strId = async (req: Request, res: Response) => {
@@ -51,12 +53,13 @@ class StrQuestions {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM js WHERE id =$1`, [id]);
-                res.status(200).json({ data: results.rows });
+                res.status(200).json({ data: "results.rows" });
             } catch {
                 res.status(500).json({ error: "Something went wrong" });
             }
+        } else {
+            res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
-        return res.status(400).send({ error: `${req.method} Method Not Allowed` });
     };
 }
 

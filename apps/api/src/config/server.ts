@@ -29,7 +29,7 @@ class App {
     }
 
     public listen() {
-        this.app.listen(this.port, (): void => {
+        this.app.listen(this.port, "0.0.0.0", (): void => {
             console.log(
                 `Server Running here 👉 http://localhost:${this.port}`
             );
