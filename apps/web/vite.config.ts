@@ -7,7 +7,7 @@ const api = process.env.API;
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr(), crossOriginIsolation()],
+  plugins: [react(), svgr()],
   manifest: true,
   server: {
     proxy: {
