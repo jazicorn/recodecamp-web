@@ -9,9 +9,9 @@ class App {
     public port: number;
     private corsOptions;
 
-    constructor(controllers, port: number) {
+    constructor(controllers) {
         this.app = express();
-        this.port = port;
+        this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
         this.initControllers(controllers);
     }
