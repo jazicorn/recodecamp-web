@@ -21,6 +21,5 @@
     "outDir": ".dist",
     "composite": true
   },
-  "include": ["src"],
-  "references": [{ "path": "../api" }]
+  "include": ["src"]
 }

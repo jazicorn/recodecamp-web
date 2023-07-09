@@ -26,7 +26,7 @@ class App {
 
     private initControllers(controllers) {
         controllers.forEach((controller) => {
-            this.app.use('/api', controller.router);
+            this.app.use('/', controller.router);
         });
     }
 
