@@ -1,24 +1,24 @@
-import "./styles/index.css";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { MantineProvider } from "@mantine/core";
-import { ThemeProvider } from "./context/ThemeContext.tsx";
-import App from "./pages/App.tsx";
-import Learn from "./pages/Learn.tsx";
+import './styles/index.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { MantineProvider } from '@mantine/core'
+import { ThemeProvider } from './context/ThemeContext.tsx'
+import App from './pages/App.tsx'
+import Learn from './pages/Learn.tsx'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
   },
   {
-    path: "learn",
+    path: 'learn',
     element: <Learn />,
   },
-]);
+])
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider>
       <MantineProvider withGlobalStyles withNormalizeCSS>
@@ -26,4 +26,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       </MantineProvider>
     </ThemeProvider>
   </React.StrictMode>
-);
+)

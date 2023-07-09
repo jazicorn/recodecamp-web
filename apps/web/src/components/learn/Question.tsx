@@ -60,7 +60,7 @@ const Question = () => {
       </div> */}
       <h1>Question Goes Here</h1>
     </div>
-  );
-};
+  )
+}
 
-export default Question;
+export default Question
