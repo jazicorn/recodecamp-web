@@ -14,6 +14,7 @@
     "api:prepack": "yarn workspace api prepack",
     "api:postpack": "yarn workspace api postpack",
     "api:pretty-quick": "yarn workspace api pretty-quick",
+    "web:start": "yarn workspace web start",
     "web:dev": "yarn workspace web dev",
     "web:build": "yarn workspace web build",
     "web:preview": "yarn workspace web preview"
