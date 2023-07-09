@@ -18,9 +18,9 @@ class App {
 
     private initMiddlewares() {
         this.app.use(bodyParser.json());
-        app.use(cors({ origin: true }));
-        app.use(express.raw({ type: 'application/vnd.custom-type' }));
-        app.use(express.text({ type: 'text/html' }));
+        this.app.use(cors({ origin: true }));
+        this.app.use(express.raw({ type: 'application/vnd.custom-type' }));
+        this.app.use(express.text({ type: 'text/html' }));
 
     }
 
