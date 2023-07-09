@@ -2,24 +2,26 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-//import cors from 'cors';
+import cors from 'cors';
 
 class App {
     public app: Application;
     public port: number;
-    //private corsOptions;
+    private corsOptions;
 
     constructor(controllers, port: number) {
         this.app = express();
         this.port = port;
         this.initMiddlewares();
-        //this.app.options('localhost', cors());
         this.initControllers(controllers);
     }
 
     private initMiddlewares() {
         this.app.use(bodyParser.json());
-        //this.app.use(cors());
+        app.use(cors({ origin: true }));
+        app.use(express.raw({ type: 'application/vnd.custom-type' }));
+        app.use(express.text({ type: 'text/html' }));
+
     }
 
     private initControllers(controllers) {
