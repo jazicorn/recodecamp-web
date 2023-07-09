@@ -7,20 +7,19 @@ import bodyParser from 'body-parser';
 class App {
     public app: Application;
     public port: number;
-    //private allowlist = ['http://localhost:4173/', 'http://localhost:5173'];
-    //private corsOptions;
+    private corsOptions;
 
     constructor(controllers, port: number) {
         this.app = express();
         this.port = port;
         this.initMiddlewares();
-        //this.app.options('localhost', cors());
+        this.app.options('localhost', cors());
         this.initControllers(controllers);
     }
 
     private initMiddlewares() {
         this.app.use(bodyParser.json());
-        //this.app.use(cors());
+        this.app.use(cors());
     }
 
     private initControllers(controllers) {

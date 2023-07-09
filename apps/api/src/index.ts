@@ -3,6 +3,8 @@
 import Strings from './controllers/strings.controller';
 import App from './config/server';
 
-const app = new App([new Strings()], 8000);
+const port = process.env.PORT;
+
+const app = new App([new Strings()], port);
 
 app.listen();

@@ -96,10 +96,7 @@ web_modules/
 
 # dotenv environment variable files
 # !!!🚨!!! For security reasons, DO NOT add env files to git repositories
-<<<<<<< HEAD
-=======
 *.env
->>>>>>> 10b3f13 (created web-app api-app strapi-app)
 .env
 .env.development.local
 .env.test.local
@@ -148,14 +145,6 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-<<<<<<< HEAD
-# yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
-=======
 
 ### yarn ###
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
@@ -169,7 +158,6 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
->>>>>>> 10b3f13 (created web-app api-app strapi-app)
 
 ### Node Patch ###
 # Serverless Webpack directories
