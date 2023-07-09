@@ -38,7 +38,7 @@ class StrQuestions {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM js`);
-                res.status(200).json({ data: 'results.rows' });
+                res.status(200).json({ data: results.rows });
             } catch {
                 res.status(500).json({ error: "Something went wrong" });
             }
