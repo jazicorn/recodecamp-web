@@ -29,6 +29,11 @@ export default defineConfig({
     resolve: {
       alias: {
         '~': resolve('src'),
+        'p': resolve('src/pages'),
+        'c': resolve('src/components'),
+        'd': resolve('src/components/dashboard'),
+        'a': resolve('src/assets'),
+        'h': resolve('src/hooks'),
       },
     },
   },

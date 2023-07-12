@@ -20,11 +20,10 @@ const Header = () => {
   }
 
   return (
-    <div className="tw-dark tw-font-mono tw-w-full tw-flex tw-flex-col tw-place-items-center">
+    <div className={`${darkMode ? 'tw-bg-campfire-blue' : 'tw-bg-light'
+      } tw-dark tw-font-mono tw-flex tw-flex-col tw-w-screen tw-place-items-center tw-px-5`}>
       <header
-        className={`bg ${
-          darkMode ? 'tw-bg-campfire-blue' : 'tw-bg-light'
-        } tw-grow-0 tw-h-[48px] tw-px-4 tw-w-full tw-flex tw-flex-row tw-justify-between`}
+        className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
       >
         <Link to={`/`} className="tw-flex tw-flex-row tw-place-self-center">
           <span className="tw-place-self-center">

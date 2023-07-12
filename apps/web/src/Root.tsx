@@ -1,9 +1,9 @@
-import App from "./pages/App";
+import Home from "./pages/Home";
 
 function Root() {
     return (
         <div>
-            <App/>
+            <Home/>
         </div>
     )     
 }

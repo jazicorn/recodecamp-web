@@ -1,5 +1,5 @@
 /**CSS*/
-import './styles/index.css'
+import './styles/tailwind.input.css'
 import { MantineProvider } from '@mantine/core'
 /**Custom Day/Night Context*/
 import { ThemeProvider } from './context/ThemeContext.tsx'
@@ -13,7 +13,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
 import Root from './Root.tsx'
 /**Non-Default Pages*/
-import Learn from './pages/Learn.tsx'
+import Dashboard from './pages/Dashboard.tsx'
 
 //const store = configureStore()
 
@@ -21,7 +21,7 @@ const router = Router(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Root />} />
-      <Route path="/learn" element={<Learn />}  />
+      <Route path="/learn" element={<Dashboard />}  />
       <Route path="*" element={<Root/>} />
     </Route>
   )
