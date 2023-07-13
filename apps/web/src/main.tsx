@@ -11,18 +11,19 @@ import ReactDOM from 'react-dom/client'
 //import configureStore from './redux/configureStore'
 /**React Router*/
 import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
-import Root from './Root.tsx'
+import ErrorBoundary from "./ErrorBoundary.tsx";
 /**Non-Default Pages*/
 import Dashboard from './pages/Dashboard.tsx'
+import Home from './pages/Home.tsx'
 
 //const store = configureStore()
 
 const router = Router(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Root />} />
-      <Route path="/learn" element={<Dashboard />}  />
-      <Route path="*" element={<Root/>} />
+      <Route path="/" element={<Home />} errorElement={<ErrorBoundary />} />
+      <Route path="/learn" element={<Dashboard />} errorElement={<ErrorBoundary />}/>
+      <Route path="*" element={<Home/>} errorElement={<ErrorBoundary />}/>
     </Route>
   )
 )
