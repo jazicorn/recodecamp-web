@@ -29,7 +29,8 @@ const D_Banner = () => {
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
       tw-z-20 tw-w-full tw-h-full tw-absolute tw-rounded tw-border-8 tw-border-no-border`}/>
       {/**Page Content | Position: Relative */}
-      <main className={`${darkMode ? '[&>section>ul]:tw-border-campfire-neutral-900': '[&>section>ul]:tw-border-campfire-blue'} tw-relative tw-z-40 tw-p-2 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left [&>section>ul]:tw-h-fit
+      <main className={`${darkMode ? '[&>section>ul]:tw-border-campfire-neutral-900': '[&>section>ul]:tw-border-campfire-blue'} 
+      tw-relative tw-z-40 tw-p-2 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left [&>section>ul]:tw-h-fit
       [&>section>ul]:tw-px-2 [&>section>ul]:tw-border-l-2 [&>section>ul]:tw-ml-4 
       [&>section>ul]:tw-flex [&>section>ul]:tw-flex-col [&>section>ul]:tw-gap-2`}>
           <section className="tw-overflow-auto tw-mb-1"> 
@@ -69,7 +70,7 @@ const D_Banner = () => {
               </li>
             </ul>
             <hr className={`${darkMode ? '' : 'tw-bg-campfire-neutral-600' } tw-ml-8 tw-my-3 tw-w-[100px] tw-h-[1px]`}/>
-            <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-cyan-dark'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
+            <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
             [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
             `}>
               <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>

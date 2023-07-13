@@ -20,7 +20,7 @@ const Header = () => {
   }
 
   return (
-    <div className={`${darkMode ? 'tw-bg-campfire-blue' : 'tw-bg-light'
+    <div className={`${darkMode ? 'tw-bg-campfire-neutral-800 tw-text-campfire-blue' : 'tw-bg-light'
       } tw-dark tw-font-mono tw-flex tw-flex-col tw-w-screen tw-place-items-center tw-px-5`}>
       <header
         className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
