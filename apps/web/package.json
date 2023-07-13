@@ -24,7 +24,10 @@
     "watch:storybook": "storybook dev -p 6006",
     "watch:tailwind": "npx tailwindcss -i ./src/styles/tailwind.input.css -o ./dist/tailwind.output.css --watch",
     "build:tailwind": "npx tailwindcss -i ./src/styles/tailwind.input.css -o ./dist/tailwind.output.css",
-    "build:storybook": "build:tailwind && storybook build"
+    "build:storybook": "build:tailwind && storybook build",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -82,12 +85,15 @@
     "@storybook/react": "^7.0.26",
     "@storybook/react-vite": "^7.0.26",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/ui": "^0.33.0",
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.0",
     "eslint": "^8.38.0",
@@ -100,6 +106,7 @@
     "eslint-plugin-storybook": "^0.6.12",
     "https": "^1.0.0",
     "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
     "lint-staged": "^13.2.3",
     "postcss": "^8.4.24",
     "prettier": "^3.0.0",
