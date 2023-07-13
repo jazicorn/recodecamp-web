@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,23 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReCodeCamp</title>
     <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&family=Space+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk&family=Space+Mono&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/dist/tailwind.output.css" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
-    <!--https://vitejs.dev/guide/backend-integration.html-->
-    <!-- <script type="module">
-      import RefreshRuntime from 'http://localhost:5173/@react-refresh'
-      RefreshRuntime.injectIntoGlobalHook(window)
-      window.$RefreshReg$ = () => {}
-      window.$RefreshSig$ = () => (type) => type
-      window.__vite_plugin_react_preamble_installed__ = true
-    </script> -->
     <script type="module" src="/src/main.tsx"></script>
-    <!--if development-->
-    <!-- <script type="module" src="http://localhost:5173/@vite/client"></script>
-    <script type="module" src="http://localhost:5173/src/main.tsx"></script> -->
   </body>
 </html>

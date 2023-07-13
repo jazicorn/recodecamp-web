@@ -1,40 +1,35 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { ThemeContext } from "../context/ThemeContext";
-import { ReactComponent as Logo } from "../assets/icons/logos/campfire-2-svgrepo-com.svg";
-import { ReactComponent as Moon } from "../assets/icons/user/settings/moon-cloudy-svgrepo-com.svg";
-import { ReactComponent as Sun } from "../assets/icons/user/settings/sun-svgrepo-com.svg";
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { ThemeContext } from '../context/ThemeContext'
+import { ReactComponent as Logo } from '../assets/icons/logos/campfire-2-svgrepo-com.svg'
+import { ReactComponent as Moon } from '../assets/icons/user/settings/moon-cloudy-svgrepo-com.svg'
+import { ReactComponent as Sun } from '../assets/icons/user/settings/sun-svgrepo-com.svg'
 
 const Header = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const theme = useContext(ThemeContext)
+  const darkMode = theme.state.darkMode
   //turn darkmode on and off
   const toggleTheme = () => {
     if (darkMode) {
-      theme.dispatch({ type: "LIGHTMODE", darkMode: false });
-      localStorage.theme = "light";
+      theme.dispatch({ type: 'LIGHTMODE', darkMode: false })
+      localStorage.theme = 'light'
     } else {
-      theme.dispatch({ type: "DARKMODE", darkMode: true });
-      localStorage.theme = "dark";
+      theme.dispatch({ type: 'DARKMODE', darkMode: true })
+      localStorage.theme = 'dark'
     }
-  };
+  }
 
   return (
-    <div className="tw-dark tw-font-mono tw-w-full tw-flex tw-flex-col tw-place-items-center">
+    <div className={`${darkMode ? 'tw-bg-campfire-blue' : 'tw-bg-light'
+      } tw-dark tw-font-mono tw-flex tw-flex-col tw-w-screen tw-place-items-center tw-px-5`}>
       <header
-        className={`bg ${
-          darkMode ? "tw-bg-campfire-blue" : "tw-bg-light"
-        } tw-grow-0 tw-h-[48px] tw-px-4 tw-w-full tw-flex tw-flex-row tw-justify-between`}
+        className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
       >
         <Link to={`/`} className="tw-flex tw-flex-row tw-place-self-center">
           <span className="tw-place-self-center">
             <Logo style={{ height: 22, width: 36 }} />
           </span>
-          <h5
-            className={`tw-text-xl ${
-              darkMode ? "hover:tw-text-white" : "hover:tw-text-campfire-blue"
-            }`}
-          >
+          <h5 className={`tw-text-xl ${darkMode ? 'hover:tw-text-white' : 'hover:tw-text-campfire-blue'}`}>
             ReCodeCamp
           </h5>
         </Link>
@@ -57,7 +52,7 @@ const Header = () => {
         </nav>
       </header>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

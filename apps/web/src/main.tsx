@@ -1,29 +1,40 @@
-import "./styles/index.css";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { MantineProvider } from "@mantine/core";
-import { ThemeProvider } from "./context/ThemeContext.tsx";
-import App from "./pages/App.tsx";
-import Learn from "./pages/Learn.tsx";
+/**CSS*/
+import './styles/tailwind.input.css'
+import { MantineProvider } from '@mantine/core'
+/**Custom Day/Night Context*/
+import { ThemeProvider } from './context/ThemeContext.tsx'
+/**React*/
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+/**React Redux*/
+//import { Provider } from 'react-redux'
+//import configureStore from './redux/configureStore'
+/**React Router*/
+import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
+import Root from './Root.tsx'
+/**Non-Default Pages*/
+import Dashboard from './pages/Dashboard.tsx'
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "learn",
-    element: <Learn />,
-  },
-]);
+//const store = configureStore()
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+const router = Router(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Root />} />
+      <Route path="/learn" element={<Dashboard />}  />
+      <Route path="*" element={<Root/>} />
+    </Route>
+  )
+)
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <RouterProvider router={router} />
+        {/* <Provider store={store}> */}
+          <RouterProvider router={router} />
+        {/* </Provider> */}
       </MantineProvider>
     </ThemeProvider>
   </React.StrictMode>
-);
+)
