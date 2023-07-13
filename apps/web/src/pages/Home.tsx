@@ -6,9 +6,6 @@ import Header from '../components/Header'
 import { ReactComponent as Plane } from '../assets/icons/homepage/airplane-svgrepo-com.svg'
 import { ReactComponent as Medal } from '../assets/icons/homepage/medal-svgrepo-com.svg'
 import { ReactComponent as Student } from '../assets/drawings/undraw/undraw_remotely_-2-j6y.svg'
-import { ReactComponent as Progress } from '../assets/drawings/undraw/undraw_progress_tracking_re_ulfg.svg'
-import { ReactComponent as Javascript } from '../assets/drawings/undraw/undraw_programming_re_kg9v.svg'
-import { ReactComponent as Customize } from '../assets/drawings/undraw/undraw_create_re_57a3.svg'
 
 function Home() {
   const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
@@ -16,17 +13,17 @@ function Home() {
   const darkMode = state.darkMode;
 
   return (
-    <div className='tw-dark tw-w-screen'>
-      <div className={`${
-          darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-contrast-25': 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-30' } tw-absolute tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-screen tw-w-screen` }/>
-      <div className="tw-relative tw-z-100 tw-bg-transparent tw-dark tw-font-mono tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-items-center">
+    <div className='tw-dark'>
+      <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60': 
+      'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50' } tw-fixed tw-absolute tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
+      <article className="tw-relative tw-z-100 tw-bg-transparent tw-dark tw-font-mono tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between ">
         {/** Navigation */}
         <Header />
         {/** Banner */}
         <section
           className={`bg ${
-            darkMode ? 'tw-bg-campfire-gray-dark tw-text-campfire-blue-light' : 'tw-bg-campfire-blue-light'
-          } tw-flex tw-flex-col tw-place-items-center tw-place-content-start tw-w-screen `}
+            darkMode ? 'tw-backdrop-opacity-70 tw-bg-black/70 [&_h1]:tw-text-campfire-neutral-300' : ' tw-backdrop-opacity-70 tw-bg-white/50 '
+          } tw-flex tw-flex-col tw-place-items-center tw-w-screen `}
         >
           {/** Stock Picture */}
           <div className="tw-flex tw-flex-col">
@@ -38,112 +35,87 @@ function Home() {
               <div className="tw-flex tw-flex-col tw-h-full">
                 <h1 className="tw-text-2xl tw-text-center tw-flex tw-flex-row tw-place-content-center">
                   <span className="tw-pl-3 tw-pr-2">Re-code Makes Perfect</span>
-                  <Medal style={{ height: 30, width: 25 }} />
+                  <Medal style={{ height: 35, width: 30 }} />
                 </h1>
-                <p
+                 <p
                   className={`${
-                    darkMode ? 'tw-text-campfire-blue ' : 'tw-text-campfire-gray-bold'
-                  } tw-text-base tw-text-center !dark:tw-text-campfire-blue`}
+                    darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-500'
+                  } tw-text-xl tw-text-center !dark:tw-text-campfire-blue`}
                 >
                   Practice leads to understanding...
                 </p>
-                <p className="tw-text-sm tw-flex tw-flex-col tw-place-items-center">
-                  <button className="tw-w-32 tw-m-2 tw-p-2 tw-font-mono tw-border tw-border-campfire-blue tw-rounded">
-                    Get Started
+                <p className="tw-text-sm tw-flex tw-flex-col tw-place-items-center tw-text-campfire-purple hover:tw-text-campfire-blue">
+                  <button className="tw-w-38 tw-m-2 tw-p-2 tw-font-mono tw-border tw-border-campfire-blue tw-rounded">
+                    Let's Get Started
                   </button>
                 </p>
               </div>
             )}
             {isDesktopMDLG && (
-              <div className="tw-flex tw-flex-col">
+              <div className="tw-flex tw-flex-col tw-min-h-[15em]">
                 <h1 className="tw-text-5xl tw-flex tw-flex-row tw-place-content-center tw-items-end">
-                  <span className="tw-pl-3 tw-pr-2">Re-Code Makes Perfect</span>
+                  <span className="tw-pl-3 tw-pr-2">
+                    <span className="tw-italic">Re-Code</span> Makes Perfect
+                  </span>
                   <Medal style={{ height: 40, width: 40 }} />
                 </h1>
                 <p
                   className={`${
-                    darkMode ? 'tw-text-campfire-blue ' : 'tw-text-campfire-gray-bold'
-                  } tw-text-lg tw-text-center !dark:tw-text-campfire-blue`}
+                    darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-500'
+                  } tw-text-xl tw-text-center`}
                 >
                   Practice leads to understanding...
                 </p>
                 <Link
                   to={`/learn`}
-                  className="tw-text-base tw-font-mono tw-w-42 tw-m-2 tw-py-1 tw-px-2 tw-flex tw-flex-row tw-place-self-center hover:tw-bg-campfire-gray tw-border-b hover:tw-border-none tw-border-campfire-blue tw-rounded-t-xl hover:tw-rounded-b-xl"
-                >
-                  <span className="tw-pr-2">Get Started</span>
-                  <Plane style={{ height: 25, width: 25 }} />
+                  className={`${
+                    darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-blue hover:tw-decoration-campfire-blue" : 
+                    "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
+                    tw-w-42 tw-m-2 tw-py-1 tw-pl-1 tw-flex tw-flex-row tw-place-self-center `}>
+                  <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 
+                  tw-text-2xl tw-text-center tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
+                    Let's Get Started
+                    </span>
+                  <Plane style={{ height: 35, width: 40 }} />
                 </Link>
               </div>
             )}
             {isDesktopXL && (
-              <div className="tw-flex tw-flex-col">
+              <div className="tw-flex tw-flex-col tw-min-h-[15em]">
                 <h1 className="tw-text-6xl tw-flex tw-flex-row tw-place-content-center tw-items-end">
                   <span className="tw-pl-3 tw-pr-2">
-                    <span className="tw-italic">Re-code</span> Makes Perfect
+                    <span className="tw-italic">Re-Code</span> Makes Perfect
                   </span>
                   <Medal style={{ height: 45, width: 55 }} />
                 </h1>
                 <p
                   className={`${
-                    darkMode ? 'tw-text-campfire-blue ' : 'tw-text-campfire-gray-bold'
-                  } tw-text-xl tw-text-center !dark:tw-text-campfire-blue`}
+                    darkMode ? 'tw-text-campfire-purple' : 'tw-text-campfire-neutral-500'
+                  } tw-text-xl tw-text-center`}
                 >
                   Practice leads to understanding...
                 </p>
                 <Link
                   to={`/learn`}
-                  className="tw-text-base tw-font-mono tw-w-42 tw-m-2 tw-py-1 tw-px-2 tw-flex tw-flex-row tw-place-self-center hover:tw-bg-campfire-gray tw-border-b hover:tw-border-transparent tw-border-campfire-blue tw-rounded-t-xl hover:tw-rounded-b-xl"
-                >
-                  <span className="tw-pr-2">Get Started</span>
-                  <Plane style={{ height: 25, width: 25 }} />
+                  className={`${
+                    darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-blue hover:tw-decoration-campfire-blue" : 
+                    "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
+                    tw-w-42 tw-m-2 tw-py-1 tw-pl-1 tw-flex tw-flex-row tw-place-self-center `}>
+                  <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 
+                  tw-text-2xl tw-text-center tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
+                    Lets's Get Started
+                  </span>
+                  <Plane style={{ height: 35, width: 40 }} />
                 </Link>
               </div>
             )}
           </div>
         </section>
-        {/**More Information */}
-        <section
-          className={`tw-grow bg ${
-            darkMode
-              ? 'tw-bg-campfire-gray-light [&_h3]:tw-text-campfire-cyan-darker child:tw-text-campfire-blue child:tw-border-x child:tw-border-campfire-cyan-dark child:tw-rounded'
-              : 'tw-bg-white h3:tw-text-campfire-blue child:tw-text-campfire-gray-darker child:tw-border-x child:tw-border-campfire-blue child:tw-rounded'
-          } 
-        tw-flex tw-flex-col tw-place-items-center tw-space-y-5 tw-p-5
-        md:tw-space-y-0 md:tw-flex-row md:tw-space-x-10 md:tw-w-full md:tw-px-32 [&>*]:tw-h-fit 
-        [&>*]:tw-place-items-center [&>*]:tw-w-1/3 [&>*]:tw-flex [&>*]:tw-flex-col 
-        [&>*]:tw-text-center [&_h3]:tw-text-xl [&>*]:tw-text-base [&>*]:tw-min-h-[228px] [&>*]:tw-min-w-[288px]`}
-        >
-          <div className={`${darkMode ? ' ' : ''} tw-flex tw-flex-col`}>
-            <h3>Learn Javascript</h3>
-            <Javascript style={{ height: 125, width: 125, padding: 0, margin: 0 }} />
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin erat elit, sed sodales
-              enim posuere sit amet. In hendrerit dignissim vestibulum.{' '}
-            </p>
-          </div>
-          <div className="tw-flex tw-flex-col">
-            <h3>Track Your Progress</h3>
-            <Progress style={{ height: 125, width: 125, padding: 0, margin: 0 }} />
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin erat elit, sed sodales
-              enim posuere sit amet. In hendrerit dignissim vestibulum.{' '}
-            </p>
-          </div>
-          <div className="tw-flex tw-flex-col">
-            <h3>Customize Questions</h3>
-            <Customize style={{ height: 125, width: 125, padding: 0, margin: 0 }} />
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin erat elit, sed sodales
-              enim posuere sit amet. In hendrerit dignissim vestibulum.{' '}
-            </p>
-          </div>
-        </section>
         {/**Footer */}
-        <footer className="tw-bg-campfire-gray tw-flex tw-flex-col tw-place-items-center tw-w-full tw-h-[28px]">
-          <p className="">created by Jazicorn</p>
+        <footer className={`${darkMode ? 'tw-bg-campfire-neutral-800 tw-text-campfire-neutral-200' : 'tw-bg-campfire-blue-100'} tw-bg-campfire-gray tw-flex tw-flex-col tw-place-items-center tw-w-full tw-h-[28px] tw-pr-3`}>
+          <a href="https://github.com/jazicorn"className="tw-pr-2">created by Jazicorn</a>
         </footer>
-      </div>
+      </article>
     </div>
   )
 }
