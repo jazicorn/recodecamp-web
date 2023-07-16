@@ -1,6 +1,7 @@
 // Dashboard Navigation
 import { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
+import { Link } from 'react-router-dom'
 //icons
 import {
   IconCalendar,
@@ -25,8 +26,8 @@ const D_Navigation = () => {
         </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
-          {darkMode ? <IconListDetails color="#2ca9bc" /> : <IconListDetails color="#000" />}
-          </li>
+          <Link to="/code">{darkMode ? <IconListDetails color="#2ca9bc" /> : <IconListDetails color="#000" />}</Link>
+        </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
           {darkMode ? <IconTerminal2 color="#2ca9bc" /> : <IconTerminal2 color="#000" />}</li>
