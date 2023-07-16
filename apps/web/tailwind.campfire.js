@@ -63,12 +63,17 @@ export default {
       },
       gridTemplateColumns: {
         // Complex site-specific column configuration
-        'dashboard': '3em auto auto minmax(10em, 17em)',
+        'dashboard': '3em, auto, auto, minmax(8em, 16em)',
+        'dashboard-mobile': 'auto',
+        'code': '3em, minmax(16em, 20em), auto',
+        'code-mobile': 'auto'
       },
       gridTemplateRows: {
         // Complex site-specific column configuration
         'dashboard': '2.5em, 65%, 30%',
-        'learn': '70%, 30%',
+        'dashboard-mobile': '3em, 3em, 24em, auto, auto, auto',
+        'code': '2.5em, 65%, 30%',
+        'code-mobile': '3em,  minmax(10em, 12em), minmax(16em, 20em), auto'
       }
     },
   },

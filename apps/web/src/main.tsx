@@ -14,6 +14,8 @@ import { RouterProvider, createHashRouter as Router, createRoutesFromElements, R
 import ErrorBoundary from "./ErrorBoundary.tsx";
 /**Non-Default Pages*/
 import Dashboard from './pages/Dashboard.tsx'
+import Code from './pages/Dashboard.Code.tsx';
+
 import Home from './pages/Home.tsx'
 
 const router = Router(
@@ -21,6 +23,7 @@ const router = Router(
     <Route>
       <Route path="/" element={<Home />} errorElement={<ErrorBoundary />} />
       <Route path="/learn" element={<Dashboard />} errorElement={<ErrorBoundary />}/>
+      <Route path="/code" element={<Code />} errorElement={<ErrorBoundary />}/>
       <Route path="*" element={<Home/>} errorElement={<ErrorBoundary />}/>
     </Route>
   )
@@ -32,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <ThemeProvider>
         <MantineProvider withGlobalStyles withNormalizeCSS>
           <RouterProvider router={router} />
-          </MantineProvider>
+        </MantineProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
