@@ -7,16 +7,14 @@ import { ThemeProvider } from './context/ThemeContext.tsx'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 /**React Redux*/
-//import { Provider } from 'react-redux'
-//import configureStore from './redux/configureStore'
+import { Provider } from 'react-redux'
+import store from './redux/store.ts'
 /**React Router*/
 import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
 import ErrorBoundary from "./ErrorBoundary.tsx";
 /**Non-Default Pages*/
 import Dashboard from './pages/Dashboard.tsx'
 import Home from './pages/Home.tsx'
-
-//const store = configureStore()
 
 const router = Router(
   createRoutesFromElements(
@@ -30,12 +28,12 @@ const router = Router(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        {/* <Provider store={store}> */}
+    <Provider store={store}>
+      <ThemeProvider>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
           <RouterProvider router={router} />
-        {/* </Provider> */}
-      </MantineProvider>
-    </ThemeProvider>
+          </MantineProvider>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 )
