@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { RootState } from '../store'
 
 // Define a type for the slice state
 interface DashboardState {
@@ -8,15 +7,22 @@ interface DashboardState {
 
 // Define the initial state using that type
 const initialState: DashboardState = {
-  value: "",
+  value: "banner",
 }
 
 export const dashboardSlice = createSlice({
   name: 'dashboard',
-  initialState: 'd_banner',
+  initialState: initialState,
   // `createSlice` will infer the state type from the `initialState` argument
-  initialState,
-  
-})
+  reducers: {
+    menuItem: (state, action) => {
+      state.value = action.payload;
+    },
+  },
+});
+
+export const { menuItem } = dashboardSlice.actions
+
+export default dashboardSlice.reducer;
 
 // Other code such as selectors can use the imported `RootState` type
