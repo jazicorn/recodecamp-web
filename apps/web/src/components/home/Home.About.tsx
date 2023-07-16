@@ -1,13 +1,13 @@
 import { useContext } from 'react'
 //import { Link } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
+import { ThemeContext } from '../../context/ThemeContext'
 //import useWindowSize from '../hooks/useWindowSize'
 //import { ReactComponent as Plane } from '../assets/icons/homepage/airplane-svgrepo-com.svg'
 //import { ReactComponent as Medal } from '../assets/icons/homepage/medal-svgrepo-com.svg'
 //import { ReactComponent as Student } from '../assets/drawings/undraw/undraw_remotely_-2-j6y.svg'
-import { ReactComponent as Progress } from '../assets/drawings/undraw/undraw_progress_tracking_re_ulfg.svg'
-import { ReactComponent as Javascript } from '../assets/drawings/undraw/undraw_programming_re_kg9v.svg'
-import { ReactComponent as Customize } from '../assets/drawings/undraw/undraw_create_re_57a3.svg'
+import { ReactComponent as Progress } from '../../assets/drawings/undraw/undraw_progress_tracking_re_ulfg.svg'
+import { ReactComponent as Javascript } from '../../assets/drawings/undraw/undraw_programming_re_kg9v.svg'
+import { ReactComponent as Customize } from '../../assets/drawings/undraw/undraw_create_re_57a3.svg'
 
 const About = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();

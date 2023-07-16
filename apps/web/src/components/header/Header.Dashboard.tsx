@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
-import { ReactComponent as Logo } from '../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../assets/icons/user/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../assets/icons/user/settings/sun-svgrepo-com.svg'
+import { ThemeContext } from '../../context/ThemeContext'
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
+import { ReactComponent as Moon } from '../../assets/icons/user/settings/moon-cloudy-svgrepo-com.svg'
+import { ReactComponent as Sun } from '../../assets/icons/user/settings/sun-svgrepo-com.svg'
 
 //icons
 import {
@@ -26,7 +26,7 @@ const HeaderDashboard = () => {
 
   return (
     <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25' : '[&>*]:tw-backdrop-brightness-65 [&>*]:tw-backdrop-blur-sm'
-      } tw-dark tw-font-mono tw-flex tw-flex-col tw-w-screen tw-place-items-center tw-px-5 tw-mt-3`}>
+      } tw-dark tw-font-mono tw-flex tw-flex-col tw-w-full tw-place-items-center tw-px-5 tw-mt-3 tw-relative`}>
       <header
         className={`tw-grow-0 tw-h-[48px] tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
       >

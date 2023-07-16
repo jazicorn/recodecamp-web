@@ -1,0 +1,21 @@
+// Dashboard Menu
+import { useContext } from 'react'
+import { ThemeContext } from '../../context/ThemeContext'
+
+const D_Editor = () => {
+  //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
+  return (
+    <div className={`${darkMode ? 'tw-text-campfire-blue' : ''} tw-flex tw-flex-col tw-h-full`}>
+      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-600' : '[&>*]:tw-bg-campfire-neutral-300'} 
+      tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
+        <main className='tw-p-2 tw-h-full'>
+          <h1>Editor</h1>
+        </main>
+      </div>
+    </div>
+  )
+}
+
+export default D_Editor
