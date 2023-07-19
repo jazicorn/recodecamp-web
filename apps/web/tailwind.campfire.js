@@ -13,23 +13,14 @@ export default {
         'no-border': 'rgba(0, 0, 0, 0.3)',
         'campfire-blue': { 
           DEFAULT: '#2ca9bc',
-          light: '#ecfeff'
-        },
-        'campfire-sky': {
-          '100': '#e0f2fe',
-          '200': "#bae6fd",
-        },
-        'campfire-cyan': {
-          'dark': '#0e7490',
-          'darker': '#164e63',
-          'darkest': '#083344',
-        },
-        'campfire-gray': {
-          DEFAULT: '#e5e7eb',
-          'light': '#f3f4f6',
-          'bold': '#9ca3af',
-          'dark': '#4b5563',
-          'darker': '#1f2937'
+          '100': '#d7ecf0',
+          '200': '#afd9e1',
+          '300': '#6cbccb',
+          '500': '#008396',
+          '600': '#006072',
+          '700': '#004e60',
+          '800': '#003e4f',
+          '900': '#00212f',
         },
         'campfire-neutral': {
           '50': '#fafafa',
@@ -72,12 +63,17 @@ export default {
       },
       gridTemplateColumns: {
         // Complex site-specific column configuration
-        'dashboard': '3em auto auto minmax(10em, 17em)',
+        'dashboard': '3em, auto, auto, minmax(8em, 16em)',
+        'dashboard-mobile': 'auto',
+        'code': '3em, minmax(16em, 20em), auto',
+        'code-mobile': 'auto'
       },
       gridTemplateRows: {
         // Complex site-specific column configuration
         'dashboard': '2.5em, 65%, 30%',
-        'learn': '70%, 30%',
+        'dashboard-mobile': '3em, 3em, 24em, auto, auto, auto',
+        'code': '2.5em, 65%, 30%',
+        'code-mobile': '3em,  minmax(10em, 12em), minmax(16em, 20em), auto'
       }
     },
   },

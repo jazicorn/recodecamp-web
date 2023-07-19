@@ -18,7 +18,14 @@
     "web:start": "yarn workspace web start",
     "web:dev": "yarn workspace web dev",
     "web:build": "yarn workspace web build",
-    "web:preview": "yarn workspace web preview"
+    "web:preview": "yarn workspace web preview",
+    "web:storybook": "yarn workspace web storybook",
+    "web:watch:storybook": "yarn workspace web watch:storybook",
+    "web:watch:tailwind": "yarn workspace web watch:tailwind",
+    "web:build:tailwind": "yarn workspace web build:tailwind",
+    "web:build:storybook": "yarn workspace web build:storybook",
+    "web:test:ui": "yarn workspace web test:ui",
+    "web:test:run": "yarn workspace web test:run"
   },
   "workspaces": [
     "apps/*"

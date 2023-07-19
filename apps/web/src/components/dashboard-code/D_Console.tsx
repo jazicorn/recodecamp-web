@@ -1,4 +1,4 @@
-// Dashboard Banner
+// Dashboard Console
 import { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 
@@ -11,7 +11,7 @@ const D_Console = () => {
       <div className={`${darkMode ? '[&>*]:tw-bg-neutral-600' : '[&>*]:tw-bg-campfire-neutral-300'} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
         <main className='tw-p-2 tw-h-full'>
-          {}
+          <h1>Console</h1>
         </main>
       </div>
     </div>

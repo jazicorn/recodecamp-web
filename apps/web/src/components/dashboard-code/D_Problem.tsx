@@ -11,7 +11,7 @@ const D_Problem = () => {
       <div className={`${darkMode ? '[&>*]:tw-bg-[#525252]' : '[&>*]:tw-bg-campfire-neutral-300'} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
         <main className='tw-p-2 tw-h-full'>
-          {}
+          <h1>Problem</h1>
         </main>
       </div>
     </div>
