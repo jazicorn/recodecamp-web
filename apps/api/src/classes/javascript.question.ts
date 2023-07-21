@@ -1,8 +1,8 @@
 'use strict';
-import { Q } from '../types/types.javascript';
+import { Q } from '../types/types.question';
 import { nanoid } from 'nanoid';
 
-export class Question implements Q {
+export class Question implements JS {
     created_at!: Date;
     updated_at!: Date;
     id!: string;
@@ -61,16 +61,12 @@ export class Question implements Q {
     public get getId(): string {
         return this.id;
     }
-    private set setId(id: string) {
-        this.id = id;
-    }
+
     // language
     public get getLanguage(): string {
         return this.language;
     }
-    public set setLanguage(language: string) {
-        this.language = language;
-    }
+
     // level
     public get getLevel(): number | null {
         return this.level;

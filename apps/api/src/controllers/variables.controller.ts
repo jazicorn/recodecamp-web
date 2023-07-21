@@ -19,25 +19,25 @@ import client from '../config/db';
  * async-await pattern for get callback argument
  */
 
-class StrQuestions {
-    public pathStr = '/str';
-    public pathStrId = '/str/:id';
-    public pathStrRandom = '/str/random'
+class VarQuestions {
+    public pathVar = '/var';
+    public pathVarId = '/var/:id';
+    public pathVarRandom = '/var/random';
     public router = Router();
     constructor() {
         this.initializeRoutes();
     }
 
     public initializeRoutes() {
-        this.router.get(this.pathStr, this.str);
-        this.router.get(this.pathStrId, this.strId);
-        this.router.get(this.pathStrRandom, this.strRandom;
+        this.router.get(this.pathVar, this.var);
+        this.router.get(this.pathVarId, this.varId);
+        this.router.get(this.pathVarRandom, this.varRandom);
     }
 
-    public str = async (req: Request, res: Response) => {
+    public var = async (req: Request, res: Response) => {
         if (req.method === 'GET') {
             try {
-                const results = await client.query(`SELECT * FROM strings WHERE category='strings'`);
+                const results = await client.query(`SELECT * FROM variables WHERE category='variables'`);
                 res.status(200).json({ data: results.rows });
             } catch {
                 res.status(500).json({ error: "Something went wrong" });
@@ -48,10 +48,10 @@ class StrQuestions {
 
     };
 
-     public strRandom = async (req: Request, res: Response) => {
+    public varRandom = async (req: Request, res: Response) => {
         if (req.method === 'GET') {
             try {
-                const results = await client.query(`SELECT * FROM strings WHERE category='strings'`);
+                const results = await client.query(`SELECT * FROM variables WHERE category='variables'`);
                 res.status(200).json({ data: results.rows });
             } catch {
                 res.status(500).json({ error: "Something went wrong" });
@@ -62,11 +62,11 @@ class StrQuestions {
 
     };
 
-    public strId = async (req: Request, res: Response) => {
+    public varId = async (req: Request, res: Response) => {
         const id = req.params.id;
         if (req.method === 'GET') {
             try {
-                const results = await client.query(`SELECT * FROM strings WHERE id =$1`, [id]);
+                const results = await client.query(`SELECT * FROM variables WHERE id =$1`, [id]);
                 res.status(200).json({ data: results.rows });
             } catch {
                 res.status(500).json({ error: "Something went wrong" });
@@ -77,4 +77,4 @@ class StrQuestions {
     };
 }
 
-export default StrQuestions;
+export default VarQuestions;
