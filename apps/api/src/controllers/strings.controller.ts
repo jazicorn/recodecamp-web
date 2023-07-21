@@ -31,7 +31,7 @@ class StrQuestions {
     public initializeRoutes() {
         this.router.get(this.pathStr, this.str);
         this.router.get(this.pathStrId, this.strId);
-        this.router.get(this.pathStrRandom, this.strRandom;
+        this.router.get(this.pathStrRandom, this.strRandom);
     }
 
     public str = async (req: Request, res: Response) => {
