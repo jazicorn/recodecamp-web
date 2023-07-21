@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 export class Question implements Q {
     created_at!: Date;
     updated_at!: Date;
-    id!: string;
+    id!: string | null;
     language!: string | null;
     level!: number | null;
     points!: number | null;
@@ -18,6 +18,7 @@ export class Question implements Q {
     refs!: object | null;
 
     constructor({
+        id = null,
         language = null,
         level = null,
         points = null,
@@ -31,7 +32,7 @@ export class Question implements Q {
     }) {
         this.created_at = new Date();
         this.updated_at = new Date();
-        this.id = `js-${nanoid(10)}`;
+        this.id = id;
         this.language = language;
         this.level = level;
         this.points = points;
