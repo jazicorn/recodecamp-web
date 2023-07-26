@@ -5665,6 +5665,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     express: ^4.18.2
     express-promise-router: ^4.1.1
+    helmet: ^7.0.0
     husky: ^8.0.0
     nanoid: ^3.0.0
     nodemon: ^1.14.9
@@ -9613,6 +9614,13 @@ __metadata:
   bin:
     he: bin/he
   checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
+  languageName: node
+  linkType: hard
+
+"helmet@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "helmet@npm:7.0.0"
+  checksum: 3622b8b68b7ac4736369fe7717adb5b87ddcdcda7c11c13277d79fb5670acab032e8c971835565b1d2144d234f3e0dbcd327a44249b9e61f0f64c0c753faf1bc
   languageName: node
   linkType: hard
 
