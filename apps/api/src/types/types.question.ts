@@ -1,8 +1,8 @@
 export interface Q {
     created_at: Date;
     updated_at: Date;
-    id: string;
-    language: string;
+    id: string | null;
+    language: string | null;
     level: number | null;
     points: number | null;
     title: string | null;
@@ -13,3 +13,9 @@ export interface Q {
     tags: string[] | null;
     refs: object | null;
 }
+
+export interface JS extends Omit<Q,'id' | 'language'>{
+    id: string;
+    language: string;
+}
+
