@@ -1,14 +1,15 @@
-import { Client } from 'pg'
-const env = process.env;
+// app.js
+const postgres = require('postgres');
+require('dotenv').config();
 
-const port = parseInt(env.API_PGPORT as string)
+const { API_PGHOST, API_PGDATABASE, AOI_PGUSER, API_PGPASSWORD, API_ENDPOINT_ID } = process.env;
+const URL = `postgres://${API_PGUSER}:${API_PGPASSWORD}@${API_PGHOST}/${API_PGDATABASE}?options=project%3D${API_ENDPOINT_ID}`;
 
-const client = new Client({
-    host: env.API_PGHOST,
-    port: port,
-    user: env.API_PGUSER,
-    password: env.API_PGPASSWORD,
-    database: env.API_PGDATABASE
-})
+default export const sql = postgres(URL, { ssl: 'require' });
 
-export default client;
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result);
+}
+
+getPgVersion();
