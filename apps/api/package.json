@@ -6,7 +6,7 @@
   "scripts": {
     "test:env": "dotenv -e .env.test.local",
     "dev:env": "dotenv -e .env.dev.local",
-    "build": "tsc",
+    "stage:build": "tsc",
     "start": "node dist",
     "dev": "dotenv -e .env.dev.local nodemon",
     "lint": "eslint . --fix",
