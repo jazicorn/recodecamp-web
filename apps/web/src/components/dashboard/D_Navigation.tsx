@@ -26,7 +26,7 @@ const D_Navigation = () => {
         </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
-          <Link to="/code">{darkMode ? <IconListDetails color="#2ca9bc" /> : <IconListDetails color="#000" />}</Link>
+          <Link to="/learn/code">{darkMode ? <IconListDetails color="#2ca9bc" /> : <IconListDetails color="#000" />}</Link>
         </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>

@@ -62,18 +62,20 @@ export default {
         25: '.25',
       },
       gridTemplateColumns: {
-        // Complex site-specific column configuration
-        'dashboard': '3em, auto, auto, minmax(8em, 16em)',
+        'dashboard': '3em, auto',
         'dashboard-mobile': 'auto',
-        'code': '3em, minmax(16em, 20em), auto',
-        'code-mobile': 'auto'
+        'layout-dashboard-home': 'auto, minmax(8em, 16em)',
+        'layout-dashboard-home-mobile': 'auto',
+        'layout-dashboard-code': 'minmax(16em, 20em), auto',
+        'layout-dashboard-code-mobile': 'auto'
       },
       gridTemplateRows: {
-        // Complex site-specific column configuration
-        'dashboard': '2.5em, 65%, 30%',
+        'dashboard': '2.5em, auto',
         'dashboard-mobile': '3em, 3em, 24em, auto, auto, auto',
-        'code': '2.5em, 65%, 30%',
-        'code-mobile': '3em,  minmax(10em, 12em), minmax(16em, 20em), auto'
+        'layout-dashboard-home': '65%, auto',
+        'layout-dashboard-home-mobile': '24em, auto, auto, auto',
+        'layout-dashboard-code': '65%, auto',
+        'layout-dashboard-code-mobile': 'minmax(10em, 12em), minmax(16em, 20em), auto'
       }
     },
   },

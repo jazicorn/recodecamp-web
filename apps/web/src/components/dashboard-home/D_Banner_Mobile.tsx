@@ -34,9 +34,8 @@ const D_Banner = () => {
       tw-relative tw-z-40 tw-px-4 tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left 
       [&>section>ul]:tw-h-fit [&>section>ul]:tw-px-2 [&>section>ul]:tw-border-l-2 [&>section>ul]:tw-ml-4 
       [&>section>ul]:tw-flex [&>section>ul]:tw-flex-col [&>section>ul]:tw-gap-2`}>
-        <h4 className="tw-text-4xl tw-pb-2 tw-pl-1">Directory</h4>
-        <section className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-row">
-          {/**Col 1 */}
+        <section className="tw-overflow-auto tw-overflow-y-hidden tw-mb-1"> 
+          <h4 className="tw-text-4xl tw-pb-2 tw-pl-1">Directory</h4>
           <ul className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
@@ -71,7 +70,7 @@ const D_Banner = () => {
               <Link to={''}>Search Dashboard</Link>
             </li>
           </ul>
-          {/**Col 2 */}
+          <hr className={`${darkMode ? '' : 'tw-bg-campfire-neutral-600' } tw-ml-8 tw-my-3 tw-w-[100px] tw-h-[1px]`}/>
           <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
