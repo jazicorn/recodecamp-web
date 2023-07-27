@@ -50,7 +50,7 @@ const D_Banner = () => {
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-100 "}
             tw-flex tw-flex-row tw-place-items-center tw-w-fit tw-pr-1 tw-rounded`}>
               { darkMode ? <IconListDetails color="#d4d4d4" /> : <IconListDetails color="#000" />}
-              <Link to='/code' className="">Start ReCoding</Link>
+              <Link to='/learn/code' className="">Start ReCoding</Link>
               <Rocket style={{ height: 22, width: 32 }} />
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
