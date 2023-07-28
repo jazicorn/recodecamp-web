@@ -4,14 +4,14 @@ get:
   responses:
     '200':
       description: Hello World string
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: string
-                  example: Hello World
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+                example: Hello World
     '500':
       description: Internal Server Error
       content:
