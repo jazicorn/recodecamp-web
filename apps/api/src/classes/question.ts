@@ -12,6 +12,8 @@ export class Question implements Q {
     title!: string | null;
     data!: object | null;
     result!: object | null;
+    conditions!: object | null;
+    constraints!: object | null;
     category!: string | null;
     category_sub!: string | null;
     tags!: string[] | null;
@@ -25,6 +27,8 @@ export class Question implements Q {
         title = null,
         data = null,
         result = null,
+        conditions = null,
+        constraints = null,
         category = null,
         category_sub = null,
         tags = null,
@@ -39,6 +43,8 @@ export class Question implements Q {
         this.title = title;
         this.data = data;
         this.result = result;
+        this.conditions = conditions;
+        this.constraints = constraints;
         this.category = category;
         this.category_sub = category_sub;
         this.tags = tags;
@@ -107,6 +113,20 @@ export class Question implements Q {
     }
     public set setResult(result: object) {
         this.result = result;
+    }
+    // conditions
+    public get getConditions(): object | null {
+        return this.conditions;
+    }
+    public set setConditions(conditions: object) {
+        this.conditions = conditions;
+    }
+    // constraints
+    public get getConstraints(): object | null {
+        return this.constraints;
+    }
+    public set setConstraints(constraints: object) {
+        this.constraints = constraints;
     }
     // category
     public get getCategory(): string | null {

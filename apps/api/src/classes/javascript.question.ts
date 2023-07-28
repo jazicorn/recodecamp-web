@@ -1,5 +1,5 @@
 'use strict';
-import { Q } from '../types/types.question';
+import { JS } from '../types/types.question';
 import { nanoid } from 'nanoid';
 
 export class Question implements JS {
@@ -12,35 +12,29 @@ export class Question implements JS {
     title!: string | null;
     data!: object | null;
     result!: object | null;
+    conditions!: object | null;
+    constraints!: object | null;
     category!: string | null;
     category_sub!: string | null;
     tags!: string[] | null;
     refs!: object | null;
 
-    constructor({
-        level = null,
-        points = null,
-        title = null,
-        data = null,
-        result = null,
-        category = null,
-        category_sub = null,
-        tags = null,
-        refs = null,
-    }) {
+    constructor(data) {
         this.created_at = new Date();
         this.updated_at = new Date();
         this.id = `js-${nanoid(10)}`;
         this.language = 'Javascript';
-        this.level = level;
-        this.points = points;
-        this.title = title;
-        this.data = data;
-        this.result = result;
-        this.category = category;
-        this.category_sub = category_sub;
-        this.tags = tags;
-        this.refs = refs;
+        this.level = data.level;
+        this.points = data.points;
+        this.title = data.title;
+        this.data = data.data;
+        this.result = data.result;
+        this.conditions = data.conditions;
+        this.constraints = data.constraints;
+        this.category = data.category;
+        this.category_sub = data.category_sub;
+        this.tags = data.tags;
+        this.refs = data.refs;
     }
 
     // created_at
@@ -101,6 +95,20 @@ export class Question implements JS {
     }
     public set setResult(result: object) {
         this.result = result;
+    }
+    // conditions
+    public get getConditions(): object | null {
+        return this.conditions;
+    }
+    public set setConditions(conditions: object) {
+        this.conditions = conditions;
+    }
+    // constraints
+    public get getConstraints(): object | null {
+        return this.constraints;
+    }
+    public set setConstraints(constraints: object) {
+        this.constraints = constraints;
     }
     // category
     public get getCategory(): string | null {
