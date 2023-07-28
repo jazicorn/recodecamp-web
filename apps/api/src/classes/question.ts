@@ -66,14 +66,14 @@ export class Question implements Q {
         this.updated_at = date;
     }
     // id
-    public get getId(): string {
+    public get getId(): string | null {
         return this.id;
     }
     private set setId(id: string) {
         this.id = id;
     }
     // language
-    public get getLanguage(): string {
+    public get getLanguage(): string | null {
         return this.language;
     }
     public set setLanguage(language: string) {
