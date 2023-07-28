@@ -1,4 +1,6 @@
 get:
+  tags:
+    - index
   description: API test response
   operationId: helloWorld
   responses:
