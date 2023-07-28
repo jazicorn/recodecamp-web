@@ -7,11 +7,7 @@ const animalFullName = faker.person.fullName({ firstName: animalName });
 export const objBlockScopeReassign: JS_Type = {
     level: 1,
     points: 1,
-    title: `
-        Assuming \"block scope\",
-        write a variable named "${animal}",
-        assign it the value "${animalName}",
-        then reassign the variable the value "${animalFullName}`,
+    title: `Assuming \"block scope\", write a variable named \"${animal}\", assign it the value \"${animalName}\", then reassign the variable the value \"${animalFullName}\"`,
     data: {
         scope: "block scope",
         keyword: 'let',

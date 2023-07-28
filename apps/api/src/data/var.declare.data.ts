@@ -11,10 +11,7 @@ const keyword = ['var', 'const', 'let'][random];
 export const objRandom: JS_Type = {
     level: 1,
     points: 1,
-    title: `
-        Using the \"${keyword}\" keyword,
-        declare a variable named "${animal},
-        and assign it the value ${animalName}"`,
+    title: `Using the \"${keyword}\" keyword, declare a variable named \"${animal}\", and assign it the value \"${animalName}\"`,
     data: { keyword: keyword, declaration: animal, value: animalName},
     result: { result: `${keyword} ${animal} = ${animalName}`},
     conditions: null,
@@ -28,7 +25,7 @@ export const objRandom: JS_Type = {
 export const objRandomVar: JS_Type = {
     level: 1,
     points: 1,
-    title: `Using the \"var\" keyword, declare a variable named "${animal}"`,
+    title: `Using the \"var\" keyword, declare a variable named \"${animal}\"`,
     data: { keyword: 'var', declaration: animal },
     result: { result: `var ${animal}`},
     conditions: null,
@@ -42,7 +39,7 @@ export const objRandomVar: JS_Type = {
 export const objRandomConst: JS_Type = {
     level: 1,
     points: 1,
-    title: `Using the \"const\" keyword, declare a variable named "${animal}" and assign it the value "${animalName}`,
+    title: `Using the \"const\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
     data: { keyword: 'const', declaration: animal, value: animalName},
     result: { result: `const ${animal} `},
     conditions: null,
@@ -56,7 +53,7 @@ export const objRandomConst: JS_Type = {
 export const objRandomLet: JS_Type = {
     level: 1,
     points: 1,
-    title: `Using the \"let\" keyword, declare a variable named "${animal}"`,
+    title: `Using the \"let\" keyword, declare a variable named \"${animal}\"`,
     data: { keyword: 'let', value: animal},
     result: { result: `let ${animal}`},
     conditions: null,
