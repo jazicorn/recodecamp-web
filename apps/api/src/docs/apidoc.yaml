@@ -18,12 +18,12 @@ servers:
     description: Production Server
 paths:
   /var/declare/random:
-    $ref: "./paths/var/var-declare-random.docs.yaml"
+    $ref: "apps/api/src/docs/paths/var/var-declare-random.docs.yaml"
   /var/declare/var:
-    $ref: "./paths/var/var-declare-var.docs.yaml"
+    $ref: "apps/api/src/docs/paths/var/var-declare-var.docs.yaml"
   /var/declare/const:
-    $ref: "./paths/var/var-declare-const.docs.yaml"
+    $ref: "apps/api/src/docs/paths/var/var-declare-const.docs.yaml"
   /var/declare/let:
-    $ref: "./paths/var/var-declare-let.docs.yaml"
+    $ref: "apps/api/src/docs/paths/var/var-declare-let.docs.yaml"
   /:
-    $ref: "./paths/index.docs.yaml"
+    $ref: "apps/api/src/docs/paths/index.docs.yaml"
