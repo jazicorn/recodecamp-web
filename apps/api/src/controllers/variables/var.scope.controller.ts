@@ -2,7 +2,6 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import client from '../../config/db';
-import { faker } from '@faker-js/faker';
 import { Question } from '../../classes/javascript.question';
 import { JS_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
@@ -26,12 +25,12 @@ export default class VarScope {
     }
 
     public varRandomScope = async (req: Request, res: Response) => {
+        const random = getRandomInt(3);
+        const obj = [objBlockScope(), objFuncScope(), objGlobalScope()][random];
+        const question = new Question(obj);
         switch(req.method) {
             case('GET'):
                 try {
-                    const random = getRandomInt(3);
-                    const obj = [objBlockScope, objFuncScope, objGlobalScope][random];
-                    const question = new Question(obj);
                     res.status(200).json({ data: question });
                 } catch {
                     res.status(500).json({ error: "Something went wrong" });
@@ -43,10 +42,11 @@ export default class VarScope {
     };
 
     public varBlockScope = async (req: Request, res: Response) => {
+        const obj = objBlockScope();
+        const question = new Question(obj);
         switch(req.method) {
             case('GET'):
                 try {
-                    const question = new Question(objBlockScope);
                     res.status(200).json({ data: question });
                 } catch {
                     res.status(500).json({ error: "Something went wrong" });
@@ -58,10 +58,11 @@ export default class VarScope {
     };
 
     public varFuncScope = async (req: Request, res: Response) => {
+        const obj =objFuncScope();
+        const question = new Question(obj);
         switch(req.method) {
             case('GET'):
                 try {
-                    const question = new Question(objFuncScope);
                     res.status(200).json({ data: question });
                 } catch {
                     res.status(500).json({ error: "Something went wrong" });
@@ -73,10 +74,11 @@ export default class VarScope {
     };
 
     public varGlobalScope = async (req: Request, res: Response) => {
+        const obj = objGlobalScope();
+        const question = new Question(obj);
         switch(req.method) {
             case('GET'):
                 try {
-                    const question = new Question(objGlobalScope);
                     res.status(200).json({ data: question });
                 } catch {
                     res.status(500).json({ error: "Something went wrong" });

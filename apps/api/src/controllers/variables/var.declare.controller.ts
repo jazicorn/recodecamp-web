@@ -2,7 +2,6 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import client from '../../config/db';
-import { faker } from '@faker-js/faker';
 import { Question } from '../../classes/javascript.question';
 import { JS_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
@@ -26,57 +25,66 @@ export default class VarDeclare {
     }
 
     public varRandomDeclare = async (req: Request, res: Response) => {
-        const question: JS_Type = new Question(objRandom);
-        if (req.method === 'GET') {
-            try {
-                res.status(200).json({ data: question });
-            } catch {
-                res.status(500).json({ error: "Something went wrong" });
-            }
-        } else {
-            res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        const data = objRandom();
+        const question: JS_Type = new Question(data);
+        switch(req.method) {
+            case('GET'):
+                 try {
+                    res.status(200).json({ data: question });
+                } catch {
+                    res.status(500).json({ error: "Something went wrong" });
+                }
+                break
+            default:
+                res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
 
     public varDeclareVar = async (req: Request, res: Response) => {
-        const question: JS_Type = new Question(objRandomVar);
-        if (req.method === 'GET') {
-            try {
-                res.status(200).json({ data: question });
-            } catch {
-                res.status(500).json({ error: "Something went wrong" });
-            }
-        } else {
-            res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        const data = objRandomVar();
+        const question: JS_Type = new Question(data);
+        switch(req.method) {
+            case('GET'):
+                 try {
+                    res.status(200).json({ data: question });
+                } catch {
+                    res.status(500).json({ error: "Something went wrong" });
+                }
+                break
+            default:
+                res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
-
     };
 
     public varDeclareConst = async (req: Request, res: Response) => {
-        const question: JS_Type = new Question(objRandomConst);
-        if (req.method === 'GET') {
-            try {
-                res.status(200).json({ data: question });
-            } catch {
-                res.status(500).json({ error: "Something went wrong" });
-            }
-        } else {
-            res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        const data = objRandomConst();
+        const question: JS_Type = new Question(data);
+         switch(req.method) {
+            case('GET'):
+                 try {
+                    res.status(200).json({ data: question });
+                } catch {
+                    res.status(500).json({ error: "Something went wrong" });
+                }
+                break
+            default:
+                res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
-
     };
 
      public varDeclareLet = async (req: Request, res: Response) => {
-        const question: JS_Type = new Question(objRandomLet);
-        if (req.method === 'GET') {
-            try {
-                res.status(200).json({ data: question });
-            } catch {
-                res.status(500).json({ error: "Something went wrong" });
-            }
-        } else {
-            res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        const data = objRandomLet();
+        const question: JS_Type = new Question(data);
+        switch(req.method) {
+            case('GET'):
+                 try {
+                    res.status(200).json({ data: question });
+                } catch {
+                    res.status(500).json({ error: "Something went wrong" });
+                }
+                break
+            default:
+                res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
-
     };
 }
