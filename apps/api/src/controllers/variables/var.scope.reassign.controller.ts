@@ -5,7 +5,7 @@ import client from '../../config/db';
 import { Question } from '../../classes/javascript.question';
 import { JS_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
-import { objBlockScopeReassign } from '../../data/var.scope.reasign.data';
+import { objBlockScopeReassign } from '../../data/var.scope.reassign.data';
 
 export default class VarScopeReassign {
     public pathVarReassignBlock = '/var/scope/reassign/block';
@@ -15,7 +15,7 @@ export default class VarScopeReassign {
     }
 
     public initializeRoutes() {
-        this.router.get(this.pathVarReassignBlock this.varBlockScope);
+        this.router.get(this.pathVarReassignBlock, this.varBlockScope);
     }
 
     public varBlockScope = async (req: Request, res: Response) => {
