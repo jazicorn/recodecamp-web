@@ -12,6 +12,9 @@ import store from './redux/store.ts'
 /**React Router*/
 import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
 import ErrorBoundary from "./ErrorBoundary.tsx";
+/**React Query */
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 /**Pages*/
 import Dashboard from './pages/Dashboard.tsx'
 import Home from './pages/Home.tsx'
@@ -32,12 +35,18 @@ const router = Router(
   )
 )
 
+// Create a react-query client
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider>
         <MantineProvider withGlobalStyles withNormalizeCSS>
-          <RouterProvider router={router} />
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
         </MantineProvider>
       </ThemeProvider>
     </Provider>
