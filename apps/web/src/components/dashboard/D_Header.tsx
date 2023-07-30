@@ -1,12 +1,18 @@
 // Dashboard Banner
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import JS_Icon from "../../assets/javascript/javascript-original.svg"
-import { IconSearch } from '@tabler/icons-react'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import JS_Icon from "../../assets/javascript/javascript-original.svg";
+import { IconSearch } from '@tabler/icons-react';
+// redux hooks
+//import { useAppSelector } from '../redux/reduxHooks.ts';
+//import type { RootState } from '../redux/store.ts';
 
 const D_Navigation = () => {
   const { state } = useContext(ThemeContext);
-    const darkMode = state.darkMode;
+  const darkMode = state.darkMode;
+  //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
+  //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
+
   return (
     <menu className={`${darkMode ? 'tw-text-campfire-blue' : 'tw-text-campfire-neutral-800'} tw-shrink-0 tw-flex tw-flex-row tw-h-full tw-w-full tw-text-campfire-blue tw-items-center tw-place-content-between tw-pr-3 `}>
       <ul className='tw-flex tw-flex-row tw-items-center'>
