@@ -31,7 +31,7 @@ get:
               points:
                 type: number
                 example: 1
-              title:
+              task:
                 type: string
                 example: Using the "${keyword}" keyword, declare a variable named "${animal}", and assign it the value "${animalName}".
               data:
@@ -40,6 +40,9 @@ get:
               result:
                 type: object
                 example: { result: '${keyword} ${animal} = ${animalName}' }
+              hints:
+                type: object
+                example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
               conditions:
                 type: object
                 example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }

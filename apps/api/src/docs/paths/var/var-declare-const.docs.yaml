@@ -31,7 +31,7 @@ get:
               points:
                 type: number
                 example: 1
-              title:
+              task:
                 type: string
                 example: Using the "const" keyword, declare a variable named "${animal}"
               data:
@@ -40,6 +40,9 @@ get:
               result:
                 type: object
                 example: { result: 'const ${animal}'}
+              hints:
+                type: object
+                example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
               conditions:
                 type: object
                 example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
@@ -74,4 +77,3 @@ get:
               message:
                 type: string
                 example: Internal Server Error
-                

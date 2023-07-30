@@ -5,9 +5,10 @@ export interface Q {
     language: string | null;
     level: number | null;
     points: number | null;
-    title: string | null;
+    task: string | null;
     data: object | null;
     result: object | null;
+    hints: object| null;
     conditions: object| null;
     constraints: object | null;
     category: string | null;
@@ -24,9 +25,10 @@ export interface JS extends Omit<Q,'id' | 'language'>{
 export type JS_Type = {
     level: number | null;
     points: number | null;
-    title: string | null;
+    task: string | null;
     data: object | null;
     result: object | null;
+    hints: object| null;
     conditions: object | null;
     constraints: object | null;
     category: string | null;

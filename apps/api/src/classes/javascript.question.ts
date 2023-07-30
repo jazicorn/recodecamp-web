@@ -9,9 +9,10 @@ export class Question implements JS {
     language!: string;
     level!: number | null;
     points!: number | null;
-    title!: string | null;
+    task!: string | null;
     data!: object | null;
     result!: object | null;
+    hints!: object | null;
     conditions!: object | null;
     constraints!: object | null;
     category!: string | null;
@@ -26,9 +27,10 @@ export class Question implements JS {
         this.language = 'Javascript';
         this.level = data.level;
         this.points = data.points;
-        this.title = data.title;
+        this.task = data.task;
         this.data = data.data;
         this.result = data.result;
+        this.hints = data.hints;
         this.conditions = data.conditions;
         this.constraints = data.constraints;
         this.category = data.category;
@@ -75,12 +77,12 @@ export class Question implements JS {
     protected set setPoints(points: number) {
         this.points = points;
     }
-    // title
-    public get getTitle(): string | null {
-        return this.title;
+    // task
+    public get getTask(): string | null {
+        return this.task;
     }
-    public set setTitle(title: string) {
-        this.title = title;
+    public set setTask(task: string) {
+        this.task = task;
     }
     // data
     public get getData(): object | null {
@@ -95,6 +97,13 @@ export class Question implements JS {
     }
     public set setResult(result: object) {
         this.result = result;
+    }
+    // hints
+    public get getHints(): object | null {
+        return this.hints;
+    }
+    public set setHints(hints: object) {
+        this.hints = hints;
     }
     // conditions
     public get getConditions(): object | null {

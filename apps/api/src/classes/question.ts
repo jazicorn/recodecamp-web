@@ -9,9 +9,10 @@ export class Question implements Q {
     language!: string | null;
     level!: number | null;
     points!: number | null;
-    title!: string | null;
+    task!: string | null;
     data!: object | null;
     result!: object | null;
+    hints!: object | null;
     conditions!: object | null;
     constraints!: object | null;
     category!: string | null;
@@ -24,9 +25,10 @@ export class Question implements Q {
         language = null,
         level = null,
         points = null,
-        title = null,
+        task = null,
         data = null,
         result = null,
+        hints = null,
         conditions = null,
         constraints = null,
         category = null,
@@ -40,9 +42,10 @@ export class Question implements Q {
         this.language = language;
         this.level = level;
         this.points = points;
-        this.title = title;
+        this.task = task;
         this.data = data;
         this.result = result;
+        this.hints = hints;
         this.conditions = conditions;
         this.constraints = constraints;
         this.category = category;
@@ -93,12 +96,12 @@ export class Question implements Q {
     protected set setPoints(points: number) {
         this.points = points;
     }
-    // title
-    public get getTitle(): string | null {
-        return this.title;
+    // task
+    public get getTask(): string | null {
+        return this.task;
     }
-    public set setTitle(title: string) {
-        this.title = title;
+    public set setTask(task: string) {
+        this.task = task;
     }
     // data
     public get getData(): object | null {
@@ -113,6 +116,13 @@ export class Question implements Q {
     }
     public set setResult(result: object) {
         this.result = result;
+    }
+    // hints
+    public get getHints(): object | null {
+        return this.hints;
+    }
+    public set setHints(hints: object) {
+        this.hints = hints;
     }
     // conditions
     public get getConditions(): object | null {

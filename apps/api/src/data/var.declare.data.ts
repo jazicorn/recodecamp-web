@@ -10,13 +10,14 @@ export const objRandom = (): JS_Type => {
     const data = {
         level: 1,
         points: 1,
-        title: `Using the \"${keyword}\" keyword, declare a variable named \"${animal}\", and assign it the value \"${animalName}\"`,
+        task: `Using the \"${keyword}\" keyword, declare a variable named \"${animal}\", and assign it the value \"${animalName}\"`,
         data: { keyword: keyword, declaration: animal, value: animalName},
         result: { result: `${keyword} ${animal} = ${animalName}`},
+        hints: null,
         conditions: null,
         constraints: null,
         category: 'Variable',
-        category_sub: null,
+        category_sub: 'declaration',
         tags: null,
         refs: null
     }
@@ -29,13 +30,14 @@ export const objRandomVar = (): JS_Type => {
     const data = {
         level: 1,
         points: 1,
-        title: `Using the \"var\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
+        task: `Using the \"var\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
         data: { keyword: 'var', declaration: animal, value: animalName },
         result: { result: `var ${animal} = ${animalName}`},
+        hints: null,
         conditions: null,
         constraints: null,
         category: 'Variable',
-        category_sub: 'var',
+        category_sub: 'declaration',
         tags: null,
         refs: null
     }
@@ -48,13 +50,14 @@ export const objRandomConst = (): JS_Type => {
     const data = {
         level: 1,
         points: 1,
-        title: `Using the \"const\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
+        task: `Using the \"const\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
         data: { keyword: 'const', declaration: animal, value: animalName},
         result: { result: `const ${animal} = ${animalName}`},
+        hints: null,
         conditions: null,
         constraints: null,
         category: 'Variable',
-        category_sub: 'const',
+        category_sub: 'declaration',
         tags: null,
         refs: null
     }
@@ -67,13 +70,14 @@ export const objRandomLet = (): JS_Type => {
     const data = {
         level: 1,
         points: 1,
-        title: `Using the \"let\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
+        task: `Using the \"let\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
         data: { keyword: 'let', declaration: animal, value: animalName},
         result: { result: `let ${animal} = ${animalName}`},
+        hints: null,
         conditions: null,
         constraints: null,
         category: 'Variable',
-        category_sub: 'let',
+        category_sub: 'declaration',
         tags: null,
         refs: null
     }

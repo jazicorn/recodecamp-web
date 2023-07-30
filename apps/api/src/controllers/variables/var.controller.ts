@@ -92,14 +92,14 @@ export default class VarGeneral {
                 try {
                     const data: JS_Type = req.body;
                     const question = new Question(data);
-                    const results = await client.query(`INSERT INTO variables ( created_at, updated_at, id, language, level, points, title, data, result, conditions, constraints, category, category_sub, tags, refs ) VALUES( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`, [
+                    const results = await client.query(`INSERT INTO variables ( created_at, updated_at, id, language, level, points, task, data, result, conditions, constraints, category, category_sub, tags, refs ) VALUES( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)`, [
                             question.created_at,
                             question.updated_at,
                             question.id,
                             question.language,
                             question.level,
                             question.points,
-                            question.title,
+                            question.task,
                             question.data,
                             question.result,
                             question.conditions,
