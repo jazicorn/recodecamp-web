@@ -26,6 +26,7 @@ export const objBlockScopeReassign = (): JS_Type => {
                 completed: false
             }
         },
+        hints: null,
         conditions: null,
         constraints: null,
         category: 'Variable',

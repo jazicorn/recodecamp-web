@@ -24,6 +24,7 @@ export const objGlobalScope = (): JS_Type => {
                 completed: false
             },
         },
+        hints: null,
         conditions: null,
         constraints: {
             1: "Declare and assign all possible variable types."
@@ -51,6 +52,7 @@ export const objFuncScope = (): JS_Type => {
                 completed: false
             }
         },
+        hints: null,
         conditions: null,
         constraints: {
             1: "Declare and assign all possible variable types."
@@ -82,6 +84,7 @@ export const objBlockScope = (): JS_Type => {
                 completed: false
             }
         },
+        hints: null,
         conditions: null,
         constraints: {
             1: "Declare and assign all possible variable types."

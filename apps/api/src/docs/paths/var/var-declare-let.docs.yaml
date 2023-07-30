@@ -40,6 +40,9 @@ get:
               result:
                 type: object
                 example: { 1 : { answer: 'let ${animal}', completed: false}}
+              hints:
+                type: object
+                example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
               conditions:
                 type: object
                 example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }

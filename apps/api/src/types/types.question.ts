@@ -8,6 +8,7 @@ export interface Q {
     task: string | null;
     data: object | null;
     result: object | null;
+    hints: object | null;
     conditions: object| null;
     constraints: object | null;
     category: string | null;
@@ -27,6 +28,7 @@ export type JS_Type = {
     task: string | null;
     data: object | null;
     result: object | null;
+    hints: object | null;
     conditions: object | null;
     constraints: object | null;
     category: string | null;
