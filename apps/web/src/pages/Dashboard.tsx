@@ -24,27 +24,27 @@ const Dashboard = () => {
       {/**Background | Position: Absolute */}
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' :
                   'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'
-        } tw-absolute tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-screen tw-w-full`}/>
+        } tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full`}/>
       {/**Page Content | Position: Relative */}
-      <div className="tw-relative tw-z-10 tw-font-mono tw-h-screen tw-w-full tw-flex tw-flex-col tw-grow tw-place-items-center">
+      <article className="tw-relative tw-z-10 tw-font-mono tw-h-screen tw-w-full tw-flex tw-flex-col tw-grow tw-place-items-center">
         <Header />
         {isDesktopMDLG || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
+        <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-overflow-y-hidden [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-dashboard tw-grid-cols-dashboard tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3'>
+            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3 tw-mb-1'>
               <D_Navigation/>
             </section>
             <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-2'>
               <D_Header/>
             </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-3'>
+            <div className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-3'>
               <Outlet/>
-            </section>
+            </div>
         </main>
         :
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-grow tw-overflow-y-hidden [&>*]:tw-backdrop-blur-sm
+        <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
+          tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             {/** z index can't go higher than 50 to work*/}
             <section className='tw-row-start-1 tw-row-end-1 tw-z-50'>
@@ -53,12 +53,12 @@ const Dashboard = () => {
             <section className=' tw-row-start-2 tw-row-end-2'>
               <D_Header/>
             </section>
-            <section className='tw-row-start-3 tw-row-end-6'>
+            <div className='tw-row-start-3 tw-row-end-6'>
               <Outlet/>
-            </section>
+            </div>
         </main>
         }
-      </div>
+      </article>
       </Transition>
     </div>
   )
