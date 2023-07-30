@@ -39,10 +39,7 @@ get:
                 example: { keyword: 'var', declaration: animal }
               result:
                 type: object
-                example: { result: 'var ${animal}'}
-              hints:
-                type: object
-                example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+                example: { 1 : { answer: 'var ${animal}', completed: false}}
               conditions:
                 type: object
                 example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }

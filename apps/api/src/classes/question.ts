@@ -12,7 +12,6 @@ export class Question implements Q {
     task!: string | null;
     data!: object | null;
     result!: object | null;
-    hints!: object | null;
     conditions!: object | null;
     constraints!: object | null;
     category!: string | null;
@@ -28,7 +27,6 @@ export class Question implements Q {
         task = null,
         data = null,
         result = null,
-        hints = null,
         conditions = null,
         constraints = null,
         category = null,
@@ -45,7 +43,6 @@ export class Question implements Q {
         this.task = task;
         this.data = data;
         this.result = result;
-        this.hints = hints;
         this.conditions = conditions;
         this.constraints = constraints;
         this.category = category;
@@ -116,13 +113,6 @@ export class Question implements Q {
     }
     public set setResult(result: object) {
         this.result = result;
-    }
-    // hints
-    public get getHints(): object | null {
-        return this.hints;
-    }
-    public set setHints(hints: object) {
-        this.hints = hints;
     }
     // conditions
     public get getConditions(): object | null {
