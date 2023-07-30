@@ -30,7 +30,7 @@ const Dashboard = () => {
         <Header />
         {isDesktopMDLG || isDesktopXL ? 
         <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-overflow-y-hidden [&>*]:tw-backdrop-blur-sm
+          tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-dashboard tw-grid-cols-dashboard tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3 tw-mb-1'>
               <D_Navigation/>
