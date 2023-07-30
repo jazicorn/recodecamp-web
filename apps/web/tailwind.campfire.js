@@ -36,6 +36,9 @@ export default {
         },
         'campfire-purple': {
           DEFAULT: '#8b5cf6',
+        },
+        'campfire-green': {
+          DEFAULT: '#22c55e',
         }
       },
        backgroundImage: {
@@ -64,18 +67,18 @@ export default {
       gridTemplateColumns: {
         'dashboard': '3em, auto',
         'dashboard-mobile': 'auto',
-        'layout-dashboard-home': 'auto, minmax(8em, 16em)',
+        'layout-dashboard-home': 'minmax(32em, auto), minmax(8em, 16em)',
         'layout-dashboard-home-mobile': 'auto',
-        'layout-dashboard-code': 'minmax(16em, 20em), auto',
+        'layout-dashboard-code': 'minmax(17em, 28em), minmax(24em, auto)',
         'layout-dashboard-code-mobile': 'auto'
       },
       gridTemplateRows: {
         'dashboard': '2.5em, auto',
         'dashboard-mobile': '3em, 3em, 24em, auto, auto, auto',
-        'layout-dashboard-home': '65%, auto',
+        'layout-dashboard-home': 'minmax(20em, 65%), auto',
         'layout-dashboard-home-mobile': '24em, auto, auto, auto',
-        'layout-dashboard-code': '65%, auto',
-        'layout-dashboard-code-mobile': 'minmax(10em, 12em), minmax(16em, 20em), auto'
+        'layout-dashboard-code': '2.5em, 65%, auto',
+        'layout-dashboard-code-mobile': '3em, minmax(10em, 12em), minmax(16em, 20em), auto'
       }
     },
   },
