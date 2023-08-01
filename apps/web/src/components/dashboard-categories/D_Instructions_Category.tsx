@@ -4,9 +4,6 @@ import { ThemeContext } from '../../context/ThemeContext';
 import List from "../../assets/icons/dashboard/list-square-svgrepo-com.svg";
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
-// redux hooks
-//import { useAppSelector } from '../../redux/reduxHooks.ts';
-//import type { RootState } from '../redux/store.ts';
 
 const D_Instructions_Category = () => {
   const { state } = useContext(ThemeContext);
