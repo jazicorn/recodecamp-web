@@ -11,13 +11,15 @@ import LoadingDashboard from '../components/dashboard/loading';
 import D_Category from '../components/dashboard-categories/D_Category';
 import D_Instructions_Category from '../components/dashboard-categories/D_Instructions_Category';
 /**React Query */
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, QueryClient } from "@tanstack/react-query";
+
+//const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Categories = () => {
   const { isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  
+
   async function getCategories() {
     try {
       const res = await fetch(`/api/categories`);
@@ -30,6 +32,8 @@ const Layout_D_Categories = () => {
   };
 
   /** Generate Categories */
+  const queryCache = new QueryClient();
+  queryCache.clear();
   const { isLoading, isError, error, data} = useQuery(['categoriesData'], getCategories, {
     refetchOnWindowFocus: false,
   });
