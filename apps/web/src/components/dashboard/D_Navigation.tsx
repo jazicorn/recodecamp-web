@@ -22,7 +22,7 @@ const D_Navigation = () => {
       <ul className='tw-flex tw-flex-col tw-place-items-center tw-space-y-2 [&>li]:tw-h-[30px]'>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
-          { darkMode ? <IconCategory color="#2ca9bc" /> : <IconCategory color="#000" />}
+          <Link to="/learn/categories">{ darkMode ? <IconCategory color="#2ca9bc" /> : <IconCategory color="#000" />}</Link>
         </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>

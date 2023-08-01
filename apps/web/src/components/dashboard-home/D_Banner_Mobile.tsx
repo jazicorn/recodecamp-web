@@ -45,7 +45,7 @@ const D_Banner = () => {
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconCategory color="#d4d4d4" /> : <IconCategory color="#000" />}
-              <Link to={''} className="">Categories</Link>
+              <Link to='/learn/categories' className="">Categories</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-100 "}
             tw-flex tw-flex-row tw-place-items-center tw-w-fit tw-pr-1 tw-rounded`}>

@@ -60,8 +60,16 @@ h6 {
   font-size: 18px;
 }
 
+ul {
+  font-size: 17px;
+}
+
 li {
   font-size: 16px;
+}
+
+li > button {
+  font-size: 14px;
 }
 
 .bg-faded-gray {

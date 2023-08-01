@@ -8,12 +8,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-
----
-
+<div align="center">
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
@@ -26,31 +21,21 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
+</div>
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <img src="./logo-200.svg" alt="logo-200"/>
   <h3 align="center">ReCodeCamp</h3>
-
-  <p align="center">
-    Re-Code makes perfect
-    <br />
-    <a href="https://github.com/github_username/repo_name">Explore The Docs</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
-  </p>
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://web-pro-production.up.railway.app/)
+[![Product Name Screen Shot][product-screenshot]](https://recodecamp-web.vercel.app/)
 
-
-
+Learn javascript and computer programming by coding computer programming principles over and over again.
 
 <p align="right">(<a href="#recodecamp">back to top</a>)</p>
 
@@ -61,7 +46,6 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -77,14 +61,6 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    yarn install
    ```
-<p align="right">(<a href="#recodecamp">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#recodecamp">back to top</a>)</p>
 
@@ -96,33 +72,20 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Feature 3
     - [ ] Nested Feature
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
 <p align="right">(<a href="#recodecamp">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <p align="right">(<a href="#recodecamp">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
 
-Jasmine Anderson - jazicorndev@gmail.com
-
-Project Link: [https://github.com/jazicorn/recodecamp](https://github.com/jazicorn/recodecamp)
-
-<p align="right">(<a href="#recodecamp">back to top</a>)</p>
-
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-* [Github Template](https://github.com/othneildrew/Best-README-Template/tree/master)
-* [Shiled Badges](https://shields.io/badges)
-* [Markdown-Badges: Ileriayo](https://github.com/Ileriayo/markdown-badges)
-* [Markdown-Badges: Vedant Chainani](https://dev.to/envoy_/150-badges-for-github-pnk)
 
 <p align="right">(<a href="#recodecamp">back to top</a>)</p>
 

@@ -21,6 +21,7 @@ import Home from './pages/Home.tsx'
 /**Layouts*/
 import D_Home from './layout/Layout.D_Home'
 import D_Code from './layout/Layout.D_Code'
+import D_Categories from './layout/Layout.D_Categories'
 
 const router = Router(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = Router(
       <Route path="learn" element={<Dashboard />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
+        <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="*" element={<Home/>} errorElement={<ErrorBoundary />}/>
     </Route>
