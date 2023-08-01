@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ThemeContext } from '../../context/ThemeContext'
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../../assets/icons/user/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../../assets/icons/user/settings/sun-svgrepo-com.svg'
+import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
+import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg'
 
 //icons
 import {

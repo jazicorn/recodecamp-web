@@ -1,0 +1,26 @@
+get:
+  tags:
+    - index
+  description: API test response
+  operationId: helloWorld
+  responses:
+    '200':
+      description: Hello World string
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+                example: Hello World
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'Internal Server Error'

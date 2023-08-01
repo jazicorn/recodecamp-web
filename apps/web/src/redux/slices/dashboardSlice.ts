@@ -2,12 +2,23 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // Define a type for the slice state
 interface DashboardState {
-  value: string
+  languageDefault: string,
+  categoryDefault: string,
+  categoryRouteDefault: string,
+  language: string,
+  category: string,
+  categoryRoute: string,
+  question: object
 }
 
 // Define the initial state using that type
 const initialState: DashboardState = {
-  value: "banner",
+  languageDefault: 'Javascript',
+  categoryDefault: "variable",
+  categoryRouteDefault: "var/declare/random",
+  category: "",
+  categoryRoute: "",
+  question: {}
 }
 
 export const dashboardSlice = createSlice({
@@ -15,13 +26,31 @@ export const dashboardSlice = createSlice({
   initialState: initialState,
   // `createSlice` will infer the state type from the `initialState` argument
   reducers: {
-    menuItem: (state, action) => {
-      state.value = action.payload;
+    menu: (state) => {
+      state.language;
+      state.languageDefault;
+      state.category;
+      state.categoryDefault;
+      state.categoryRoute;
+      state.categoryRouteDefault;
+      state.question;
+    },
+    menuLanguage: (state, action) => {
+      state.language = action.payload;
+    },
+    menuCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    menuCategoryRoute: (state, action) => {
+      state.categoryRoute = action.payload;
+    },
+    menuQuestion: (state, action) => {
+      state.question = action.payload;
     },
   },
 });
 
-export const { menuItem } = dashboardSlice.actions
+export const { menu, menuLanguage, menuCategory, menuCategoryRoute, menuQuestion } = dashboardSlice.actions
 
 export default dashboardSlice.reducer;
 

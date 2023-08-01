@@ -1,0 +1,79 @@
+get:
+  tags:
+    - Variables
+  description: Generate question declaring let keyword variable
+  operationId: varDeclareLet
+  responses:
+    '200':
+      description: Question generated successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              created_at:
+                type: string
+                format: date-time
+                example: 2023-07-28T08:40:43.939Z
+              updated_at:
+                type: string
+                format: date-time
+                example: 2023-07-28T08:40:43.939Z
+              id:
+                type: string
+                example: 67KzKoGqYA
+              language:
+                type: string
+                example: Javascript
+              level:
+                type: number
+                example: 1
+              points:
+                type: number
+                example: 1
+              task:
+                type: string
+                example: Using the "let" keyword, declare a variable named "${animal}"
+              data:
+                type: object
+                example: { keyword: 'let', declaration: animal }
+              result:
+                type: object
+                example: { 1 : { answer: 'let ${animal}', completed: false}}
+              hints:
+                type: object
+                example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+              conditions:
+                type: object
+                example: { 1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+              constraints:
+                type: object
+                example: {
+                    1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    2 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    3 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                }
+              category:
+                type: string
+                example: Variables
+              category_sub:
+                type: string
+                example: let
+              tags:
+                type: array
+                example: ['Variables', 'declaration', 'let']
+              refs:
+                type: object
+                example: {
+                    variables: 'https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Variables'
+                }
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'Internal Server Error'

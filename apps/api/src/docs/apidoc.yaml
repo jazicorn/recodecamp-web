@@ -1,0 +1,29 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: ReCodeCamp API - Documentation
+  description: API Documentation for ReCodeCamp.com
+  termsOfService: https://recodecamp.com/terms
+  contact:
+    name: Jazicorn
+    email: jazicorndev@gmail.com
+    url: https://github.com/jazicorn/
+  license:
+    name: MIT
+    url: https://github.com/jazicorn/recodecamp/LICENSE.md
+servers:
+  - url: http://localhost:8000/
+    description: Local Server
+  - url: https://recodecamp-api.vercel.app
+    description: Production Server
+paths:
+  /var/declare/random:
+    $ref: "apps/api/src/docs/paths/var/var-declare-random.docs.yaml"
+  /var/declare/var:
+    $ref: "apps/api/src/docs/paths/var/var-declare-var.docs.yaml"
+  /var/declare/const:
+    $ref: "apps/api/src/docs/paths/var/var-declare-const.docs.yaml"
+  /var/declare/let:
+    $ref: "apps/api/src/docs/paths/var/var-declare-let.docs.yaml"
+  /:
+    $ref: "apps/api/src/docs/paths/index.docs.yaml"

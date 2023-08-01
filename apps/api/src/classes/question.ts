@@ -9,9 +9,12 @@ export class Question implements Q {
     language!: string | null;
     level!: number | null;
     points!: number | null;
-    title!: string | null;
+    task!: string | null;
     data!: object | null;
     result!: object | null;
+    hints!: object | null;
+    conditions!: object | null;
+    constraints!: object | null;
     category!: string | null;
     category_sub!: string | null;
     tags!: string[] | null;
@@ -22,9 +25,12 @@ export class Question implements Q {
         language = null,
         level = null,
         points = null,
-        title = null,
+        task = null,
         data = null,
         result = null,
+        hints = null,
+        conditions = null,
+        constraints = null,
         category = null,
         category_sub = null,
         tags = null,
@@ -36,9 +42,12 @@ export class Question implements Q {
         this.language = language;
         this.level = level;
         this.points = points;
-        this.title = title;
+        this.task = task;
         this.data = data;
         this.result = result;
+        this.hints = hints;
+        this.conditions = conditions;
+        this.constraints = constraints;
         this.category = category;
         this.category_sub = category_sub;
         this.tags = tags;
@@ -60,14 +69,14 @@ export class Question implements Q {
         this.updated_at = date;
     }
     // id
-    public get getId(): string {
+    public get getId(): string | null {
         return this.id;
     }
     private set setId(id: string) {
         this.id = id;
     }
     // language
-    public get getLanguage(): string {
+    public get getLanguage(): string | null {
         return this.language;
     }
     public set setLanguage(language: string) {
@@ -87,12 +96,12 @@ export class Question implements Q {
     protected set setPoints(points: number) {
         this.points = points;
     }
-    // title
-    public get getTitle(): string | null {
-        return this.title;
+    // task
+    public get getTask(): string | null {
+        return this.task;
     }
-    public set setTitle(title: string) {
-        this.title = title;
+    public set setTask(task: string) {
+        this.task = task;
     }
     // data
     public get getData(): object | null {
@@ -107,6 +116,27 @@ export class Question implements Q {
     }
     public set setResult(result: object) {
         this.result = result;
+    }
+    // hints
+    public get getHints(): object | null {
+        return this.hints;
+    }
+    public set setHints(hints: object) {
+        this.hints = hints;
+    }
+    // conditions
+    public get getConditions(): object | null {
+        return this.conditions;
+    }
+    public set setConditions(conditions: object) {
+        this.conditions = conditions;
+    }
+    // constraints
+    public get getConstraints(): object | null {
+        return this.constraints;
+    }
+    public set setConstraints(constraints: object) {
+        this.constraints = constraints;
     }
     // category
     public get getCategory(): string | null {

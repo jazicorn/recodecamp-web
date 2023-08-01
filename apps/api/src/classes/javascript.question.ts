@@ -1,5 +1,5 @@
 'use strict';
-import { Q } from '../types/types.question';
+import { JS } from '../types/types.question';
 import { nanoid } from 'nanoid';
 
 export class Question implements JS {
@@ -9,38 +9,34 @@ export class Question implements JS {
     language!: string;
     level!: number | null;
     points!: number | null;
-    title!: string | null;
+    task!: string | null;
     data!: object | null;
     result!: object | null;
+    hints!: object | null;
+    conditions!: object | null;
+    constraints!: object | null;
     category!: string | null;
     category_sub!: string | null;
     tags!: string[] | null;
     refs!: object | null;
 
-    constructor({
-        level = null,
-        points = null,
-        title = null,
-        data = null,
-        result = null,
-        category = null,
-        category_sub = null,
-        tags = null,
-        refs = null,
-    }) {
+    constructor(data) {
         this.created_at = new Date();
         this.updated_at = new Date();
         this.id = `js-${nanoid(10)}`;
         this.language = 'Javascript';
-        this.level = level;
-        this.points = points;
-        this.title = title;
-        this.data = data;
-        this.result = result;
-        this.category = category;
-        this.category_sub = category_sub;
-        this.tags = tags;
-        this.refs = refs;
+        this.level = data.level;
+        this.points = data.points;
+        this.task = data.task;
+        this.data = data.data;
+        this.result = data.result;
+        this.hints = data.hints;
+        this.conditions = data.conditions;
+        this.constraints = data.constraints;
+        this.category = data.category;
+        this.category_sub = data.category_sub;
+        this.tags = data.tags;
+        this.refs = data.refs;
     }
 
     // created_at
@@ -81,12 +77,12 @@ export class Question implements JS {
     protected set setPoints(points: number) {
         this.points = points;
     }
-    // title
-    public get getTitle(): string | null {
-        return this.title;
+    // task
+    public get getTask(): string | null {
+        return this.task;
     }
-    public set setTitle(title: string) {
-        this.title = title;
+    public set setTask(task: string) {
+        this.task = task;
     }
     // data
     public get getData(): object | null {
@@ -101,6 +97,27 @@ export class Question implements JS {
     }
     public set setResult(result: object) {
         this.result = result;
+    }
+    // hints
+    public get getHints(): object | null {
+        return this.hints;
+    }
+    public set setHints(hints: object) {
+        this.hints = hints;
+    }
+    // conditions
+    public get getConditions(): object | null {
+        return this.conditions;
+    }
+    public set setConditions(conditions: object) {
+        this.conditions = conditions;
+    }
+    // constraints
+    public get getConstraints(): object | null {
+        return this.constraints;
+    }
+    public set setConstraints(constraints: object) {
+        this.constraints = constraints;
     }
     // category
     public get getCategory(): string | null {
