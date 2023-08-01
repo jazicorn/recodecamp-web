@@ -9,7 +9,7 @@
       "moduleResolution": "node",
       "esModuleInterop": true,
       "noEmit": false,
-      "types": ["node"],
+      "types": ["node", "mocha"],
       "forceConsistentCasingInFileNames": true,
       "allowSyntheticDefaultImports": true,
       "noImplicitAny": false,
