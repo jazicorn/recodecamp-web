@@ -22,7 +22,7 @@ const Layout_D_Categories = () => {
 
   async function getCategories() {
     try {
-      const res = await fetch(`/api/categories`);
+      const res = await fetch(`api/categories`);
       const resJSON = res.json();
       //setStuff(resJSON);
       return resJSON;
