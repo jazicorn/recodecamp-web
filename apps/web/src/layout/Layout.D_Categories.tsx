@@ -17,8 +17,6 @@ const Layout_D_Categories = () => {
   const { isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
-  //const [categories, setCategories] = useState();
   
   async function getCategories() {
     try {
@@ -36,8 +34,6 @@ const Layout_D_Categories = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log('parent', data)
-
   if (isLoading) return <LoadingDashboard/>
 
   if (isError) return <ErrorDashboard error={error.message}/>
@@ -53,7 +49,7 @@ const Layout_D_Categories = () => {
             <D_Instructions_Category/>
             {
               data.data !== undefined && data?.data.map((category, i) => {
-                return (<section className=''><D_Category key={i} category={category}/></section>)
+                return (<section key={i} className=''><D_Category category={category}/></section>)
               })
             }
         </main>
@@ -64,7 +60,7 @@ const Layout_D_Categories = () => {
             <D_Instructions_Category/>
             {
               data.data !== undefined && data?.data.map((category, i) => {
-                return (<section className=''><D_Category key={i} category={category}/></section>)
+                return (<section key={i} className=''><D_Category  category={category}/></section>)
               })
             }
         </main>

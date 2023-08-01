@@ -1,7 +1,5 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-//import { useAppSelector } from '../redux/reduxHooks.ts';
-//import type { RootState } from '../redux/store.ts';
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
@@ -16,7 +14,6 @@ const Layout_D_Home = () => {
   const { isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
 
   return (
     <div className="tw-h-full">

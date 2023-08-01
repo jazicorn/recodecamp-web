@@ -1,8 +1,6 @@
 // Category
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-// hooks
-//import useWindowSize from '../hooks/useWindowSize';
 // redux hooks
 import { useAppDispatch } from '../../redux/reduxHooks.ts';
 import { menuCategoryRoute } from '../../redux/slices/dashboardSlice.ts';
@@ -15,7 +13,6 @@ const D_SubCategory = (subCategory) => {
 
   const sub = subCategory.subCategory;
   const routes = sub[1];
-  console.log('sub', routes);
 
   function setCategory(route) {
     dispatch(menuCategoryRoute(route))
@@ -33,10 +30,10 @@ const D_SubCategory = (subCategory) => {
             <h6 className={`${darkMode ? "" :"" } tw-pb-1`}>{sub[0]}:</h6>
             <div className="tw-flex tw-flex-row tw-gap-1 tw-place-content-left">
             {
-              routes.map((route) => {
+              routes.map((route, i) => {
                 const strRoute = route.split('/').slice(-1);
                 return (
-                  <li className={`${darkMode ? "tw-text-campfire-blue" : "tw-text-campfire-neutral-900 tw-border-campfire-blue" } tw-border`}>
+                  <li key={i} className={`${darkMode ? "tw-text-campfire-blue" : "tw-text-campfire-neutral-900 tw-border-campfire-blue" } tw-border`}>
                     <button 
                       onClick={() => setCategory(route)} 
                       className="tw-px-2">

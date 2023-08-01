@@ -24,8 +24,8 @@ const D_Navigation = () => {
       <ul className='tw-flex tw-flex-row tw-items-center'>
         <li className=''><img src={JS_Icon} alt="Javascript" style={{ height: 18, width: 36 }}></img></li>
         <li><span className=''>Javascript</span></li>
-        {!routeEmpty ? routeArr.map((route) => 
-          <li className="tw-flex tw-flex-row">
+        {!routeEmpty ? routeArr.map((route, i) => 
+          <li key={i} className="tw-flex tw-flex-row">
             <span className='tw-flex tw-flex-row tw-items-center tw-pt-0.5 tw-px-1'>
               { darkMode ? <IconArrowBadgeRightFilled size={18} color="#2ca9bc" /> 
                 : <IconArrowBadgeRightFilled size={18} color="#000" />
