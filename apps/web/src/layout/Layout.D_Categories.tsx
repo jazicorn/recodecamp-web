@@ -13,7 +13,7 @@ import D_Instructions_Category from '../components/dashboard-categories/D_Instru
 /**React Query */
 import { useQuery, QueryClient } from "@tanstack/react-query";
 
-//const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Categories = () => {
   const { isDesktopMDLG, isDesktopXL } = useWindowSize();
@@ -22,7 +22,12 @@ const Layout_D_Categories = () => {
 
   async function getCategories() {
     try {
-      const res = await fetch(`api/categories`);
+      let res;
+      if(import.meta.env.PROD) {
+        res = await fetch(`${baseURL}/categories`);
+      } else {
+        res = await fetch(`api/categories`);
+      }
       const resJSON = res.json();
       //setStuff(resJSON);
       return resJSON;
