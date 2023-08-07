@@ -4,25 +4,10 @@ import Router from 'express-promise-router';
 import client from '../config/db';
 //import { faker } from '@faker-js/faker';
 
-/**
- * Query the database using the pool
- * @param {*} query
- * @param {*} params
- *
- * @see https://node-postgres.com/features/pooling#single-query
- */
-
-/**
- * HTTP methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
- * HTTP codes: https://www.w3.org/Protocols/HTTP/HTRESP.html
- * Postgresql Error codes: https://www.postgresql.org/docs/current/errcodes-appendix.html
- * async-await pattern for get callback argument
- */
-
 class StrQuestions {
     public pathStr = '/str';
     public pathStrId = '/str/:id';
-    public pathStrRandom = '/str/random'
+    public pathStrRandom = '/str/all'
     public router = Router();
     constructor() {
         this.initializeRoutes();

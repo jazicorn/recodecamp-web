@@ -7,21 +7,6 @@ import { Question } from '../../classes/javascript.question';
 import { JS_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index'
 
-/**
- * Query the database using the pool
- * @param {*} query
- * @param {*} params
- *
- * @see https://node-postgres.com/features/pooling#single-query
- */
-
-/**
- * HTTP methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
- * HTTP codes: https://www.w3.org/Protocols/HTTP/HTRESP.html
- * Postgresql Error codes: https://www.postgresql.org/docs/current/errcodes-appendix.html
- * async-await pattern for get callback argument
- */
-
 export default class VarGeneral {
     public pathVar = '/var';
     public pathVarId = '/var/:id';
