@@ -33,7 +33,8 @@ const D_SubCategory = (subCategory) => {
               routes.map((route, i) => {
                 const strRoute = route.split('/').slice(-1);
                 return (
-                  <li key={i} className={`${darkMode ? "tw-text-campfire-blue" : "tw-text-campfire-neutral-900 tw-border-campfire-blue" } tw-border`}>
+                  <li key={i} className={`${darkMode ? "hover:tw-bg-campfire-neutral-200 tw-text-campfire-blue" 
+                                        : "hover:tw-bg-campfire-neutral-400 tw-text-campfire-neutral-900 tw-border-campfire-blue" } tw-border`}>
                     <button 
                       onClick={() => setCategory(route)} 
                       className="tw-px-2">

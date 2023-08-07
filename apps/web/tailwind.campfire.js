@@ -72,7 +72,9 @@ export default {
         'layout-dashboard-home': 'minmax(32em, auto), minmax(8em, 16em)',
         'layout-dashboard-home-mobile': 'auto',
         'layout-dashboard-code': 'minmax(17em, 28em), minmax(24em, auto)',
-        'layout-dashboard-code-mobile': 'auto'
+        'layout-dashboard-code-mobile': 'auto',
+        'layout-dashboard-categories': 'auto',
+        'layout-dashboard-categories-mobile': 'auto'
       },
       gridTemplateRows: {
         'dashboard': '2.5em, auto',
@@ -80,7 +82,9 @@ export default {
         'layout-dashboard-home': 'minmax(20em, 65%), auto',
         'layout-dashboard-home-mobile': '24em, auto, auto, auto',
         'layout-dashboard-code': '2.5em, 65%, auto',
-        'layout-dashboard-code-mobile': '3em, minmax(10em, 12em), minmax(16em, 20em), auto'
+        'layout-dashboard-code-mobile': '3em, auto, minmax(16em, 20em), auto',
+        'layout-dashboard-categories': '2.5em, auto',
+        'layout-dashboard-categories-mobile': '5em, auto'
       }
     },
   },

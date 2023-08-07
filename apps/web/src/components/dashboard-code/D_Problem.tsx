@@ -10,6 +10,8 @@ import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks.ts';
 import { menuCategoryRoute } from '../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
+/** API url */
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const D_Problem = () => {
   const { state } = useContext(ThemeContext);
@@ -27,9 +29,18 @@ const D_Problem = () => {
       dispatch(menuCategoryRoute(menuRouteDefault))
     };
     /** Retrieve Question from API */
-    const res = await fetch(`/api/${menuRoute}`);
-    const resJSON = res.json();
-    return resJSON;
+    try {
+      let res;
+      if(import.meta.env.PROD) {
+          res = await fetch(`${baseURL}/${menuRoute}`);
+        } else {
+          res = await fetch(`/api/${menuRoute}`);
+        }
+      const resJSON = res.json();
+      return resJSON;
+    } catch(error) {
+      console.log(error);
+    }
   };
   /** Generate Question */
   const { isLoading, isError, error, data, refetch } = useQuery(['questionData'], getQuestion, {
