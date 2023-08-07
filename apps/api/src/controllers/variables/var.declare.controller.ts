@@ -8,7 +8,7 @@ import { getRandomInt } from '../../utils/index';
 import { objRandom, objRandomVar, objRandomConst, objRandomLet } from '../../data/var.declare.data'
 
 export default class VarDeclare {
-    public pathVarRandomDeclare = '/var/declare/random'
+    public pathVarRandomDeclare = '/var/declare/all'
     public pathVarDeclareVar = '/var/declare/var';
     public pathVarDeclareConst = '/var/declare/const';
     public pathVarDeclareLet = '/var/declare/let';

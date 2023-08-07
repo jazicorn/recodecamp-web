@@ -8,7 +8,7 @@ import { getRandomInt } from '../../utils/index';
 import { objBlockScope, objFuncScope, objGlobalScope } from '../../data/var.scope.data';
 
 export default class VarScope {
-    public pathVarRandomScope = '/var/scope/random';
+    public pathVarRandomScope = '/var/scope/all';
     public pathVarScopeBlock = '/var/scope/block';
     public pathVarScopeFunc = '/var/scope/func';
     public pathVarScopeGlobal = '/var/scope/global';
