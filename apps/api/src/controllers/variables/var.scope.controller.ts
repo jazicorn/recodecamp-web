@@ -31,9 +31,9 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
@@ -47,9 +47,9 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
@@ -63,9 +63,9 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
@@ -79,9 +79,9 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:

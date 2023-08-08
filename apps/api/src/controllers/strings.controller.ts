@@ -23,9 +23,9 @@ class StrQuestions {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM strings WHERE category='strings'`);
-                res.status(200).json({ data: results.rows });
+                res.status(200).send({ data: results.rows });
             } catch {
-                res.status(500).json({ error: "Something went wrong" });
+                res.status(500).send({ error: "Something went wrong" });
             }
         } else {
             res.status(400).send({ error: `${req.method} Method Not Allowed` });
@@ -37,9 +37,9 @@ class StrQuestions {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM strings WHERE category='strings'`);
-                res.status(200).json({ data: results.rows });
+                res.status(200).send({ data: results.rows });
             } catch {
-                res.status(500).json({ error: "Something went wrong" });
+                res.status(500).send({ error: "Something went wrong" });
             }
         } else {
             res.status(400).send({ error: `${req.method} Method Not Allowed` });
@@ -52,9 +52,9 @@ class StrQuestions {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM strings WHERE id =$1`, [id]);
-                res.status(200).json({ data: results.rows });
+                res.status(200).send({ data: results.rows });
             } catch {
-                res.status(500).json({ error: "Something went wrong" });
+                res.status(500).send({ error: "Something went wrong" });
             }
         } else {
             res.status(400).send({ error: `${req.method} Method Not Allowed` });

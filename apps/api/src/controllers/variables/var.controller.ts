@@ -26,9 +26,9 @@ export default class VarGeneral {
         if (req.method === 'GET') {
             try {
                 const results = await client.query(`SELECT * FROM variables WHERE category='variables'`);
-                res.status(200).json({ data: results.rows });
+                res.status(200).send({ data: results.rows });
             } catch {
-                res.status(500).json({ error: "Something went wrong" });
+                res.status(500).send({ error: "Something went wrong" });
             }
         } else {
             res.status(400).send({ error: `${req.method} Method Not Allowed` });
@@ -42,9 +42,9 @@ export default class VarGeneral {
                 try {
                     const id = req.params.id;
                     const results = await client.query(`SELECT * FROM variables WHERE id = $1`, [id]);
-                    res.status(200).json({ data: results.rows });
+                    res.status(200).send({ data: results.rows });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             case('UPDATE'):
@@ -54,16 +54,16 @@ export default class VarGeneral {
                     // #TODO: UPDATE Row in DATABASE
                     res.status(200);
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             case('DELETE'):
                 try {
                     const id = req.params.id;
                     const results = await client.query(`DELETE * FROM variables WHERE id = $1`, [id]);
-                    res.status(200).json({ data: results.rows });
+                    res.status(200).send({ data: results.rows });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
@@ -96,7 +96,7 @@ export default class VarGeneral {
                          ]);
                     res.status(200);
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
