@@ -15,7 +15,7 @@ interface DashboardState {
 const initialState: DashboardState = {
   languageDefault: 'Javascript',
   categoryDefault: "variable",
-  categoryRouteDefault: "var/declare/random",
+  categoryRouteDefault: "var/declare/all",
   category: "",
   categoryRoute: "",
   question: {}
