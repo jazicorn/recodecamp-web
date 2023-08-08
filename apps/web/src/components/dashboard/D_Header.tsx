@@ -36,7 +36,7 @@ const D_Navigation = () => {
               </span>
               <span className=''>{route}</span>
             </li>
-          ) : <div/>}
+          ) : <div><span className=''>Javascript</span></div>}
         </ul>
       </ul> 
       :
