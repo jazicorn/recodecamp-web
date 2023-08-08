@@ -32,7 +32,7 @@ const Dashboard = () => {
         <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-dashboard tw-grid-cols-dashboard tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3 tw-min-h-[523px]'>
+            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3'>
               <D_Navigation/>
             </section>
             <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-2'>
