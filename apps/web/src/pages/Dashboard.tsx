@@ -1,19 +1,19 @@
-import { useContext } from 'react'
-import { Outlet } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
+import { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 //import { useAppSelector } from '../redux/reduxHooks.ts';
 //import type { RootState } from '../redux/store.ts'
 // hooks
-import useWindowSize from '../hooks/useWindowSize'
+import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
 // components
-import Header from '../components/header/Header.Dashboard'
+import Header from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_NavigationMobile';
 import D_Header from '../components/dashboard/D_Header';
 
 const Dashboard = () => {
-  const { isDesktopMDLG, isDesktopXL } = useWindowSize();
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
@@ -28,7 +28,7 @@ const Dashboard = () => {
       {/**Page Content | Position: Relative */}
       <article className="tw-relative tw-z-10 tw-font-mono tw-h-screen tw-w-full tw-flex tw-flex-col tw-grow tw-place-items-center">
         <Header />
-        {isDesktopMDLG || isDesktopXL ? 
+        {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-dashboard tw-grid-cols-dashboard tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>

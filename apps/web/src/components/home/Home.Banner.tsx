@@ -9,7 +9,7 @@ import { ReactComponent as Student } from '../../assets/drawings/undraw/undraw_r
 
 
 const HomeBanner = () => {
-    const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
+    const { isMobile, isDesktopMDXL, isDesktopXL } = useWindowSize();
     const { state } = useContext(ThemeContext);
     const darkMode = state.darkMode;
 
@@ -53,7 +53,7 @@ const HomeBanner = () => {
                 </Link>
               </div>
             )}
-            {isDesktopMDLG && (
+            {isDesktopMDXL && (
               <div className="tw-flex tw-flex-col tw-min-h-[15em]">
                 <h1 className="tw-text-5xl tw-flex tw-flex-row tw-place-content-center tw-items-end">
                   <span className="tw-pl-3 tw-pr-2">
