@@ -18,7 +18,9 @@ class App {
 
     private initMiddlewares() {
         this.app.use(bodyParser.json());
-        this.app.use(cors({ origin: true }));
+        this.app.use(cors({ origin: ['https://vercel.com/jazicorn/recodecamp-web',
+                                    'https://recodecamp-web.vercel.app',
+                                    'https://www.recodecamp.com'] }));
         this.app.use(express.raw({ type: 'application/vnd.custom-type' }));
         this.app.use(express.text({ type: 'text/html' }));
 
