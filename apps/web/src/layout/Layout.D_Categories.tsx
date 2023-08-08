@@ -16,7 +16,7 @@ import { useQuery, QueryCache, } from "@tanstack/react-query";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Categories = () => {
-  const { isDesktopMDLG, isDesktopXL } = useWindowSize();
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
@@ -52,7 +52,7 @@ const Layout_D_Categories = () => {
     <div className="tw-h-full">
       <Transition>
       {/**Page Content | Position: Relative */}
-        {isDesktopMDLG || isDesktopXL ? 
+        {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>

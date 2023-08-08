@@ -10,7 +10,7 @@ import D_Console from '../components/dashboard-code/D_Console';
 import D_Scoreboard from '../components/dashboard-code/D_Scoreboard';
 
 const Layout_D_Code = () => {
-  const { isDesktopMDLG, isDesktopXL } = useWindowSize();
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
@@ -18,7 +18,7 @@ const Layout_D_Code = () => {
     <div className="tw-h-full">
       <Transition>
       {/**Page Content | Position: Relative */}
-        {isDesktopMDLG || isDesktopXL ? 
+        {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-w-full tw-h-[85vh] tw-overflow-y-hidden [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-code tw-grid-cols-layout-dashboard-code tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
