@@ -57,7 +57,7 @@ const D_Problem = () => {
   if (isError) return <ErrorDashboard error={error.message}/>
 
   return (
-    <div className={`${darkMode ? '[&>*]:tw-bg-[#525252] tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-300'} 
+    <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600 tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-300'} 
     tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
       <article className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-p-2 tw-h-full`}>
