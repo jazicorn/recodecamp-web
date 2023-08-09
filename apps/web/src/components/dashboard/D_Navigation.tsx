@@ -18,7 +18,7 @@ const D_Navigation = () => {
   const darkMode = state.darkMode;
 
   return (
-    <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-place-content-between tw-h-full`}>
+    <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-mb-1 tw-place-content-between tw-h-full`}>
       <ul className='tw-flex tw-flex-col tw-place-items-center tw-space-y-2 [&>li]:tw-h-[30px]'>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>

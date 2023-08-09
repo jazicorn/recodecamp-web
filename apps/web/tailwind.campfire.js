@@ -69,7 +69,7 @@ export default {
       gridTemplateColumns: {
         'dashboard': '3em, auto',
         'dashboard-mobile': 'auto',
-        'layout-dashboard-home': 'minmax(32em, auto), minmax(8em, 16em)',
+        'layout-dashboard-home': 'minmax(32em, 1fr), minmax(8em, 16em)',
         'layout-dashboard-home-mobile': 'auto',
         'layout-dashboard-code': 'minmax(17em, 28em), minmax(24em, auto)',
         'layout-dashboard-code-mobile': 'auto',
@@ -77,11 +77,11 @@ export default {
         'layout-dashboard-categories-mobile': 'auto'
       },
       gridTemplateRows: {
-        'dashboard': '2.5em, minmax(30em, auto)',
+        'dashboard': '2.5em, minmax(33.9em, auto)',
         'dashboard-mobile': '3em, 3em, 24em, auto, auto, auto',
-        'layout-dashboard-home': 'minmax(20em, 65%), auto',
+        'layout-dashboard-home': 'minmax(20em, 1fr), minmax(13.5em, 1fr)',
         'layout-dashboard-home-mobile': '24em, auto, auto, auto',
-        'layout-dashboard-code': '3.2em, 22em, auto',
+        'layout-dashboard-code': '3.2em, 25em, auto',
         'layout-dashboard-code-mobile': '3em, minmax(14em, 18em), minmax(14em, 18em), auto',
         'layout-dashboard-categories': '2.5em, auto',
         'layout-dashboard-categories-mobile': '5em, auto'

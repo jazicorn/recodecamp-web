@@ -21,7 +21,7 @@ const Layout_D_Home = () => {
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-pb-1 tw-w-full tw-h-[82vh] tw-overflow-y-hidden [&>*]:tw-backdrop-blur-sm
+          tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-home tw-grid-cols-layout-dashboard-home tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-col-start-1 tw-col-end-2 tw-row-start-1 tw-row-end-1'>
               <D_Banner/>
