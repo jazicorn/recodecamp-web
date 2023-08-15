@@ -24,13 +24,13 @@ export default class VarScopeReassign {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).send({ data: question });
+                    return res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).send({ error: "Something went wrong" });
+                    return res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
 
