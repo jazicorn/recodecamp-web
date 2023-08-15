@@ -13,7 +13,7 @@ const D_Console = () => {
           <header className={`${darkMode ? '' : ''} 
             tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
             <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
-            tw-border-b tw-border-r tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2`}>
+            tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2`}>
               Console
             </h5>
             {/* <button 
