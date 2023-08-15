@@ -46,7 +46,7 @@ export const objSingle = (): JS_Type => {
         conditions: {},
         constraints: {},
         category: 'Comments',
-        category_sub: {},
+        category_sub: '',
         tags: [],
         refs: {}
     }
@@ -71,7 +71,7 @@ export const objMulti = (): JS_Type => {
         conditions: {},
         constraints: {},
         category: 'Comments',
-        category_sub: {},
+        category_sub: '',
         tags: [],
         refs: {}
     }
