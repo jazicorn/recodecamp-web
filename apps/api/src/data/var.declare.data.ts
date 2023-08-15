@@ -18,13 +18,13 @@ export const objRandom = (): JS_Type => {
                 completed: false
             },
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Variable',
         category_sub: 'declaration',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };
@@ -43,13 +43,13 @@ export const objRandomVar = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Variable',
         category_sub: 'declaration',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };
@@ -68,13 +68,13 @@ export const objRandomConst = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Variable',
         category_sub: 'declaration',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };
@@ -93,13 +93,13 @@ export const objRandomLet = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Variable',
         category_sub: 'declaration',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };

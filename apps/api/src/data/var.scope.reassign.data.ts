@@ -26,13 +26,13 @@ export const objBlockScopeReassign = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Variable',
         category_sub: 'scope',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };

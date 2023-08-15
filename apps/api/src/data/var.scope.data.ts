@@ -24,15 +24,15 @@ export const objGlobalScope = (): JS_Type => {
                 completed: false
             },
         },
-        hints: null,
-        conditions: null,
+        hints: {},
+        conditions: {},
         constraints: {
             1: "Declare and assign all possible variable types."
         },
         category: 'Variable',
         category_sub: 'scope',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };
@@ -52,15 +52,15 @@ export const objFuncScope = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
+        hints: {},
+        conditions: {},
         constraints: {
             1: "Declare and assign all possible variable types."
         },
         category: 'Variable',
         category_sub: 'scope',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };
@@ -84,15 +84,15 @@ export const objBlockScope = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
+        hints: {},
+        conditions: {},
         constraints: {
             1: "Declare and assign all possible variable types."
         },
         category: 'Variable',
         category_sub: 'scope',
-        tags: null,
-        refs: null
+        tags: [],
+        refs: {}
     }
     return data;
 };

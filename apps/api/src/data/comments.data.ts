@@ -42,13 +42,13 @@ export const objSingle = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Comments',
-        category_sub: null,
-        tags: null,
-        refs: null
+        category_sub: {},
+        tags: [],
+        refs: {}
     }
     return data;
 };
@@ -67,13 +67,13 @@ export const objMulti = (): JS_Type => {
                 completed: false
             }
         },
-        hints: null,
-        conditions: null,
-        constraints: null,
+        hints: {},
+        conditions: {},
+        constraints: {},
         category: 'Comments',
-        category_sub: null,
-        tags: null,
-        refs: null
+        category_sub: {},
+        tags: [],
+        refs: {}
     }
     return data;
 };
