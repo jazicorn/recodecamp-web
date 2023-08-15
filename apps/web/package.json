@@ -42,7 +42,11 @@
     }
   },
   "dependencies": {
+    "@codemirror/commands": "^6.2.4",
+    "@codemirror/lang-javascript": "^6.1.9",
+    "@codemirror/view": "^6.16.0",
     "@emotion/react": "^11.11.1",
+    "@lezer/highlight": "^1.1.6",
     "@mantine/core": "^6.0.16",
     "@mantine/dates": "^6.0.16",
     "@mantine/dropzone": "^6.0.16",
@@ -61,6 +65,8 @@
     "@tiptap/extension-link": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
+    "@uiw/codemirror-themes": "^4.21.9",
+    "@uiw/react-codemirror": "^4.21.9",
     "add": "^2.0.6",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",

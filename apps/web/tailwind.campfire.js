@@ -4,8 +4,8 @@ export default {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      gro: ['Space Grotesk', 'sans-serif'],
-      mono: ['Space Mono', 'monospace'],
+      gro: ['Space Grotesk'],
+      mono: ['Space Mono'],
       vt: ['VT323', 'monospace'],
     },
     extend: {
@@ -38,6 +38,8 @@ export default {
         },
         'campfire-purple': {
           DEFAULT: '#8b5cf6',
+          '300': '#c4b5fd',
+          'light': '#c4b5fd',
         },
         'campfire-green': {
           DEFAULT: '#22c55e',
