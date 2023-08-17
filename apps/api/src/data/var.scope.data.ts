@@ -11,20 +11,27 @@ export const objGlobalScope = (): JS_Type => {
         task: `Assuming \"global scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
         data: { scope: "global scope", declaration: animal, value: animalName},
         result: {
+            0: {
+                all:true
+            },
             1 : {
                 resultVar: `var ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             },
             2 : {
                 resultConst: `const ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             },
             3: {
                 resultLet: `let ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             },
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {
             1: "Declare and assign all possible variable types."
@@ -47,12 +54,17 @@ export const objFuncScope = (): JS_Type => {
         task: `Assuming \"function scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
         data: { scope: "function scope", keyword: 'var', declaration: animal, value: animalName},
         result: {
+            0: {
+                all:true
+            },
             1: {
                 resultVar: `var ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {
             1: "Declare and assign all possible variable types."
@@ -75,16 +87,22 @@ export const objBlockScope = (): JS_Type => {
         task: `Assuming \"block scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
         data: { scope: "block scope", keyword: ['const', 'let'], declaration: animal, value: animalName},
         result: {
+            0: {
+                all:false
+            },
             1 : {
                 resultConst: `const ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: true
             },
             2 : {
                 resultLet: `let ${animal} = ${animalFullName}`,
-                completed: false
-            }
+                completed: false,
+                optional: true
+            },
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {
             1: "Declare and assign all possible variable types."

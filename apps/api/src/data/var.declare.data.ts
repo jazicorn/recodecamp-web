@@ -13,12 +13,17 @@ export const objRandom = (): JS_Type => {
         task: `Using the \"${keyword}\" keyword, declare a variable named \"${animal}\", and assign it the value \"${animalName}\"`,
         data: { keyword: keyword, declaration: animal, value: animalName},
         result: {
+            0: {
+                all:true
+            },
             1: {
                 answer: `${keyword} ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             },
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {},
         category: 'Variable',
@@ -38,12 +43,17 @@ export const objRandomVar = (): JS_Type => {
         task: `Using the \"var\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
         data: { keyword: 'var', declaration: animal, value: animalName },
         result: {
+            0: {
+                all:true
+            },
             1 : {
                 answer: `var ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {},
         category: 'Variable',
@@ -63,12 +73,17 @@ export const objRandomConst = (): JS_Type => {
         task: `Using the \"const\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
         data: { keyword: 'const', declaration: animal, value: animalName},
         result: {
+            0: {
+                all:true
+            },
             1 : {
                 answer: `const ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {},
         category: 'Variable',
@@ -88,12 +103,17 @@ export const objRandomLet = (): JS_Type => {
         task: `Using the \"let\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
         data: { keyword: 'let', declaration: animal, value: animalName},
         result: {
+            0: {
+                all:true
+            },
             1 : {
                 answer: `let ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: ``,
         conditions: {},
         constraints: {},
         category: 'Variable',

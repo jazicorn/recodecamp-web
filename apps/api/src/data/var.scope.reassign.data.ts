@@ -17,16 +17,22 @@ export const objBlockScopeReassign = (): JS_Type => {
             reassign: animalFullName
         },
         result: {
+            0: {
+                all: true,
+            },
             1 : {
                 resultDeclare: `let ${animal} = ${animalName}`,
-                completed: false
+                completed: false,
+                optional: false
             },
             2 : {
                 resultReassign: `${animal} = ${animalFullName}`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {},
         category: 'Variable',

@@ -13,6 +13,7 @@ export class Question implements JS {
     data!: object | null;
     result!: object | null;
     hints!: object | null;
+    boilerplate!: string | null;
     conditions!: object | null;
     constraints!: object | null;
     category!: string | null;
@@ -31,6 +32,7 @@ export class Question implements JS {
         this.data = data.data;
         this.result = data.result;
         this.hints = data.hints;
+        this.boilerplate = data.boilerplate;
         this.conditions = data.conditions;
         this.constraints = data.constraints;
         this.category = data.category;
@@ -104,6 +106,13 @@ export class Question implements JS {
     }
     public set setHints(hints: object) {
         this.hints = hints;
+    }
+    // boilerplate
+    public get getBoilerplate(): string | null {
+        return this.boilerplate;
+    }
+    public set setBoilerplate(boilerplate: string) {
+        this.boilerplate = boilerplate;
     }
     // conditions
     public get getConditions(): object | null {

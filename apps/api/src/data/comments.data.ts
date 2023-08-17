@@ -12,18 +12,23 @@ import { getRandomInt } from '../utils/index';
 //         task: `Using ${keyword.method} comments, comment the statement: "Hello ${personName}"`,
 //         data: keyword,
 //         result: {
+//             0: {
+//                  all:false
+//             },
 //             1: {
 //                 answer: `${keyword.value} Hello ${personName} ${keyword.value2}`,
-//                 completed: false
+//                 completed: false,
+//                 optional: false
 //             },
 //         },
-//         hints: null,
-//         conditions: null,
-//         constraints: null,
+//         hints: {},
+//         boilerplate: '',
+//         conditions: {},
+//         constraints: {},
 //         category: 'Comments',
-//         category_sub: null,
-//         tags: null,
-//         refs: null
+//         category_sub: '',
+//         tags: [],
+//         refs: {}
 //     }
 //     return data;
 // };
@@ -37,12 +42,17 @@ export const objSingle = (): JS_Type => {
         task: `Using ${keyword} comments, comment the statement: "Hello ${personName}"`,
         data: { keyword: keyword, value: personName },
         result: {
+            0: {
+                all:true
+            },
             1 : {
                 answer: `// Hello ${personName}`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {},
         category: 'Comments',
@@ -62,12 +72,17 @@ export const objMulti = (): JS_Type => {
         task: `Using ${keyword} comments, comment the statement: "Hello ${personName}"`,
         data: { keyword: keyword, value: personName},
         result: {
+            0: {
+                all:true
+            },
             1 : {
                 answer: `/** Hello ${personName} */`,
-                completed: false
+                completed: false,
+                optional: false
             }
         },
         hints: {},
+        boilerplate: '',
         conditions: {},
         constraints: {},
         category: 'Comments',

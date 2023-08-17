@@ -9,6 +9,7 @@ export interface Q {
     data: object | null;
     result: object | null;
     hints: object | null;
+    boilerplate: string | null;
     conditions: object| null;
     constraints: object | null;
     category: string | null;

@@ -13,6 +13,7 @@ export class Question implements Q {
     data!: object | null;
     result!: object | null;
     hints!: object | null;
+    boilerplate!: object | null;
     conditions!: object | null;
     constraints!: object | null;
     category!: string | null;
@@ -29,6 +30,7 @@ export class Question implements Q {
         data = null,
         result = null,
         hints = null,
+        boilerplate= null,
         conditions = null,
         constraints = null,
         category = null,
@@ -46,6 +48,7 @@ export class Question implements Q {
         this.data = data;
         this.result = result;
         this.hints = hints;
+        this.boilerplate = boilerplate;
         this.conditions = conditions;
         this.constraints = constraints;
         this.category = category;
@@ -123,6 +126,13 @@ export class Question implements Q {
     }
     public set setHints(hints: object) {
         this.hints = hints;
+    }
+    // boilerplate
+    public get getBoilerplate(): string | null {
+        return this.boilerplate;
+    }
+    public set setBoilerplate(boilerplate: string) {
+        this.boilerplate = boilerplate;
     }
     // conditions
     public get getConditions(): object | null {
