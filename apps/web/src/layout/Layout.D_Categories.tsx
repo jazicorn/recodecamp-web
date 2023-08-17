@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
 // components
 import ErrorDashboard from '../components/dashboard/error';
 import LoadingDashboard from '../components/dashboard/loading';
@@ -50,13 +49,12 @@ const Layout_D_Categories = () => {
 
   return (
     <div className="tw-h-full">
-      <Transition>
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <D_Instructions_Category/>
+              <D_Instructions_Category/>
             {
               data.data !== undefined && data?.data.map((category, i) => {
                 return (<section key={i} className=''><D_Category category={category}/></section>)
@@ -75,7 +73,6 @@ const Layout_D_Categories = () => {
             }
         </main>
         }
-      </Transition>
     </div>
   )
 }

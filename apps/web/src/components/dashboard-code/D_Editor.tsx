@@ -1,6 +1,7 @@
 // Dashboard Menu
 import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import Transition from '../../hooks/useTransition';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import lightTheme from '../../styles/style.codemirror.light';
@@ -28,6 +29,7 @@ const D_Editor = () => {
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-items-between`}>
+          <Transition>
           <header className={`${darkMode ? '' : ''} 
             tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
             <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
@@ -60,6 +62,7 @@ const D_Editor = () => {
               Submit Answer
             </button>
           </div>
+          </Transition>
       </div>
     </div>
   )

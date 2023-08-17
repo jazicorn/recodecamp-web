@@ -1,6 +1,7 @@
 // Dashboard Console
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import Transition from '../../hooks/useTransition';
 
 const D_Console = () => {
   const { state } = useContext(ThemeContext);
@@ -10,6 +11,7 @@ const D_Console = () => {
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-items-between`}>
         <main className='tw-h-full'>
+          <Transition>
           <header className={`${darkMode ? '' : ''} 
             tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
             <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
@@ -24,6 +26,7 @@ const D_Console = () => {
               Button
             </button> */}
           </header>
+          </Transition>
         </main>
       </div>
     </div>

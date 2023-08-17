@@ -2,6 +2,7 @@
 /** React Hooks */
 import { useContext, useCallback, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import Transition from '../../hooks/useTransition';
 /** Custom Components*/
 import ErrorDashboard from '../dashboard/error';
 import LoadingDashboard from '../dashboard/loading';
@@ -92,9 +93,10 @@ const D_Problem = () => {
       <article className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-gap-1 tw-h-full tw-flex tw-flex-col tw-content-around`}>
         <span className="tw-h-full tw-flex tw-flex-col">
-          <section className="tw-flex tw-flex-col tw-justify-between tw-h-3/4">
+          <div className="tw-flex tw-flex-col tw-justify-between tw-h-3/4">
             {/**Question Task */}
             <section className="">
+              <Transition> 
               <header className={`${darkMode ? '' : ''} 
                tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
                 <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-text-campfire-blue tw-border-campfire-purple-light
@@ -111,14 +113,17 @@ const D_Problem = () => {
               {getMenuQuestion === undefined || Object.keys(getMenuQuestion).length === 0 ?
                   <LoadingDashboard/>
                 :
-                <section className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2`}>
+                <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2`}>
                     <div>
                       <p className="tw-text-base">{getMenuQuestion.task}</p>
                     </div>
-                </section>
+                </div>
               }
+              </Transition>
             </section>
-          </section>
+          </div>
+          
+          <Transition>
           {/**Question Conditions (Test Cases) */}
           <section className={`${darkMode ? '' : ''} tw-border-campfire-purple-light tw-h-1/4 tw-border-t`}>
             {getMenuQuestion.conditions === undefined || Object.keys(getMenuQuestion.conditions).length === 0 ?
@@ -127,6 +132,7 @@ const D_Problem = () => {
               <div/>
             }
           </section>
+          </Transition>
         </span>
       </article>
     </div>
