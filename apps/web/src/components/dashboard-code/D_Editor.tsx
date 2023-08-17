@@ -6,16 +6,24 @@ import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import lightTheme from '../../styles/style.codemirror.light';
 import darkTheme from '../../styles/style.codemirror.dark';
-//import { useAppSelector } from '../../redux/reduxHooks.ts';
+import { useAppSelector } from '../../redux/reduxHooks.ts';
 
 const extensions = [ javascript({ jsx: true })];
 
 const D_Editor = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  const getMenuQuestion = useAppSelector((state:RootState) => state?.dashboard?.question);
+  const getMenuQuestionBoilerplate = () => {
+    const newLines = "\n".repeat(4);
+    if(  getMenuQuestion.boilerplate === undefined) {
+      return `${newLines}`
+    } else {
+      return  `${getMenuQuestion.boilerplate}${newLines}`
+    }
+  };
 
-  const newLines = "\n".repeat(11);
-  const code = `console.log('hello world!');${newLines}`;
+  const code = getMenuQuestionBoilerplate();
 
   const [editor, setEditor] = useState(code);
 
@@ -23,8 +31,7 @@ const D_Editor = () => {
     setEditor(value);
   }, []);
 
-  //const getMenuQuestion = useAppSelector((state:RootState) => state?.dashboard?.question);
-
+ 
   return (
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
