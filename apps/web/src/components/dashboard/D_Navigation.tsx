@@ -10,7 +10,8 @@ import {
   IconLogout,
   IconNotes,
   IconSettings,
-  IconListDetails
+  IconListDetails,
+  IconBook2
 } from '@tabler/icons-react';
 
 const D_Navigation = () => {
@@ -18,7 +19,7 @@ const D_Navigation = () => {
   const darkMode = state.darkMode;
 
   return (
-    <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-mb-1 tw-place-content-between tw-h-full`}>
+    <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-mb-1 tw-place-content-between tw-h-full `}>
       <ul className='tw-flex tw-flex-col tw-place-items-center tw-space-y-2 [&>li]:tw-h-[30px]'>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
@@ -34,6 +35,9 @@ const D_Navigation = () => {
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
           { darkMode ? <IconCalendar color="#2ca9bc" /> : <IconCalendar color="#000" />}</li>
+        <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
+       `}>
+        { darkMode ? <IconBook2 color="#2ca9bc" /> : <IconBook2 color="#000" />}</li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
         { darkMode ? <IconNotes color="#2ca9bc" /> : <IconNotes color="#000" />}</li>

@@ -15,7 +15,8 @@ import {
   IconSettings,
   IconListDetails,
   IconHome,
-  IconSearch
+  IconSearch,
+  IconBook2
 } from '@tabler/icons-react';
 
 const D_Banner = () => {
@@ -62,19 +63,23 @@ const D_Banner = () => {
               { darkMode ? <IconCalendar color="#d4d4d4" /> : <IconCalendar color="#000" />}
               <Link to={''}>Calendar</Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
+             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
+              { darkMode ? <IconBook2 color="#d4d4d4" /> : <IconBook2 color="#000" />}
               <Link to={''}>Documentation</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              { darkMode ? <IconSearch color="#d4d4d4" /> : <IconSearch color="#000" />}
-              <Link to={''}>Search Dashboard</Link>
+              { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
+              <Link to={''}>Notes</Link>
             </li>
           </ul>
           {/**Col 2 */}
           <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
+             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
+              { darkMode ? <IconSearch color="#d4d4d4" /> : <IconSearch color="#000" />}
+              <Link to={''}>Search Dashboard</Link>
+            </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
               <Link to={''}>Dashboard Settings</Link>
