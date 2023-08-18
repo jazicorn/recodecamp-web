@@ -1,16 +1,21 @@
 // Dashboard Menu
 import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import Transition from '../../hooks/useTransition';
+// redux
+import { useAppSelector } from '../../redux/reduxHooks.ts';
+// hooks
+//import useWindowSize from '../../hooks/useWindowSize';
+// codemirror
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import lightTheme from '../../styles/style.codemirror.light';
 import darkTheme from '../../styles/style.codemirror.dark';
-import { useAppSelector } from '../../redux/reduxHooks.ts';
+
 
 const extensions = [ javascript({ jsx: true })];
 
 const D_Editor = () => {
+  //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   const getMenuQuestion = useAppSelector((state:RootState) => state?.dashboard?.question);
@@ -31,12 +36,10 @@ const D_Editor = () => {
     setEditor(value);
   }, []);
 
- 
   return (
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
+     <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-items-between`}>
-          <Transition>
           <header className={`${darkMode ? '' : ''} 
             tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
             <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
@@ -52,14 +55,14 @@ const D_Editor = () => {
             </button>
           </header>
           <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-h-full`}>
-          <CodeMirror
-            value={editor}
-            height="300px"
-            maxHeight="100%"
-            theme={darkMode ? darkTheme : lightTheme}
-            extensions={extensions}
-            onChange={onChange}
-          />
+            <CodeMirror
+              value={editor}
+              height="200px"
+              maxHeight="100%"
+              theme={darkMode ? darkTheme : lightTheme}
+              extensions={extensions}
+              onChange={onChange}
+            />
           </div>
           <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-justify-between tw-content-center`}>
             <button 
@@ -69,7 +72,6 @@ const D_Editor = () => {
               Submit Answer
             </button>
           </div>
-          </Transition>
       </div>
     </div>
   )
