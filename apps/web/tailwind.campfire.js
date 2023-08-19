@@ -80,9 +80,9 @@ export default {
       },
       gridTemplateRows: {
         'dashboard': '2.5em, minmax(38.5em, auto)',
-        'dashboard-mobile': '3em, 3em, 24em, auto, auto, auto',
+        'dashboard-mobile': '3em, 3em, 28em, auto, auto, auto',
         'layout-dashboard-home': 'minmax(38.3em, auto)',
-        'layout-dashboard-home-mobile': '24em, auto, auto, auto',
+        'layout-dashboard-home-mobile': '28em, auto, auto, auto',
         'layout-dashboard-code': '3.2em, 25em, minmax(9.8em, auto)',
         'layout-dashboard-code-mobile': '3em, minmax(14em, auto), minmax(14em, auto), minmax(10em, auto)',
         'layout-dashboard-categories': '2.5em, minmax(35.7em, auto)',

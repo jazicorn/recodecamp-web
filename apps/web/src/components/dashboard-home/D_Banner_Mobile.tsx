@@ -15,7 +15,8 @@ import {
   IconSettings,
   IconListDetails,
   IconHome,
-  IconSearch
+  IconSearch,
+  IconBook2
 } from '@tabler/icons-react';
 
 const D_Banner = () => {
@@ -24,18 +25,19 @@ const D_Banner = () => {
   const darkMode = state.darkMode;
   return (
     <div className={`${darkMode ? '[&_section>ul]:tw-text-campfire-blue [&_section>h4]:tw-text-campfire-neutral-300' : 
-    '[&_section]:tw-text-campfire-purple [&_section>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-grow-0 tw-relative`}>
-      {/**Background | Position: Absolute */}
+    '[&_section]:tw-text-campfire-purple [&_section>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
-      tw-z-20 tw-w-full tw-h-full tw-absolute tw-rounded tw-border-8 tw-border-no-border`}/>
-      {/**Page Content | Position: Relative */}
+      tw-w-full tw-h-full`}>
       <main className={`${darkMode ? '[&>section>ul]:tw-border-campfire-neutral-900': '[&>section>ul]:tw-border-campfire-blue'} 
-      tw-relative tw-z-40 tw-px-4 tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left 
+      tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left 
       [&>section>ul]:tw-h-fit [&>section>ul]:tw-px-2 [&>section>ul]:tw-border-l-2 [&>section>ul]:tw-ml-4 
       [&>section>ul]:tw-flex [&>section>ul]:tw-flex-col [&>section>ul]:tw-gap-2`}>
         <section className="tw-overflow-auto tw-overflow-y-hidden tw-mb-1"> 
-          <h4 className="tw-text-4xl tw-pb-2 tw-pl-1">Directory</h4>
+          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
+          tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
+            Directory
+          </h4>
           <ul className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
@@ -62,18 +64,22 @@ const D_Banner = () => {
               <Link to={''}>Calendar</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
+              { darkMode ? <IconBook2 color="#d4d4d4" /> : <IconBook2 color="#000" />}
               <Link to={''}>Documentation</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              { darkMode ? <IconSearch color="#d4d4d4" /> : <IconSearch color="#000" />}
-              <Link to={''}>Search Dashboard</Link>
+              { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
+              <Link to={''}>Notes</Link>
             </li>
           </ul>
           <hr className={`${darkMode ? '' : 'tw-bg-campfire-neutral-600' } tw-ml-8 tw-my-3 tw-w-[100px] tw-h-[1px]`}/>
           <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
+            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
+              { darkMode ? <IconSearch color="#d4d4d4" /> : <IconSearch color="#000" />}
+              <Link to={''}>Search Dashboard</Link>
+            </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
               <Link to={''}>Dashboard Settings</Link>
@@ -94,6 +100,7 @@ const D_Banner = () => {
           </p>
         </section> */}
       </main>
+      </div>
     </div>
   )
 }
