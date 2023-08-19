@@ -54,12 +54,14 @@ const Layout_D_Categories = () => {
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-              <D_Instructions_Category/>
-            {
-              data.data !== undefined && data?.data.map((category, i) => {
-                return (<section key={i} className=''><D_Category category={category}/></section>)
-              })
-            }
+            <D_Instructions_Category/>
+            <div>
+              {
+                data.data !== undefined && data?.data.map((category, i) => {
+                  return (<section key={i} className=''><D_Category category={category}/></section>)
+                })
+              }
+            </div>
         </main>
         :
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 

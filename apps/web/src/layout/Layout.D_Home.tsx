@@ -29,12 +29,6 @@ const Layout_D_Home = () => {
             <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
               <D_User/>
             </section>
-            <section className='tw-col-start-1 tw-col-end-2 tw-row-start-2 tw-row-end-3 tw-h-full'>
-              <D_Support/>
-            </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-3 tw-h-full'>
-              <D_Support/>
-            </section>
         </main>
         :
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
