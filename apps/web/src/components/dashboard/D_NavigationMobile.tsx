@@ -85,7 +85,7 @@ const D_Navigation = () => {
                 { darkMode ? <IconCalendar color="#2ca9bc" /> : <IconCalendar color="#000" />} Calendar</li>
                <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}> 
-              { darkMode ? <IconBook2 color="#2ca9bc" /> : <IconBook2 color="#000" />} Notes</li>
+              { darkMode ? <IconBook2 color="#2ca9bc" /> : <IconBook2 color="#000" />} Documentation</li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}> 
               { darkMode ? <IconNotes color="#2ca9bc" /> : <IconNotes color="#000" />} Notes</li>
