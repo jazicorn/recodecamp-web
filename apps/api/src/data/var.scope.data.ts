@@ -1,16 +1,18 @@
-import { JS_Type } from  '../types/types.question';
+import { Q_Type } from  '../types/types.question';
 import { faker } from '@faker-js/faker';
 
-export const objGlobalScope = (): JS_Type => {
+export const objGlobalScope = (): Q_Type => {
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const animalFullName = faker.person.fullName({ firstName: animalName });
     const data = {
-        level: 1,
-        points: 1,
-        task: `Assuming \"global scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
-        data: { scope: "global scope", declaration: animal, value: animalName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Assuming \"global scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
+        _QUESTION_DATA: { scope: "global scope", declaration: animal, value: animalName},
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -30,30 +32,32 @@ export const objGlobalScope = (): JS_Type => {
                 optional: false
             },
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {
             1: "Declare and assign all possible variable types."
         },
-        category: 'Variable',
-        category_sub: 'scope',
-        tags: [],
-        refs: {}
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'scope',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };
 
-export const objFuncScope = (): JS_Type => {
+export const objFuncScope = (): Q_Type => {
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const animalFullName = faker.person.fullName({ firstName: animalName });
     const data = {
-        level: 1,
-        points: 1,
-        task: `Assuming \"function scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
-        data: { scope: "function scope", keyword: 'var', declaration: animal, value: animalName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Assuming \"function scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
+        _QUESTION_DATA: { scope: "function scope", keyword: 'var', declaration: animal, value: animalName},
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -63,30 +67,32 @@ export const objFuncScope = (): JS_Type => {
                 optional: false
             }
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {
             1: "Declare and assign all possible variable types."
         },
-        category: 'Variable',
-        category_sub: 'scope',
-        tags: [],
-        refs: {}
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'scope',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };
 
-export const objBlockScope = (): JS_Type => {
+export const objBlockScope = (): Q_Type => {
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const animalFullName = faker.person.fullName({ firstName: animalName });
     const data = {
-        level: 1,
-        points: 1,
-        task: `Assuming \"block scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
-        data: { scope: "block scope", keyword: ['const', 'let'], declaration: animal, value: animalName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Assuming \"block scope\", write a variable named "${animal}" and assign it the value "${animalName}".`,
+        _QUESTION_DATA: { scope: "block scope", keyword: ['const', 'let'], declaration: animal, value: animalName},
+        _QUESTION_RESULT: {
             0: {
                 all:false
             },
@@ -101,16 +107,16 @@ export const objBlockScope = (): JS_Type => {
                 optional: true
             },
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {
             1: "Declare and assign all possible variable types."
         },
-        category: 'Variable',
-        category_sub: 'scope',
-        tags: [],
-        refs: {}
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'scope',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };

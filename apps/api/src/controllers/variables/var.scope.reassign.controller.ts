@@ -2,8 +2,8 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import client from '../../config/db';
-import { Question } from '../../classes/javascript.question';
-import { JS_Type } from  '../../types/types.question';
+import { Question } from '../../classes/question';
+import { Q_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
 import { objBlockScopeReassign } from '../../data/var.scope.reassign.data';
 
@@ -20,7 +20,7 @@ export default class VarScopeReassign {
 
     public varBlockScope = async (req: Request, res: Response) => {
         const data = objBlockScopeReassign();
-        const question: JS_Type = new Question(data);
+        const question = new Question(data);
         switch(req.method) {
             case('GET'):
                 try {

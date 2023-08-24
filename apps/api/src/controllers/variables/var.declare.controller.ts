@@ -2,8 +2,8 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import client from '../../config/db';
-import { Question } from '../../classes/javascript.question';
-import { JS_Type } from  '../../types/types.question';
+import { Question } from '../../classes/question';
+import { Q_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
 import { objRandom, objRandomVar, objRandomConst, objRandomLet } from '../../data/var.declare.data'
 
@@ -26,7 +26,7 @@ export default class VarDeclare {
 
     public varRandomDeclare = async (req: Request, res: Response) => {
         const data = await Promise.resolve(objRandom());
-        const question: JS_Type = new Question(data);
+        const question: Q_Type = new Question(data);
         switch(req.method) {
             case('GET'):
                 try {
@@ -42,7 +42,7 @@ export default class VarDeclare {
 
     public varDeclareVar = async (req: Request, res: Response) => {
         const data = objRandomVar();
-        const question: JS_Type = new Question(data);
+        const question: Q_Type = new Question(data);
         switch(req.method) {
             case('GET'):
                  try {
@@ -58,7 +58,7 @@ export default class VarDeclare {
 
     public varDeclareConst = async (req: Request, res: Response) => {
         const data = objRandomConst();
-        const question: JS_Type = new Question(data);
+        const question: Q_Type = new Question(data);
          switch(req.method) {
             case('GET'):
                  try {
@@ -74,7 +74,7 @@ export default class VarDeclare {
 
      public varDeclareLet = async (req: Request, res: Response) => {
         const data = objRandomLet();
-        const question: JS_Type = new Question(data);
+        const question: Q_Type = new Question(data);
         switch(req.method) {
             case('GET'):
                  try {

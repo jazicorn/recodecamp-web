@@ -1,18 +1,20 @@
-import { JS_Type } from  '../types/types.question';
+import { Q_Type } from  '../types/types.question';
 import { faker } from '@faker-js/faker';
 import { getRandomInt } from '../utils/index';
 
-export const objRandom = (): JS_Type => {
+export const objRandom = (): Q_Type => {
     const random = getRandomInt(3);
     const keyword = ['var', 'const', 'let'][random];
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const data = {
-        level: 1,
-        points: 1,
-        task: `Using the \"${keyword}\" keyword, declare a variable named \"${animal}\", and assign it the value \"${animalName}\"`,
-        data: { keyword: keyword, declaration: animal, value: animalName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Using the \"${keyword}\" keyword declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
+        _QUESTION_DATA: { keyword: keyword, declaration: animal, value: animalName},
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -22,27 +24,29 @@ export const objRandom = (): JS_Type => {
                 optional: false
             },
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {},
-        category: 'Variable',
-        category_sub: 'declaration',
-        tags: [],
-        refs: {}
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {},
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'declaration',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {},
     }
     return data;
 };
 
-export const objRandomVar = (): JS_Type => {
+export const objRandomVar = (): Q_Type => {
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const data = {
-        level: 1,
-        points: 1,
-        task: `Using the \"var\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
-        data: { keyword: 'var', declaration: animal, value: animalName },
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Using the \"var\" keyword declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
+        _QUESTION_DATA: { keyword: 'var', declaration: animal, value: animalName },
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -52,27 +56,29 @@ export const objRandomVar = (): JS_Type => {
                 optional: false
             }
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {},
-        category: 'Variable',
-        category_sub: 'declaration',
-        tags: [],
-        refs: {}
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {},
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'declaration',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };
 
-export const objRandomConst = (): JS_Type => {
+export const objRandomConst = (): Q_Type => {
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const data = {
-        level: 1,
-        points: 1,
-        task: `Using the \"const\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
-        data: { keyword: 'const', declaration: animal, value: animalName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Using the \"const\" keyword declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
+        _QUESTION_DATA: { keyword: 'const', declaration: animal, value: animalName},
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -82,27 +88,29 @@ export const objRandomConst = (): JS_Type => {
                 optional: false
             }
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {},
-        category: 'Variable',
-        category_sub: 'declaration',
-        tags: [],
-        refs: {}
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {},
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'declaration',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };
 
-export const objRandomLet = (): JS_Type => {
+export const objRandomLet = (): Q_Type => {
     const animal = faker.animal.type();
     const animalName = faker.person.firstName();
     const data = {
-        level: 1,
-        points: 1,
-        task: `Using the \"let\" keyword, declare a variable named \"${animal}\" and assign it the value \"${animalName}\"`,
-        data: { keyword: 'let', declaration: animal, value: animalName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Using the \"let\" keyword declare a variable named \"${animal}\" and assign it the value \"${animalName}\"` ,
+        _QUESTION_DATA: { keyword: 'let', declaration: animal, value: animalName},
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -112,14 +120,14 @@ export const objRandomLet = (): JS_Type => {
                 optional: false
             }
         },
-        hints: {},
-        boilerplate: ``,
-        conditions: {},
-        constraints: {},
-        category: 'Variable',
-        category_sub: 'declaration',
-        tags: [],
-        refs: {}
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: ``,
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {},
+        _QUESTION_CATEGORY: 'Variable',
+        _QUESTION_CATEGORY_SUB: 'declaration',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };

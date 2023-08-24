@@ -2,8 +2,8 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import client from '../../config/db';
-import { Question } from '../../classes/javascript.question';
-import { JS_Type } from  '../../types/types.question';
+import { Question } from '../../classes/question';
+import { Q_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
 import { objBlockScope, objFuncScope, objGlobalScope } from '../../data/var.scope.data';
 

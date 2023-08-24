@@ -1,16 +1,16 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import client from '../config/db';
-import { Question } from '../classes/javascript.question';
-import { JS_Type } from  '../types/types.question';
-import { getRandomInt } from '../utils/index';
-import { objSingle, objMulti } from '../data/comments.data'
+import client from '../../config/db';
+import { Question } from '../../classes/question';
+import { Q_Type } from  '../../types/types.question';
+import { getRandomInt } from '../../utils/index';
+import { objSingle, objMulti } from '../../data/comments.data'
 
 export default class VarDeclare {
     // public pathCommentsRandom = '/comments/all';
-    public pathCommentsSingle = '/comments/multi/all';
-    public pathCommentsMulti = '/comments/single/all';
+    public pathCommentsSingle = '/comments/single/all';
+    public pathCommentsMulti = '/comments/multi/all';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -22,25 +22,9 @@ export default class VarDeclare {
         this.router.get(this.pathCommentsMulti, this.commentsMulti);
     }
 
-    // public  commentsRandom = async (req: Request, res: Response) => {
-    //     const data = objRandom();
-    //     const question: JS_Type = new Question(data);
-    //     switch(req.method) {
-    //         case('GET'):
-    //              try {
-    //                 res.status(200).send({ data: question });
-    //             } catch {
-    //                 res.status(500).send({ error: "Something went wrong" });
-    //             }
-    //             break
-    //         default:
-    //             res.status(400).send({ error: `${req.method} Method Not Allowed` });
-    //     }
-    // };
-
     public commentsSingle = async (req: Request, res: Response) => {
         const data = objSingle();
-        const question: JS_Type = new Question(data);
+        const question = new Question(data);
         switch(req.method) {
             case('GET'):
                  try {
@@ -56,7 +40,7 @@ export default class VarDeclare {
 
     public commentsMulti = async (req: Request, res: Response) => {
         const data = objMulti();
-        const question: JS_Type = new Question(data);
+        const question = new Question(data);
          switch(req.method) {
             case('GET'):
                  try {

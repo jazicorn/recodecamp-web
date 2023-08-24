@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import sql from '../../config/db';
 import { faker } from '@faker-js/faker';
-import { Question } from '../../classes/javascript.question';
-import { JS_Type } from  '../../types/types.question';
+import { Question } from '../../classes/question';
+import { Q_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
 import cors from 'cors';
 
@@ -91,7 +91,7 @@ export default class VarGeneral {
         switch(req.method) {
             case('POST'):
                 try {
-                    const data: JS_Type = req.body;
+                    const data: Q_Type = req.body;
                     const question = new Question(data);
                     const results = await sql`INSERT INTO _QUESTIONS (
                             _QUESTION_CREATED_AT,
@@ -112,23 +112,23 @@ export default class VarGeneral {
                             _QUESTION_TAGS,
                             _QUESTION_REFS,
                         ) VALUES (
-                            ${question.created_at},
-                            ${question.updated_at},
-                            ${question.id},
-                            ${question.language},
-                            ${question.level},
-                            ${question.points},
-                            ${question.task},
-                            ${question.data},
-                            ${question.result},
-                            ${question.hints},
-                            ${question.boilerplate},
-                            ${question.conditions},
-                            ${question.constraints},
-                            ${question.category},
-                            ${question.category_sub},
-                            ${question.tags},
-                            ${question.refs}
+                            ${question._QUESTION_CREATED_AT},
+                            ${question._QUESTION_UPDATED_AT},
+                            ${question._QUESTION_ID},
+                            ${question._QUESTION_LANGUAGE},
+                            ${question._QUESTION_LEVEL},
+                            ${question._QUESTION_POINTS},
+                            ${question._QUESTION_TASK},
+                            ${question._QUESTION_DATA},
+                            ${question._QUESTION_RESULT},
+                            ${question._QUESTION_HINTS},
+                            ${question._QUESTION_BOILERPLATE},
+                            ${question._QUESTION_CONDITIONS},
+                            ${question._QUESTION_CONSTRAINTS},
+                            ${question._QUESTION_CATEGORY},
+                            ${question._QUESTION_CATEGORY_SUB},
+                            ${question._QUESTION_TAGS},
+                            ${question._QUESTION_REFS}
                          )`;
                     return res.status(200);
                 } catch {

@@ -1,47 +1,18 @@
-import { JS_Type } from  '../types/types.question';
+import { Q_Type } from  '../types/types.question';
 import { faker } from '@faker-js/faker';
 import { getRandomInt } from '../utils/index';
 
-// export const objRandom = (): JS_Type => {
-//     const personName = faker.person.firstName();
-//     const random = getRandomInt(3);
-//     const keyword = [{method:"SingleLine", value: "//", value2: ""}, {method:"MultiLine", value: "/**", value2: "*/"}][random];
-//     const data = {
-//         level: 1,
-//         points: 1,
-//         task: `Using ${keyword.method} comments, comment the statement: "Hello ${personName}"`,
-//         data: keyword,
-//         result: {
-//             0: {
-//                  all:false
-//             },
-//             1: {
-//                 answer: `${keyword.value} Hello ${personName} ${keyword.value2}`,
-//                 completed: false,
-//                 optional: false
-//             },
-//         },
-//         hints: {},
-//         boilerplate: '',
-//         conditions: {},
-//         constraints: {},
-//         category: 'Comments',
-//         category_sub: '',
-//         tags: [],
-//         refs: {}
-//     }
-//     return data;
-// };
-
-export const objSingle = (): JS_Type => {
+export const objSingle = (): Q_Type => {
     const personName = faker.person.firstName();
     const keyword = "SingleLine";
     const data = {
-        level: 1,
-        points: 1,
-        task: `Using ${keyword} comments, comment the statement: "Hello ${personName}"`,
-        data: { keyword: keyword, value: personName },
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Using ${keyword} comments, comment the statement: "Hello ${personName}"`,
+        _QUESTION_DATA: { keyword: keyword, value: personName },
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -51,27 +22,29 @@ export const objSingle = (): JS_Type => {
                 optional: false
             }
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {},
-        category: 'Comments',
-        category_sub: '',
-        tags: [],
-        refs: {}
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {},
+        _QUESTION_CATEGORY: 'Comments',
+        _QUESTION_CATEGORY_SUB: '',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };
 
-export const objMulti = (): JS_Type => {
+export const objMulti = (): Q_Type => {
     const personName = faker.person.firstName();
     const keyword = "MultiLine";
     const data = {
-        level: 1,
-        points: 1,
-        task: `Using ${keyword} comments, comment the statement: "Hello ${personName}"`,
-        data: { keyword: keyword, value: personName},
-        result: {
+        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_ID: '',
+        _QUESTION_LEVEL: 1,
+        _QUESTION_POINTS: 1,
+        _QUESTION_TASK: `Using ${keyword} comments, comment the statement: "Hello ${personName}"`,
+        _QUESTION_DATA: { keyword: keyword, value: personName},
+        _QUESTION_RESULT: {
             0: {
                 all:true
             },
@@ -81,14 +54,14 @@ export const objMulti = (): JS_Type => {
                 optional: false
             }
         },
-        hints: {},
-        boilerplate: '',
-        conditions: {},
-        constraints: {},
-        category: 'Comments',
-        category_sub: '',
-        tags: [],
-        refs: {}
+        _QUESTION_HINTS: {},
+        _QUESTION_BOILERPLATE: '',
+        _QUESTION_CONDITIONS: {},
+        _QUESTION_CONSTRAINTS: {},
+        _QUESTION_CATEGORY: 'Comments',
+        _QUESTION_CATEGORY_SUB: '',
+        _QUESTION_TAGS: [],
+        _QUESTION_REFS: {}
     }
     return data;
 };
