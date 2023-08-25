@@ -28,13 +28,13 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                  try {
-                    return res.status(200).send({ data: question });
+                    res.status(200).send({ data: question });
                 } catch {
-                    return res.status(500).send({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+                res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
 
