@@ -1,9 +1,8 @@
 export interface Q {
     _QUESTION_CREATED_AT: Date;
     _QUESTION_UPDATED_AT: Date;
-    _QUESTION_ID: string | null;
     _QUESTION_LANGUAGE: string | null;
-    _QUESTION_ID: number | null;
+    _QUESTION_ID: string | null;
     _QUESTION_POINTS: number | null;
     _QUESTION_TASK: string | null;
     _QUESTION_DATA: object | null;
