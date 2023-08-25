@@ -114,7 +114,7 @@ const D_Problem = () => {
                 </button>
               </header>
               {/**Question: Task */}
-              {getMenuQuestion === undefined || Object.keys(getMenuQuestion).length === 0 ?
+              {getMenuQuestion._QUESTION_TASK === undefined ?
                 <LoadingDashboard/>
                 :
                 <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2`}>
