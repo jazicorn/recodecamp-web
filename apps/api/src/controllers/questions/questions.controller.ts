@@ -3,22 +3,22 @@ import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import sql from '../../config/db';
 import { faker } from '@faker-js/faker';
-import { Question } from '../../classes/question';
-import { Q_Type } from  '../../types/types.question';
+import { JS_Question } from '../../classes/javascript.question';
+import { JS_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
 import cors from 'cors';
 
-export default class VarGeneral {
-    /**Public: Get All Var Category Questions*/
-    public pathVar = '/var';
-    /**Public: Get Var Category Question by ID*/
-    public pathVarId = '/var/get/:id';
-    /**Private: Create Var Question*/
-    public pathVarNew = '/var/new';
-    /**Private: Update Var Question*/
-    public pathVarUpdate = '/var/update/:id';
-    /**Private: Delete Var Question';*/
-    public pathVarDelete = '/var/delete/:id';
+export default class Questions {
+    /**Public: Get All Questions*/
+    public pathQuestion = '/q';
+    /**Public: Get Question by ID*/
+    public pathQuestionId = '/q/get/:id';
+    /**Private: Create Question*/
+    public pathQuestionNew = '/q/new';
+    /**Private: Update Question*/
+    public pathQuestionUpdate = '/q/update/:id';
+    /**Private: Delete Question';*/
+    public pathQuestionDelete = '/q/delete/:id';
     /**Express Router */
     public router = Router();
     /**Cors Options*/
@@ -32,19 +32,18 @@ export default class VarGeneral {
     }
 
     public initializeRoutes() {
-        this.router.get(this.pathVar, this.varAll);
-        this.router.get(this.pathVarId, this.varId);
-        this.router.post(this.pathVarNew, this.corsOptions, this.varPost);
-        this.router.put(this.pathVarUpdate, this.corsOptions, this.varUpdate);
-        this.router.delete(this.pathVarDelete, this.corsOptions, this.varDelete);
+        this.router.get(this.pathQuestion, this.questionAll);
+        this.router.get(this.pathQuestionId, this.questionId);
+        this.router.post(this.pathQuestionNew, this.corsOptions, this.questionPost);
+        this.router.put(this.pathQuestionUpdate, this.corsOptions, this.questionUpdate);
+        this.router.delete(this.pathQuestionDelete, this.corsOptions, this.questionDelete);
     }
 
-    public varAll = async (req: Request, res: Response) => {
+    public questionAll = async (req: Request, res: Response) => {
         switch(req.method) {
             case('GET'):
                 try {
-                    const id = req.params.id;
-                    const results = await sql`SELECT * FROM _QUESTIONS WHERE _QUESTIONS_CATEGORY = 'variables'`;
+                    const results = await sql`SELECT * FROM _QUESTIONS`;
                     return res.status(200).send({ data: results.rows });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
@@ -55,7 +54,7 @@ export default class VarGeneral {
         }
     };
 
-    public varId = async (req: Request, res: Response) => {
+    public questionId = async (req: Request, res: Response) => {
         switch(req.method) {
             case('GET'):
                 try {
@@ -71,7 +70,7 @@ export default class VarGeneral {
         }
     }
 
-    public varUpdate = async (req: Request, res: Response) => {
+    public questionUpdate = async (req: Request, res: Response) => {
         switch(req.method) {
             case('UPDATE'):
                 try {
@@ -87,12 +86,12 @@ export default class VarGeneral {
         }
     }
 
-    public varPost = async (req: Request, res: Response) => {
+    public questionPost = async (req: Request, res: Response) => {
         switch(req.method) {
             case('POST'):
                 try {
-                    const data: Q_Type = req.body;
-                    const question = new Question(data);
+                    const data: JS_Type = req.body;
+                    const question = new JS_Question(data);
                     const results = await sql`INSERT INTO _QUESTIONS (
                             _QUESTION_CREATED_AT,
                             _QUESTION_UPDATED_AT,
@@ -140,7 +139,7 @@ export default class VarGeneral {
         }
     };
 
-    public varDelete = async (req: Request, res: Response) => {
+    public questionDelete = async (req: Request, res: Response) => {
         switch(req.method) {
             case('DELETE'):
                 try {

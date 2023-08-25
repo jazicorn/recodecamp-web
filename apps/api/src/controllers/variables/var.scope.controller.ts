@@ -2,8 +2,8 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import client from '../../config/db';
-import { Question } from '../../classes/javascript.question';
-import { JS_Type } from  '../../types/types.question';
+import { Question } from '../../classes/question';
+import { Q_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
 import { objBlockScope, objFuncScope, objGlobalScope } from '../../data/var.scope.data';
 
@@ -31,13 +31,13 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    return res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    return res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
 
@@ -47,13 +47,13 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    return res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    return res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
 
@@ -63,9 +63,9 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    return res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    return res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
@@ -79,13 +79,13 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).json({ data: question });
+                    return res.status(200).send({ data: question });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    return res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
 }

@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
 // components
 import D_Editor from '../components/dashboard-code/D_Editor';
 import D_Problem from '../components/dashboard-code/D_Problem';
@@ -16,7 +15,6 @@ const Layout_D_Code = () => {
 
   return (
     <div className="tw-h-full">
-      <Transition>
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
@@ -54,7 +52,6 @@ const Layout_D_Code = () => {
             </section>
         </main>
         }
-      </Transition>
     </div>
   )
 }

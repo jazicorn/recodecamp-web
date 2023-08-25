@@ -19,13 +19,14 @@ class Index {
         switch(req.method) {
             case('GET'):
                  try {
-                    const data = { data: "Hello World!" };
-                    res.status(200).json(data);
+                    const data = await { data: "Hello World!" };
+                    return res.status(200).send(data);
                 } catch {
-                    res.status(500).json({ error: "Something went wrong"});
+                    return res.status(500).send({ error: "Something went wrong"});
                 }
+                break
             default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         };
     };
 
@@ -33,9 +34,9 @@ class Index {
         switch(req.method) {
             case('GET'):
                  try {
-                    res.status(200).json({ data: ROUTES });
+                    res.status(200).send({ data: ROUTES });
                 } catch {
-                    res.status(500).json({ error: "Something went wrong" });
+                    res.status(500).send({ error: "Something went wrong" });
                 }
                 break
             default:
