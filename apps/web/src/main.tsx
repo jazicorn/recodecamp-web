@@ -32,6 +32,11 @@ const router = Router(
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route>
+      <Route path="admin" element={<Dashboard />}>
+        <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
+        <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
+        <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
+      </Route>
       <Route path="*" element={<Home/>} errorElement={<ErrorBoundary />}/>
     </Route>
   )
