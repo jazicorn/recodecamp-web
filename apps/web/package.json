@@ -73,6 +73,7 @@
     "embla-carousel-react": "^8.0.0-rc07",
     "framer-motion": "^10.12.18",
     "http-server": "^14.1.1",
+    "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",

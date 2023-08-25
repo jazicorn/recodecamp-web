@@ -29,7 +29,10 @@ export const objSingle = (): Q_Type => {
         _QUESTION_CATEGORY: 'Comments',
         _QUESTION_CATEGORY_SUB: '',
         _QUESTION_TAGS: [],
-        _QUESTION_REFS: {}
+        _QUESTION_REFS: {
+            "javascript.info/comments": "https://javascript.info/comments",
+            "javascript.info/structure": "https://javascript.info/structure"
+        }
     }
     return data;
 };

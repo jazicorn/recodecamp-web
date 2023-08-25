@@ -5,7 +5,7 @@ import { ThemeContext } from '../context/ThemeContext';
 //import type { RootState } from '../redux/store.ts'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
+//import Transition from '../hooks/useTransition';
 // components
 import Header from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
@@ -19,14 +19,13 @@ const Dashboard = () => {
   //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
 
   return (
-    <div className="">
-      <Transition>
+    <div className="tw-font-mono">
       {/**Background | Position: Absolute */}
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' :
                   'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'
         } tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full`}/>
       {/**Page Content | Position: Relative */}
-      <article className="tw-relative tw-z-10 tw-font-mono tw-h-screen tw-w-full tw-flex tw-flex-col tw-grow tw-place-items-center">
+      <article className="tw-relative tw-z-10tw-h-screen tw-w-full tw-flex tw-flex-col tw-grow tw-place-items-center">
         <Header />
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
@@ -59,7 +58,6 @@ const Dashboard = () => {
         </main>
         }
       </article>
-      </Transition>
     </div>
   )
 }

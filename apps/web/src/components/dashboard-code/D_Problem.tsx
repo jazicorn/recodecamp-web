@@ -1,4 +1,6 @@
 // Component Title: Dashboard Problem
+/**random string generator */
+import { nanoid } from 'nanoid';
 /** React Hooks */
 import { useContext, useCallback, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -66,13 +68,14 @@ const D_Problem = () => {
     refetchOnWindowFocus: false,
   });
 
+  /** Save Question to Redux Store */
   useEffect(() => {
     if(data !== undefined) {
-      console.log(data);
       dispatch(menuQuestion(data.data));
     }
   }, [dispatch, data]);
 
+  /** Retrive Question from Redux Store*/
   const getMenuQuestion = useAppSelector((state:RootState) => state?.dashboard?.question);
 
   /** Generate New Question */
@@ -89,7 +92,7 @@ const D_Problem = () => {
 
   /** Render if Successful */
   if(isSuccess) return (
-    <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
+    <div className={`${darkMode ? '' : ''} overflow-y-scroll tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
       <article className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-gap-1 tw-h-full tw-flex tw-flex-col tw-content-around`}>
         <span className="tw-h-full tw-flex tw-flex-col">
@@ -99,7 +102,7 @@ const D_Problem = () => {
               <Transition> 
               <header className={`${darkMode ? '' : ''} 
                tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
-                <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-text-campfire-blue tw-border-campfire-purple-light
+                <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
                 tw-border-b tw-border-r tw-text-2xl tw-h-[36px] tw-w-3/4 tw-pl-2`}>
                   Problem
                 </h5>
@@ -110,28 +113,53 @@ const D_Problem = () => {
                   Generate
                 </button>
               </header>
+              {/**Question: Task */}
               {getMenuQuestion === undefined || Object.keys(getMenuQuestion).length === 0 ?
-                  <LoadingDashboard/>
+                <LoadingDashboard/>
                 :
                 <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2`}>
-                    <div>
-                      <p className="tw-text-base">{getMenuQuestion.task}</p>
-                    </div>
+                  <h6 className="tw-p-1 tw-text-xl tw-text-campfire-blue">Task</h6>
+                  <p className="tw-pl-3 tw-pt-1 tw-text-base">
+                    {getMenuQuestion._QUESTION_TASK.split(' ').map((word, index) => {
+                      const regex = /[""]/g;
+                      const wordStrip = word.replace(regex, '');
+                      if(word.match(regex)) {
+                        return <span>
+                          <span key={index} className={`${darkMode ? '' : 'tw-bg-campfire-neutral-400'} tw-border-no-border tw-rounded tw-px-1`}>
+                            {wordStrip}
+                          </span>&nbsp;
+                        </span>
+                      }
+                      return <span key={index}>{word} </span>
+                    })}
+                  </p>
                 </div>
               }
               </Transition>
             </section>
           </div>
-          
           <Transition>
-          {/**Question Conditions (Test Cases) */}
-          <section className={`${darkMode ? '' : ''} tw-border-campfire-purple-light tw-h-1/4 tw-border-t`}>
-            {getMenuQuestion.conditions === undefined || Object.keys(getMenuQuestion.conditions).length === 0 ?
-              <div/>
-              :
-              <div/>
-            }
-          </section>
+            {/**Question References (Helpful Links) */}
+            <section className={`${darkMode ? '' : ''} tw-border-campfire-purple-light tw-h-1/4 tw-border-t tw-px-2
+            overflow-y-scroll tw-pb-2`}>
+              <h6 className="tw-p-1 tw-text-xl tw-text-campfire-blue">References</h6>
+              {getMenuQuestion._QUESTION_REFS === undefined || Object.keys(getMenuQuestion._QUESTION_REFS).length === 0 ?
+                <div/>
+                :
+                <ul className={`${darkMode ? '[&>li>a]:tw-text-campfire-neutral-100' : '[&>li>a]:tw-text-campfire-neutral-700'} 
+                tw-pl-3 tw-pt-1 tw-text-sm tw-flex tw-flex-col tw-list-disc`}>
+                  { Object.entries(getMenuQuestion._QUESTION_REFS).map((entry) => {
+                    const [key, value] = entry;
+                    console.log("key:", key, "value:", value)
+                    return <li className="tw-ml-4">
+                      <a key={nanoid(4)} href={value} target="_blank" 
+                      className={`${darkMode ? 'hover:tw-text-campfire-purple-light' : 'hover:tw-text-campfire-blue'}`}>
+                        {key}</a>
+                    </li>
+                  })}
+                </ul>
+              }
+            </section>
           </Transition>
         </span>
       </article>
