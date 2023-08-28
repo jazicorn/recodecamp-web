@@ -1,7 +1,7 @@
 export const ROUTES = [
     {
         "id": 1,
-        "category": "comments",
+        "category": ["comments", "comments/all"],
         "subCategories": {
             "singleLine": ['comments/single/all'],
             "multiLine": ['comments/multi/all'],
@@ -9,7 +9,7 @@ export const ROUTES = [
     },
     {
         "id": 2,
-        "category": "variables",
+        "category": ["variables", "var/all"],
         "subCategories": {
             "declare": ['var/declare/all','var/declare/var','var/declare/const','var/declare/let'],
             "scope": ['var/scope/all','var/scope/block','var/scope/func','var/scope/global'],
