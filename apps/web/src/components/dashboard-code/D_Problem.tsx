@@ -99,7 +99,7 @@ const D_Problem = () => {
                   Generate
                 </button>
               </header>
-              {/** Loader */}
+              {/**Question: Task */}
               {getMenuQuestion._QUESTION_TASK === undefined ?
                 <LoadingDashboard/>
                 :

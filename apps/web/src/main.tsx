@@ -31,7 +31,7 @@ const router = Router(
       <Route path="/" element={<Home />} errorElement={<ErrorBoundary />} />
       <Route path="learn" element={<Dashboard />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
-        <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
+        <Route path="code" element={<D_Code />} />
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="admin" element={<Admin/>} errorElement={<ErrorBoundary />}/>
