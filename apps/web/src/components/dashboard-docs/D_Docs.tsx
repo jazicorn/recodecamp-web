@@ -18,7 +18,7 @@ const D_Docs = () => {
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2`}>
         <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
           tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
-          Docs
+          Documentation
         </h4>
         <main className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-col">
           
