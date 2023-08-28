@@ -4,7 +4,7 @@ import { ThemeContext } from '../context/ThemeContext';
 import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
 // components
-import D_Calendar from '../components/dashboard-calender/D_Calendar';
+import D_Calendar from '../components/dashboard-calendar/D_Calendar';
 
 const Layout_D_Calender = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
