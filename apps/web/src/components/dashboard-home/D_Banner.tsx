@@ -54,21 +54,17 @@ const D_Banner = () => {
               <Link to='/learn/code' className="">Start ReCoding</Link>
               <Rocket style={{ height: 22, width: 32 }} />
             </li>
-            {/* <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              { darkMode ? <IconTerminal2 color="#d4d4d4" /> : <IconTerminal2 color="#000" />}
-              <Link to={''}>User Editor</Link>
-            </li> */}
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconCalendar color="#d4d4d4" /> : <IconCalendar color="#000" />}
-              <Link to={''}>Calendar</Link>
+              <Link to={'/learn/calendar'}>Calendar</Link>
             </li>
              <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconBook2 color="#d4d4d4" /> : <IconBook2 color="#000" />}
-              <Link to={''}>Documentation</Link>
+              <Link to={'/learn/docs'}>Documentation</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
-              <Link to={''}>Notes</Link>
+              <Link to={'/learn/notes'}>Notes</Link>
             </li>
           </ul>
           <hr className={`${darkMode ? 'tw-border-campfire-neutral-900' : 'tw-border-campfire-blue' } 
@@ -83,7 +79,7 @@ const D_Banner = () => {
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
-              <Link to={''}>Dashboard Settings</Link>
+              <Link to={'/learn/settings'}>Dashboard Settings</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-pl-0.5`}>
               { darkMode ? <IconLogout color="#d4d4d4" /> : <IconLogout color="#000" />}
@@ -91,15 +87,6 @@ const D_Banner = () => {
             </li>
           </ul>
         </main>
-        {/* <hr className={`${darkMode ? 'tw-bg-campfire-neutral-200' : 'tw-bg-campfire-neutral-600' } 
-        tw-place-self-center tw-ml-8 tw-my-3 tw-h-[200px] tw-w-[1px]`}/> */}
-        {/**Descriptions */}
-        {/* <main className={`${darkMode ? '' : '' } tw-ml-8 tw-mt-1`}>
-          <h4 className="tw-text-3xl">Description</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-        </main> */}
       </section>
       </div>
     </div>

@@ -7,8 +7,6 @@ import Transition from '../hooks/useTransition';
 import D_Banner from '../components/dashboard-home/D_Banner';
 import D_Banner_Mobile from '../components/dashboard-home/D_Banner_Mobile';
 import D_User from '../components/dashboard-home/D_User';
-import D_Support from '../components/dashboard-home/D_Support';
-
 
 const Layout_D_Home = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
@@ -40,12 +38,6 @@ const Layout_D_Home = () => {
             </section>
             <section className='tw-row-start-2 tw-row-end-2'>
               <D_User/>
-            </section>
-            <section className='tw-row-start-3 tw-row-end-3'>
-              <D_Support/>
-            </section>
-            <section className='tw-row-start-4 tw-row-end-4'>
-              <D_Support/>
             </section>
         </main>
         }

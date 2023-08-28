@@ -6,7 +6,6 @@ import { ThemeContext } from '../../context/ThemeContext';
 import {
   IconCalendar,
   IconCategory,
-  IconTerminal2,
   IconLogout,
   IconNotes,
   IconSettings,
@@ -77,27 +76,36 @@ const D_Navigation = () => {
                   </span>
                 </Link>
                 </li>
-              {/* <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
+              <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                <Link to="/learn/editor" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
-                  {darkMode ? <IconTerminal2 color="#2ca9bc" /> : <IconTerminal2 color="#000" />} 
-                  Console
+                <Link to="/learn/calendar" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
+                { darkMode ? <IconCalendar color="#2ca9bc" /> : <IconCalendar color="#000" />}
+                  Calendar
                 </Link>
-              </li> */}
+              </li>
+               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
+              tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
+                <Link to="/learn/docs" className="tw-flex tw-flex-row tw-gap-1 tw-w-full"> 
+                {darkMode ? <IconBook2 color="#2ca9bc" /> : <IconBook2 color="#000" />} 
+                  Documentation
+                </Link>
+              </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                { darkMode ? <IconCalendar color="#2ca9bc" /> : <IconCalendar color="#000" />} Calendar</li>
-               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
-              tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}> 
-              { darkMode ? <IconBook2 color="#2ca9bc" /> : <IconBook2 color="#000" />} Documentation</li>
-              <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
-              tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}> 
-              { darkMode ? <IconNotes color="#2ca9bc" /> : <IconNotes color="#000" />} Notes</li>
+                <Link to="/learn/notes" className="tw-flex tw-flex-row tw-gap-1 tw-w-full"> 
+                  {darkMode ? <IconNotes color="#2ca9bc" /> : <IconNotes color="#000" />} 
+                  Notes
+                </Link>
+              </li>  
             </ul>
             <ul className='tw-flex tw-flex-col tw-place-items-start tw-space-y-2 [&>li]:tw-h-[30px]'>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                { darkMode ? <IconSettings color="#2ca9bc" /> : <IconSettings color="#000" />} Dashboard Settings</li>
+                <Link to="/learn/settings" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
+                {darkMode ? <IconSettings color="#2ca9bc" /> : <IconSettings color="#000"/>}          
+                  Dashboard Settings
+                </Link>
+                </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
                 { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> } User Logout</li>
