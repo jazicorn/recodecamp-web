@@ -25,7 +25,7 @@ export default class VarDeclare {
     }
 
     public varRandomDeclare = async (req: Request, res: Response) => {
-        const data = await Promise.resolve(objRandom());
+        const data = objRandom();
         const question: Q_Type = new Question(data);
         switch(req.method) {
             case('GET'):

@@ -6,9 +6,14 @@ import { faker } from '@faker-js/faker';
 import { Question } from '../../classes/question';
 import { Q_Type } from  '../../types/types.question';
 import { getRandomInt } from '../../utils/index';
+import { objRandom as objDeclare } from '../../data/var.declare.data';
+import { objGlobalScope, objFuncScope, objBlockScope } from '../../data/var.scope.data';
+import { objBlockScopeReassign } from '../../data/var.scope.reassign.data';
 import cors from 'cors';
 
 export default class VarGeneral {
+    /**Public: Get random var */
+    public pathRandom = '/var/all';
     /**Public: Get All Var Category Questions*/
     public pathVar = '/var';
     /**Public: Get Var Category Question by ID*/
@@ -32,12 +37,37 @@ export default class VarGeneral {
     }
 
     public initializeRoutes() {
+        this.router.get(this.pathRandom, this.varRandom);
         this.router.get(this.pathVar, this.varAll);
         this.router.get(this.pathVarId, this.varId);
         this.router.post(this.pathVarNew, this.corsOptions, this.varPost);
         this.router.put(this.pathVarUpdate, this.corsOptions, this.varUpdate);
         this.router.delete(this.pathVarDelete, this.corsOptions, this.varDelete);
     }
+
+     public varRandom = async (req: Request, res: Response) => {
+        const declare = new Question(objDeclare());
+        const scopeGlobal = new Question(objGlobalScope());
+        const scopeFunc = new Question(objFuncScope());
+        const scopeBlock = new Question(objBlockScope());
+        const reassign = new Question(objBlockScopeReassign());
+
+        const random = getRandomInt(5);
+
+        const varRandom = [declare, scopeGlobal, scopeFunc, scopeBlock, reassign][random];
+
+        switch(req.method) {
+            case('GET'):
+                try {
+                    return res.status(200).send({ data: varRandom });
+                } catch {
+                    return res.status(500).send({ error: "Something went wrong" });
+                }
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        }
+    };
 
     public varAll = async (req: Request, res: Response) => {
         switch(req.method) {
