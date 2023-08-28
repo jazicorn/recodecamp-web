@@ -1,7 +1,7 @@
 // Dashboard Banner
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import JS_Icon from "../../assets/javascript/javascript-original.svg";
+import JS_Icon from "../../assets/tech/javascript/javascript-original.svg";
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
 // redux hooks

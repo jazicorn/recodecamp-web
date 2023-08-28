@@ -16,8 +16,8 @@ const initialState: DashboardState = {
   languageDefault: 'Javascript',
   categoryDefault: import.meta.env.VITE_DEFAULT_CATEGORY,
   categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
-  category: "",
-  categoryRoute: "",
+  category: import.meta.env.VITE_DEFAULT_CATEGORY,
+  categoryRoute: import.meta.env.VITE_DEFAULT_ROUTE,
   question: {}
 }
 

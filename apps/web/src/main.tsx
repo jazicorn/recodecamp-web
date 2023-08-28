@@ -19,7 +19,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from './pages/Home.tsx';
 import Admin from './pages/Admin.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import Dashboard_Admin from './pages/Dashboard_Admin.tsx';
+import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
 /**Layouts*/
 import D_Home from './layout/Layout.D_Home';
 import D_Code from './layout/Layout.D_Code';
@@ -35,7 +35,7 @@ const router = Router(
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="admin" element={<Admin/>} errorElement={<ErrorBoundary />}/>
-      <Route path="dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
+      <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>

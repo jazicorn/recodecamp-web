@@ -8,8 +8,8 @@ import ErrorDashboard from '../components/dashboard/error';
 import LoadingDashboard from '../components/dashboard/loading';
 // components
 import D_Category from '../components/dashboard-categories/D_Category';
-import D_Instructions_Category from '../components/dashboard-categories/D_Instructions_Category';
-/**React Query */
+// import D_Languages from '../components/dashboard-categories/D_Languages';
+// /**React Query */
 import { useQuery, QueryCache, } from "@tanstack/react-query";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -54,7 +54,6 @@ const Layout_D_Categories = () => {
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <D_Instructions_Category/>
             <div>
               {
                 data.data !== undefined && data?.data.map((category, i) => {
@@ -67,7 +66,6 @@ const Layout_D_Categories = () => {
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <D_Instructions_Category/>
             {
               data.data !== undefined && data?.data.map((category, i) => {
                 return (<section key={i} className=''><D_Category  category={category}/></section>)

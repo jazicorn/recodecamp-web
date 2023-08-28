@@ -1,36 +1,39 @@
 // Dashboard Menu
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 // redux
 import { useAppSelector } from '../../redux/reduxHooks.ts';
 // hooks
-//import useWindowSize from '../../hooks/useWindowSize';
+import useWindowSize from '../../hooks/useWindowSize';
 // codemirror
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import lightTheme from '../../styles/style.codemirror.light';
 import darkTheme from '../../styles/style.codemirror.dark';
 
-
 const extensions = [ javascript({ jsx: true })];
 
 const D_Editor = () => {
-  //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
+  const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   const getMenuQuestion = useAppSelector((state:RootState) => state?.dashboard?.question);
   const getMenuQuestionBoilerplate = () => {
     const newLines = "\n".repeat(4);
-    if(  getMenuQuestion.boilerplate === undefined) {
+    if( getMenuQuestion._QUESTION_BOILERPLATE === undefined) {
       return `${newLines}`
     } else {
-      return  `${getMenuQuestion.boilerplate}${newLines}`
+      return  `${getMenuQuestion._QUESTION_BOILERPLATE}`
     }
   };
 
   const code = getMenuQuestionBoilerplate();
 
-  const [editor, setEditor] = useState(code);
+  const [editor, setEditor] = useState();
+
+  useEffect(() => {
+    setEditor(code);
+  },[code]);
 
   const onChange = React.useCallback((value) => {
     setEditor(value);
@@ -54,16 +57,20 @@ const D_Editor = () => {
               Reset
             </button>
           </header>
-          <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-h-full`}>
+          {code  === undefined ?
+            "loading"
+            :
+            <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-h-full`}>
             <CodeMirror
               value={editor}
-              height="200px"
+              height={isMobile ? "250px" : "300px"}
               maxHeight="100%"
               theme={darkMode ? darkTheme : lightTheme}
               extensions={extensions}
               onChange={onChange}
             />
           </div>
+          }
           <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-justify-between tw-content-center`}>
             <button 
               className={`${darkMode ? '' : ''} tw-border-campfire-purple-light

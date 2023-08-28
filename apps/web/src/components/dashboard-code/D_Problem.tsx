@@ -11,36 +11,21 @@ import LoadingDashboard from '../dashboard/loading';
 /** React Redux Hooks */
 import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks.ts';
 import { 
-  menuCategoryRoute, 
   menuQuestion,
 } from '../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
-/** API url */
+/** API url | Custom env mandatory to begin with VITE | https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const D_Problem = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  // const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
 
   /** Retrieve Category From Redux State */
   const dispatch = useAppDispatch();
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
-  const getMenuRouteDefault = useAppSelector((state:RootState) => state?.dashboard?.categoryRouteDefault);
-  
-  /**Set Category if empty or null */
-  function getRoute() {
-    try {
-      if(getMenuRoute.length === 0 || getMenuRoute === null) {
-        dispatch(menuCategoryRoute(getMenuRouteDefault))
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  getRoute();
-   
+
   /** Retrieve Category Based Question */
   const getQuestion = useCallback( async () => {
     /** Retrieve Question from API */
@@ -61,6 +46,7 @@ const D_Problem = () => {
       console.log(error);
     }
   }, [getMenuRoute]);
+
   /** Generate Question */
   const { isLoading, isError, isSuccess, error, data, refetch } = useQuery({ 
     queryKey: ['questionData'], 
@@ -117,7 +103,8 @@ const D_Problem = () => {
               {getMenuQuestion._QUESTION_TASK === undefined ?
                 <LoadingDashboard/>
                 :
-                <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2`}>
+                <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2 tw-pb-2`}>
+                  {/**Question: Task */}
                   <h6 className="tw-p-1 tw-text-xl tw-text-campfire-blue">Task</h6>
                   <p className="tw-pl-3 tw-pt-1 tw-text-base">
                     {getMenuQuestion._QUESTION_TASK.split(' ').map((word, index) => {
@@ -139,7 +126,7 @@ const D_Problem = () => {
             </section>
           </div>
           <Transition>
-            {/**Question References (Helpful Links) */}
+            {/**Question References: (Helpful Links) */}
             <section className={`${darkMode ? '' : ''} tw-border-campfire-purple-light tw-h-1/4 tw-border-t tw-px-2
             overflow-y-scroll tw-pb-2`}>
               <h6 className="tw-p-1 tw-text-xl tw-text-campfire-blue">References</h6>
