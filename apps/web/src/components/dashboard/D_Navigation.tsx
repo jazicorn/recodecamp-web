@@ -31,10 +31,13 @@ const D_Navigation = () => {
         </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
-          {darkMode ? <IconTerminal2 color="#2ca9bc" /> : <IconTerminal2 color="#000" />}</li>
+          <Link to="/learn/editor">
+            {darkMode ? <IconTerminal2 color="#2ca9bc" /> : <IconTerminal2 color="#000" />}
+          </Link>
+        </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
-          { darkMode ? <IconCalendar color="#2ca9bc" /> : <IconCalendar color="#000" />}</li>
+          { darkMode ? <IconCalendar color="#2ca9bc" /> : <IconCalendar color="#000" />} </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
         { darkMode ? <IconBook2 color="#2ca9bc" /> : <IconBook2 color="#000" />}</li>

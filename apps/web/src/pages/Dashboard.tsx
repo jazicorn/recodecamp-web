@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import type { Location, Params } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 //import { useAppSelector } from '../redux/reduxHooks.ts';
 //import type { RootState } from '../redux/store.ts'
@@ -11,12 +12,29 @@ import Header from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_NavigationMobile';
 import D_Header from '../components/dashboard/D_Header';
+import D_Header_User_Editor from '../components/dashboard/D_Header_User_Editor';
+
+const getRoutePath = (location: Location, params: Params): string => {
+  const { pathname } = location;
+  if (!Object.keys(params).length) {
+    return pathname; // we don't need to replace anything
+  }
+  let path = pathname;
+  Object.entries(params).forEach(([paramName, paramValue]) => {
+    if (paramValue) {
+      path = path.replace(paramValue, `:${paramName}`);
+    }
+  });
+  return path;
+};
 
 const Dashboard = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
+  const location = useLocation();
+  const params = useParams();
+  const path = getRoutePath(location, params);
 
   return (
     <div className="tw-font-mono ">
@@ -35,7 +53,7 @@ const Dashboard = () => {
               <D_Navigation/>
             </section>
             <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-2'>
-              <D_Header/>
+              {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
             </section>
             <div className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-3'>
               <Outlet/>
@@ -50,7 +68,7 @@ const Dashboard = () => {
               <D_NavigationMobile/>
             </section>
             <section className=' tw-row-start-2 tw-row-end-2'>
-              <D_Header/>
+              {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
             </section>
             <div className='tw-row-start-3 tw-row-end-6'>
               <Outlet/>

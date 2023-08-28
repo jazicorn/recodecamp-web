@@ -9,7 +9,6 @@ import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right
 import {
   IconCalendar,
   IconCategory,
-  IconTerminal2,
   IconLogout,
   IconNotes,
   IconSettings,
@@ -55,10 +54,10 @@ const D_Banner = () => {
               <Link to='/learn/code' className="">Start ReCoding</Link>
               <Rocket style={{ height: 22, width: 32 }} />
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
+            {/* <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconTerminal2 color="#d4d4d4" /> : <IconTerminal2 color="#000" />}
-              <Link to={''}>Programming Console</Link>
-            </li>
+              <Link to={''}>User Editor</Link>
+            </li> */}
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconCalendar color="#d4d4d4" /> : <IconCalendar color="#000" />}
               <Link to={''}>Calendar</Link>

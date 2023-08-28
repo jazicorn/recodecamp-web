@@ -75,6 +75,8 @@ export default {
         'layout-dashboard-home-mobile': 'auto',
         'layout-dashboard-code': 'minmax(22em, 28em), minmax(23em, auto)',
         'layout-dashboard-code-mobile': 'auto',
+        'layout-dashboard-code-editor': 'minmax(14em, 18em), minmax(20em, auto)',
+        'layout-dashboard-code-editor-mobile': 'auto',
         'layout-dashboard-categories': 'auto',
         'layout-dashboard-categories-mobile': 'auto'
       },
@@ -85,6 +87,8 @@ export default {
         'layout-dashboard-home-mobile': '28em, auto, auto, auto',
         'layout-dashboard-code': '3.2em, 25em, minmax(9.8em, auto)',
         'layout-dashboard-code-mobile': '3em, minmax(20em, auto), minmax(22em, auto), minmax(10em, auto)',
+        'layout-dashboard-code-editor': '28.2em, minmax(9.8em, auto)',
+        'layout-dashboard-code-editor-mobile': 'minmax(20em, auto), minmax(22em, auto), minmax(10em, auto)',
         'layout-dashboard-categories': ' minmax(35.7em, auto)',
         'layout-dashboard-categories-mobile': ' auto'
       }
