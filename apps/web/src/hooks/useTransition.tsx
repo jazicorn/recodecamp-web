@@ -5,7 +5,7 @@ const animationConfiguration = {
     exit: { opacity: 0 },
 };
 
-const Transitions = ({ children }) => {
+export const Transitions = ({ children }) => {
     return (
         <motion.div
             variants={animationConfiguration}
@@ -16,6 +16,35 @@ const Transitions = ({ children }) => {
         >
             {children}
         </motion.div>
-);
+    );
 };
+
+export const Transition2 = ({ children }) => {
+    return (
+        <motion.div
+            variants={animationConfiguration}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 2 }}
+        >
+            {children}
+        </motion.div>
+    );
+};
+
+export const Transition3 = ({ children }) => {
+    return (
+        <motion.div
+            variants={animationConfiguration}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 3 }}
+        >
+            {children}
+        </motion.div>
+    );
+};
+
 export default Transitions;

@@ -3,9 +3,10 @@
 import { nanoid } from 'nanoid';
 /** React Hooks */
 import { useContext, useCallback, useEffect } from 'react';
+/** Custom Hooks */
 import { ThemeContext } from '../../context/ThemeContext';
-import Transition from '../../hooks/useTransition';
-/** Custom Components*/
+import Transition, { Transition3 } from '../../hooks/useTransition';
+/** Custom State Components*/
 import ErrorDashboard from '../dashboard/error';
 import LoadingDashboard from '../dashboard/loading';
 /** React Redux Hooks */
@@ -15,10 +16,12 @@ import {
 } from '../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
-/** API url | Custom env mandatory to begin with VITE | https://vitejs.dev/guide/env-and-mode.html#env-files */
+/** API url | Custom env mandatory to begin with VITE 
+ * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const D_Problem = () => {
+  /** Custom Hooks */
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
@@ -48,10 +51,12 @@ const D_Problem = () => {
   }, [getMenuRoute]);
 
   /** Generate Question */
-  const { isLoading, isError, isSuccess, error, data, refetch } = useQuery({ 
+  const { isLoading, isFetching, isError, isSuccess, error, data, refetch } = useQuery({ 
     queryKey: ['questionData'], 
     queryFn: getQuestion,
     refetchOnWindowFocus: false,
+    staleTime: 100 * (60 * 1000),
+    cacheTime: 100 * (60 * 1000),
   });
 
   /** Save Question to Redux Store */
@@ -71,7 +76,11 @@ const D_Problem = () => {
   }
 
   /** Render if Loading */
-  if (isLoading || getMenuQuestion === undefined) return <LoadingDashboard/>
+  if (isLoading || isFetching || getMenuQuestion === undefined) return  (
+    <Transition> 
+      <LoadingDashboard/> 
+    </Transition>
+  )
 
   /** Render if Error */
   if (isError) return <ErrorDashboard error={error.message}/>
@@ -85,7 +94,7 @@ const D_Problem = () => {
           <div className="tw-flex tw-flex-col tw-justify-between tw-h-3/4">
             {/**Question Task */}
             <section className="">
-              <Transition> 
+              <Transition3> 
               <header className={`${darkMode ? '' : ''} 
                tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
                 <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
@@ -93,7 +102,7 @@ const D_Problem = () => {
                   Problem
                 </h5>
                 <button 
-                  className={`${darkMode ? '' : ''} tw-border-campfire-purple-light
+                  className={`${darkMode ? 'hover:tw-bg-campfire-neutral-500' : 'hover:tw-bg-campfire-neutral-100'} tw-border-campfire-purple-light
                   tw-border-b tw-h-[36px] tw-font-gro tw-px-2 tw-w-1/4`}
                   onClick={() => newQuestion()}>
                   Generate
@@ -122,10 +131,10 @@ const D_Problem = () => {
                   </p>
                 </div>
               }
-              </Transition>
+              </Transition3>
             </section>
           </div>
-          <Transition>
+          <Transition3>
             {/**Question References: (Helpful Links) */}
             <section className={`${darkMode ? '' : ''} tw-border-campfire-purple-light tw-h-1/4 tw-border-t tw-px-2
             overflow-y-scroll tw-pb-2`}>
@@ -137,17 +146,18 @@ const D_Problem = () => {
                 tw-pl-3 tw-pt-1 tw-text-sm tw-flex tw-flex-col tw-list-disc`}>
                   { Object.entries(getMenuQuestion._QUESTION_REFS).map((entry) => {
                     const [key, value] = entry;
-                    console.log("key:", key, "value:", value)
-                    return <li className="tw-ml-4">
-                      <a key={nanoid(4)} href={value} target="_blank" 
+                    return (
+                    <li key={nanoid(4)} className="tw-ml-4">
+                      <a  href={value} target="_blank" 
                       className={`${darkMode ? 'hover:tw-text-campfire-purple-light' : 'hover:tw-text-campfire-blue'}`}>
                         {key}</a>
                     </li>
+                    )
                   })}
                 </ul>
               }
             </section>
-          </Transition>
+          </Transition3>
         </span>
       </article>
     </div>

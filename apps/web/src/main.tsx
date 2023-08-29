@@ -1,14 +1,15 @@
 /**CSS*/
-import './styles/tailwind.input.css'
-import { MantineProvider } from '@mantine/core'
+import './styles/tailwind.input.css';
+import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 /**Custom Day/Night Context*/
-import { ThemeProvider } from './context/ThemeContext.tsx'
+import { ThemeProvider } from './context/ThemeContext.tsx';
 /**React*/
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 /**React Redux*/
-import { Provider } from 'react-redux'
-import store from './redux/store.ts'
+import { Provider } from 'react-redux';
+import store from './redux/store.ts';
 /**React Router*/
 import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
 import ErrorBoundary from "./ErrorBoundary.tsx";
@@ -60,12 +61,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
-          <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <MantineProvider withGlobalStyles withNormalizeCSS>
+            <Notifications position="top-center"/>
             <RouterProvider router={router} />
             <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </MantineProvider>
+          </MantineProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
