@@ -1,4 +1,3 @@
-// Dashboard Banner
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import JS_Icon from "../../assets/tech/javascript/javascript-original.svg";
@@ -13,7 +12,7 @@ import {
   IconArrowBadgeRightFilled
 } from '@tabler/icons-react';
 
-const D_Navigation = () => {
+const D_Header = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   const { isMobile } = useWindowSize();
@@ -64,4 +63,4 @@ const D_Navigation = () => {
   )
 }
 
-export default D_Navigation
+export default D_Header

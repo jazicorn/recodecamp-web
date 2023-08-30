@@ -9,7 +9,6 @@ import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right
 import {
   IconCalendar,
   IconCategory,
-  IconTerminal2,
   IconLogout,
   IconNotes,
   IconSettings,
@@ -56,20 +55,16 @@ const D_Banner = () => {
               <Rocket style={{ height: 22, width: 32 }} />
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              { darkMode ? <IconTerminal2 color="#d4d4d4" /> : <IconTerminal2 color="#000" />}
-              <Link to={''}>Programming Console</Link>
-            </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconCalendar color="#d4d4d4" /> : <IconCalendar color="#000" />}
-              <Link to={''}>Calendar</Link>
+              <Link to={'/learn/calendar'}>Calendar</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconBook2 color="#d4d4d4" /> : <IconBook2 color="#000" />}
-              <Link to={''}>Documentation</Link>
+              <Link to={'/learn/docs'}>Documentation</Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
-              <Link to={''}>Notes</Link>
+              <Link to={'/learn/notes'}>Notes</Link>
             </li>
           </ul>
           <hr className={`${darkMode ? '' : 'tw-bg-campfire-neutral-600' } tw-ml-8 tw-my-3 tw-w-[100px] tw-h-[1px]`}/>

@@ -48,12 +48,12 @@ const Layout_D_Categories = () => {
   if (isError) return <ErrorDashboard error={error.message}/>
 
   return (
-    <div className="tw-h-full">
+    <div className="tw-h-full ">
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700' : '[&>*]:tw-bg-neutral-400'} 
+          [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
+          tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1  `}>
             <div>
               {
                 data.data !== undefined && data?.data.map((category, i) => {

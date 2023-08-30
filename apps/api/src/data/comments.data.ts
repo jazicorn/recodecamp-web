@@ -17,7 +17,7 @@ export const objSingle = (): Q_Type => {
                 all:true
             },
             1 : {
-                answer: `// Hello ${personName}`,
+                answer: `function greetingUser {// Only change code bellow this line // Greeting User console.log(\'Hello ${personName}\');// Only change code abouve this line}`,
                 optional: false
             }
         },
