@@ -63,7 +63,7 @@ const D_Editor = () => {
   }, [getMenuRoute]);
 
   /** Generate Question */
-  const { isLoading, isFetching, isError, isSuccess, error, data, refetch } = useQuery({ 
+  const { isLoading, isFetching, isError, isSuccess, error, data } = useQuery({ 
     queryKey: ['questionData'], 
     queryFn: getQuestion,
     refetchOnWindowFocus: false,
@@ -77,12 +77,6 @@ const D_Editor = () => {
       dispatch(menuQuestion(data.data));
     }
   }, [dispatch, data]);
-
-  /** Generate New Question */
-  const newQuestion = useCallback(() => {
-    // manually refetch
-    refetch();
-  },[refetch]);
 
   /** Retrieve Menu Question From Redux State */
   const getMenuQuestion = useAppSelector((state:RootState) => state?.dashboard?.question);
@@ -183,32 +177,34 @@ const D_Editor = () => {
   },[]);
   
   /** Submit Code & Notify if Correct or Incorrect */
-  const onSubmission = useCallback((e) => {
+  const onSubmission = useCallback(async (e) => {
     e.preventDefault();
+
     const userCode = editor.replace(/\s+/g, '');
     const resultsStrip = getMenuQuestion._QUESTION_RESULT[1].answer.replace(/\s+/g, '');
-    if( userCode === resultsStrip ) {
-      consoleTest(93, editor, '');
-      // Success Notification
-      notifications.show({
-        id: 'correct',
-        withCloseButton: true,
-        onClose: () => console.log('unmounted'),
-        onOpen: () => console.log('mounted'),
-        autoClose: 2000,
-        title: "Answer Correct",
-        message: '',
-        color: 'green',
-        icon: <IconCheck />,
-        className: 'my-notification-class',
-        style: { backgroundColor: 'white' },
-        sx: { backgroundColor: 'green' },
-        loading: false,
-      });
-      setPoints(getMenuPoints + getMenuQuestion._QUESTION_POINTS);
-      newQuestion();
-    } else {
-      // Success Notification
+    try {
+      if( userCode === resultsStrip ) {
+        consoleTest(93, editor, '');
+        // Success Notification
+        notifications.show({
+          id: 'correct',
+          withCloseButton: true,
+          onClose: () => console.log('unmounted'),
+          onOpen: () => console.log('mounted'),
+          autoClose: 2000,
+          title: "Answer Correct",
+          message: '',
+          color: 'green',
+          icon: <IconCheck />,
+          className: 'my-notification-class',
+          style: { backgroundColor: 'white' },
+          sx: { backgroundColor: 'green' },
+          loading: false,
+        });
+        setPoints(getMenuPoints + getMenuQuestion._QUESTION_POINTS);
+      }
+    } catch (e) {
+      // Failure Notification
       notifications.show({
         id: 'incorrect',
         withCloseButton: true,
@@ -225,7 +221,7 @@ const D_Editor = () => {
         loading: false,
       });
     }
-  }, [consoleTest, editor, getMenuPoints, getMenuQuestion._QUESTION_POINTS, getMenuQuestion._QUESTION_RESULT, newQuestion, setPoints]);
+  }, [editor, getMenuQuestion._QUESTION_RESULT, getMenuQuestion._QUESTION_POINTS, consoleTest, setPoints, getMenuPoints]);
 
   useEffect(() => {
     dispatch(menuConsoleMessage(consoleMessage));
