@@ -1,11 +1,14 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 import Header from '../components/header/Header';
+// hooks
+import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
 
 const prodURL = import.meta.env.PROD;
 
 function Home() {
+  const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
@@ -21,8 +24,24 @@ function Home() {
           {/** Navigation */}
           <Header />
           <Transition>
-            <div className="tw-flex tw-place-content-center">
-              <h1>Admin Page</h1>
+            <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-place-content-center tw-place-items-center`}>
+              <div className={` ${isMobile ? '' : 'tw-w-[30em]'} tw-py-6 [&>div]:tw-h-[3em] [&>div]:tw-flex [&>div]:tw-place-content-center
+              [&>div]:tw-py-2 [&>div>input]:tw-h-[1.6em] [&>div>input]:tw-self-center [&>div>label]:tw-px-1 [&>div>label]:tw-self-center
+              [&>div>label]:tw-w-[10em] [&>div>label]:tw-bg-neutral-100 [&>div>label]:tw-border [&>div>label]:tw-border-campfire-blue-200
+              tw-bg-gray-200 tw-border tw-border-campfire-blue-200`}>
+                 <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} 
+                 tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
+                  Admin Login
+                </h4>
+                <div className="">
+                  <label>Email:</label>
+                  <input/>
+                </div> 
+                <div>
+                  <label>Password:</label>
+                  <input/>
+                </div>
+              </div>
             </div>
           </Transition>
           {/**Footer */}
