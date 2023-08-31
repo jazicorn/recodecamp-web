@@ -10,19 +10,19 @@ export const objSingle = (): Q_Type => {
         _QUESTION_ID: '',
         _QUESTION_LEVEL: 1,
         _QUESTION_POINTS: 1,
-        _QUESTION_TASK: `Using ${keyword} comments, comment the statement: \'Greeting User\', abouve the console.log('Hello ${personName}') method `,
-        _QUESTION_DATA: { keyword: keyword, value: personName },
+        _QUESTION_TASK: `Using ${keyword} comments, comment the statement: Greeting User abouve the console.log('Hello ${personName}') method `,
+        _QUESTION_DATA: { keyword: keyword, value: personName, returnValue: `console.log('Hello ${personName})` },
         _QUESTION_RESULT: {
             0: {
                 all:true
             },
             1 : {
-                answer: `function greetingUser {// Only change code bellow this line // Greeting User console.log(\'Hello ${personName}\');// Only change code abouve this line}`,
+                answer: `function greetingUser() {// Only change code bellow this line // Greeting User console.log(\'Hello ${personName}\');// Only change code abouve this line}greetingUser()`,
                 optional: false
             }
         },
         _QUESTION_HINTS: {},
-        _QUESTION_BOILERPLATE: `function greetingUser {\n// Only change code bellow this line \n\n Greeting User\nconsole.log(\'Hello ${personName}\');\n\n// Only change code abouve this line\n}\n`,
+        _QUESTION_BOILERPLATE: `function greetingUser() {\n// Only change code bellow this line \n\n Greeting User\nconsole.log(\'Hello ${personName}\');\n\n// Only change code abouve this line\n}\n\ngreetingUser()\n`,
         _QUESTION_CONDITIONS: {},
         _QUESTION_CONSTRAINTS: {},
         _QUESTION_CATEGORY: 'Comments',

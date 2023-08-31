@@ -8,7 +8,9 @@ interface DashboardState {
   language: string,
   category: string,
   categoryRoute: string,
-  question: object
+  question: object,
+  points: number,
+  consoleMessage: string,
 }
 
 // Define the initial state using that type
@@ -18,7 +20,9 @@ const initialState: DashboardState = {
   categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
   category: import.meta.env.VITE_DEFAULT_CATEGORY,
   categoryRoute: import.meta.env.VITE_DEFAULT_ROUTE,
-  question: {}
+  question: {},
+  points: 0,
+  consoleMessage: '',
 }
 
 export const dashboardSlice = createSlice({
@@ -34,6 +38,8 @@ export const dashboardSlice = createSlice({
       state.categoryRoute;
       state.categoryRouteDefault;
       state.question;
+      state.points;
+      state.consoleMessage;
     },
     menuLanguage: (state, action) => {
       state.language = action.payload;
@@ -46,11 +52,18 @@ export const dashboardSlice = createSlice({
     },
     menuQuestion: (state, action) => {
       state.question = action.payload;
+      state.consoleMessage = '';
+    },
+    menuPoints: (state, action) => {
+      state.points = action.payload;
+    },
+    menuConsoleMessage: (state, action) => {
+      state.consoleMessage = action.payload;
     },
   },
 });
 
-export const { menu, menuLanguage, menuCategory, menuCategoryRoute, menuQuestion } = dashboardSlice.actions
+export const { menu, menuLanguage, menuCategory, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
 
 export default dashboardSlice.reducer;
 

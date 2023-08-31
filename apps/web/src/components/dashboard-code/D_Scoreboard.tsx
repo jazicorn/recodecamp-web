@@ -3,16 +3,16 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import Trophy from "../../assets/icons/dashboard/trophy-1st-place-svgrepo-com.svg";
 // redux hooks
-//import { useAppSelector } from '../redux/reduxHooks.ts';
-//import type { RootState } from '../redux/store.ts';
+import { useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 
 const D_Scoreboard = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
-  //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
+  const getMenuPoints = useAppSelector((state:RootState) => state?.dashboard?.points);
 
-  const points = 154;
+  const points = getMenuPoints;
 
   return (
     // <menu className={`${darkMode ? 'tw-text-campfire-blue' : 'tw-text-campfire-neutral-800'} tw-shrink-0 tw-flex tw-flex-row tw-h-full tw-w-full tw-text-campfire-blue  tw-pr-3 `}>
