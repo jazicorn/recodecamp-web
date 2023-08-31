@@ -13,6 +13,7 @@ export default {
         'no-border': 'rgba(0, 0, 0, 0.3)',
         'campfire-blue': { 
           DEFAULT: '#2ca9bc',
+          '50': '#eff6ff',
           '100': '#d7ecf0',
           '200': '#afd9e1',
           '300': '#6cbccb',
