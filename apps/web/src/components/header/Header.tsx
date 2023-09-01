@@ -40,7 +40,7 @@ const Header = () => {
   if(isMobile) {
     return (
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue ' : 'tw-bg-light '
-        } ${menu ? "tw-h-full" : "tw-px-5"} tw-dark tw-font-mono tw-flex tw-flex-col tw-h-fit tw-w-full tw-place-items-center tw-relative`}>
+        } ${menu ? "tw-h-full" : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-font-mono tw-flex tw-flex-col tw-h-fit tw-w-full tw-place-items-center tw-relative`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
         >
