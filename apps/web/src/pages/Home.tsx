@@ -12,10 +12,10 @@ function Home() {
   const darkMode = state.darkMode;
 
   return (
-    <div className='tw-dark'>
+    <div className='tw-dark tw-font-space_mono'>
       <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60': 
       'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50' }  tw-absolute tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
-      <article className="tw-relative tw-z-100 tw-bg-transparent tw-font-mono tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between">
+      <article className="tw-relative tw-z-100 tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between">
         {/** Navigation */}
         <Header />
         <div className={`${darkMode ? "tw-border-neutral-500" : "tw-border-neutral-800"} 
