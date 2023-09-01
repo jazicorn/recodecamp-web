@@ -52,8 +52,15 @@ export default {
         },
         'campfire-purple': {
           DEFAULT: '#8b5cf6',
-          '300': '#c4b5fd',
           'light': '#c4b5fd',
+          'dark': "#6d28d9",
+          'darker': "#581c87",
+          'darkest': "#2e1065",
+          '300': '#c4b5fd',
+          '500': "#8b5cf6",
+          '700': "#6d28d9",
+          '900': "#4c1d95",
+          '950': "#2e1065",
         },
         'campfire-green': {
           DEFAULT: '#22c55e',

@@ -55,14 +55,14 @@ const Dashboard = () => {
     <div className="tw-font-space_mono">
       {/**Background | Position: Absolute */}
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' : 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'} 
-      tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full`}/>
+      tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full `}/>
       {/**Page Content | Position: Relative */}
       <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-w-full tw-relative tw-z-10 tw-h-screen tw-flex tw-flex-col tw-grow tw-place-items-center`}>
         <Header />
         {isDesktopMDXL || isDesktopXL ?
         <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
           ${pathFilter && 'tw-grid-rows-dashboard-no-language'}
-          ${!pathFilter && 'tw-grid-rows-dashboard'}
+          ${!pathFilter && 'tw-grid-rows-dashboard'} 
           tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
           [&>*]:tw-backdrop-blur-sm
           tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>

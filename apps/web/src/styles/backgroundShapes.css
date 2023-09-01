@@ -1,0 +1,11 @@
+.custom-bg-shape-lighest {
+    background-image: url("../assets/shapes/blob-lighest.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.custom-bg-shape-darkest {
+    background-image: url("../assets/shapes/blob-darkest.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}

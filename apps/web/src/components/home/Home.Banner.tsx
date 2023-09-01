@@ -20,22 +20,24 @@ const HomeBanner = () => {
 
     return (
         <section
-          className={`${darkMode ? 'tw-backdrop-opacity-70 tw-bg-black/70 [&_h1]:tw-text-campfire-neutral-200' : ' tw-backdrop-opacity-70 tw-bg-white/50'} ${isMobile ? 'tw-flex-col' : 'tw-flex-row-reverse tw-min-w-[800px]'}
+          className={`${darkMode ? 'tw-backdrop-opacity-70 tw-bg-black/70 [&_h1]:tw-text-campfire-neutral-200' : ' tw-backdrop-opacity-70 tw-bg-white/50'} ${isMobile ? 'tw-flex-col tw-pb-4' : 'tw-flex-row-reverse tw-min-w-[800px] tw-min-h-[450px]'}
           tw-flex tw-place-items-center tw-place-content-center tw-h-full tw-w-full tw-font-space_mono`}
         >
           {/** Stock Picture */}
-          <div className={`${!isMobile && ""} ${!isDesktopMDXL && ""} tw-flex tw-flex-col tw-justify-center tw-items-left tw-basis-2/3 tw-pt-10 pr-20`}>
+          <div className={`${darkMode ? "custom-bg-shape-darkest" : "custom-bg-shape-lighest"}  tw-h-full tw-w-full tw-flex tw-flex-col tw-justify-center tw-items-center tw-basis-1/2 pr-20 tw-mr-4`}>
+            <div className={`${darkMode ? "" : ""} tw-mx-4`}>
             <Transition>
               {isMobile && (<Student style={{ height: 210, width: 210, padding: 0, margin: 0 }} />)}
               {isDesktopMDXL && (<Student style={{ height: 280, width: 280, padding: 0, margin: 0 }} />)}
               {isDesktopXL && (<Student style={{ height: 330, width: 330, padding: 0, margin: 0 }} />)}
             </Transition>
+            </div>
           </div>
           {/** Welcome Statement */}
-          <div className="tw-w-full tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
+          <div className="tw-basis-1/2 tw-pl-4 tw-w-full tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
             <Transition>
             {isMobile && (
-              <div className="tw-flex tw-flex-col tw-h-full tw-pb-8">
+              <div className={`${darkMode ? "border-gradient-dark" : "border-gradient"} tw-flex tw-flex-col tw-h-full tw-pb-8`}>
                 <h1 className="tw-text-3xl tw-text-center tw-flex tw-flex-row tw-place-content-center tw-font-space_grotesk_medium">
                   <span className="tw-pl-3 tw-pr-2">Re-code Makes Perfect</span>
                 </h1>
@@ -81,8 +83,8 @@ const HomeBanner = () => {
               </div>
             )}
             {isDesktopMDXL && (
-              <div className={`${darkMode ? "" : ""} tw-flex tw-flex-col tw-basis-1/3 tw-w-full tw-pl-10 tw-pr-4`}>
-                <div className={`${darkMode ? "" : ""} `}>
+              <div className={`${darkMode ? "border-gradient-dark" : "border-gradient"} tw-flex tw-flex-col tw-w-full tw-pl-10 tw-pr-4 `}>
+                <div className={`${darkMode ? "" : ""} tw-px-2 tw-py-4`}> 
                   <h1 className="tw-w-[8em] tw-text-5xl tw-flex tw-flex-row tw-font-space_grotesk_medium">
                     Re-Code Makes Perfect
                   </h1>
@@ -127,7 +129,7 @@ const HomeBanner = () => {
               </div>
             )}
             {isDesktopXL && (
-              <div className="tw-flex tw-flex-col tw-basis-1/3 tw-w-full tw-pl-20">
+              <div className={`${darkMode ? "border-gradient-dark" : "border-gradient"} tw-flex tw-flex-col tw-w-full tw-pl-20 tw-p-5`}> 
                 <h1 className="tw-w-[8em] tw-text-6xl tw-flex tw-flex-row tw-text-left tw-font-space_grotesk_medium">
                   Re-Code Makes Perfect
                 </h1>
@@ -142,7 +144,7 @@ const HomeBanner = () => {
                 <Link
                   to={`/learn`} id="banner-dashboard-link"
                   className={`${
-                    darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
+                    darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple hover:tw-decoration-campfire-blue" : 
                     "tw-text-campfire-purple hover:tw-text-campfire-blue "} tw-font-space_mono_bold
                     tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-left`}>
                   <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 

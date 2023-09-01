@@ -22,3 +22,27 @@
   --tw-gradient-to: rgb(243 244 246 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+
+.border-gradient {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #2ca9bc, #8b5cf6) 1;
+}
+
+.border-gradient-dark {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #004e60, #581c87) 1;
+}
+
+.border-gradient-darker {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #003e4f, #2e1065) 1;
+}
+
+.border-gradient-light {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #bae6fd, #c4b5fd) 1;
+}
