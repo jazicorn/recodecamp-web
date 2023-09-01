@@ -15,7 +15,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto-Mono-thin';
+  font-family: 'Roboto-Mono-Thin';
   src: url('./fonts/Roboto_Mono/static/RobotoMono-Thin.ttf') format('truetype');
   font-stretch: 75% 125%;
   font-style: normal;
@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: 'Roboto-Mono-BoldItalic';
-  src: url('./fonts/Roboto_Mono/static/Roboto_Mono-BoldItalic.ttf') format('truetype');
+  src: url('./fonts/Roboto_Mono/static/RobotoMono-BoldItalic.ttf') format('truetype');
   font-stretch: 75% 125%;
   font-style: normal;
 }

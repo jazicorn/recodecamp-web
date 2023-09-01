@@ -6,10 +6,20 @@ export default {
     fontFamily: {
       roboto_mono: ['Roboto-Mono'],
       roboto_mono_italic: ['Roboto-Mono-Italic'],
+      roboto_mono_thin: ['Roboto-Mono-Thin'],
+      roboto_mono_thin_italic: ['Roboto-Mono-ThinItalic'],
+      roboto_mono_medium: ['Roboto-Mono-Medium'],
+      roboto_mono_mediumitalic: ['Roboto-Mono-MediumItalic'],
+      roboto_mono_bold: ['Roboto-Mono-Bold'],
+      roboto_mono_bold_italic: ['Roboto-Mono-BoldItalic'],
       space_mono: ['Space-Mono'],
       space_mono_italic: ['Space-Mono-Italic'],
+      space_mono_bold: ['Space-Mono-Bold'],
+      space_mono_bold_italic: ['Space-Mono-BoldItalic'],
       space_grotesk: ['Space-Grotesk'],
-      vt323: ['VT323', 'monospace'],
+      space_grotesk_light: ['Space-Grotesk-Light'],
+      space_grotesk_medium: ['Space-Grotesk-Medium'],
+      space_grotesk_bold: ['Space-Grotesk-Bold'],
     },
     extend: {
       colors: {
