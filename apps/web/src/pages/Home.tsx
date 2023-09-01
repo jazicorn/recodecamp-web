@@ -12,7 +12,7 @@ function Home() {
   const darkMode = state.darkMode;
 
   return (
-    <div className='tw-dark tw-font-space_mono'>
+    <div className='tw-dark tw-font-roboto_mono'>
       <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60': 
       'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50' }  tw-absolute tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
       <article className="tw-relative tw-z-100 tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between">
@@ -35,7 +35,7 @@ function Home() {
             [&>li]:tw-basis-1/3 [&>li]:tw-px-2 [&>li]:tw-pt-0.5`}>
               <li>
                 <Transition>
-                  <h6 className={`${darkMode ? "" : ""} `}>
+                  <h6 className={`${darkMode ? "" : ""} tw-font-space_mono_bold`}>
                     1.
                     <span className={`${darkMode ? "" : ""} tw-decoration-campfire-purple-light tw-underline 
                     tw-decoration-solid tw-decoration-1 tw-underline-offset-2`}>Practice</span>
@@ -45,9 +45,9 @@ function Home() {
                   </p>
                 </Transition>
               </li>
-              <li className={`${darkMode ? "tw-border-neutral-500" : "tw-border-neutral-800"} tw-border-x`}>
+              <li className={`${darkMode ? "tw-border-neutral-500" : "tw-border-neutral-800"} tw-border-x `}>
                 <Transition>
-                  <h6 className={`${darkMode ? "" : ""} `}>
+                  <h6 className={`${darkMode ? "" : ""} tw-font-space_mono_bold`}>
                     2.
                     <span className={`${darkMode ? "" : ""} tw-decoration-campfire-purple-light tw-underline 
                     tw-decoration-solid tw-decoration-1 tw-underline-offset-2`}>References</span>
@@ -59,7 +59,7 @@ function Home() {
               </li>
               <li className="">
                 <Transition>
-                  <h6 className={`${darkMode ? "" : ""} `}>
+                  <h6 className={`${darkMode ? "" : ""} tw-font-space_mono_bold`}>
                     3. 
                     <span className={`${darkMode ? "" : ""} tw-decoration-campfire-purple-light tw-underline 
                       tw-decoration-solid tw-decoration-1 tw-underline-offset-2`}>

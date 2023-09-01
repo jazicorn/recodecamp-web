@@ -20,13 +20,14 @@ const HomeBanner = () => {
 
     return (
         <section
-          className={`${darkMode ? 'tw-backdrop-opacity-70 tw-bg-black/70 [&_h1]:tw-text-campfire-neutral-200' : ' tw-backdrop-opacity-70 tw-bg-white/50'} ${isMobile ? 'tw-flex-col' : 'tw-flex-row-reverse '} tw-flex tw-place-items-center tw-place-content-center tw-h-full tw-w-full `}
+          className={`${darkMode ? 'tw-backdrop-opacity-70 tw-bg-black/70 [&_h1]:tw-text-campfire-neutral-200' : ' tw-backdrop-opacity-70 tw-bg-white/50'} ${isMobile ? 'tw-flex-col' : 'tw-flex-row-reverse tw-min-w-[800px]'}
+          tw-flex tw-place-items-center tw-place-content-center tw-h-full tw-w-full tw-font-space_mono`}
         >
           {/** Stock Picture */}
-          <div className={`${!isMobile && "tw-pt-10"} tw-flex tw-flex-col tw-justify-center tw-items-left tw-basis-2/3 tw-pt-10`}>
+          <div className={`${!isMobile && ""} ${!isDesktopMDXL && ""} tw-flex tw-flex-col tw-justify-center tw-items-left tw-basis-2/3 tw-pt-10 pr-20`}>
             <Transition>
               {isMobile && (<Student style={{ height: 210, width: 210, padding: 0, margin: 0 }} />)}
-              {isDesktopMDXL && (<Student style={{ height: 290, width: 290, padding: 0, margin: 0 }} />)}
+              {isDesktopMDXL && (<Student style={{ height: 280, width: 280, padding: 0, margin: 0 }} />)}
               {isDesktopXL && (<Student style={{ height: 330, width: 330, padding: 0, margin: 0 }} />)}
             </Transition>
           </div>
@@ -35,7 +36,7 @@ const HomeBanner = () => {
             <Transition>
             {isMobile && (
               <div className="tw-flex tw-flex-col tw-h-full tw-pb-8">
-                <h1 className="tw-text-3xl tw-text-center tw-flex tw-flex-row tw-place-content-center">
+                <h1 className="tw-text-3xl tw-text-center tw-flex tw-flex-row tw-place-content-center tw-font-space_grotesk_medium">
                   <span className="tw-pl-3 tw-pr-2">Re-code Makes Perfect</span>
                 </h1>
                 <p
@@ -53,7 +54,7 @@ const HomeBanner = () => {
                     darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
                     "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
                     tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-center `}>
-                  <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 
+                  <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} tw-font-space_mono_bold
                   tw-text-xl tw-text-center tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
                     Lets's Get Started 
                     
@@ -80,52 +81,54 @@ const HomeBanner = () => {
               </div>
             )}
             {isDesktopMDXL && (
-                <div className="tw-flex tw-flex-col tw-basis-1/3 tw-w-full tw-pl-14">
-                  <h1 className="tw-w-[8em] tw-text-5xl tw-flex tw-flex-row ">Re-Code Makes Perfect
-                </h1>
-                <p
-                  className={`${
-                    darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-500'
-                  } tw-pt-5 tw-text-lg tw-text-left tw-w-[22em] `}
-                >
-                  Build your programming skills by reproducing&nbsp;
-                  <span className="tw-text-campfire-blue">arrays, functions, objects,</span> and other programming fundamentals
-                </p>
-                <Link
-                  to={`/learn`} id="banner-dashboard-link"
-                  className={`${
-                    darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
-                    "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
-                    tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-left `}>
-                  <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 
-                  tw-text-xl tw-text-left tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
-                    Lets's Get Started 
-                    
-                  </span>
-                  <span className={`tw-float-top`}>
-                    {darkMode ?  
-                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
-                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
-                    }
-                  </span>
-                </Link>
-                <ul className={`${darkMode ? "tw-text-campfire-neutral-400" : ""} tw-flex tw-flex-row tw-place-content-start
-                [&>li]:tw-flex [&>li]:tw-flex-row [&>li]:tw-items-center
-                tw-mt-2 tw-gap-4`}>
-                  <li className="">
-                    <JS style={{ height: 20, width: 20 }}/>Javascript
-                  </li>
-                  <li>
-                    <Java style={{ height: 20, width: 20 }}/>Java
-                  </li>
-                  <li><Python style={{ height: 20, width: 20 }}/>Python
-                  </li>
-                </ul>
+              <div className={`${darkMode ? "" : ""} tw-flex tw-flex-col tw-basis-1/3 tw-w-full tw-pl-10 tw-pr-4`}>
+                <div className={`${darkMode ? "" : ""} `}>
+                  <h1 className="tw-w-[8em] tw-text-5xl tw-flex tw-flex-row tw-font-space_grotesk_medium">
+                    Re-Code Makes Perfect
+                  </h1>
+                  <p
+                    className={`${
+                      darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-500'
+                    } tw-pt-5 tw-text-lg tw-text-left tw-w-[22em] `}
+                  >
+                    Build your programming skills by reproducing&nbsp;
+                    <span className="tw-text-campfire-blue">arrays, functions, objects,</span> and other programming fundamentals
+                  </p>
+                  <Link
+                    to={`/learn`} id="banner-dashboard-link"
+                    className={`${
+                      darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
+                      "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
+                      tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-left `}>
+                    <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} tw-font-space_mono_bold
+                    tw-text-xl tw-text-left tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
+                      Lets's Get Started 
+                    </span>
+                    <span className={`tw-float-top`}>
+                      {darkMode ?  
+                      <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                      <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+                      }
+                    </span>
+                  </Link>
+                  <ul className={`${darkMode ? "tw-text-campfire-neutral-400" : ""} tw-flex tw-flex-row tw-place-content-start
+                  [&>li]:tw-flex [&>li]:tw-flex-row [&>li]:tw-items-center
+                  tw-mt-2 tw-gap-4`}>
+                    <li className="">
+                      <JS style={{ height: 20, width: 20 }}/>Javascript
+                    </li>
+                    <li>
+                      <Java style={{ height: 20, width: 20 }}/>Java
+                    </li>
+                    <li><Python style={{ height: 20, width: 20 }}/>Python
+                    </li>
+                  </ul>
+                </div>
               </div>
             )}
             {isDesktopXL && (
               <div className="tw-flex tw-flex-col tw-basis-1/3 tw-w-full tw-pl-20">
-                <h1 className="tw-w-[8em] tw-text-6xl tw-flex tw-flex-row tw-text-left">
+                <h1 className="tw-w-[8em] tw-text-6xl tw-flex tw-flex-row tw-text-left tw-font-space_grotesk_medium">
                   Re-Code Makes Perfect
                 </h1>
                 <p 
@@ -140,12 +143,11 @@ const HomeBanner = () => {
                   to={`/learn`} id="banner-dashboard-link"
                   className={`${
                     darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
-                    "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
+                    "tw-text-campfire-purple hover:tw-text-campfire-blue "} tw-font-space_mono_bold
                     tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-left`}>
                   <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 
                   tw-text-xl tw-text-left tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
                     Lets's Get Started 
-                    
                   </span>
                   <span className={`tw-float-top`}>
                     {darkMode ?  
