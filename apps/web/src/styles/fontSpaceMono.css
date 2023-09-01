@@ -1,0 +1,28 @@
+/*Space Mono*/
+@font-face {
+  font-family: 'Space-Mono';
+  src: url('./fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype');
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space-Mono-Italic';
+  src: url('./fonts/Space_Mono/SpaceMono-Italic.ttf') format('truetype');
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Space-Mono-Bold';
+  src: url('./fonts/Space_Mono/SpaceMono-Bold.ttf') format('truetype');
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space-Mono-BoldItalic';
+  src: url('./fonts/Space_Mono/SpaceMono-BoldItalic.ttf') format('truetype');
+  font-stretch: 75% 125%;
+  font-style: normal;
+}

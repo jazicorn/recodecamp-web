@@ -4,9 +4,22 @@ export default {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      gro: ['Space Grotesk'],
-      mono: ['Space Mono'],
-      vt: ['VT323', 'monospace'],
+      roboto_mono: ['Roboto-Mono'],
+      roboto_mono_italic: ['Roboto-Mono-Italic'],
+      roboto_mono_thin: ['Roboto-Mono-Thin'],
+      roboto_mono_thin_italic: ['Roboto-Mono-ThinItalic'],
+      roboto_mono_medium: ['Roboto-Mono-Medium'],
+      roboto_mono_mediumitalic: ['Roboto-Mono-MediumItalic'],
+      roboto_mono_bold: ['Roboto-Mono-Bold'],
+      roboto_mono_bold_italic: ['Roboto-Mono-BoldItalic'],
+      space_mono: ['Space-Mono'],
+      space_mono_italic: ['Space-Mono-Italic'],
+      space_mono_bold: ['Space-Mono-Bold'],
+      space_mono_bold_italic: ['Space-Mono-BoldItalic'],
+      space_grotesk: ['Space-Grotesk'],
+      space_grotesk_light: ['Space-Grotesk-Light'],
+      space_grotesk_medium: ['Space-Grotesk-Medium'],
+      space_grotesk_bold: ['Space-Grotesk-Bold'],
     },
     extend: {
       colors: {
@@ -39,8 +52,15 @@ export default {
         },
         'campfire-purple': {
           DEFAULT: '#8b5cf6',
-          '300': '#c4b5fd',
           'light': '#c4b5fd',
+          'dark': "#6d28d9",
+          'darker': "#581c87",
+          'darkest': "#2e1065",
+          '300': '#c4b5fd',
+          '500': "#8b5cf6",
+          '700': "#6d28d9",
+          '900': "#4c1d95",
+          '950': "#2e1065",
         },
         'campfire-green': {
           DEFAULT: '#22c55e',
