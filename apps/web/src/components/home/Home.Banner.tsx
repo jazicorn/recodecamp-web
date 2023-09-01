@@ -5,7 +5,6 @@ import { ThemeContext } from '../../context/ThemeContext'
 import useWindowSize from '../../hooks/useWindowSize'
 import Transition from '../../hooks/useTransition'
 /**Images */
-import { ReactComponent as Plane } from '../../assets/icons/homepage/airplane-svgrepo-com.svg'
 import { ReactComponent as Student } from '../../assets/drawings/undraw/undraw_remotely_-2-j6y.svg'
 import { ReactComponent as JS } from '../../assets/tech/javascript/javascript-original.svg';
 import { ReactComponent as Java } from '../../assets/tech/java/java-original.svg';
@@ -24,7 +23,7 @@ const HomeBanner = () => {
           className={`${darkMode ? 'tw-backdrop-opacity-70 tw-bg-black/70 [&_h1]:tw-text-campfire-neutral-200' : ' tw-backdrop-opacity-70 tw-bg-white/50'} ${isMobile ? 'tw-flex-col' : 'tw-flex-row-reverse '} tw-flex tw-place-items-center tw-place-content-center tw-h-full tw-w-full `}
         >
           {/** Stock Picture */}
-          <div className={`${!isMobile && "tw-pt-10"}tw-flex tw-flex-col tw-justify-center tw-items-left tw-basis-2/3 tw-pt-10`}>
+          <div className={`${!isMobile && "tw-pt-10"} tw-flex tw-flex-col tw-justify-center tw-items-left tw-basis-2/3 tw-pt-10`}>
             <Transition>
               {isMobile && (<Student style={{ height: 210, width: 210, padding: 0, margin: 0 }} />)}
               {isDesktopMDXL && (<Student style={{ height: 290, width: 290, padding: 0, margin: 0 }} />)}
@@ -42,7 +41,7 @@ const HomeBanner = () => {
                 <p
                   className={`${
                     darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-500'
-                  } tw-pt-5 tw-text-lg tw-text-center tw-w-[22em] `}
+                  } tw-pt-5 tw-text-lg tw-text-center tw-w-[22em]`}
                 >
                   Build your programming skills by reproducing&nbsp;
                   <span className="tw-text-campfire-blue">arrays, functions, objects,</span> and other programming fundamentals
@@ -129,10 +128,10 @@ const HomeBanner = () => {
                 <h1 className="tw-w-[8em] tw-text-6xl tw-flex tw-flex-row tw-text-left">
                   Re-Code Makes Perfect
                 </h1>
-                <p
+                <p 
                   className={`${
                     darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-500'
-                  } tw-pt-5 tw-text-lg tw-text-left tw-w-[22em] `}
+                  } tw-pt-5 tw-text-lg tw-text-left tw-w-[22em]`}
                 >
                   Build your programming skills by reproducing&nbsp;
                   <span className="tw-text-campfire-blue">arrays, functions, objects,</span> and other programming fundamentals
@@ -142,7 +141,7 @@ const HomeBanner = () => {
                   className={`${
                     darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
                     "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
-                    tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-left `}>
+                    tw-w-42 tw-my-2  tw-py-1 tw-flex tw-flex-row tw-place-self-left`}>
                   <span className={`${darkMode ? "hover:tw-decoration-campfire-blue" : "hover:tw-decoration-campfire-neutral-500"} 
                   tw-text-xl tw-text-left tw-pr-2 hover:tw-underline hover:tw-decoration-2`}>
                     Lets's Get Started 
