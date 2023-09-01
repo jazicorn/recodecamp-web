@@ -1,0 +1,24 @@
+/*Background Gradients*/
+.custom-bg {
+  background-image: linear-gradient(
+    295deg,
+    hsl(220deg 13% 91%) 0%,
+    hsl(195deg 32% 79%) 5%,
+    hsl(191deg 42% 64%) 10%,
+    hsl(189deg 47% 55%) 18%,
+    hsl(191deg 40% 78%) 30%,
+    hsl(192deg 37% 93%) 54%,
+    hsl(220deg 13% 98%) 71%,
+    hsl(220deg 13% 95%) 80%,
+    hsl(220deg 13% 92%) 87%,
+    hsl(197deg 29% 82%) 92%,
+    hsl(192deg 40% 68%) 96%,
+    hsl(188deg 62% 45%) 100%
+  );
+}
+
+.bg-faded-gray {
+  --tw-gradient-from: #f3f4f6 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(243 244 246 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}

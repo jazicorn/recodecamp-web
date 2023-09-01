@@ -4,9 +4,12 @@ export default {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      gro: ['Space Grotesk'],
-      mono: ['Space Mono'],
-      vt: ['VT323', 'monospace'],
+      roboto_mono: ['Roboto-Mono'],
+      roboto_mono_italic: ['Roboto-Mono-Italic'],
+      space_mono: ['Space-Mono'],
+      space_mono_italic: ['Space-Mono-Italic'],
+      space_grotesk: ['Space-Grotesk'],
+      vt323: ['VT323', 'monospace'],
     },
     extend: {
       colors: {
