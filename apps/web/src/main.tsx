@@ -18,8 +18,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 /**Pages*/
 import App from './App.tsx';
-import Admin from './pages/Admin.tsx';
+import Register from './pages/Register.tsx';
+import Login from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import Admin_Login from './pages/Admin.Login.tsx';
+import Admin_Register from './pages/Admin.Register.tsx';
 import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
 /**Layouts*/
 import D_Home from './layout/Layout.D_Home';
@@ -43,7 +46,10 @@ const router = Router(
         <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />}/>
         <Route path="settings" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
-      <Route path="admin" element={<Admin/>} errorElement={<ErrorBoundary />}/>
+      <Route path="register" element={<Register />} errorElement={<ErrorBoundary />} />
+      <Route path="login" element={<Login />} errorElement={<ErrorBoundary />} />
+      <Route path="admin/register" element={<Admin_Register/>} errorElement={<ErrorBoundary />}/>
+      <Route path="admin/login" element={<Admin_Login/>} errorElement={<ErrorBoundary />}/>
       <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>

@@ -4,10 +4,12 @@ import Header from '../components/header/Header';
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
+// images
+import { ReactComponent as Logo } from '../assets/icons/logos/campfire-2-svgrepo-com.svg';
 
 const prodURL = import.meta.env.PROD;
 
-function Home() {
+const Admin_Register = () => {
   const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
@@ -23,24 +25,43 @@ function Home() {
         <article className="tw-relative tw-z-100 tw-bg-transparent tw-dark tw-font-mono tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between ">
           {/** Navigation */}
           <Header />
-          <Transition>
+           <Transition>
             <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-place-content-center tw-place-items-center`}>
               <div className={` ${isMobile ? '' : 'tw-w-[30em]'} tw-py-6 [&>div]:tw-h-[3em] [&>div]:tw-flex [&>div]:tw-place-content-center
-              [&>div]:tw-py-2 [&>div>input]:tw-h-[1.6em] [&>div>input]:tw-self-center [&>div>label]:tw-px-1 [&>div>label]:tw-self-center
-              [&>div>label]:tw-w-[10em] [&>div>label]:tw-bg-neutral-100 [&>div>label]:tw-border [&>div>label]:tw-border-campfire-blue-200
               tw-bg-gray-200 tw-border tw-border-campfire-blue-200`}>
-                 <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} 
-                 tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
-                  Admin Login
-                </h4>
-                <div className="">
-                  <label>Email:</label>
-                  <input/>
-                </div> 
-                <div>
-                  <label>Password:</label>
-                  <input/>
+                <div to={`/`} className="tw-flex tw-flex-row tw-place-content-center tw-font-space_mono">
+                  <span className="tw-pt-1 ">
+                      <Logo style={{ height: 28, width: 28 }} />
+                  </span>
+                  <h5 className={`tw-text-2xl tw-px-2 tw-pt-1 ${darkMode ? 'hover:tw-text-white' : 'hover:tw-text-campfire-blue'}`}>
+                      ReCodeCamp
+                  </h5>
                 </div>
+                <h4 className={`${darkMode ? 'tw-text-campfire-neutral-700' : 'tw-text-campfire-neutral-500'} 
+                 tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[52px] tw-w-full tw-pt-4 tw-pl-2 tw-mb-4`}>
+                  Register
+                </h4>
+                <ul className={`${darkMode ? '' : ''} [&>li]:tw-flex [&>li]:tw-flex-col 
+                [&>li]:tw-p-2 [&>li>input]:tw-h-[1.6em]
+                [&>li>label]:tw-px-1 [&>li>label]:tw-w-full [&>li>label]:tw-border-campfire-blue-200
+                [&>li>label]:tw-w-[10em] [&>li>label]:tw-bg-neutral-100 [&>li>label]:tw-border-y `}>
+                  <li className="">
+                    <label>Registration Code:</label>
+                    <input/>
+                  </li>
+                  <li className="">
+                    <label>Email:</label>
+                    <input/>
+                  </li> 
+                  <li>
+                    <label>Password:</label>
+                    <input/>
+                  </li>
+                  <li>
+                    <label>Repeat Password:</label>
+                    <input/>
+                  </li>
+                </ul>
               </div>
             </div>
           </Transition>
@@ -55,4 +76,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Admin_Register
