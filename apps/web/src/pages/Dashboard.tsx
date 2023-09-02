@@ -8,7 +8,8 @@ import { ThemeContext } from '../context/ThemeContext';
 import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
 // components
-import Header from '../components/header/Header.Dashboard';
+import Header from '../components/header/Header';
+import Header_Dashboard from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_NavigationMobile';
 import D_Header from '../components/dashboard/D_Header';
@@ -42,7 +43,7 @@ const Dashboard = () => {
   }, [location, params]);
 
   const noLanguagePaths = () => {
-    if( path === '/learn/calendar' || path === '/learn/docs' || path === '/learn/notes' || path === '/learn/settings') {
+    if( path === '/learn' || path === '/learn/calendar' || path === '/learn/docs' || path === '/learn/notes' || path === '/learn/settings') {
       return true
     } else {
       return false
@@ -60,11 +61,13 @@ const Dashboard = () => {
       {/**Page Content | Position: Relative */}
       <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-w-full tw-relative tw-z-10 tw-h-screen tw-flex tw-flex-col tw-grow tw-place-items-center`}>
         <Header />
+        <Header_Dashboard />
         {isDesktopMDXL || isDesktopXL ?
         <div className="tw-w-full tw-h-full">
           { path === '/learn' && 
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
-            tw-grid-rows-dashboard tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard 
+            tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
             [&>*]:tw-backdrop-blur-sm
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
@@ -76,8 +79,7 @@ const Dashboard = () => {
                 <D_Header/>
               </section>
               }
-              <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
-              : ' tw-row-start-2 tw-row-end-3'} tw-col-start-2 tw-col-end-3 `}>
+              <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
                 <Outlet/>
               </div>
             </main>
