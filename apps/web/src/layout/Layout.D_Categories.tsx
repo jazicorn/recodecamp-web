@@ -43,7 +43,7 @@ const Layout_D_Categories = () => {
     cache: queryCache
   });
 
-  if (isLoading) return <LoadingDashboard/>
+  if (isLoading) return ( <LoadingDashboard size={'xl'}/> )
 
   if (isError) return <ErrorDashboard error={error.message}/>
 
@@ -51,7 +51,7 @@ const Layout_D_Categories = () => {
     <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/80' : '[&>*]:tw-bg-neutral-400/80'} 
+        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/90' : '[&>*]:tw-bg-neutral-400/80'} 
           [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
           tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1  `}>
             <div>
