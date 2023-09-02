@@ -17,7 +17,7 @@ const H_Banner = () => {
 
   return (
     <>
-        <div className="tw-basis-8/12">
+        <div className="tw-basis-8/12 tw-overflow-y-auto">
         {/** Banner */}
         <HomeBanner/>
         </div>
