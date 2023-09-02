@@ -15,7 +15,8 @@ const Layout_D_Home = () => {
   return (
     <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
-        {isDesktopMDXL || isDesktopXL ? 
+        {isDesktopMDXL || isDesktopXL ?
+        <div> 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-home tw-grid-cols-layout-dashboard-home tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
@@ -23,6 +24,7 @@ const Layout_D_Home = () => {
               <D_Banner/>
             </section>
         </main>
+        </div>
         :
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
