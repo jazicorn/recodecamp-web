@@ -5,6 +5,8 @@ import Trophy from "../../assets/icons/dashboard/trophy-1st-place-svgrepo-com.sv
 // redux hooks
 import { useAppSelector } from '../../redux/reduxHooks.ts';
 import type { RootState } from '../../redux/store.ts';
+// hooks
+import Transition from '../../hooks/useTransition';
 
 const D_Scoreboard = () => {
   const { state } = useContext(ThemeContext);
@@ -15,13 +17,11 @@ const D_Scoreboard = () => {
   const points = getMenuPoints;
 
   return (
-    // <menu className={`${darkMode ? 'tw-text-campfire-blue' : 'tw-text-campfire-neutral-800'} tw-shrink-0 tw-flex tw-flex-row tw-h-full tw-w-full tw-text-campfire-blue  tw-pr-3 `}>
-   
-    // </menu>
      <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600 tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-300'} 
     tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2 tw-content-center`}>
       <menu className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-h-full tw-pt-1`}>
+        <Transition>
           <ul className='tw-flex tw-flex-row tw-items-center '>
             <li className=''><img src={Trophy} alt="Trophy" style={{ height: 18, width: 36 }}></img></li>
             <li className='tw-text-campfire-purple'>Total<span className='tw-text-campfire-neutral-900'>:</span></li>
@@ -32,6 +32,7 @@ const D_Scoreboard = () => {
           <ul className='tw-flex tw-flex-row tw-items-center tw-gap-1'>
             <li></li>
           </ul>
+        </Transition>   
       </menu>
     </div>
   )

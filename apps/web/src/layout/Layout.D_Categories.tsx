@@ -48,10 +48,10 @@ const Layout_D_Categories = () => {
   if (isError) return <ErrorDashboard error={error.message}/>
 
   return (
-    <div className="tw-h-full ">
+    <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700' : '[&>*]:tw-bg-neutral-400'} 
+        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/80' : '[&>*]:tw-bg-neutral-400/80'} 
           [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
           tw-grid tw-grid-rows-layout-dashboard-categories tw-gap-1  `}>
             <div>

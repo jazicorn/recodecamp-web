@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/ThemeContext';
 //import type { RootState } from '../redux/store.ts'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-//import Transition from '../hooks/useTransition';
+import Transition from '../hooks/useTransition';
 // components
 import Header from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
@@ -53,6 +53,7 @@ const Dashboard = () => {
 
   return (
     <div className="tw-font-space_mono">
+      <Transition>
       {/**Background | Position: Absolute */}
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' : 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'} 
       tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full `}/>
@@ -72,7 +73,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
+                <D_Header/>
               </section>
               }
               <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
@@ -92,7 +93,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
+                <D_Header/>
               </section>
               }
               <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
@@ -112,7 +113,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
+                <D_Header/>
               </section>
               }
               <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
@@ -212,6 +213,7 @@ const Dashboard = () => {
         </main>
         }
       </article>
+      </Transition>
     </div>
   )
 }
