@@ -95,7 +95,7 @@ const Header = () => {
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-300 tw-text-campfire-neutral-900 hover:tw-text-campfire-blue" 
             : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-text-campfire-blue"} tw-rounded tw-py-2 tw-flex tw-flex-row`}>
-              <button className="tw-font-mono ">
+              <button className="tw-font-space_mono ">
                 Login
               </button>
             </li>
