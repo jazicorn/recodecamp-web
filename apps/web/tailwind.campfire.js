@@ -36,6 +36,7 @@ export default {
           '700': '#004e60',
           '800': '#003e4f',
           '900': '#00212f',
+          '950': '#082f49',
         },
         'campfire-neutral': {
           DEFAULT: '#a3a3a3',
@@ -56,6 +57,7 @@ export default {
           'dark': "#6d28d9",
           'darker': "#581c87",
           'darkest': "#2e1065",
+          '200': '#ddd6fe',
           '300': '#c4b5fd',
           '500': "#8b5cf6",
           '700': "#6d28d9",
