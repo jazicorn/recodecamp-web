@@ -17,10 +17,10 @@ const Layout_D_Home = () => {
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-w-full tw-h-[84vh] [&>*]:tw-backdrop-blur-sm
+          tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-home tw-grid-cols-layout-dashboard-home tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-col-start-1 tw-col-end-2 tw-row-start-1 tw-row-end-1'>
-              <Transition><D_Banner/></Transition>
+              <D_Banner/>
             </section>
         </main>
         :
@@ -29,7 +29,7 @@ const Layout_D_Home = () => {
           tw-grid tw-grid-rows-layout-dashboard-home-mobile tw-grid-cols-layout-dashboard-home-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             {/** z index can't go higher than 50 to work*/}
             <section className='tw-row-start-1 tw-row-end-1'>
-              <Transition><D_Banner_Mobile/></Transition>
+              <D_Banner_Mobile/>
             </section>
         </main>
         }
