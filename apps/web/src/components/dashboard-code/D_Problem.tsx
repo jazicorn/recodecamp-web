@@ -77,9 +77,7 @@ const D_Problem = () => {
 
   /** Render if Loading */
   if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-    <Transition> 
-      <LoadingDashboard/> 
-    </Transition>
+      <LoadingDashboard sixe={'md'}/>
   )
 
   /** Render if Error */

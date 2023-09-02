@@ -22,7 +22,7 @@ const D_Category = ({i, category}) => {
   };
 
   return (
-    <div key={i} className={`${darkMode ? '[&>*]:tw-bg-[#525252] tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-300'} 
+    <div key={i} className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600 tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-300'} 
     tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
       <article className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-py-2 tw-h-full`}>
@@ -39,7 +39,7 @@ const D_Category = ({i, category}) => {
         <Transition>
           <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} 
           tw-text-lg tw-font-space_mono tw-px-2`}>
-            Subcategories (Optional):
+            Subcategories <span className="tw-text-base">(Optional):</span>
           </h5>
         </Transition>
         {

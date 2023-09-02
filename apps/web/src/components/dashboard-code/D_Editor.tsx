@@ -229,9 +229,7 @@ const D_Editor = () => {
 
   /** Render if Loading */
   if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-    <Transition> 
-      <LoadingDashboard/> 
-    </Transition>
+      <LoadingDashboard sixe={'lg'}/>
   )
 
   /** Render if Error */

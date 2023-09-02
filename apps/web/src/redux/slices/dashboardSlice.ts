@@ -15,7 +15,7 @@ interface DashboardState {
 
 // Define the initial state using that type
 const initialState: DashboardState = {
-  languageDefault: 'Javascript',
+  languageDefault: import.meta.env.VITE_DEFAULT_LANGUAGE,
   categoryDefault: import.meta.env.VITE_DEFAULT_CATEGORY,
   categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
   category: import.meta.env.VITE_DEFAULT_CATEGORY,
