@@ -6,7 +6,6 @@ import Transition from '../hooks/useTransition';
 // components
 import D_Banner from '../components/dashboard-home/D_Banner';
 import D_Banner_Mobile from '../components/dashboard-home/D_Banner_Mobile';
-import D_User from '../components/dashboard-home/D_User';
 
 const Layout_D_Home = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
@@ -15,17 +14,13 @@ const Layout_D_Home = () => {
 
   return (
     <div className="tw-h-full">
-      <Transition>
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
+          tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-home tw-grid-cols-layout-dashboard-home tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-col-start-1 tw-col-end-2 tw-row-start-1 tw-row-end-1'>
               <D_Banner/>
-            </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
-              <D_User/>
             </section>
         </main>
         :
@@ -36,12 +31,8 @@ const Layout_D_Home = () => {
             <section className='tw-row-start-1 tw-row-end-1'>
               <D_Banner_Mobile/>
             </section>
-            <section className='tw-row-start-2 tw-row-end-2'>
-              <D_User/>
-            </section>
         </main>
         }
-      </Transition>
     </div>
   )
 }

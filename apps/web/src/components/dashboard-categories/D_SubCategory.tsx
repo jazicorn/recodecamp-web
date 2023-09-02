@@ -4,6 +4,8 @@ import { ThemeContext } from '../../context/ThemeContext';
 // redux hooks
 import { useAppDispatch } from '../../redux/reduxHooks.ts';
 import { menuCategoryRoute } from '../../redux/slices/dashboardSlice.ts';
+//hooks
+import Transition from '../../hooks/useTransition';
 
 const D_SubCategory = (subCategory) => {
   const { state } = useContext(ThemeContext);
@@ -27,7 +29,7 @@ const D_SubCategory = (subCategory) => {
           <div/>
           :
           <div className="tw-flex tw-flex-row">
-            <h6 className={`${darkMode ? "" :"" } tw-pb-1 tw-text-base`}>{sub[0]}:</h6>
+            <Transition><h6 className={`${darkMode ? "" :"" } tw-pb-1 tw-text-base`}>{sub[0]}:</h6></Transition>
             <div className="tw-flex tw-flex-row tw-gap-1 tw-place-content-left">
             {
               routes.map((route, i) => {
@@ -36,11 +38,13 @@ const D_SubCategory = (subCategory) => {
                   <li key={i} 
                   className={`${darkMode ? "hover:tw-bg-campfire-neutral-200 tw-text-campfire-blue" 
                   : "hover:tw-bg-campfire-neutral-400 tw-text-campfire-neutral-900 tw-border-campfire-blue" } tw-border tw-rounded`}>
-                    <button 
+                    <Transition>
+                      <button 
                       onClick={() => setCategory(route)} 
                       className="tw-px-2 tw-text-sm tw-font-gro">
-                        {strRoute}
-                    </button>
+                          {strRoute}
+                      </button>
+                    </Transition>
                   </li>
                 )
               })

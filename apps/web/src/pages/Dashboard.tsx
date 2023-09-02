@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/ThemeContext';
 //import type { RootState } from '../redux/store.ts'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-//import Transition from '../hooks/useTransition';
+import Transition from '../hooks/useTransition';
 // components
 import Header from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
@@ -53,6 +53,7 @@ const Dashboard = () => {
 
   return (
     <div className="tw-font-space_mono">
+      <Transition>
       {/**Background | Position: Absolute */}
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' : 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'} 
       tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full `}/>
@@ -60,26 +61,141 @@ const Dashboard = () => {
       <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-w-full tw-relative tw-z-10 tw-h-screen tw-flex tw-flex-col tw-grow tw-place-items-center`}>
         <Header />
         {isDesktopMDXL || isDesktopXL ?
-        <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
-          ${pathFilter && 'tw-grid-rows-dashboard-no-language'}
-          ${!pathFilter && 'tw-grid-rows-dashboard'} 
-          tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-          [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
-            tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
-              <D_Navigation/>
-            </section>
-            {!pathFilter &&
-            <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-              {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
-            </section>
-            }
-            <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
-            : ' tw-row-start-2 tw-row-end-3'} tw-col-start-2 tw-col-end-3 `}>
-              <Outlet/>
-            </div>
-        </main>
+        <div className="tw-w-full tw-h-full">
+          { path === '/learn' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
+              tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Header/>
+              </section>
+              }
+              <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
+              : ' tw-row-start-2 tw-row-end-3'} tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/code' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
+              tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Header/>
+              </section>
+              }
+              <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
+              : ' tw-row-start-2 tw-row-end-3'} tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/categories' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
+              tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Header/>
+              </section>
+              }
+              <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
+              : ' tw-row-start-2 tw-row-end-3'} tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/calendar' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-no-langauge tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-1 tw-col-end-1`}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                 <D_Header/>
+              </section>
+              }
+              <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
+              : ' tw-row-start-2 tw-row-end-3'} tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/docs' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-no-langauge tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Header/>
+              </section>
+              }
+              <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/notes' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Header/>
+              </section>
+              }
+              <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/settings' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Header/>
+              </section>
+              }
+              <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+        </div>
         :
         <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
           tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
@@ -97,6 +213,7 @@ const Dashboard = () => {
         </main>
         }
       </article>
+      </Transition>
     </div>
   )
 }

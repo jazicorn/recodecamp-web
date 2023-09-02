@@ -2,6 +2,7 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 //import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 
 const D_Docs = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
@@ -16,10 +17,12 @@ const D_Docs = () => {
        tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left
       [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-4 
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2`}>
-        <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
-          tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
-          Documentation
-        </h4>
+        <Transition>
+          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
+            tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
+            Documentation
+          </h4>
+        </Transition>
         <main className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-col">
           
         </main>

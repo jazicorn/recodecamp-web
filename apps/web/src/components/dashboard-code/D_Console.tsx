@@ -60,7 +60,7 @@ const D_Console = () => {
             </header>
           </Transition>
           { message !== undefined &&
-            <ul className="tw-max-h-[100px]">
+            <ul className="tw-max-h-[100px] tw-pl-2">
               {
                 message.map((item, i) => {
                   return <li key={i}>{item}</li>;
