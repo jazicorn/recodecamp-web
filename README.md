@@ -1,32 +1,3 @@
-<style>
-.title {
-    color: #2ca9bc;
-    font-size: 30px;
-}
-
-.title:hover {
-    color: #a3a3a3;
-}
-
-.heading {
-    color: #404040;
-}
-
-.heading:hover {
-    color: #a3a3a3;
-}
-
-#about > span {
-    color: #2ca9bc;
-}
-
-#about > a {
-    color: #2ca9bc;
-    font-size: 16px
-}
-
-</style>
-
 <div align="center">
 
 <h1 align="center" >
@@ -40,7 +11,7 @@
 
 </div>
 
-## Description {#identifier .heading}
+## Description
 
 <p id="about">
 <a href="https://recodecamp-web.vercel.app/" class="title">Recodecamp</a> is the leetcode for coding fundamentals. While their are plenty of resources on the web about programming, their aren't a lot of resources for repeated practical practice of the fundamentals. Recodecamp allows you to build your programming skills by reproducing <span> arrays, functions, objects,</span> and other essential concepts. 
