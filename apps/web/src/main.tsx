@@ -18,7 +18,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 /**Pages*/
 import Home from './pages/Home.tsx';
-import User_Register from './pages/Register.tsx';
+import User_Register from './pages/User.Register.tsx';
 import User_Login from './pages/User.Login.tsx';
 import Guest_Login from './pages/Guest.Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
