@@ -1,11 +1,12 @@
-// Dashboard Calender
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-//import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+// Dashboard Banner
+import { useContext } from 'react'
+import { ThemeContext } from '../../../context/ThemeContext'
+// hooks
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 
-const D_Calendar = () => {
-  //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
+const D_User = () => {
+ //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   return (
@@ -20,7 +21,7 @@ const D_Calendar = () => {
         <Transition>
           <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
             tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
-            Calendar
+            Announcements
           </h4>
         </Transition>
         <main className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-col">
@@ -32,4 +33,4 @@ const D_Calendar = () => {
   )
 }
 
-export default D_Calendar
+export default D_User

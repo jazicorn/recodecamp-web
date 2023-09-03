@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 // redux hooks
-//import { useAppSelector } from '../redux/reduxHooks.ts';
-//import type { RootState } from '../redux/store.ts';
+//import { useAppSelector } from '../../../redux/reduxHooks.ts';
+//import type { RootState } from '../../../redux/store.ts';
 
 const D_User_Editor_Mode = () => {
   const { state } = useContext(ThemeContext);

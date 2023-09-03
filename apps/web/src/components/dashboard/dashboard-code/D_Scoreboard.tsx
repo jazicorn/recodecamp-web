@@ -1,12 +1,12 @@
 // Dashboard Banner
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import Trophy from "../../assets/icons/dashboard/trophy-1st-place-svgrepo-com.svg";
+import { ThemeContext } from '../../../context/ThemeContext';
+import Trophy from "../../../assets/icons/dashboard/trophy-1st-place-svgrepo-com.svg";
 // redux hooks
-import { useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
+import { useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
 // hooks
-import Transition from '../../hooks/useTransition';
+import Transition from '../../../hooks/useTransition';
 
 const D_Scoreboard = () => {
   const { state } = useContext(ThemeContext);

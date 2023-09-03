@@ -1,66 +1,29 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import JS_Icon from "../../assets/tech/javascript/javascript-original.svg";
-// hooks
-import useWindowSize from '../../hooks/useWindowSize';
-// redux hooks
-import { useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
-// icons
-import { IconSearch } from '@tabler/icons-react';
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { ThemeContext } from '../../context/ThemeContext'
+//icons
 import {
-  IconArrowBadgeRightFilled
+  IconHome,
 } from '@tabler/icons-react';
 
-const D_Header = () => {
-  const { state } = useContext(ThemeContext);
-  const darkMode = state.darkMode;
-  const { isMobile } = useWindowSize();
-  const menuItem = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
-  const routeEmpty = menuItem.length === 0;
-  const routeArr = menuItem.split('/').filter(route => route !== 'random');
+const HeaderDashboard = () => {
+  const theme = useContext(ThemeContext)
+  const darkMode = theme.state.darkMode
 
   return (
-    <menu className={`${darkMode ? 'tw-text-campfire-blue' : 'tw-text-campfire-neutral-800'} tw-shrink-0 tw-flex tw-flex-row tw-h-full tw-w-full tw-text-campfire-blue tw-items-center tw-place-content-between tw-pr-3 `}>
-      {isMobile ? 
-      <ul>
-        <ul className='tw-flex tw-flex-row tw-items-center'>
-          <li className=''><img src={JS_Icon} alt="Javascript" style={{ height: 18, width: 36 }}></img></li>
-          {!routeEmpty ? routeArr.map((route, i) => 
-            <li key={i} className="tw-flex tw-flex-row">
-              <span className='tw-flex tw-flex-row tw-items-center tw-pt-0.5 tw-px-1'>
-                { darkMode ? <IconArrowBadgeRightFilled size={18} color="#2ca9bc" /> 
-                  : <IconArrowBadgeRightFilled size={18} color="#000" />
-                }
-              </span>
-              <span className=''>{route}</span>
-            </li>
-          ) : <div><span className=''>Javascript</span></div>}
-        </ul>
-      </ul> 
-      :
-      <ul className="tw-flex tw-flex-row tw-place-content-between tw-w-full">
-        <ul className='tw-flex tw-flex-row tw-items-center'>
-          <li className=''><img src={JS_Icon} alt="Javascript" style={{ height: 18, width: 36 }}></img></li>
-          <li><span className=''>Javascript</span></li>
-          {!routeEmpty ? routeArr.map((route, i) => 
-            <li key={i} className="tw-flex tw-flex-row">
-              <span className='tw-flex tw-flex-row tw-items-center tw-pt-0.5 tw-px-1'>
-                { darkMode ? <IconArrowBadgeRightFilled size={18} color="#2ca9bc" /> 
-                  : <IconArrowBadgeRightFilled size={18} color="#000" />
-                }
-              </span>
-              <span className=''>{route}</span>
-            </li>
-          ) : <div/>}
-        </ul>
-        <ul>
-          <li>{ darkMode ? <IconSearch color="#2ca9bc" />: <IconSearch color="#000" />}</li>
-        </ul> 
-      </ul>
-      }
-    </menu>
+    <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25' : '[&>*]:tw-backdrop-brightness-65 [&>*]:tw-backdrop-blur-sm'
+      } tw-dark tw-font-mono tw-flex tw-flex-col tw-w-full tw-place-items-center tw-px-5 tw-mt-2 tw-relative`}>
+      <header
+        className={`tw-grow-0 tw-h-[48px] tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
+      >
+        <div className='tw-pl-1 tw-flex tw-flex-row tw-place-self-center'>
+          <Link to={'/learn'} className={`${darkMode ? "": ""}`}>
+          { darkMode ? <IconHome color="#2ca9bc" /> : <IconHome color="#000" />}
+          </Link>
+        </div>
+      </header>
+    </div>
   )
 }
 
-export default D_Header
+export default HeaderDashboard

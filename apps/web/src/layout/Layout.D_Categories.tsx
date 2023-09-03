@@ -8,9 +8,9 @@ import useWindowSize from '../hooks/useWindowSize';
 import ErrorDashboard from '../components/dashboard/error';
 import LoadingDashboard from '../components/dashboard/loading';
 // components
-import D_Category from '../components/dashboard-categories/D_Category';
-import D_Category_Menu from '../components/dashboard-categories/D_Category_Menu';
-// import D_Languages from '../components/dashboard-categories/D_Languages';
+import D_Category from '../components/dashboard/dashboard-categories/D_Category';
+import D_Category_Menu from '../components/dashboard/dashboard-categories/D_Category_Menu';
+// import D_Languages from '../components/dashboard/dashboard-categories/D_Languages';
 /**React Query */
 import { useQuery, QueryCache, } from "@tanstack/react-query";
 /** React Redux Hooks */

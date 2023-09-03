@@ -1,11 +1,11 @@
 // Category
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 // redux hooks
-// import { useAppDispatch } from '../../redux/reduxHooks.ts';
-// import { menuCategoryRoute } from '../../redux/slices/dashboardSlice.ts';
+// import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+// import { menuCategoryRoute } from '../../../redux/slices/dashboardSlice.ts';
 // hooks
-import Transition from '../../hooks/useTransition';
+import Transition from '../../../hooks/useTransition';
 
 const D_Category_Menu = ({i, category}) => {
   const { state } = useContext(ThemeContext);

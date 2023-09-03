@@ -4,16 +4,16 @@ import { nanoid } from 'nanoid';
 /** React Hooks */
 import { useContext, useCallback, useEffect } from 'react';
 /** Custom Hooks */
-import { ThemeContext } from '../../context/ThemeContext';
-import Transition, { Transition3 } from '../../hooks/useTransition';
+import { ThemeContext } from '../../../context/ThemeContext';
+import { Transition3 } from '../../../hooks/useTransition';
 /** Custom State Components*/
-import ErrorDashboard from '../dashboard/error';
-import LoadingDashboard from '../dashboard/loading';
+import ErrorDashboard from '../error';
+import LoadingDashboard from '../loading';
 /** React Redux Hooks */
-import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks.ts';
+import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
 import { 
   menuQuestion,
-} from '../../redux/slices/dashboardSlice.ts';
+} from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
 /** API url | Custom env mandatory to begin with VITE 

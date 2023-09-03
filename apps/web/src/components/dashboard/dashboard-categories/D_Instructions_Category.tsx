@@ -1,10 +1,10 @@
 // Dashboard Banner
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import List from "../../assets/icons/dashboard/list-square-svgrepo-com.svg";
+import { ThemeContext } from '../../../context/ThemeContext';
+import List from "../../../assets/icons/dashboard/list-square-svgrepo-com.svg";
 // hooks
-import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 
 const D_Instructions_Category = () => {
   const { state } = useContext(ThemeContext);

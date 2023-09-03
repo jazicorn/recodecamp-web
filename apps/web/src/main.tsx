@@ -17,14 +17,17 @@ import ErrorBoundary from "./ErrorBoundary.tsx";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 /**Pages*/
-import App from './App.tsx';
+import Home from './pages/Home.tsx';
 import Register from './pages/Register.tsx';
 import Login from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Admin_Login from './pages/Admin.Login.tsx';
 import Admin_Register from './pages/Admin.Register.tsx';
-import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
-/**Layouts*/
+// import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
+/**Layouts | Home Pages*/
+import H_Home from './layout/Layout.H_Banner';
+import H_About from './layout/Layout.H_About';
+/**Layouts | Dashboard Pages*/
 import D_Home from './layout/Layout.D_Home';
 import D_Code from './layout/Layout.D_Code';
 import D_Categories from './layout/Layout.D_Categories';
@@ -36,7 +39,10 @@ import D_Settings from './layout/Layout.D_Settings';
 const router = Router(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<App />} errorElement={<ErrorBoundary />} />
+      <Route path="/" element={<Home />} errorElement={<ErrorBoundary />} >
+        <Route path="" element={<H_Home />} errorElement={<ErrorBoundary />}/>
+        <Route path="about" element={<H_About />} errorElement={<ErrorBoundary />}/>
+      </Route>
       <Route path="learn" element={<Dashboard />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
@@ -50,12 +56,12 @@ const router = Router(
       <Route path="login" element={<Login />} errorElement={<ErrorBoundary />} />
       <Route path="admin/register" element={<Admin_Register/>} errorElement={<ErrorBoundary />}/>
       <Route path="admin/login" element={<Admin_Login/>} errorElement={<ErrorBoundary />}/>
-      <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
+      {/* <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
-      </Route>
-      <Route path="*" element={<App/>} errorElement={<ErrorBoundary />}/>
+      </Route> */}
+      <Route path="*" element={<Home />} errorElement={<ErrorBoundary />}/>
     </Route>
   )
 )

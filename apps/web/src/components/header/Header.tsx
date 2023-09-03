@@ -3,12 +3,27 @@ import { Link } from 'react-router-dom'
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
+import { useLocation, useParams } from 'react-router-dom';
 // icons
 import { IconMenu2 } from '@tabler/icons-react';
 import { ThemeContext } from '../../context/ThemeContext'
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
 import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
 import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg'
+
+const getRoutePath = (location: Location, params: Params): string => {
+  const { pathname } = location;
+  if (!Object.keys(params).length) {
+    return pathname; // we don't need to replace anything
+  }
+  let path = pathname;
+  Object.entries(params).forEach(([paramName, paramValue]) => {
+    if (paramValue) {
+      path = path.replace(paramValue, `:${paramName}`);
+    }
+  });
+  return path;
+};
 
 const Header = () => {
   const { isMobile } = useWindowSize();
@@ -24,6 +39,24 @@ const Header = () => {
       localStorage.theme = 'dark'
     }
   }
+  const location = useLocation();
+  const params = useParams();
+  
+  const [path, setPath] = useState();
+
+  useEffect(() => {
+    setPath(getRoutePath(location, params));
+  }, [location, params]);
+
+  const pagesPath = () => {
+    if( path === '/learn') {
+      return true
+    } else {
+      return false
+    }
+  };
+
+  const pathFilter = pagesPath();
 
   const [ menu, setMenu ] = useState(true);
 
@@ -73,7 +106,7 @@ const Header = () => {
               <span className="">
                 <Logo style={{ height: 26, width: 40 }} />
               </span>
-              <h5 className={`tw-text-2xl ${darkMode ? 'hover:tw-text-white' : 'hover:tw-text-campfire-blue'}`}>
+              <h5 className={`tw-text-2xl ${darkMode ? '' : ''} hover:tw-text-campfire-blue`}>
                 ReCodeCamp
               </h5>
             </Link>
@@ -81,16 +114,16 @@ const Header = () => {
           </Transition>
           <Transition>
           <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li>button]:tw-font-mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1`}>
-            <li className={`${darkMode ? "hover:tw-text-campfire-blue" : "hover:tw-text-campfire-blue"}`}>
-              <Link>About</Link>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+              <Link tp={'/about'}>About</Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-blue" : "hover:tw-text-campfire-blue"}`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}>Dashboard</Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-blue" : "hover:tw-text-campfire-blue"}`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link>Documentation</Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-blue" : "hover:tw-text-campfire-blue"}`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link>Contact</Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-300 tw-text-campfire-neutral-900 hover:tw-text-campfire-blue" 
@@ -108,7 +141,7 @@ const Header = () => {
   }
 
   return (
-    <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-neutral-300' : 'tw-bg-light'
+    <div className={`${pathFilter && !darkMode && 'tw-bg-campfire-neutral-200/70 '} ${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-neutral-300' : 'tw-bg-light'
       } tw-dark tw-font-space_mono tw-flex tw-flex-col tw-w-full tw-place-items-center tw-px-5 tw-relative`}>
       <header
         className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
@@ -117,22 +150,22 @@ const Header = () => {
           <span className="tw-pt-1 ">
             <Logo style={{ height: 22, width: 38 }} />
           </span>
-          <h5 className={`tw-text-lg ${darkMode ? 'hover:tw-text-white' : 'hover:tw-text-campfire-blue'}`}>
+          <h5 className={`tw-text-lg ${darkMode ? '' : ''} hover:tw-text-campfire-blue`}>
             ReCodeCamp
           </h5>
         </Link>
         <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 [&>ol>li>button]:tw-font-mono">
           <ol className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5 tw-items-center`}>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-200" : "hover:tw-text-campfire-blue"}`}>
-              <Link><Transition>About</Transition></Link>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+              <Link to={'/about'}><Transition>About</Transition></Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-200" : "hover:tw-text-campfire-blue"}`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}><Transition>Dashboard</Transition></Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-200" : "hover:tw-text-campfire-blue"}`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link><Transition>Documentation</Transition></Link>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-200" : "hover:tw-text-campfire-blue"}`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link><Transition>Contact</Transition></Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 "} hover:tw-text-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row`}>
