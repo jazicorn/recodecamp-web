@@ -1,12 +1,12 @@
 // Component Title: Dashboard Console
-import { ThemeContext } from '../../context/ThemeContext';
-import Transition from '../../hooks/useTransition';
+import { ThemeContext } from '../../../context/ThemeContext';
+import Transition from '../../../hooks/useTransition';
 /** React Hooks */
 import { useContext, useState, useEffect, useCallback } from 'react';
 /** React Redux */
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
-import { menuConsoleMessage } from '../../redux/slices/dashboardSlice.ts';
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
+import { menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts';
 
 const D_Console = () => {
   const { state } = useContext(ThemeContext);

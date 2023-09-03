@@ -3,10 +3,10 @@ import { ThemeContext } from '../context/ThemeContext'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
 // components
-import D_Editor from '../components/dashboard-code/D_Editor';
-import D_Problem from '../components/dashboard-code/D_Problem';
-import D_Console from '../components/dashboard-code/D_Console';
-import D_Scoreboard from '../components/dashboard-code/D_Scoreboard';
+import D_Editor from '../components/dashboard/dashboard-code/D_Editor';
+import D_Problem from '../components/dashboard/dashboard-code/D_Problem';
+import D_Console from '../components/dashboard/dashboard-code/D_Console';
+import D_Scoreboard from '../components/dashboard/dashboard-code/D_Scoreboard';
 
 const Layout_D_Code = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();

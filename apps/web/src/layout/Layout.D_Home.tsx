@@ -2,10 +2,10 @@ import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
+//import Transition from '../hooks/useTransition';
 // components
-import D_Banner from '../components/dashboard-home/D_Banner';
-import D_Banner_Mobile from '../components/dashboard-home/D_Banner_Mobile';
+import D_Banner from '../components/dashboard/dashboard-home/D_Banner';
+import D_Banner_Mobile from '../components/dashboard/dashboard-home/D_Banner_Mobile';
 
 const Layout_D_Home = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();

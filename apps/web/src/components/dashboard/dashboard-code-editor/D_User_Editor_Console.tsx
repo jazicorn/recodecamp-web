@@ -1,7 +1,7 @@
 // Dashboard Console
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import Transition from '../../hooks/useTransition';
+import { ThemeContext } from '../../../context/ThemeContext';
+import Transition from '../../../hooks/useTransition';
 
 const D_User_Editor_Console = () => {
   const { state } = useContext(ThemeContext);

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 /**Components */
-import HomeBanner from '../components/home/Home.Banner';
+import HomeBanner from '../components/home/H_Banner';
 /**Hooks */
 import Transition from '../hooks/useTransition';
 import useWindowSize from '../hooks/useWindowSize';

@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
+//import Transition from '../hooks/useTransition';
 // components
-import D_Docs from '../components/dashboard-docs/D_Docs';
+import D_Docs from '../components/dashboard/dashboard-docs/D_Docs';
 
 const Layout_D_Docs = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();

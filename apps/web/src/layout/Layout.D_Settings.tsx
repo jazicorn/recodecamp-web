@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
+//import Transition from '../hooks/useTransition';
 // components
-import D_Settings from '../components/dashboard-settings/D_Settings';
+import D_Settings from '../components/dashboard/dashboard-settings/D_Settings';
 
 const Layout_D_Calender = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();

@@ -2,26 +2,26 @@
 /** React Hooks */
 import { useContext, useState, useEffect, useCallback } from 'react';
 /** React Redux */
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
-import { menuQuestion, menuPoints, menuConsoleMessage } from '../../redux/slices/dashboardSlice.ts';
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
+import { menuQuestion, menuPoints, menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
 /** Custom Hooks */
-import { ThemeContext } from '../../context/ThemeContext';
-import Transition, { Transition3 } from '../../hooks/useTransition';
-import useWindowSize from '../../hooks/useWindowSize';
+import { ThemeContext } from '../../../context/ThemeContext';
+import { Transition3 } from '../../../hooks/useTransition';
+import useWindowSize from '../../../hooks/useWindowSize';
 /** Custom State Components*/
-import ErrorDashboard from '../dashboard/error';
-import LoadingDashboard from '../dashboard/loading';
+import ErrorDashboard from '../../dashboard/error';
+import LoadingDashboard from '../../dashboard/loading';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** Codemirror */
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import lightTheme from '../../styles/style.codemirror.light';
-import darkTheme from '../../styles/style.codemirror.dark';
+import lightTheme from '../../../styles/style.codemirror.light';
+import darkTheme from '../../../styles/style.codemirror.dark';
 const extensions = [ javascript({ jsx: true })];
 
 /** API url | Custom env mandatory to begin with VITE  

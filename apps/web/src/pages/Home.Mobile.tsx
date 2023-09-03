@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
 import Header from '../components/header/Header'
-import HomeBanner from '../components/home/Home.Banner'
+import HomeBanner from '../components/home/H_Banner'
 
 function HomeMobile() {
   const { state } = useContext(ThemeContext);

@@ -1,10 +1,10 @@
 // Dashboard Banner
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg';
-//import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+import { ReactComponent as Rocket } from '../../../assets/icons/others/rocket-right-svgrepo-com.svg';
+//import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 //icons
 import {
   IconCalendar,
