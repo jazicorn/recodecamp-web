@@ -12,8 +12,8 @@ import Header from '../components/header/Header';
 import Header_Dashboard from '../components/header/Header.Dashboard';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_NavigationMobile';
-import D_Header from '../components/dashboard/D_Header';
-import D_Header_User_Editor from '../components/dashboard/D_Header_User_Editor';
+import D_Route from '../components/dashboard/D_Route';
+import D_Route_User_Editor from '../components/dashboard/D_Route_User_Editor';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
@@ -76,7 +76,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                <D_Header/>
+                <D_Route/>
               </section>
               }
               <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
@@ -95,7 +95,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                <D_Header/>
+                <D_Route/>
               </section>
               }
               <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
@@ -115,7 +115,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                <D_Header/>
+                <D_Route/>
               </section>
               }
               <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
@@ -134,7 +134,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                 <D_Header/>
+                 <D_Route/>
               </section>
               }
               <div className={`${pathFilter ? 'tw-row-start-1 tw-row-end-2' 
@@ -153,7 +153,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                <D_Header/>
+                <D_Route/>
               </section>
               }
               <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
@@ -171,7 +171,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                <D_Header/>
+                <D_Route/>
               </section>
               }
               <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
@@ -189,7 +189,7 @@ const Dashboard = () => {
               </section>
               {!pathFilter &&
               <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
-                <D_Header/>
+                <D_Route/>
               </section>
               }
               <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
@@ -207,7 +207,7 @@ const Dashboard = () => {
               <D_NavigationMobile/>
             </section>
             <section className=' tw-row-start-2 tw-row-end-2'>
-              {path === '/learn/editor' ? <D_Header_User_Editor/> : <D_Header/>}
+              {path === '/learn/editor' ? <D_Route_User_Editor/> : <D_Route/>}
             </section>
             <div className='tw-row-start-3 tw-row-end-6'>
               <Outlet/>

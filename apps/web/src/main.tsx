@@ -23,7 +23,7 @@ import Login from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Admin_Login from './pages/Admin.Login.tsx';
 import Admin_Register from './pages/Admin.Register.tsx';
-import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
+// import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
 /**Layouts | Home Pages*/
 import H_Home from './layout/Layout.H_Banner';
 import H_About from './layout/Layout.H_About';
@@ -56,11 +56,11 @@ const router = Router(
       <Route path="login" element={<Login />} errorElement={<ErrorBoundary />} />
       <Route path="admin/register" element={<Admin_Register/>} errorElement={<ErrorBoundary />}/>
       <Route path="admin/login" element={<Admin_Login/>} errorElement={<ErrorBoundary />}/>
-      <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
+      {/* <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
-      </Route>
+      </Route> */}
       <Route path="*" element={<Home />} errorElement={<ErrorBoundary />}/>
     </Route>
   )
