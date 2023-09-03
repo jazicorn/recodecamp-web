@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 /**Hooks */
 import Transition from '../hooks/useTransition';
@@ -37,10 +37,10 @@ const Auth = () => {
                     <span className="tw-pt-1 ">
                         <Logo style={{ height: 24, width: 24 }} />
                     </span>
-                     <h1 className={`tw-text-lg tw-px-2 tw-pt-1 
+                     <Link to={'/'} className={`tw-text-lg tw-px-2 tw-pt-1 
                      ${darkMode ? 'tw-text-neutral-100 hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
                         ReCodeCamp
-                    </h1>
+                    </Link>
                    </div>
                 </Transition>
                <Transition>

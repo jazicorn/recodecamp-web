@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import Auth_Mobile from './Auth.Mobile';
 /**Hooks */
@@ -43,9 +43,9 @@ const Auth = () => {
                     </span> 
                 </Transition>
                 <Transition>
-                    <h1 className={`tw-text-lg tw-px-2 tw-pt-1 ${darkMode ? 'tw-text-neutral-100 hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
+                    <Link to={'/'} className={`tw-text-lg tw-px-2 tw-pt-1 ${darkMode ? 'tw-text-neutral-100 hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
                         ReCodeCamp
-                    </h1>
+                    </Link>
                </Transition>
             </div>
             {''}
