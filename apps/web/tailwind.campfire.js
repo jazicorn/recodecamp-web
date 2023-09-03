@@ -94,7 +94,7 @@ export default {
       gridTemplateColumns: {
         'dashboard': '3em, auto',
         'dashboard-mobile': 'auto',
-        'layout-dashboard-home': 'minmax(32em, auto)',
+        'layout-dashboard-home': 'minmax(16em, 20em), minmax(32em, auto)',
         'layout-dashboard-home-mobile': 'auto',
         'layout-dashboard-code': 'minmax(22em, 28em), minmax(23em, auto)',
         'layout-dashboard-code-mobile': 'auto',
