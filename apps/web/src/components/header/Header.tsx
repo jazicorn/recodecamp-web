@@ -127,10 +127,12 @@ const Header = () => {
               <Link>Contact</Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-300 tw-text-campfire-neutral-900 hover:tw-text-campfire-blue" 
-            : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-text-campfire-blue"} tw-rounded tw-py-2 tw-flex tw-flex-row`}>
-              <button className="tw-font-space_mono ">
-                Login
-              </button>
+            : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-text-campfire-blue"} tw-font-space_mono tw-rounded tw-py-2 tw-flex tw-flex-row`}>
+              <Link to={'/auth/guest/login'}>
+                <button className="tw-font-space_mono ">
+                  Login
+                </button>
+              </Link>
             </li>
           </ul>
           </Transition>
@@ -169,7 +171,7 @@ const Header = () => {
               <Link><Transition>Contact</Transition></Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 "} hover:tw-text-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row`}>
-              <Link to={'/login'}><Transition>Login</Transition></Link>
+              <Link to={'auth/guest/login'}><Transition>Login</Transition></Link>
             </li>
           </ol>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-10">
