@@ -9,7 +9,7 @@ import useWindowSize from '../hooks/useWindowSize';
 import Transition from '../hooks/useTransition';
 // components
 import Header from '../components/header/Header';
-import Header_Dashboard from '../components/dashboard/D_header';
+import Header_Dashboard from '../components/dashboard/D_Header';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_NavigationMobile';
 import D_Route from '../components/dashboard/D_Route';
