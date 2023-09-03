@@ -18,13 +18,15 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 /**Pages*/
 import Home from './pages/Home.tsx';
-import User_Register from './pages/User.Register.tsx';
-import User_Login from './pages/User.Login.tsx';
-import Guest_Login from './pages/Guest.Login.tsx';
+import Auth from './pages/Auth.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import Admin_Login from './pages/Admin.Login.tsx';
-import Admin_Register from './pages/Admin.Register.tsx';
 // import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
+/**Auth Components */
+import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
+import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
+import A_Guest_Login from './components/auth/A_Guest.Login.tsx';
+import A_User_Register from './components/auth/A_User.Register.tsx';
+import A_User_Login from './components/auth/A_Guest.Login.tsx';
 /**Layouts | Home Pages*/
 import H_Home from './layout/Layout.H_Banner';
 import H_About from './layout/Layout.H_About';
@@ -53,11 +55,13 @@ const router = Router(
         <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />}/>
         <Route path="settings" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
-      <Route path="auth/user/register" element={<User_Register />} errorElement={<ErrorBoundary />} />
-      <Route path="auth/user/login" element={<User_Login />} errorElement={<ErrorBoundary />} />
-      <Route path="auth/guest/login" element={<Guest_Login />} errorElement={<ErrorBoundary />} />
-      <Route path="auth/admin/register" element={<Admin_Register/>} errorElement={<ErrorBoundary />}/>
-      <Route path="auth/admin/login" element={<Admin_Login/>} errorElement={<ErrorBoundary />}/>
+      <Route path="auth" element={<Auth />}>
+        <Route path="admin/register" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
+        <Route path="admin/login" element={<A_Admin_Login/>} errorElement={<ErrorBoundary />}/>
+        <Route path="guest/login" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
+        <Route path="user/register" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
+      </Route>
       {/* <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
