@@ -7,6 +7,8 @@ interface DashboardState {
   categoryRouteDefault: string,
   language: string,
   category: string,
+  categoryInfo: object,
+  categoryInfo2: object,
   categoryRoute: string,
   question: object,
   points: number,
@@ -19,6 +21,7 @@ const initialState: DashboardState = {
   categoryDefault: import.meta.env.VITE_DEFAULT_CATEGORY,
   categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
   category: import.meta.env.VITE_DEFAULT_CATEGORY,
+  categoryInfo: {},
   categoryRoute: import.meta.env.VITE_DEFAULT_ROUTE,
   question: {},
   points: 0,
@@ -35,6 +38,7 @@ export const dashboardSlice = createSlice({
       state.languageDefault;
       state.category;
       state.categoryDefault;
+      state.categoryInfo;
       state.categoryRoute;
       state.categoryRouteDefault;
       state.question;
@@ -46,6 +50,9 @@ export const dashboardSlice = createSlice({
     },
     menuCategory: (state, action) => {
       state.category = action.payload;
+    },
+    menuCategoryInfo: (state, action) => {
+      state.categoryInfo = action.payload;
     },
     menuCategoryRoute: (state, action) => {
       state.categoryRoute = action.payload;
@@ -63,7 +70,7 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { menu, menuLanguage, menuCategory, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
+export const { menu, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
 
 export default dashboardSlice.reducer;
 
