@@ -1,12 +1,10 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { ThemeContext } from '../context/ThemeContext';
-import Header from '../components/header/Header';
+import { ThemeContext } from '../../context/ThemeContext';
 // hooks
-import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 // images
-import { ReactComponent as Logo } from '../assets/icons/logos/campfire-2-svgrepo-com.svg'
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
 
 const prodURL = import.meta.env.PROD;
 
@@ -20,13 +18,10 @@ const Register = () => {
     {prodURL ? 
        <Navigate to="/" replace={true} />
       :
-      <span> 
-        <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60': 
-        'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50' } tw-fixed tw-absolute tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
-        <article className="tw-relative tw-z-100 tw-bg-transparent tw-dark tw-font-mono tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between ">
+      <> 
+        <article className="tw-relative tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between">
           {/** Navigation */}
-          <Header />
-          <Transition>
+           <Transition>
             <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-place-content-center tw-place-items-center`}>
               <div className={` ${isMobile ? '' : 'tw-w-[30em]'} tw-py-6 [&>div]:tw-h-[3em] [&>div]:tw-flex [&>div]:tw-place-content-center
               tw-bg-gray-200 tw-border tw-border-campfire-blue-200`}>
@@ -66,12 +61,8 @@ const Register = () => {
               </div>
             </div>
           </Transition>
-          {/**Footer */}
-          <footer className={`${darkMode ? 'tw-bg-campfire-neutral-800 tw-text-campfire-neutral-200' : 'tw-bg-campfire-blue-100'} tw-bg-campfire-gray tw-flex tw-flex-col tw-place-items-center tw-w-full tw-h-[28px] tw-pr-3`}>
-            <a href="https://github.com/jazicorn"className="tw-pr-2">created by Jazicorn</a>
-          </footer>
         </article>
-      </span>
+      </>
     }
     </div>
   )
