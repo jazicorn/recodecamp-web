@@ -117,12 +117,12 @@ const HomeBanner = () => {
                   [&>li]:tw-flex [&>li]:tw-flex-row [&>li]:tw-items-center
                   tw-mt-2 tw-gap-4`}>
                     <li className="">
-                      <JS style={{ height: 20, width: 20 }}/>Javascript
+                      <JS style={{ height: 20, width: 20 }}/>&nbsp;Javascript
                     </li>
                     <li>
-                      <Java style={{ height: 20, width: 20 }}/>Java
+                      <Java style={{ height: 20, width: 20 }}/>&nbsp;Java
                     </li>
-                    <li><Python style={{ height: 20, width: 20 }}/>Python
+                    <li><Python style={{ height: 20, width: 20 }}/>&nbsp;Python
                     </li>
                   </ul>
                 </div>
@@ -159,7 +159,7 @@ const HomeBanner = () => {
                   </span>
                 </Link>
                 <ul className={`${darkMode ? "tw-text-campfire-neutral-400" : ""} tw-flex tw-flex-row tw-place-content-start
-                [&>li]:tw-flex [&>li]:tw-flex-row [&>li]:tw-items-center 
+                [&>li]:tw-flex [&>li]:tw-flex-row [&>li]:tw-items-center
                 tw-mt-2 tw-gap-4`}>
                   <li className="">
                     <JS style={{ height: 20, width: 20 }}/>&nbsp;Javascript
