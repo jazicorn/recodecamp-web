@@ -7,7 +7,7 @@ export class Guest implements _Guest {
     _GUEST_ID!: string;
     _GUEST_CREATED_AT!: Date;
     _GUEST_UPDATED_AT!: Date;
-    _GUEST_ACCESS_TOKEN!: string,
+    _GUEST_ACCESS_TOKEN!: string;
     _GUEST_FIRST_LOGIN!: boolean;
     _GUEST_ADMIN!: boolean;
     _GUEST_SUBSCRIPTION!: number;

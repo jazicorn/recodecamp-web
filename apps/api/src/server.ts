@@ -1,6 +1,7 @@
 'use strict';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import express, { Application } from 'express';
+import session from 'express-session';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
@@ -23,12 +24,12 @@ class App {
             extended: true
         }));
         this.app.use(bodyParser.json());
-        // this.app.set('trust proxy', true);
         this.app.use(cors());
-        this.app.use(sessions({
+        this.app.set('trust proxy', 1) // trust first proxy
+        this.app.use(session({
             secret: process.env.SECRET_TOKEN,
             saveUninitialized:true,
-            cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24; },
+            cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 },
             resave: false
         }));
     }

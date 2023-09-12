@@ -119,8 +119,8 @@ class Guest_Routes {
             case('POST'):
                 try {
                     const data = req.body;
-                    const userIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(userIP);
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
                     const validEmail = z.string().email(data._GUEST_EMAIL);
                     const validPasswordMin = z.string().min(8,data._GUEST_PASSWORD);
                     const validPasswordMax = z.string().max(16,data._GUEST_PASSWORD);
@@ -140,7 +140,7 @@ class Guest_Routes {
                     } else if(validIP && validEmail && validPasswordMin && validPasswordMax && validPasswordRegex) {
                         const guest = new Guest(data);
                         // set user ip address
-                        guest.set_GUEST_IP_ADDRESS = userIP as string;
+                        guest.set_GUEST_IP_ADDRESS = guestIP as string;
                         // Encrypt user password
                         const encryptedPassword = await bcrypt.hash(data._GUEST_PASSWORD, 10);
                         // set encrypted password
@@ -149,10 +149,7 @@ class Guest_Routes {
                         guest.setDatabaseValues();
                         // guest after updates
                         //console.log("guest", guest);
-                    } else {
-                        return res.status(400).send({ error: "Invalid Data" });
-                    }
-                    const createGuest = await sql`INSERT INTO _GUEST(
+                        const createGuest = await sql`INSERT INTO _GUEST(
                         _GUEST_ID,
                         _GUEST_CREATED_AT,
                         _GUEST_UPDATED_AT,
@@ -194,12 +191,15 @@ class Guest_Routes {
                             ${guest._GUEST_POINTS_JAVA},
                             ${guest._GUEST_POINTS_PYTHON},
                             ${guest._GUEST_COURSES})`;
-                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _GUEST_ID = ${guest._GUEST_ID}`;
-                    //console.log("guest info:", getGuest);
-                    if(getGuest !== undefined) {
-                        return res.sendStatus(200);
+                        const getGuest = await sql`SELECT * FROM _GUEST WHERE _GUEST_ID = ${guest._GUEST_ID}`;
+                        //console.log("guest info:", getGuest);
+                        if(getGuest !== undefined) {
+                            return res.sendStatus(200);
+                        } else {
+                            return res.status(500).send({ error: "Guest Creation Error" });
+                        }
                     } else {
-                        return res.status(500).send({ error: "Guest Creation Error" });
+                        return res.status(400).send({ error: "Invalid Data" });
                     }
                 } catch {
                     return res.status(500).send({ error: "Database Connection Error" });
@@ -219,7 +219,7 @@ class Guest_Routes {
                     const getGuest = await sql`SELECT * FROM _GUEST WHERE _GUEST_EMAIL = ${data._GUEST_EMAIL}`;
                     // Check Guest IP Address
                     const guestIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(getGuestIP);
+                    const validIP = z.string().ip(guestIP);
                     // Check Email & Password
                     const validEmail = data._GUEST_EMAIL.trim() === getGuest._GUEST_EMAIL;
                     const validPassword = data._GUEST_PASSWORD.trim() === getGuest._GUEST_PASSWORD;
@@ -240,8 +240,6 @@ class Guest_Routes {
                     });
                     // Save Guest Token
                     guest._GUEST_ACCESS_TOKEN = getToken;
-                    // Save Token To Session
-                    req.session.token = getToken;
                     if(!validIP) {
                         return res.status(400).send({ error: "User Network Error" });
                     } else if(!validEmail || !validPassword) {
