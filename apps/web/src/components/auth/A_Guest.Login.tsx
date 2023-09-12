@@ -74,14 +74,14 @@ const SignIn = () => {
                 </Link>
               </p>
             </div>
-            <div to={`/`} className="tw-flex tw-flex-row tw-place-content-center tw-font-space_mono">
-                <span className="tw-pt-1 ">
-                    <Logo style={{ height: 28, width: 28 }} />
-                </span>
-                <h5 className={`tw-text-3xl tw-px-2 tw-pt-1 ${darkMode ? 'hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
-                    ReCodeCamp
-                </h5>
-            </div>
+            <Link to={`/`} className="tw-flex tw-flex-row tw-place-content-center tw-font-space_mono">
+              <span className="tw-pt-1 ">
+                  <Logo style={{ height: 28, width: 28 }} />
+              </span>
+              <h5 className={`tw-text-3xl tw-px-2 ${darkMode ? 'hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
+                  ReCodeCamp
+              </h5>
+            </Link>
             <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-place-items-baseline tw-place-content-between tw-border-campfire-purple-light tw-border-b tw-h-[52px] tw-w-full tw-pt-4 tw-px-2 tw-my-4 `}>
               <h4 className="tw-text-xl tw-w-fit tw-place-self-left">
                 Guest Login
