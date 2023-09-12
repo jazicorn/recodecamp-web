@@ -140,13 +140,13 @@ class Guest_Routes {
                     } else if(validIP && validEmail && validPasswordMin && validPasswordMax && validPasswordRegex) {
                         const guest = new Guest(data);
                         // set user ip address
-                        guest.set_GUEST_IP_ADDRESS = guestIP as string;
+                        guest._GUEST_IP_ADDRESS = guestIP as string;
                         // Encrypt user password
                         const encryptedPassword = await bcrypt.hash(data._GUEST_PASSWORD, 10);
                         // set encrypted password
-                        guest.set_GUEST_PASSWORD = encryptedPassword;
+                        guest._GUEST_PASSWORD = encryptedPassword;
                         // convert courses to string value
-                        guest.setDatabaseValues();
+                        guest._GUEST_COURSES = guest._GUEST_COURSES.toString();
                         // guest after updates
                         //console.log("guest", guest);
                         const createGuest = await sql`INSERT INTO _GUEST(
@@ -233,7 +233,7 @@ class Guest_Routes {
                     // Create Guest Object
                     const guest = new Guest(data);
                     // Set Guest IP Address
-                    guest.set_GUEST_IP_ADDRESS = guestIP as string;
+                    guest._GUEST_IP_ADDRESS = guestIP as string;
                     // Create Token
                     const getToken = jwt.sign({ _GUEST_ID: guest._GUEST_ID, _GUEST_EMAIL: guest._GUEST_EMAIL }, process.env.SECRET_TOKEN, {
                         algorithm: 'HS256',

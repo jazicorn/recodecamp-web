@@ -27,34 +27,59 @@ export class Guest implements _Guest {
     _GUEST_COURSES!: string[] | string;
 
     constructor(data) {
-        this._GUEST_ID = uuidv4() || data._GUEST_ID;
-        this._GUEST_CREATED_AT = new Date() || data._GUEST_CREATED_AT;
-        this._GUEST_UPDATED_AT = new Date() || data._GUEST_UPDATED_AT;
-        this._GUEST_ACCESS_TOKEN = '' || data._GUEST_ACCESS_TOKEN.trim();
-        this._GUEST_FIRST_LOGIN = false || data._GUEST_FIRST_LOGIN;
-        this._GUEST_ADMIN = false || data._GUEST_ADMIN;
+        const defaults = {
+            _GUEST_ID: uuidv4(),
+            _GUEST_CREATED_AT: new Date(),
+            _GUEST_UPDATED_AT: new Date(),
+            _GUEST_ACCESS_TOKEN: 'Empty',
+            _GUEST_FIRST_LOGIN: false,
+            _GUEST_ADMIN: false,
+            /** 1234 === Subscription(Guest Account)*/
+            _GUEST_SUBSCRIPTION: 1234,
+            _GUEST_IP_ADDRESS: 'Empty',
+            _GUEST_PASSCODE: uuidv4(),
+            _GUEST_PASSCODE_CONFIRMED: false,
+            _GUEST_EMAIL: data._GUEST_EMAIL.toLowerCase().trim(),
+            _GUEST_EMAIL_CONFIRMED: false,
+            _GUEST_EMAIL_PASSCODE: uuidv4(),
+            _GUEST_PASSWORD: data._GUEST_PASSWORD,
+            _GUEST_DEFAULT_LANGUAGE: 'javascript',
+            _GUEST_DEFAULT_ROUTE: 'var/declare/var',
+            _GUEST_POINTS_TOTAL: 0,
+            _GUEST_POINTS_JAVASCRIPT: 0,
+            _GUEST_POINTS_JAVA: 0,
+            _GUEST_POINTS_PYTHON: 0,
+            _GUEST_COURSES: ['Empty'],
+        };
+        let opts = Object.assign({}, defaults, data);
+        // assign options to instance data (using only property names contained
+        // in defaults object to avoid copying properties we don't want)
+        // Object.keys(defaults).forEach(prop => {
+        //     this[prop] = opts[prop];
+        // });
+        this._GUEST_ID = opts._GUEST_ID ;
+        this._GUEST_CREATED_AT = opts._GUEST_CREATED_AT;
+        this._GUEST_UPDATED_AT = opts._GUEST_UPDATED_AT;
+        this._GUEST_ACCESS_TOKEN = opts._GUEST_ACCESS_TOKEN;
+        this._GUEST_FIRST_LOGIN = opts._GUEST_FIRST_LOGIN ;
+        this._GUEST_ADMIN = opts._GUEST_ADMIN;
         /** 1234 === Subscription(Guest Account)*/
-        this._GUEST_SUBSCRIPTION = 1234 || data._GUEST_SUBSCRIPTION,
-        this._GUEST_IP_ADDRESS = 'Empty' || data._GUEST_IP_ADDRESS.trim();
-        this._GUEST_PASSCODE = uuidv4() || data._GUEST_PASSCODE;
-        this._GUEST_PASSCODE_CONFIRMED = false || data._GUEST_PASSCODE_CONFIRMED;
-        this._GUEST_EMAIL = data._GUEST_EMAIL.toLowerCase().trim();
-        this._GUEST_EMAIL_CONFIRMED = false || data._GUEST_EMAIL_CONFIRMED;
-        this._GUEST_EMAIL_PASSCODE = uuidv4() || data._GUEST_EMAIL_PASSCODE;
-        this._GUEST_PASSWORD = data._GUEST_PASSWORD.trim();
-        this._GUEST_DEFAULT_LANGUAGE = 'javascript' || data._GUEST_DEFAULT_LANGUAGE.trim();
-        this._GUEST_DEFAULT_ROUTE = 'var/declare/var' || data._GUEST_DEFAULT_ROUTE.trim();
-        this._GUEST_POINTS_TOTAL = 0 || data._GUEST_POINTS_TOTAL;
-        this._GUEST_POINTS_JAVASCRIPT = 0 || data._GUEST_POINTS_JAVASCRIPT;
-        this._GUEST_POINTS_JAVA = 0 || data._GUEST_POINTS_JAVA;
-        this._GUEST_POINTS_PYTHON = 0 || data._GUEST_POINTS_PYTHON;
-        this._GUEST_COURSES = ['Empty'] || data._GUEST_COURSES;
+        this._GUEST_SUBSCRIPTION = opts._GUEST_SUBSCRIPTION,
+        this._GUEST_IP_ADDRESS = opts._GUEST_IP_ADDRESS.trim();
+        this._GUEST_PASSCODE = opts._GUEST_PASSCODE;
+        this._GUEST_PASSCODE_CONFIRMED = opts._GUEST_PASSCODE_CONFIRMED;
+        this._GUEST_EMAIL = opts._GUEST_EMAIL.toLowerCase().trim();
+        this._GUEST_EMAIL_CONFIRMED = opts._GUEST_EMAIL_CONFIRMED;
+        this._GUEST_EMAIL_PASSCODE = opts._GUEST_EMAIL_PASSCODE;
+        this._GUEST_PASSWORD = opts._GUEST_PASSWORD.trim();
+        this._GUEST_DEFAULT_LANGUAGE = opts._GUEST_DEFAULT_LANGUAGE.trim();
+        this._GUEST_DEFAULT_ROUTE = opts._GUEST_DEFAULT_ROUTE.trim();
+        this._GUEST_POINTS_TOTAL = opts._GUEST_POINTS_TOTAL;
+        this._GUEST_POINTS_JAVASCRIPT = opts._GUEST_POINTS_JAVASCRIPT;
+        this._GUEST_POINTS_JAVA = opts._GUEST_POINTS_JAVA;
+        this._GUEST_POINTS_PYTHON = opts._GUEST_POINTS_PYTHON ;
+        this._GUEST_COURSES = opts._GUEST_COURSES;
     };
-
-    /** Convert Declarations To Strings */
-    public setDatabaseValues() {
-        this._GUEST_COURSES = this._GUEST_COURSES.toString();
-    }
 
     /** _GUEST_ID */
     public get get_GUEST_ID(): string {
@@ -120,7 +145,7 @@ export class Guest implements _Guest {
         return this._GUEST_IP_ADDRESS
     };
 
-    public set set_GUEST_IP_ADDRESS(_GUEST_IP_ADDRESS) {
+    public set set_GUEST_IP_ADDRESS(_GUEST_IP_ADDRESS: string) {
         this._GUEST_IP_ADDRESS = _GUEST_IP_ADDRESS
     };
 
