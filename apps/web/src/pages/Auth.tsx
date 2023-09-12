@@ -36,23 +36,24 @@ const Auth = () => {
         <div className={`${darkMode ? "tw-border-neutral-500" : "tw-border-neutral-800"} 
         tw-border tw-h-full tw-flex tw-flex-row `}>
           <aside className={`${darkMode ? "tw-bg-neutral-700 tw-border-neutral-500 custom-bg-pattern-darker" : "tw-bg-neutral-50 tw-border-neutral-800 custom-bg-pattern-lightest"} tw-border-r-2 tw-flex tw-basis-6/12`}>
-            <div to={`/`} className={`${darkMode ? "tw-border-neutral-700 tw-bg-campfire-neutral-700/70 " : "tw-bg-campfire-neutral-50/70 tw-border-neutral-800"} tw-w-full tw-h-[3em] tw-pl-4 tw-flex tw-flex-row tw-items-center tw-justify-start tw-font-space_mono tw-border-b`}> 
-                <Transition>
-                    <span className="tw-pt-1 ">
-                        <Logo style={{ height: 24, width: 24 }} />
-                    </span> 
-                </Transition>
-                <Transition>
-                    <Link to={'/'} className={`tw-text-lg tw-px-2 tw-pt-1 ${darkMode ? 'tw-text-neutral-100 hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
-                        ReCodeCamp
-                    </Link>
-               </Transition>
-            </div>
             {''}
           </aside>          
           <div className={`${darkMode ? "" : ""} tw-basis-6/12 tw-flex tw-flex-col`}>
             <Transition>
-                <header className="tw-pr-4 tw-h-[3em] tw-w-full tw-flex tw-items-center tw-justify-end">
+                <header className={`${darkMode ? "tw-border-campfire-neutral-700 tw-bg-campfire-neutral-700/70 " : "tw-bg-campfire-neutral-50/70 tw-border-campfire-neutral-100"} tw-pr-4 tw-h-[3em] tw-w-full tw-flex tw-items-center tw-justify-between tw-w-full tw-h-[3em] tw-pl-4 tw-border-b
+                `}>
+                  <div className="tw-font-space_mono tw-flex tw-flex-row tw-items-center tw-justify-start"> 
+                  <Transition>
+                      <span className="tw-pt-1 ">
+                          <Logo style={{ height: 24, width: 24 }} />
+                      </span> 
+                  </Transition>
+                  <Transition>
+                      <Link to={'/'} className={`tw-text-lg tw-px-2 tw-pt-1 ${darkMode ? 'tw-text-neutral-100 hover:tw-text-campfire-neutral-300' : 'hover:tw-text-campfire-blue'}`}>
+                          ReCodeCamp
+                      </Link>
+                  </Transition>
+                  </div>
                     <ul className="tw-flex tw-flex-row tw-items-center ">
                         {!darkMode ? (
                         <li>
