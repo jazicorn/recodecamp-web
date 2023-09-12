@@ -75,7 +75,7 @@ export default class VarGeneral {
                 try {
                     const id = req.params.id;
                     const results = await sql`SELECT * FROM _QUESTIONS WHERE _QUESTIONS_CATEGORY = 'variables'`;
-                    return res.status(200).send({ data: results.rows });
+                    return res.status(200).send({ data: results });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -91,7 +91,7 @@ export default class VarGeneral {
                 try {
                     const id = req.params.id;
                     const results = await sql`SELECT * FROM _QUESTIONS WHERE _QUESTION_ID = ${id}`;
-                    return res.status(200).send({ data: results.rows });
+                    return res.status(200).send({ data: results });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }

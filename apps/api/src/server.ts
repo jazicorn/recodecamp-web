@@ -3,6 +3,8 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 class App {
     public app: Application;
@@ -17,15 +19,18 @@ class App {
     }
 
     private initMiddlewares() {
+        this.app.use(bodyParser.urlencoded({
+            extended: true
+        }));
         this.app.use(bodyParser.json());
-        this.app.use(express.urlencoded({ extended: true }));
-        this.app.use(cors({ origin: ['https://vercel.com/jazicorn/recodecamp-web',
-                                    'https://recodecamp-web.vercel.app',
-                                    'https://www.recodecamp.com'] }));
-        this.app.use(express.raw({ type: 'application/vnd.custom-type' }));
-        this.app.use(express.text({ type: 'text/html' }));
-        this.app.set('trust proxy', true)
-
+        // this.app.set('trust proxy', true);
+        this.app.use(cors());
+        this.app.use(sessions({
+            secret: process.env.SECRET_TOKEN,
+            saveUninitialized:true,
+            cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24; },
+            resave: false
+        }));
     }
 
     private initControllers(controllers) {
