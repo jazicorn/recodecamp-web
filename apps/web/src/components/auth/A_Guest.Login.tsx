@@ -98,7 +98,7 @@ const SignIn = () => {
                 </li>
                 <li className="">
                   <label>Password:</label>
-                  <input type="email" {...register('_GUEST_PASSWORD')}/>
+                  <input type="password" {...register('_GUEST_PASSWORD')}/>
                 </li>
                 <li className={`${darkMode ? 'hover:tw-bg-campfire-neutral-400/70' : 'hover:tw-bg-campfire-neutral-300/70'} tw-w-full 
                 tw-border-y tw-border-campfire-purple-light`}>
