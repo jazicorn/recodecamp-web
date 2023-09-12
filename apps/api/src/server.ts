@@ -17,6 +17,7 @@ class App {
         this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
         this.initControllers(controllers);
+        this.corsOptions = process.env.CORS_URLS;
     }
 
     private initMiddlewares() {
@@ -29,7 +30,7 @@ class App {
         this.app.use(session({
             secret: process.env.SECRET_TOKEN,
             saveUninitialized:true,
-            cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 },
+            cookie: { sameSite: 'strict', secure: false, maxAge: 1000 * 60 * 60 * 24 },
             resave: false
         }));
     }
