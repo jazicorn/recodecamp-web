@@ -49,7 +49,7 @@ const Header = () => {
   }, [location, params]);
 
   const pagesPath = () => {
-    if( path === '/learn') {
+    if( path !== '/') {
       return true
     } else {
       return false
@@ -72,8 +72,8 @@ const Header = () => {
 
   if(isMobile) {
     return (
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue ' : 'tw-bg-light '
-        } ${menu ? "tw-h-full" : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-h-fit tw-w-full tw-place-items-center tw-relative`}>
+      <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue' : 'tw-bg-light '
+        } ${menu ? "tw-h-fit" : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-place-items-center tw-relative tw-grow-0`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
         >
@@ -113,7 +113,7 @@ const Header = () => {
           </div>
           </Transition>
           <Transition>
-          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li>button]:tw-font-mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1`}>
+          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={'/about'}>About</Link>
             </li>
@@ -126,7 +126,7 @@ const Header = () => {
             <li className={`${darkMode ? "tw-bg-neutral-300 tw-text-campfire-neutral-900 hover:tw-text-campfire-blue" 
             : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-text-campfire-blue"} tw-font-space_mono tw-rounded tw-py-2 tw-flex tw-flex-row`}>
               <Link to={'/auth/guest/login'}>
-                <button className="tw-font-space_mono ">
+                <button className="tw-font-space_mono">
                   Login
                 </button>
               </Link>
@@ -153,8 +153,8 @@ const Header = () => {
             ReCodeCamp
           </h5>
         </Link>
-        <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 [&>ol>li>button]:tw-font-mono">
-          <ol className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5 tw-items-center`}>
+        <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_mono">
+          <ul className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5 tw-items-center`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={'/about'}><Transition>About</Transition></Link>
             </li>
@@ -167,7 +167,7 @@ const Header = () => {
             <li className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 "} hover:tw-text-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row`}>
               <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
             </li>
-          </ol>
+          </ul>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-10">
             {!darkMode ? (
               <li>
