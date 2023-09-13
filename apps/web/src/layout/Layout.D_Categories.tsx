@@ -18,6 +18,7 @@ import { useAppSelector, useAppDispatch } from '../redux/reduxHooks.ts';
 import { 
   menuLanguage, menuCategoryInfo
 } from '../redux/slices/dashboardSlice.ts';
+import { Center } from '@mantine/core';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -75,7 +76,7 @@ const Layout_D_Categories = () => {
     dispatch(menuCategoryInfo(results))
   },[data, dispatch, getMenuCategory, getMenuCategoryInfo]);
 
-  if (isLoading) return ( <LoadingDashboardXL/> )
+  if (isLoading) return ( <Center><LoadingDashboardXL/></Center>)
 
   if (isError) return <ErrorDashboard error={error.message}/>
 
