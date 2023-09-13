@@ -11,11 +11,11 @@ export const LoadingDashboardXS = () => {
         <>
         {darkMode ?
             <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-sm`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="xs"/></div>;
+                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="xs"/></div>
             </div>
             :
             <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-sm`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="xs"/></div>;
+                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="xs"/></div>
             </div>
         }
         </>
@@ -30,11 +30,11 @@ export const LoadingDashboardSM = () => {
         <>
         {darkMode ?
             <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-base`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="sm"/></div>;
+                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="sm"/></div>
             </div>
             :
             <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-base`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="sm"/></div>;
+                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="sm"/></div>
             </div>
         }
         </>
@@ -48,11 +48,11 @@ export const LoadingDashboardMD = () => {
         <>
         {darkMode ?
             <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-xl`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="md"/></div>;
+                <Loader color="gray" size="md"/>
             </div>
             :
             <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-xl`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="md"/></div>;
+                <Loader color="dark" size="md"/>
             </div>
         }
         </>
@@ -66,11 +66,11 @@ export const LoadingDashboardLG = () => {
         <>
         {darkMode ?
             <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-2xl`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="lg"/></div>;
+                <Loader color="gray" size="lg"/>
             </div>
             :
             <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-2xl`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="lg"/></div>;
+                <Loader color="dark" size="lg"/>
             </div>
         }
         </>
@@ -84,11 +84,11 @@ export const LoadingDashboardXL = () => {
         <>
         {darkMode ?
             <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-4xl`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="gray" size="xl"/></div>;
+                <Loader color="gray" size="xl"/>
             </div>
             :
             <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-4xl`}>
-                <div className=" tw-place-self-center">Loading...<Loader color="dark" size="xl"/></div>;
+                <Loader color="dark" size="xl"/>
             </div>
         }
         </>
