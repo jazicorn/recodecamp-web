@@ -115,16 +115,13 @@ const Header = () => {
           <Transition>
           <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li>button]:tw-font-mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link tp={'/about'}>About</Link>
+              <Link to={'/about'}>About</Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}>Dashboard</Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link>Documentation</Link>
-            </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link>Contact</Link>
+              <Link to={`/contact`}>Contact</Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-300 tw-text-campfire-neutral-900 hover:tw-text-campfire-blue" 
             : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-text-campfire-blue"} tw-font-space_mono tw-rounded tw-py-2 tw-flex tw-flex-row`}>
@@ -165,10 +162,7 @@ const Header = () => {
               <Link to={`/learn`}><Transition>Dashboard</Transition></Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link><Transition>Documentation</Transition></Link>
-            </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link><Transition>Contact</Transition></Link>
+              <Link to={`/contact`}><Transition>Contact</Transition></Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 "} hover:tw-text-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row`}>
               <Link to={'auth/guest/login'}><Transition>Login</Transition></Link>
