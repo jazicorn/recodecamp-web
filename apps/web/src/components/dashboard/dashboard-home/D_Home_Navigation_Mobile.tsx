@@ -44,7 +44,7 @@ const D_Banner = () => {
           `}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconHome color="#d4d4d4" /> : <IconHome color="#000" />}
-              <Transition><Link to={'/learn'} className=''>Directory</Link></Transition>
+              <Transition><Link to={'/learn'} className=''>Home</Link></Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconCategory color="#d4d4d4" /> : <IconCategory color="#000" />}
@@ -79,11 +79,11 @@ const D_Banner = () => {
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
-              <Transition><Link to={''}>Dashboard Settings</Link></Transition>
+              <Transition><Link to={'/learn/settings'}>Dashboard Settings</Link></Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-pl-0.5`}>
               { darkMode ? <IconLogout color="#d4d4d4" /> : <IconLogout color="#000" />}
-              <Transition><Link to={''}>User Logout</Link></Transition>
+              <Transition><button>User Logout</button></Transition>
             </li>
           </ul>
         </section>
