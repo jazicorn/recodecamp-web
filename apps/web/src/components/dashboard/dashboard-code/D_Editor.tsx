@@ -13,7 +13,7 @@ import { Transition3 } from '../../../hooks/useTransition';
 import useWindowSize from '../../../hooks/useWindowSize';
 /** Custom State Components*/
 import ErrorDashboard from '../../dashboard/error';
-import LoadingDashboard from '../../dashboard/loading';
+import {LoadingDashboardMD} from '../../dashboard/loading';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
@@ -229,7 +229,7 @@ const D_Editor = () => {
 
   /** Render if Loading */
   if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-      <LoadingDashboard sixe={'lg'}/>
+      <LoadingDashboardMD />
   )
 
   /** Render if Error */

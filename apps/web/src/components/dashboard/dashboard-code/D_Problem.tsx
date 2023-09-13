@@ -8,7 +8,7 @@ import { ThemeContext } from '../../../context/ThemeContext';
 import { Transition3 } from '../../../hooks/useTransition';
 /** Custom State Components*/
 import ErrorDashboard from '../error';
-import LoadingDashboard from '../loading';
+import {LoadingDashboardLG, LoadingDashboardMD} from '../loading';
 /** React Redux Hooks */
 import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
 import { 
@@ -77,7 +77,7 @@ const D_Problem = () => {
 
   /** Render if Loading */
   if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-      <LoadingDashboard sixe={'md'}/>
+      <LoadingDashboardLG/>
   )
 
   /** Render if Error */
@@ -108,7 +108,7 @@ const D_Problem = () => {
               </header>
               {/**Question: Task */}
               {getMenuQuestion._QUESTION_TASK === undefined ?
-                <LoadingDashboard/>
+                <LoadingDashboardMD/>
                 :
                 <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2 tw-pb-2`}>
                   {/**Question: Task */}

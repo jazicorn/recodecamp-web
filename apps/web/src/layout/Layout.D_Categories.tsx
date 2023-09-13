@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/ThemeContext'
 import useWindowSize from '../hooks/useWindowSize';
 // components
 import ErrorDashboard from '../components/dashboard/error';
-import LoadingDashboard from '../components/dashboard/loading';
+import { LoadingDashboardXL } from '../components/dashboard/loading';
 // components
 import D_Category from '../components/dashboard/dashboard-categories/D_Category';
 import D_Category_Menu from '../components/dashboard/dashboard-categories/D_Category_Menu';
@@ -75,7 +75,7 @@ const Layout_D_Categories = () => {
     dispatch(menuCategoryInfo(results))
   },[data, dispatch, getMenuCategory, getMenuCategoryInfo]);
 
-  if (isLoading) return ( <LoadingDashboard size={'xl'}/> )
+  if (isLoading) return ( <LoadingDashboardXL/> )
 
   if (isError) return <ErrorDashboard error={error.message}/>
 
