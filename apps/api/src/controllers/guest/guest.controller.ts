@@ -40,7 +40,7 @@ class Guest_Routes {
 
     public initializeRoutes() {
         this.router.get(this.pathGuest, this.guestId);
-        this.router.get(this.pathGuestLogin, this.guestLogin);
+        this.router.post(this.pathGuestLogin, this.guestLogin);
         this.router.get(this.pathGuestRegister, this.guestRegister);
         this.router.get(this.pathGuestAll, this.corsOptions, this.guestAll);
         this.router.post(this.pathGuestNew, this.guestNew);
@@ -217,37 +217,52 @@ class Guest_Routes {
             case('POST'):
                 try {
                     const data = req.body;
+                    //console.log(data);
+
                     // Check Email in database
                     const getGuest = await sql`SELECT * FROM _GUEST WHERE _GUEST_EMAIL = ${data._GUEST_EMAIL}`;
+                    const guestResult = getGuest[0];
+                    //console.log("guestResult:", guestResult)
+
                     // Check Guest IP Address
                     const guestIP = req.socket.remoteAddress;
                     const validIP = z.string().ip(guestIP);
                     // Check Email & Password
-                    const validEmail = data._GUEST_EMAIL.trim() === getGuest._GUEST_EMAIL;
-                    const validPassword = data._GUEST_PASSWORD.trim() === getGuest._GUEST_PASSWORD;
+                    const validEmail = data._GUEST_EMAIL === guestResult._guest_email;
+                    //console.log("validEmail", validEmail);
                     // Compare Encrypted Password
-                    const validCompare = bcrypt.compareSync(
+                    const validPasswordCompare = bcrypt.compareSync(
                         data._GUEST_PASSWORD,
-                        getGuest._GUEST_PASSWORD
+                        guestResult._guest_password
                     );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+                    // uppercase guestResult keys
+                    Object.entries(guestResult).forEach(([key, value]) => {
+                        guestResult[key.toUpperCase()] = guestResult[key];
+                        //console.log(`${key}: ${value}`);
+                    });
                     // Create Guest Object
-                    const guest = new Guest(data);
+                    const guestObj = new Guest(guestResult);
+                    //console.log("guest:", guestObj);
                     // Set Guest IP Address
-                    guest._GUEST_IP_ADDRESS = guestIP as string;
+                    guestObj._GUEST_IP_ADDRESS = guestIP as string;
                     // Create Token
-                    const getToken = jwt.sign({ _GUEST_ID: guest._GUEST_ID, _GUEST_EMAIL: guest._GUEST_EMAIL }, process.env.SECRET_TOKEN, {
+                    const getToken = jwt.sign({ _GUEST_ID: guestObj._GUEST_ID, _GUEST_EMAIL: guestObj._GUEST_EMAIL }, process.env.SECRET_TOKEN, {
                         algorithm: 'HS256',
                         allowInsecureKeySizes: true,
                         expiresIn: 86400, // 24 hours
                     });
                     // Save Guest Token
-                    guest._GUEST_ACCESS_TOKEN = getToken;
+                    guestObj._GUEST_ACCESS_TOKEN = getToken;
+
+                    //console.log("guestObj:", guestObj)
+
                     if(!validIP) {
                         return res.status(400).send({ error: "User Network Error" });
-                    } else if(!validEmail || !validPassword) {
+                    } else if(!validEmail || !validPasswordCompare) {
                         return res.status(400).send({ error: "Invalid Guest Information" });
-                    } else if(validIP && validEmail && validCompare) {
-                        return res.sendStatus(200).send({data: guest});
+                    } else if(validIP && validEmail && validPasswordCompare) {
+                        return res.status(200).send({data: guestObj});
                     } else {
                         return res.status(400).send({ error: "Invalid Data" });
                     }
