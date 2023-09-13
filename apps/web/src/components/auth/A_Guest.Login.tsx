@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
 // hooks
@@ -7,6 +7,13 @@ import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
 // images
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
+/** React Redux */
+//import { useAppDispatch } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
+//import { menuUser } from '../../redux/slices/dashboardSlice.ts';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -18,6 +25,10 @@ const SignIn = () => {
   const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  const navigate = useNavigate();
+
+  /** Redux Dispatch Instance */
+  //const dispatch = useAppDispatch();
 
   const {
     register,
@@ -26,7 +37,7 @@ const SignIn = () => {
     criteriaMode: "all",
   })
   const onSubmit = handleSubmit((data) => {
-    guestLogin(data);
+    guestLogin(data)
   });
 
   /** Guest Login */
@@ -48,12 +59,51 @@ const SignIn = () => {
       }).then(function(response) {
           //console.log(response)
           if(response.status === 200) {
-            console.log("🎉 Guest Logged In!");
-            return response;
+            console.log("✅ Guest Logged In");
+            // Success Notification
+            notifications.show({
+              id: 'success',
+              withCloseButton: true,
+              onClose: () => console.log('unmounted'),
+              onOpen: () => console.log('mounted'),
+              autoClose: 2000,
+              title: "👋 Welcome Back",
+              message: '',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: false,
+            });
+            //const user = response.json();
+            //console.log(user)
+            //dispatch(menuUser(user))
+            setTimeout(() => {
+              console.log("⏳ Delay for 2 seconds.");
+              navigate("/");
+            }, "2000");
+          } else {
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              onClose: () => console.log('unmounted'),
+              onOpen: () => console.log('mounted'),
+              autoClose: 2000,
+              title: "Failed Login Attempt",
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
           }
       });
     } catch(error) {
-      console.log("❌ Guest Creation Failed")
+      console.log("🚫 Guest Login Failed")
       console.log(error);
     }
   };

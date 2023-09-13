@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
 // hooks
@@ -7,6 +7,9 @@ import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
 // images
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
 
 /** API url | Custom env mandatory to begin with VITE  
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
@@ -20,6 +23,7 @@ const Register = () => {
   const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  const navigate = useNavigate();
 
   const {
     register,
@@ -54,7 +58,43 @@ const Register = () => {
           //console.log(response)
           if(response.status === 200) {
             console.log("🎉 Guest Created!");
-            return response;
+            // Success Notification
+            notifications.show({
+              id: 'created',
+              withCloseButton: true,
+              onClose: () => console.log('unmounted'),
+              onOpen: () => console.log('mounted'),
+              autoClose: 2000,
+              title: "🎉 Guest Created",
+              message: '',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: false,
+            });
+            setTimeout(() => {
+              console.log("⏳ Delay for 2 seconds.");
+              navigate("/");
+            }, "2000");
+          } else {
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              onClose: () => console.log('unmounted'),
+              onOpen: () => console.log('mounted'),
+              autoClose: 2000,
+              title: "Failed Registration Attempt",
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
           }
       });
     } catch(error) {
