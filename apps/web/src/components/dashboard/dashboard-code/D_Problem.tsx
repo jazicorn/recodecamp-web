@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import { useContext, useCallback, useEffect } from 'react';
 /** Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
-import { Transition3 } from '../../../hooks/useTransition';
+import { Transition2 } from '../../../hooks/useTransition';
 /** Custom State Components*/
 import ErrorDashboard from '../error';
 import {LoadingDashboardLG, LoadingDashboardMD} from '../loading';
@@ -92,7 +92,7 @@ const D_Problem = () => {
           <div className="tw-flex tw-flex-col tw-justify-between tw-h-3/4">
             {/**Question Task */}
             <section className="">
-              <Transition3> 
+              <Transition2> 
               <header className={`${darkMode ? '' : ''} 
                tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
                 <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
@@ -129,10 +129,10 @@ const D_Problem = () => {
                   </p>
                 </div>
               }
-              </Transition3>
+              </Transition2>
             </section>
           </div>
-          <Transition3>
+          <Transition2>
             {/**Question References: (Helpful Links) */}
             <section className={`${darkMode ? '' : ''} tw-border-campfire-purple-light tw-h-1/4 tw-border-t tw-px-2
             overflow-y-scroll tw-pb-2`}>
@@ -155,7 +155,7 @@ const D_Problem = () => {
                 </ul>
               }
             </section>
-          </Transition3>
+          </Transition2>
         </span>
       </article>
     </div>

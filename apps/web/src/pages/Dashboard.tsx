@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/ThemeContext';
 //import type { RootState } from '../redux/store.ts'
 // hooks
 import useWindowSize from '../hooks/useWindowSize';
-import Transition from '../hooks/useTransition';
+//import Transition from '../hooks/useTransition';
 // components
 import Header from '../components/header/Header';
 import Header_Dashboard from '../components/dashboard/D_Header';
@@ -54,7 +54,6 @@ const Dashboard = () => {
 
   return (
     <div className="tw-font-space_mono">
-      <Transition>
       {/**Background | Position: Absolute */}
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' : 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'} 
       tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full `}/>
@@ -203,7 +202,6 @@ const Dashboard = () => {
         </main>
         }
       </article>
-      </Transition>
     </div>
   )
 }

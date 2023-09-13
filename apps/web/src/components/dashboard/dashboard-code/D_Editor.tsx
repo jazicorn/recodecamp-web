@@ -9,7 +9,7 @@ import { menuQuestion, menuPoints, menuConsoleMessage } from '../../../redux/sli
 import { useQuery } from "@tanstack/react-query";
 /** Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
-import { Transition3 } from '../../../hooks/useTransition';
+import { Transition2 } from '../../../hooks/useTransition';
 import useWindowSize from '../../../hooks/useWindowSize';
 /** Custom State Components*/
 import ErrorDashboard from '../../dashboard/error';
@@ -240,7 +240,7 @@ const D_Editor = () => {
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
      <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-items-between`}>
-        <Transition3>
+        <Transition2>
           <header className={`${darkMode ? '' : ''} 
             tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
             <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
@@ -255,8 +255,8 @@ const D_Editor = () => {
               Reset
             </button>
           </header>
-        </Transition3>
-        <Transition3>
+        </Transition2>
+        <Transition2>
           {code  === undefined ?
             "loading"
             :
@@ -271,8 +271,8 @@ const D_Editor = () => {
             />
           </div>
           }
-        </Transition3>
-        <Transition3>
+        </Transition2>
+        <Transition2>
           <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-justify-between tw-content-center tw-h-[36px]`}>
             <button
               onClick={(e) => onSubmission(e)}
@@ -281,7 +281,7 @@ const D_Editor = () => {
               Submit
             </button>
           </div>
-        </Transition3>
+        </Transition2>
       </div>
     </div>
   )
