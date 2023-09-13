@@ -165,6 +165,25 @@ const D_Editor = () => {
       if (jsonGetSolution.stdout) {
         const output = atob(jsonGetSolution.stdout);
         setConsoleMessage(`Results...\n---\n${output}\n---\nExecution Time : ${jsonGetSolution.time} Secs\nMemory used : ${jsonGetSolution.memory} bytes`);
+        console.log("🥳 Compiled Successfully");
+        setTimeout(() => {
+          // Success Notification
+          notifications.show({
+            id: 'correct',
+            withCloseButton: true,
+            onClose: () => console.log('unmounted'),
+            onOpen: () => console.log('mounted'),
+            autoClose: 2000,
+            title: "Answer Correct",
+            message: '',
+            color: 'green',
+            icon: <IconCheck />,
+            className: 'my-notification-class',
+            style: { backgroundColor: 'white' },
+            sx: { backgroundColor: 'green' },
+            loading: false,
+          });
+        }, "1000");
       } else if (jsonGetSolution.stderr) {
         const error = atob(jsonGetSolution.stderr);
         setConsoleMessage(`\n Error :${error}`);
@@ -186,22 +205,6 @@ const D_Editor = () => {
     try {
       if( userCode === resultsStrip ) {
         consoleTest(93, editor, '');
-        // Success Notification
-        notifications.show({
-          id: 'correct',
-          withCloseButton: true,
-          onClose: () => console.log('unmounted'),
-          onOpen: () => console.log('mounted'),
-          autoClose: 2000,
-          title: "Answer Correct",
-          message: '',
-          color: 'green',
-          icon: <IconCheck />,
-          className: 'my-notification-class',
-          style: { backgroundColor: 'white' },
-          sx: { backgroundColor: 'green' },
-          loading: false,
-        });
         setPoints(getMenuPoints + getMenuQuestion._QUESTION_POINTS);
       }
     } catch (e) {
