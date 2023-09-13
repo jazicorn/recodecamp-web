@@ -165,7 +165,7 @@ const Header = () => {
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
             </li>
             <li className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 "} hover:tw-text-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row`}>
-              <Link to={'auth/guest/login'}><Transition>Login</Transition></Link>
+              <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
             </li>
           </ol>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-10">
