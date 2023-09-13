@@ -16,6 +16,7 @@ import {
 import JS_Icon from "../../../assets/tech/javascript/javascript-original.svg";
 //import JAVA_Icon from "../../../assets/tech/java/java-original.svg";
 //import PY_Icon from "../../../assets/tech/python/python-original.svg";
+import { IconArrowBadgeDown } from '@tabler/icons-react';
 
 const D_Category_Menu = ({data}) => {
     /** Custom Hooks */
@@ -39,34 +40,39 @@ const D_Category_Menu = ({data}) => {
     return (
     <div className="tw-h-full">
         <Transition>
-            <div className={`${darkMode ? "" : ""} tw-py-2 tw-h-full`}>
-            <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light tw-border-b tw-text-xl tw-h-[36px] tw-w-full tw-pl-2 
-            tw-font-space_mono tw-justify-items-start`}>
-            <div className="tw-flex tw-flex-row tw-items-end tw-text-xl">
-                Language:
-                <button className={`${darkMode ? '' : 'tw-text-campfire-neutral-600'} tw-px-2  tw-w-fit tw-flex tw-flex-row tw-font-space_mono tw-bg-transparent hover:tw-text-campfire-purple-light tw-text-base 
-                `}>
-                    {getMenuLanguage === "Javascript" &&
-                    <div className="tw-flex tw-flex-row tw-bg-transparent"> 
-                        <img src={JS_Icon} alt="Javascript" style={{ height: 21, width: 21 }}></img>
-                        &nbsp;{getMenuLanguage}
+            <div className={`${darkMode ? "" : ""} tw-py-2 tw-h-full tw-mb-2 `}>
+                <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light tw-border-b tw-text-xl tw-h-[36px] tw-w-full tw-pl-2 
+                tw-font-space_mono tw-justify-items-start tw-flex tw-flex-row`}>
+                    Language:
+                <div className="tw-flex tw-flex-row tw-items-end tw-text-xl">
+                    <button className={`${darkMode ? 'tw-border-campfire-neutral-500' : ''} [&>div]:tw-text-campfire-blue tw-px-2 tw-w-fit tw-flex tw-flex-row tw-font-space_mono_bold tw-bg-transparent hover:[&>div]:tw-text-campfire-purple-light tw-text-[18px] tw-border-b tw-mb-1
+                    `}>
+                        {getMenuLanguage === "Javascript" &&
+                        <div className="tw-flex tw-flex-row tw-bg-transparent"> 
+                            <img src={JS_Icon} alt="Javascript" style={{ height: 20, width: 20 }}></img>
+                            &nbsp;{getMenuLanguage}
+                        </div>
+                        }
+                        {getMenuLanguage === "Java" &&
+                        <div className="tw-flex tw-flex-row tw-bg-transparent"> 
+                            <img src={Java_Icon} alt="Java" style={{ height: 20, width: 20 }}></img>
+                            &nbsp;{getMenuLanguage}
+                        </div>
+                        }
+                        {getMenuLanguage === "Python" &&
+                        <div className="tw-flex tw-flex-row tw-bg-transparent"> 
+                            <img src={Py_Icon} alt="Python" style={{ height: 20, width: 20 }}></img>
+                            &nbsp;{getMenuLanguage}
+                        </div>
+                        }
+                        <span className='tw-flex tw-flex-row tw-items-center tw-px-1'>
+                        { darkMode ? <IconArrowBadgeDown size={24} color="#a3a3a3" /> 
+                            : <IconArrowBadgeDown size={24} color="#000" />
+                        }
+                        </span>
+                    </button>
                     </div>
-                    }
-                    {getMenuLanguage === "Java" &&
-                    <div className="tw-flex tw-flex-row tw-bg-transparent"> 
-                        <img src={Java_Icon} alt="Java" style={{ height: 21, width: 21 }}></img>
-                        &nbsp;{getMenuLanguage}
-                    </div>
-                    }
-                    {getMenuLanguage === "Python" &&
-                    <div className="tw-flex tw-flex-row tw-bg-transparent"> 
-                        <img src={Py_Icon} alt="Python" style={{ height: 21, width: 21 }}></img>
-                        &nbsp;{getMenuLanguage}
-                    </div>
-                    }
-                </button>
-                </div>
-            </h4>
+                </h4>
             </div>
         </Transition>
         <Transition>
@@ -75,11 +81,13 @@ const D_Category_Menu = ({data}) => {
             Categories:&nbsp;
             </h5>
         </Transition>
+        <ul className={`${darkMode ? "marker:tw-text-campfire-neutral-400" : "" } tw-list-decimal tw-flex tw-flex-col tw-px-10 `}>
         {
             categories !== undefined && categories.map((category, i) => {
-            return (<section key={i} className=''><D_Category_Menu_Items category={category}/></section>)
+            return (<li key={i} className=''><D_Category_Menu_Items category={category}/></li>)
             })
         }
+        </ul>
     </div>
     )
 }

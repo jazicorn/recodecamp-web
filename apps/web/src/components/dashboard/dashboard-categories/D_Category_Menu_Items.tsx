@@ -21,22 +21,18 @@ const D_Category_Menu_Items = ({category}) => {
   }
 
   return (
-    <div className={`${darkMode ? ' tw-text-campfire-blue' : ''} 
-    tw-w-full tw-h-full tw-flex tw-flex-col`}>
-      <ul className={`${darkMode ? ' ' : 
-      ''} tw-h-full`}>
+    <>
         <Transition>
-          <li className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
-           tw-h-[36px] tw-w-full tw-pl-6 `}>
+          <div className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
+           tw-h-[36px] tw-w-full tw-flex tw-flex-row`}>
             {title !== undefined &&
-              <button onClick={() => setCategoryInfo(title[0])} className={`${darkMode ? '' : ''} tw-font-space_mono tw-text-xl hover:tw-text-campfire-purple-light tw-text-campfire-blue tw-px-2`}>
+              <button onClick={() => setCategoryInfo(title[0])} className={`${darkMode ? '' : ''} tw-font-space_mono tw-text-xl hover:tw-text-campfire-purple-light tw-text-campfire-blue tw-px-1 tw-underline tw-decoration-dashed`}>
                 {title[0]}
               </button>
             }
-          </li>
+          </div>
         </Transition>
-      </ul>
-    </div>
+    </>
   )
 }
 

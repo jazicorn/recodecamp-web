@@ -10,6 +10,10 @@ import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
 import { menuCategoryRoute } from '../../../redux/slices/dashboardSlice.ts';
 // hooks
 import Transition from '../../../hooks/useTransition';
+// icons
+import {
+  IconArrowBadgeRightFilled
+} from '@tabler/icons-react';
 
 const D_Category = () => {
   const { state } = useContext(ThemeContext);
@@ -39,20 +43,24 @@ const D_Category = () => {
         'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-py-2 tw-h-full`}>
           <Transition>
             {title === undefined ? <div/> :
-              <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
+              <div className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light tw-flex tw-flex-row
               tw-border-b tw-text-xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4 tw-font-space_mono`}>
-                <button className="tw-font-space_mono" onClick={() => setCategoryRoute(title[1])}>
-                  Category:&nbsp;
-                  <span className={`${darkMode ? 'tw-bg-campfire-neutral-500' : 'tw-bg-campfire-neutral-100'} hover:tw-text-campfire-purple-light tw-text-campfire-blue tw-px-2`}>{ title[0]}
-                  </span>
+                <h4>Category</h4>
+                <span className='tw-flex tw-flex-row tw-items-center tw-px-1'>
+                  { darkMode ? <IconArrowBadgeRightFilled size={25} color="#2ca9bc" /> 
+                    : <IconArrowBadgeRightFilled size={25} color="#000" />
+                  }
+                </span>
+                <button onClick={() => setCategoryRoute(title[1])} className={`${darkMode ? '' : ''} hover:tw-text-campfire-purple-light tw-text-campfire-blue tw-pb-0.5 tw-font-space_mono`}>
+                  { title[0]}
                 </button>
-              </h4>
+              </div>
             }
           </Transition>
           <Transition>
             <h5 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} 
             tw-text-lg tw-font-space_mono tw-px-2`}>
-              Subcategories <span className="tw-text-base">(Optional):</span>
+              Subcategories<span className="tw-text-base">:</span>
             </h5>
           </Transition>
           {subs === undefined ? <div/> :
