@@ -7,7 +7,7 @@ export interface _Guest {
     _GUEST_ACCESS_TOKEN: string;
     _GUEST_FIRST_LOGIN: boolean
     _GUEST_ADMIN: boolean;
-    _GUEST_SUBSCRIPTION: number;
+    _GUEST_SUBSCRIPTION: Array<string | number> | string;
     _GUEST_IP_ADDRESS: string;
     _GUEST_PASSCODE: string;
     _GUEST_PASSCODE_CONFIRMED: boolean;
@@ -21,7 +21,7 @@ export interface _Guest {
     _GUEST_POINTS_JAVASCRIPT: number;
     _GUEST_POINTS_JAVA: number;
     _GUEST_POINTS_PYTHON: number;
-    _GUEST_COURSES: string[] | string;
+    _GUEST_COURSES:  number[] | string[] | string;
 }
 
 export type Course = {

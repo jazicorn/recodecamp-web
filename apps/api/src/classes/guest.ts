@@ -3,6 +3,11 @@ import { _Guest } from '../types/types.guest';
 import { v4 as uuidv4 } from 'uuid';
 import { nanoid } from 'nanoid';
 
+/**
+ * Note (Databases):
+ * Convert array values to string before attempting to save to db
+ */
+
 export class Guest implements _Guest {
     _GUEST_ID!: string;
     _GUEST_CREATED_AT!: Date;
@@ -10,7 +15,7 @@ export class Guest implements _Guest {
     _GUEST_ACCESS_TOKEN!: string;
     _GUEST_FIRST_LOGIN!: boolean;
     _GUEST_ADMIN!: boolean;
-    _GUEST_SUBSCRIPTION!: number;
+    _GUEST_SUBSCRIPTION!: Array<string | number> | string;
     _GUEST_IP_ADDRESS!: string;
     _GUEST_PASSCODE!: string;
     _GUEST_PASSCODE_CONFIRMED!: boolean;
@@ -24,7 +29,7 @@ export class Guest implements _Guest {
     _GUEST_POINTS_JAVASCRIPT!: number;
     _GUEST_POINTS_JAVA!: number ;
     _GUEST_POINTS_PYTHON!: number ;
-    _GUEST_COURSES!: string[] | string;
+    _GUEST_COURSES!: number[] | string[] | string;
 
     constructor(data) {
         const defaults = {
@@ -35,7 +40,7 @@ export class Guest implements _Guest {
             _GUEST_FIRST_LOGIN: false,
             _GUEST_ADMIN: false,
             /** 1234 === Subscription(Guest Account)*/
-            _GUEST_SUBSCRIPTION: 1234,
+            _GUEST_SUBSCRIPTION: [1234, 'guest'],
             _GUEST_IP_ADDRESS: 'Empty',
             _GUEST_PASSCODE: uuidv4(),
             _GUEST_PASSCODE_CONFIRMED: false,
@@ -132,11 +137,11 @@ export class Guest implements _Guest {
     };
 
     /** _GUEST_SUBSCRIPTION */
-    public get get_GUEST_SUBSCRIPTION(): number {
+    public get get_GUEST_SUBSCRIPTION(): Array<string | number> | string  {
         return this._GUEST_SUBSCRIPTION
     };
 
-    public set set_GUEST_SUBSCRIPTION(_GUEST_SUBSCRIPTION: number) {
+    public set set_GUEST_SUBSCRIPTION(_GUEST_SUBSCRIPTION: Array<string | number> | string) {
         this._GUEST_SUBSCRIPTION = _GUEST_SUBSCRIPTION
     };
 
@@ -258,11 +263,11 @@ export class Guest implements _Guest {
     };
 
     /** _GUEST_COURSES */
-    public get get_GUEST_COURSES() {
+    public get get_GUEST_COURSES():  number[] | string[] | string {
         return this._GUEST_COURSES
     };
 
-    public set set_GUEST_COURSES(_GUEST_COURSES) {
+    public set set_GUEST_COURSES(_GUEST_COURSES:  number[] | string[] | string) {
         this._GUEST_COURSES = _GUEST_COURSES
     };
 }
