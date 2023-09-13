@@ -7,6 +7,7 @@ import { useAppSelector } from '../../../redux/reduxHooks.ts';
 import type { RootState } from '../../../redux/store.ts';
 // hooks
 import Transition from '../../../hooks/useTransition';
+//import { Center } from '@mantine/core';
 
 const D_Scoreboard = () => {
   const { state } = useContext(ThemeContext);

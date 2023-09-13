@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ThemeContext } from '../../../context/ThemeContext';
 import { Transition2 } from '../../../hooks/useTransition';
 import useWindowSize from '../../../hooks/useWindowSize';
+import { Center } from '@mantine/core';
 /** Custom State Components*/
 import ErrorDashboard from '../../dashboard/error';
 import {LoadingDashboardMD} from '../../dashboard/loading';
@@ -229,7 +230,7 @@ const D_Editor = () => {
 
   /** Render if Loading */
   if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-      <LoadingDashboardMD />
+      <Center><LoadingDashboardMD /></Center>
   )
 
   /** Render if Error */

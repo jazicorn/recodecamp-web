@@ -1,6 +1,7 @@
 // Component Title: Dashboard Console
 import { ThemeContext } from '../../../context/ThemeContext';
 import Transition from '../../../hooks/useTransition';
+//import { Center } from '@mantine/core';
 /** React Hooks */
 import { useContext, useState, useEffect, useCallback } from 'react';
 /** React Redux */

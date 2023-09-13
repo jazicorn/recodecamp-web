@@ -16,6 +16,7 @@ import {
 } from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
+import { Center } from '@mantine/core';
 /** API url | Custom env mandatory to begin with VITE 
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -77,7 +78,7 @@ const D_Problem = () => {
 
   /** Render if Loading */
   if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-      <LoadingDashboardLG/>
+      <Center><LoadingDashboardLG/></Center>
   )
 
   /** Render if Error */
