@@ -30,5 +30,8 @@
   "workspaces": [
     "apps/*"
   ],
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.1",
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.1"
+  }
 }

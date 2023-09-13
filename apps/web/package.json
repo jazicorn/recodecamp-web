@@ -50,6 +50,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "latest",
+    "@hookform/error-message": "^2.0.1",
     "@lezer/highlight": "^1.1.6",
     "@mantine/core": "^6.0.16",
     "@mantine/dates": "^6.0.16",

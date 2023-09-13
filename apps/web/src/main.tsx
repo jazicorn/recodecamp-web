@@ -24,9 +24,10 @@ import Dashboard from './pages/Dashboard.tsx';
 /**Auth Components */
 import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
 import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
+import A_Guest_Register from './components/auth/A_Guest.Register.tsx';
 import A_Guest_Login from './components/auth/A_Guest.Login.tsx';
 import A_User_Register from './components/auth/A_User.Register.tsx';
-import A_User_Login from './components/auth/A_Guest.Login.tsx';
+import A_User_Login from './components/auth/A_User.Login.tsx';
 /**Layouts | Home Pages*/
 import H_Home from './layout/Layout.H_Banner';
 import H_About from './layout/Layout.H_About';
@@ -46,7 +47,7 @@ const router = Router(
         <Route path="" element={<H_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="about" element={<H_About />} errorElement={<ErrorBoundary />}/>
       </Route>
-      <Route path="learn" element={<Dashboard />}>
+      <Route path="/learn" element={<Dashboard />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
@@ -55,9 +56,10 @@ const router = Router(
         <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />}/>
         <Route path="settings" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
-      <Route path="auth" element={<Auth />}>
+      <Route path="/auth" element={<Auth />}>
         <Route path="admin/register" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
         <Route path="admin/login" element={<A_Admin_Login/>} errorElement={<ErrorBoundary />}/>
+        <Route path="guest/register" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
         <Route path="guest/login" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
         <Route path="user/register" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
         <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />

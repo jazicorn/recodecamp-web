@@ -49,7 +49,7 @@ const H_Banner = () => {
                 tw-decoration-solid tw-decoration-1 tw-underline-offset-2`}>References</span>
                 </h6>
                 <p className={`${darkMode ? "" : ""} tw-ml-1 tw-mt-2 tw-pl-4  tw-pl-2 tw-leading-5`}>
-                Each question comes with reference links to building upon your programming comprehension
+                Each question comes with reference links to build upon your programming comprehension
                 </p>
             </Transition>
             </li>

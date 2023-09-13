@@ -1,12 +1,14 @@
 'use strict';
-import { Guest } from '../types/types.guest';
+import { _Guest } from '../types/types.guest';
 import { v4 as uuidv4 } from 'uuid';
 import { nanoid } from 'nanoid';
 
-export class Guest implements Guest {
+export class Guest implements _Guest {
     _GUEST_ID!: string;
     _GUEST_CREATED_AT!: Date;
     _GUEST_UPDATED_AT!: Date;
+    _GUEST_ACCESS_TOKEN!: string;
+    _GUEST_FIRST_LOGIN!: boolean;
     _GUEST_ADMIN!: boolean;
     _GUEST_SUBSCRIPTION!: number;
     _GUEST_IP_ADDRESS!: string;
@@ -14,32 +16,69 @@ export class Guest implements Guest {
     _GUEST_PASSCODE_CONFIRMED!: boolean;
     _GUEST_EMAIL!: string;
     _GUEST_EMAIL_CONFIRMED!: boolean;
+    _GUEST_EMAIL_PASSCODE!: string;
+    _GUEST_PASSWORD!: string;
     _GUEST_DEFAULT_LANGUAGE!: string;
     _GUEST_DEFAULT_ROUTE!: string;
     _GUEST_POINTS_TOTAL!: number;
     _GUEST_POINTS_JAVASCRIPT!: number;
     _GUEST_POINTS_JAVA!: number ;
     _GUEST_POINTS_PYTHON!: number ;
-    _GUEST_COURSES!: Course[] | string[];
+    _GUEST_COURSES!: string[] | string;
 
     constructor(data) {
-        this._GUEST_ID = uuidv4();
-        this._GUEST_CREATED_AT = new Date();
-        this._GUEST_UPDATED_AT = new Date();
-        this._GUEST_ADMIN = data._GUEST_ADMIN || false;
-        /** 001001001 === Subscription(Guest Account)*/
-        this._GUEST_SUBSCRIPTION = data._GUEST_SUBSCRIPTION || 001001001,
-        this._GUEST_IP_ADDRESS = data._GUEST_IP_ADDRESS || '';
-        this._GUEST_EMAIL = data._GUEST_EMAIL.toLowerCase() || "";
-        this._GUEST_PASSCODE = uuidv4();
-        this._GUEST_EMAIL_CONFIRMED = _GUEST_EMAIL_CONFIRMED || false;
-        this._GUEST_DEFAULT_LANGUAGE = data._GUEST_DEFAULT_LANGUAGE || 'javascript';
-        this._GUEST_DEFAULT_ROUTE = data._GUEST_DEFAULT_ROUTE || '';
-        this._GUEST_POINTS_TOTAL = data._GUEST_POINTS_TOTAL || 0;
-        this._GUEST_POINTS_JAVASCRIPT = data._GUEST_POINTS_JAVASCRIPT || 0;
-        this._GUEST_POINTS_JAVA = data._GUEST_POINTS_JAVA || 0;
-        this._GUEST_POINTS_PYTHON = data._GUEST_POINTS_PYTHON || 0;
-        this._GUEST_COURSES = data._GUEST_COURSES || [];
+        const defaults = {
+            _GUEST_ID: uuidv4(),
+            _GUEST_CREATED_AT: new Date(),
+            _GUEST_UPDATED_AT: new Date(),
+            _GUEST_ACCESS_TOKEN: 'Empty',
+            _GUEST_FIRST_LOGIN: false,
+            _GUEST_ADMIN: false,
+            /** 1234 === Subscription(Guest Account)*/
+            _GUEST_SUBSCRIPTION: 1234,
+            _GUEST_IP_ADDRESS: 'Empty',
+            _GUEST_PASSCODE: uuidv4(),
+            _GUEST_PASSCODE_CONFIRMED: false,
+            _GUEST_EMAIL: data._GUEST_EMAIL.toLowerCase().trim(),
+            _GUEST_EMAIL_CONFIRMED: false,
+            _GUEST_EMAIL_PASSCODE: uuidv4(),
+            _GUEST_PASSWORD: data._GUEST_PASSWORD,
+            _GUEST_DEFAULT_LANGUAGE: 'javascript',
+            _GUEST_DEFAULT_ROUTE: 'var/declare/var',
+            _GUEST_POINTS_TOTAL: 0,
+            _GUEST_POINTS_JAVASCRIPT: 0,
+            _GUEST_POINTS_JAVA: 0,
+            _GUEST_POINTS_PYTHON: 0,
+            _GUEST_COURSES: ['Empty'],
+        };
+        let opts = Object.assign({}, defaults, data);
+        // assign options to instance data (using only property names contained
+        // in defaults object to avoid copying properties we don't want)
+        // Object.keys(defaults).forEach(prop => {
+        //     this[prop] = opts[prop];
+        // });
+        this._GUEST_ID = opts._GUEST_ID ;
+        this._GUEST_CREATED_AT = opts._GUEST_CREATED_AT;
+        this._GUEST_UPDATED_AT = opts._GUEST_UPDATED_AT;
+        this._GUEST_ACCESS_TOKEN = opts._GUEST_ACCESS_TOKEN;
+        this._GUEST_FIRST_LOGIN = opts._GUEST_FIRST_LOGIN ;
+        this._GUEST_ADMIN = opts._GUEST_ADMIN;
+        /** 1234 === Subscription(Guest Account)*/
+        this._GUEST_SUBSCRIPTION = opts._GUEST_SUBSCRIPTION,
+        this._GUEST_IP_ADDRESS = opts._GUEST_IP_ADDRESS.trim();
+        this._GUEST_PASSCODE = opts._GUEST_PASSCODE;
+        this._GUEST_PASSCODE_CONFIRMED = opts._GUEST_PASSCODE_CONFIRMED;
+        this._GUEST_EMAIL = opts._GUEST_EMAIL.toLowerCase().trim();
+        this._GUEST_EMAIL_CONFIRMED = opts._GUEST_EMAIL_CONFIRMED;
+        this._GUEST_EMAIL_PASSCODE = opts._GUEST_EMAIL_PASSCODE;
+        this._GUEST_PASSWORD = opts._GUEST_PASSWORD.trim();
+        this._GUEST_DEFAULT_LANGUAGE = opts._GUEST_DEFAULT_LANGUAGE.trim();
+        this._GUEST_DEFAULT_ROUTE = opts._GUEST_DEFAULT_ROUTE.trim();
+        this._GUEST_POINTS_TOTAL = opts._GUEST_POINTS_TOTAL;
+        this._GUEST_POINTS_JAVASCRIPT = opts._GUEST_POINTS_JAVASCRIPT;
+        this._GUEST_POINTS_JAVA = opts._GUEST_POINTS_JAVA;
+        this._GUEST_POINTS_PYTHON = opts._GUEST_POINTS_PYTHON ;
+        this._GUEST_COURSES = opts._GUEST_COURSES;
     };
 
     /** _GUEST_ID */
@@ -47,7 +86,7 @@ export class Guest implements Guest {
         return this._GUEST_ID
     };
 
-    public set set__GUEST_ID(_GUEST_ID: string) {
+    public set set_GUEST_ID(_GUEST_ID: string) {
         this._GUEST_ID = _GUEST_ID
     };
 
@@ -61,8 +100,26 @@ export class Guest implements Guest {
         return this._GUEST_UPDATED_AT
     };
 
-    public set set_GUEST_UPDATED_AT(_GUEST_UPDATED_AT: string) {
+    public set set_GUEST_UPDATED_AT(_GUEST_UPDATED_AT: Date) {
         this._GUEST_UPDATED_AT = _GUEST_UPDATED_AT
+    };
+
+    /**_GUEST_ACCESS_TOKEN */
+    public get get_GUEST_ACCESS_TOKEN(): string {
+        return this._GUEST_ACCESS_TOKEN
+    };
+
+    public set set_GUEST_ACCESS_TOKEN(_GUEST_ACCESS_TOKEN: string) {
+        this._GUEST_ACCESS_TOKEN = _GUEST_ACCESS_TOKEN
+    };
+
+    /** _GUEST_FIRST_LOGIN */
+    public get get_GUEST_FIRST_LOGIN(): boolean {
+        return this._GUEST_FIRST_LOGIN
+    };
+
+    private set set_GUEST_FIRST_LOGIN(_GUEST_FIRST_LOGIN: boolean) {
+        this._GUEST_FIRST_LOGIN = _GUEST_FIRST_LOGIN
     };
 
     /** _GUEST_ADMIN */
@@ -116,7 +173,7 @@ export class Guest implements Guest {
     };
 
     public set set_GUEST_EMAIL(_GUEST_EMAIL: string) {
-        this._GUEST_EMAIL = _GUEST_EMAIL
+        this._GUEST_EMAIL = _GUEST_EMAIL.toLowerCase().trim();
     };
 
     /** _GUEST_EMAIL_CONFIRMED */
@@ -126,6 +183,24 @@ export class Guest implements Guest {
 
     public set set_GUEST_EMAIL_CONFIRMED(_GUEST_EMAIL_CONFIRMED: boolean) {
         this._GUEST_EMAIL_CONFIRMED = _GUEST_EMAIL_CONFIRMED
+    };
+
+    /** _GUEST_EMAIL_PASSCODE */
+    public get get_GUEST_EMAIL_PASSCODE(): string {
+        return this._GUEST_EMAIL_PASSCODE
+    };
+
+    public set set_GUEST_EMAIL_PASSCODE(_GUEST_EMAIL_PASSCODE: string) {
+        this._GUEST_EMAIL_PASSCODE = _GUEST_EMAIL_PASSCODE
+    };
+
+    /** _GUEST_PASSWORD */
+    public get get_GUEST_PASSWORD(): string {
+        return this._GUEST_PASSWORD
+    };
+
+    public set set_GUEST_PASSWORD(_GUEST_PASSWORD: string) {
+        this._GUEST_PASSWORD = _GUEST_PASSWORD.trim();
     };
 
     /** _GUEST_DEFAULT_LANGUAGE */
@@ -142,12 +217,12 @@ export class Guest implements Guest {
         return this._GUEST_DEFAULT_ROUTE
     };
 
-    public set set_GUEST_DEFAULT_LANGUAGE(_GUEST_DEFAULT_ROUTE: string) {
+    public set set_GUEST_DEFAULT_ROUTE(_GUEST_DEFAULT_ROUTE: string) {
         this._GUEST_DEFAULT_ROUTE = _GUEST_DEFAULT_ROUTE
     };
 
     /** _GUEST_POINTS_TOTAL */
-    public get _GUEST_POINTS_TOTAL(): number {
+    public get get_GUEST_POINTS_TOTAL(): number {
         return this._GUEST_POINTS_TOTAL
     };
 
@@ -156,7 +231,7 @@ export class Guest implements Guest {
     };
 
     /** _GUEST_POINTS_JAVASCRIPT */
-    public get _GUEST_POINTS_JAVASCRIPT(): number {
+    public get get_GUEST_POINTS_JAVASCRIPT(): number {
         return this._GUEST_POINTS_JAVASCRIPT
     };
 
@@ -165,7 +240,7 @@ export class Guest implements Guest {
     };
 
     /** _GUEST_POINTS_JAVA */
-    public get _GUEST_POINTS_JAVA(): number {
+    public get get_GUEST_POINTS_JAVA(): number {
         return this._GUEST_POINTS_JAVASCRIPT
     };
 
@@ -174,7 +249,7 @@ export class Guest implements Guest {
     };
 
     /** _GUEST_POINTS_PYTHON */
-    public get _GUEST_POINTS_PYTHON(): number {
+    public get get_GUEST_POINTS_PYTHON(): number {
         return this._GUEST_POINTS_PYTHON
     };
 
@@ -183,7 +258,7 @@ export class Guest implements Guest {
     };
 
     /** _GUEST_COURSES */
-    public get _GUEST_COURSES() {
+    public get get_GUEST_COURSES() {
         return this._GUEST_COURSES
     };
 
