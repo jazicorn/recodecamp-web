@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
 // hooks
@@ -7,6 +7,14 @@ import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
 // images
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
+/** React Redux Hooks */
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
+import { 
+  menuUser,
+} from '../../redux/slices/dashboardSlice.ts';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -18,6 +26,10 @@ const SignIn = () => {
   const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  const navigate = useNavigate();
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -26,8 +38,10 @@ const SignIn = () => {
     criteriaMode: "all",
   })
   const onSubmit = handleSubmit((data) => {
-    guestLogin(data);
+    guestLogin(data)
   });
+
+  const [ guestData, setGuestData] = useState();
 
   /** Guest Login */
   const guestLogin = async (data) => {
@@ -48,15 +62,57 @@ const SignIn = () => {
       }).then(function(response) {
           //console.log(response)
           if(response.status === 200) {
-            console.log("🎉 Guest Logged In!");
-            return response;
+            console.log("🏠 Guest Logged In");
+            // Success Notification
+            notifications.show({
+              id: 'success',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "🥳 Login Successful",
+              message: 'Have fun Re-coding.',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: false,
+            });
+            return response.json();
+          } else {
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Failed Login Attempt",
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
           }
+      }).then(function(response) {
+        const userJson = response.data;
+        //console.log("userJson: ", userJson);
+        setGuestData(userJson);
+        setTimeout(() => {
+          console.log("⏳ Delay | Redirect in 1 second.");
+          navigate("/learn");
+        }, "1000");
       });
     } catch(error) {
-      console.log("❌ Guest Creation Failed")
+      console.log("🚫 Guest Login Failed")
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    //console.log("guestData: ",guestData);
+    dispatch(menuUser(guestData));
+  },[dispatch, guestData]);
 
   return (
     <>
@@ -69,7 +125,7 @@ const SignIn = () => {
             <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-w-full tw-pb-4 tw-px-2 tw-mb-4 `}>
               <p className="tw-w-fit tw-text-xs">
                 New User?:&nbsp;
-                <Link to={'/auth/guest/register'} className={`${darkMode ? 'hover:tw-text-campfire-neutral-200' : 'hover:tw-text-campfire-neutral-700'} tw-text-campfire-blue-300 tw-font-space_mono_bold`}>
+                <Link to={'/auth/guest/signup'} className={`${darkMode ? 'hover:tw-text-campfire-neutral-200' : 'hover:tw-text-campfire-neutral-700'} tw-text-campfire-blue-300 tw-font-space_mono_bold`}>
                   Register
                 </Link>
               </p>
@@ -94,11 +150,11 @@ const SignIn = () => {
               [&>li>label]:tw-w-[10em] [&>li>label]:tw-bg-neutral-100 [&>li>label]:tw-border-y `}>
                 <li className="">
                   <label className="tw-text-campfire-blue">Email:</label>
-                  <input type="email" {...register('_GUEST_EMAIL')}/>
+                  <input type="email" {...register('_EMAIL')}/>
                 </li>
                 <li className="">
                   <label>Password:</label>
-                  <input type="password" {...register('_GUEST_PASSWORD')}/>
+                  <input type="password" {...register('_PASSWORD')}/>
                 </li>
                 <li className={`${darkMode ? 'hover:tw-bg-campfire-neutral-400/70' : 'hover:tw-bg-campfire-neutral-300/70'} tw-w-full 
                 tw-border-y tw-border-campfire-purple-light`}>

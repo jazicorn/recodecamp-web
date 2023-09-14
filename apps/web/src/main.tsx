@@ -39,6 +39,7 @@ import D_Calendar from './layout/Layout.D_Calendar';
 import D_Docs from './layout/Layout.D_Docs';
 import D_Notes from './layout/Layout.D_Notes';
 import D_Settings from './layout/Layout.D_Settings';
+import D_Settings_User from './layout/Layout.D_Settings_User';
 
 const router = Router(
   createRoutesFromElements(
@@ -54,14 +55,15 @@ const router = Router(
         <Route path="calendar" element={<D_Calendar />} errorElement={<ErrorBoundary />}/>
         <Route path="docs" element={<D_Docs />} errorElement={<ErrorBoundary />}/>
         <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />}/>
-        <Route path="settings" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
+        <Route path="settings/user" element={<D_Settings_User />} errorElement={<ErrorBoundary />}/>
+        <Route path="settings/dashboard" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="/auth" element={<Auth />}>
-        <Route path="admin/register" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
+        <Route path="admin/signup" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
         <Route path="admin/login" element={<A_Admin_Login/>} errorElement={<ErrorBoundary />}/>
-        <Route path="guest/register" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="guest/signup" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
         <Route path="guest/login" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
-        <Route path="user/register" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
         <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
       </Route>
       {/* <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>

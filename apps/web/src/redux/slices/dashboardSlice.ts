@@ -13,6 +13,7 @@ interface DashboardState {
   question: object,
   points: number,
   consoleMessage: string,
+  user: object,
 }
 
 // Define the initial state using that type
@@ -26,6 +27,7 @@ const initialState: DashboardState = {
   question: {},
   points: 0,
   consoleMessage: '',
+  user: {},
 }
 
 export const dashboardSlice = createSlice({
@@ -44,6 +46,7 @@ export const dashboardSlice = createSlice({
       state.question;
       state.points;
       state.consoleMessage;
+      state.user;
     },
     menuLanguage: (state, action) => {
       state.language = action.payload;
@@ -67,10 +70,13 @@ export const dashboardSlice = createSlice({
     menuConsoleMessage: (state, action) => {
       state.consoleMessage = action.payload;
     },
+    menuUser: (state, action) => {
+      state.user = action.payload;
+    }
   },
 });
 
-export const { menu, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
+export const { menu, menuUser, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
 
 export default dashboardSlice.reducer;
 

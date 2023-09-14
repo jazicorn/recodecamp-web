@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
 // hooks
@@ -7,6 +7,9 @@ import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
 // images
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
 
 /** API url | Custom env mandatory to begin with VITE  
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
@@ -20,6 +23,7 @@ const Register = () => {
   const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  const navigate = useNavigate();
 
   const {
     register,
@@ -54,7 +58,39 @@ const Register = () => {
           //console.log(response)
           if(response.status === 200) {
             console.log("🎉 Guest Created!");
-            return response;
+            // Success Notification
+            notifications.show({
+              id: 'created',
+              withCloseButton: true,
+              autoClose: 5000,
+              title: "🎉 Guest Created",
+              message: 'Registration Successful. Please Login',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: false,
+            });
+            setTimeout(() => {
+              console.log("⏳ Delay | Redirect in 1 second.");
+              navigate("/auth/guest/login");
+            }, "1000");
+          } else {
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Failed Registration Attempt",
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
           }
       });
     } catch(error) {
@@ -102,7 +138,7 @@ const Register = () => {
                   <input 
                   id="email"
                   type="email" 
-                  {...register('_GUEST_EMAIL', {
+                  {...register('_EMAIL', {
                       required: "Email Required",
                       pattern: {
                         value: /\S+@\S+\.\S+/,
@@ -114,24 +150,24 @@ const Register = () => {
                       },
                     })}/>
                     <div>
-                      {errors?._GUEST_EMAIL?.type === "required" && 
+                      {errors?._EMAIL?.type === "required" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_EMAIL.message}
+                        {errors._EMAIL.message}
                       </p>)}
-                      {errors?._GUEST_EMAIL?.type === "pattern" && 
+                      {errors?._EMAIL?.type === "pattern" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_EMAIL.message}
+                        {errors._EMAIL.message}
                       </p>)}
-                      {errors?._GUEST_EMAIL?.type === "maxLength" && 
+                      {errors?._EMAIL?.type === "maxLength" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_EMAIL.message}
+                        {errors._EMAIL.message}
                       </p>)}
                     </div>
                 </li>
                 <li className="">
                   <label>Password:</label>
                   <input id="password" type="password"
-                  {...register('_GUEST_PASSWORD', {
+                  {...register('_PASSWORD', {
                       required: "Password Required",
                       pattern: {
                         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$,;%^*-]).{8,16}$/,
@@ -147,21 +183,21 @@ const Register = () => {
                       },
                     })}/>
                   <div>
-                      {errors?._GUEST_PASSWORD?.type === "required" && 
+                      {errors?._PASSWORD?.type === "required" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_PASSWORD.message}
+                        {errors._PASSWORD.message}
                       </p>)}
-                      {errors?._GUEST_PASSWORD?.type === "pattern" && 
+                      {errors?._PASSWORD?.type === "pattern" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_PASSWORD.message}
+                        {errors._PASSWORD.message}
                       </p>)}
-                      {errors?._GUEST_EMAIL?.type === "minLength" && 
+                      {errors?._EMAIL?.type === "minLength" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_PASSWORD.message}
+                        {errors._PASSWORD.message}
                       </p>)}
-                      {errors?._GUEST_EMAIL?.type === "maxLength" && 
+                      {errors?._EMAIL?.type === "maxLength" && 
                       (<p className="tw-text-red-500 tw-text-sm"> 
-                        {errors._GUEST_PASSWORD.message}
+                        {errors._PASSWORD.message}
                       </p>)}
                     </div>
                 </li>
@@ -176,8 +212,8 @@ const Register = () => {
                     (<p className="tw-text-red-500 tw-text-sm"> 
                       {errors.passwordReapeat.message}
                     </p>)}
-                     {watch("passwordRepeat") !== watch("_GUEST_PASSWORD") &&
-                      getValues("_GUEST_PASSWORD") ? (
+                     {watch("passwordRepeat") !== watch("_PASSWORD") &&
+                      getValues("_PASSWORD") ? (
                       <p className="tw-text-red-500 tw-text-sm">password not match</p>
                       ) : null}
                   </div>

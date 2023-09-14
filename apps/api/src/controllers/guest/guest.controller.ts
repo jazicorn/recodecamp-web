@@ -40,7 +40,7 @@ class Guest_Routes {
 
     public initializeRoutes() {
         this.router.get(this.pathGuest, this.guestId);
-        this.router.get(this.pathGuestLogin, this.guestLogin);
+        this.router.post(this.pathGuestLogin, this.guestLogin);
         this.router.get(this.pathGuestRegister, this.guestRegister);
         this.router.get(this.pathGuestAll, this.corsOptions, this.guestAll);
         this.router.post(this.pathGuestNew, this.guestNew);
@@ -54,7 +54,7 @@ class Guest_Routes {
             case('GET'):
                 try {
                     const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _GUEST_ID = ${id}`;
+                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
                     return res.status(200).send(data);
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});
@@ -70,7 +70,7 @@ class Guest_Routes {
             case('PUT'):
                  try {
                     const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _GUEST_ID = ${id}`;
+                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
                     return res.status(200).send(data);
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});
@@ -86,7 +86,7 @@ class Guest_Routes {
             case('POST'):
                  try {
                     const { email, passcode } = req.body;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _USER_PASSCODE = ${passcode} AND _GUEST_EMAIL = ${email}`;
+                    const data = await sql`SELECT * FROM _GUEST WHERE _PASSCODE = ${passcode} AND _EMAIL = ${email}`;
                     return res.status(200).send(data);
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});
@@ -119,12 +119,13 @@ class Guest_Routes {
             case('POST'):
                 try {
                     const data = req.body;
+                    //console.log("data:", data);
                     const guestIP = req.socket.remoteAddress;
                     const validIP = z.string().ip(guestIP);
-                    const validEmail = z.string().email(data._GUEST_EMAIL);
-                    const validPasswordMin = z.string().min(8,data._GUEST_PASSWORD);
-                    const validPasswordMax = z.string().max(16,data._GUEST_PASSWORD);
-                    const validPasswordRegex = z.string().regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$,;%^*-]).{8,16}$/,data._GUEST_PASSWORD);
+                    const validEmail = z.string().email(data._EMAIL);
+                    const validPasswordMin = z.string().min(8,data._PASSWORD);
+                    const validPasswordMax = z.string().max(16,data._PASSWORD);
+                    const validPasswordRegex = z.string().regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$,;%^*-]).{8,16}$/,data._PASSWORD);
                     //console.log('validIP', validIP);
                     //console.log('validEmail', validEmail);
                     if(!validIP) {
@@ -140,60 +141,62 @@ class Guest_Routes {
                     } else if(validIP && validEmail && validPasswordMin && validPasswordMax && validPasswordRegex) {
                         const guest = new Guest(data);
                         // set user ip address
-                        guest._GUEST_IP_ADDRESS = guestIP as string;
+                        guest._IP_ADDRESS = guestIP as string;
                         // Encrypt user password
-                        const encryptedPassword = await bcrypt.hash(data._GUEST_PASSWORD, 10);
+                        const encryptedPassword = await bcrypt.hash(data._PASSWORD, 10);
                         // set encrypted password
-                        guest._GUEST_PASSWORD = encryptedPassword;
+                        guest._PASSWORD = encryptedPassword;
+                        // convert subscription to string value
+                        guest._SUBSCRIPTION = guest._SUBSCRIPTION.toString().trim();
                         // convert courses to string value
-                        guest._GUEST_COURSES = guest._GUEST_COURSES.toString();
+                        guest._COURSES = guest._COURSES.toString().trim();
                         // guest after updates
                         //console.log("guest", guest);
                         const createGuest = await sql`INSERT INTO _GUEST(
-                        _GUEST_ID,
-                        _GUEST_CREATED_AT,
-                        _GUEST_UPDATED_AT,
-                        _GUEST_ACCESS_TOKEN,
-                        _GUEST_FIRST_LOGIN,
-                        _GUEST_ADMIN,
-                        _GUEST_SUBSCRIPTION,
-                        _GUEST_IP_ADDRESS,
-                        _GUEST_PASSCODE,
-                        _GUEST_PASSCODE_CONFIRMED,
-                        _GUEST_EMAIL,
-                        _GUEST_EMAIL_CONFIRMED,
-                        _GUEST_EMAIL_PASSCODE,
-                        _GUEST_PASSWORD,
-                        _GUEST_DEFAULT_LANGUAGE,
-                        _GUEST_DEFAULT_ROUTE,
-                        _GUEST_POINTS_TOTAL,
-                        _GUEST_POINTS_JAVASCRIPT,
-                        _GUEST_POINTS_JAVA,
-                        _GUEST_POINTS_PYTHON,
-                        _GUEST_COURSES)
-                        VALUES (
-                            ${guest._GUEST_ID},
-                            ${guest._GUEST_CREATED_AT},
-                            ${guest._GUEST_UPDATED_AT},
-                            ${guest._GUEST_ACCESS_TOKEN},
-                            ${guest._GUEST_FIRST_LOGIN},
-                            ${guest._GUEST_ADMIN},
-                            ${guest._GUEST_SUBSCRIPTION},
-                            ${guest._GUEST_IP_ADDRESS},
-                            ${guest._GUEST_PASSCODE},
-                            ${guest._GUEST_PASSCODE_CONFIRMED},
-                            ${guest._GUEST_EMAIL},
-                            ${guest._GUEST_EMAIL_CONFIRMED},
-                            ${guest._GUEST_EMAIL_PASSCODE},
-                            ${guest._GUEST_PASSWORD},
-                            ${guest._GUEST_DEFAULT_LANGUAGE},
-                            ${guest._GUEST_DEFAULT_ROUTE},
-                            ${guest._GUEST_POINTS_TOTAL},
-                            ${guest._GUEST_POINTS_JAVASCRIPT},
-                            ${guest._GUEST_POINTS_JAVA},
-                            ${guest._GUEST_POINTS_PYTHON},
-                            ${guest._GUEST_COURSES})`;
-                        const getGuest = await sql`SELECT * FROM _GUEST WHERE _GUEST_ID = ${guest._GUEST_ID}`;
+                        _ID,
+                        _CREATED_AT,
+                        _UPDATED_AT,
+                        _ACCESS_TOKEN,
+                        _FIRST_LOGIN,
+                        _ADMIN,
+                        _SUBSCRIPTION,
+                        _IP_ADDRESS,
+                        _PASSCODE,
+                        _PASSCODE_CONFIRMED,
+                        _EMAIL,
+                        _EMAIL_CONFIRMED,
+                        _EMAIL_PASSCODE,
+                        _PASSWORD,
+                        _DEFAULT_LANGUAGE,
+                        _DEFAULT_ROUTE,
+                        _POINTS_TOTAL,
+                        _POINTS_JAVASCRIPT,
+                        _POINTS_JAVA,
+                        _POINTS_PYTHON,
+                        _COURSES
+                        ) VALUES (
+                            ${guest._ID},
+                            ${guest._CREATED_AT},
+                            ${guest._UPDATED_AT},
+                            ${guest._ACCESS_TOKEN},
+                            ${guest._FIRST_LOGIN},
+                            ${guest._ADMIN},
+                            ${guest._SUBSCRIPTION},
+                            ${guest._IP_ADDRESS},
+                            ${guest._PASSCODE},
+                            ${guest._PASSCODE_CONFIRMED},
+                            ${guest._EMAIL},
+                            ${guest._EMAIL_CONFIRMED},
+                            ${guest._EMAIL_PASSCODE},
+                            ${guest._PASSWORD},
+                            ${guest._DEFAULT_LANGUAGE},
+                            ${guest._DEFAULT_ROUTE},
+                            ${guest._POINTS_TOTAL},
+                            ${guest._POINTS_JAVASCRIPT},
+                            ${guest._POINTS_JAVA},
+                            ${guest._POINTS_PYTHON},
+                            ${guest._COURSES})`;
+                        const getGuest = await sql`SELECT * FROM _GUEST WHERE _ID = ${guest._ID}`;
                         //console.log("guest info:", getGuest);
                         if(getGuest !== undefined) {
                             return res.sendStatus(200);
@@ -217,37 +220,52 @@ class Guest_Routes {
             case('POST'):
                 try {
                     const data = req.body;
+                    //console.log(data);
+
                     // Check Email in database
-                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _GUEST_EMAIL = ${data._GUEST_EMAIL}`;
+                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
+                    const guestResult = getGuest[0];
+                    //console.log("guestResult:", guestResult)
+
                     // Check Guest IP Address
                     const guestIP = req.socket.remoteAddress;
                     const validIP = z.string().ip(guestIP);
                     // Check Email & Password
-                    const validEmail = data._GUEST_EMAIL.trim() === getGuest._GUEST_EMAIL;
-                    const validPassword = data._GUEST_PASSWORD.trim() === getGuest._GUEST_PASSWORD;
+                    const validEmail = data._EMAIL === guestResult._email;
+                    //console.log("validEmail", validEmail);
                     // Compare Encrypted Password
-                    const validCompare = bcrypt.compareSync(
-                        data._GUEST_PASSWORD,
-                        getGuest._GUEST_PASSWORD
+                    const validPasswordCompare = bcrypt.compareSync(
+                        data._PASSWORD,
+                        guestResult._password
                     );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+                    // uppercase guestResult keys
+                    Object.entries(guestResult).forEach(([key, value]) => {
+                        guestResult[key.toUpperCase()] = guestResult[key];
+                        //console.log(`${key}: ${value}`);
+                    });
                     // Create Guest Object
-                    const guest = new Guest(data);
+                    const guestObj = new Guest(guestResult);
+                    //console.log("guest:", guestObj);
                     // Set Guest IP Address
-                    guest._GUEST_IP_ADDRESS = guestIP as string;
+                    guestObj._IP_ADDRESS = guestIP as string;
                     // Create Token
-                    const getToken = jwt.sign({ _GUEST_ID: guest._GUEST_ID, _GUEST_EMAIL: guest._GUEST_EMAIL }, process.env.SECRET_TOKEN, {
+                    const getToken = jwt.sign({ _ID: guestObj._ID, _EMAIL: guestObj._EMAIL }, process.env.SECRET_TOKEN, {
                         algorithm: 'HS256',
                         allowInsecureKeySizes: true,
                         expiresIn: 86400, // 24 hours
                     });
                     // Save Guest Token
-                    guest._GUEST_ACCESS_TOKEN = getToken;
+                    guestObj._ACCESS_TOKEN = getToken;
+
+                    //console.log("guestObj:", guestObj)
+
                     if(!validIP) {
                         return res.status(400).send({ error: "User Network Error" });
-                    } else if(!validEmail || !validPassword) {
+                    } else if(!validEmail || !validPasswordCompare) {
                         return res.status(400).send({ error: "Invalid Guest Information" });
-                    } else if(validIP && validEmail && validCompare) {
-                        return res.sendStatus(200).send({data: guest});
+                    } else if(validIP && validEmail && validPasswordCompare) {
+                        return res.status(200).send({data: guestObj});
                     } else {
                         return res.status(400).send({ error: "Invalid Data" });
                     }
@@ -265,7 +283,7 @@ class Guest_Routes {
             case('DELETE'):
                  try {
                     const id = req.params.id;
-                    const results = await sql`DELETE * FROM _GUEST WHERE _GUEST_ID = ${id}`;
+                    const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
                     return res.status(200);
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});

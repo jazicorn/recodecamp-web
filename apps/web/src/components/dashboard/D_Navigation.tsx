@@ -10,7 +10,8 @@ import {
   IconNotes,
   IconSettings,
   IconListDetails,
-  IconBook2
+  IconBook2,
+  IconUser
 } from '@tabler/icons-react';
 
 const D_Navigation = () => {
@@ -54,7 +55,13 @@ const D_Navigation = () => {
       <ul className='tw-flex tw-flex-col tw-place-items-center tw-pt-4 tw-space-y-2 [&>li]:tw-h-[30px]'>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        `}>
-          <Link to="/learn/settings">
+          <Link to="/learn/settings/user">
+            { darkMode ? <IconUser color="#2ca9bc" /> : <IconUser color="#000" />}
+          </Link>
+        </li>
+        <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
+       `}>
+          <Link to="/learn/settings/dashboard">
             { darkMode ? <IconSettings color="#2ca9bc" /> : <IconSettings color="#000" />}
           </Link>
         </li>
