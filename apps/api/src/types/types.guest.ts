@@ -1,27 +1,27 @@
 import { Question } from './types.question'
 
 export interface _Guest {
-    _GUEST_ID: string;
-    _GUEST_CREATED_AT: Date;
-    _GUEST_UPDATED_AT: Date;
-    _GUEST_ACCESS_TOKEN: string;
-    _GUEST_FIRST_LOGIN: boolean
-    _GUEST_ADMIN: boolean;
-    _GUEST_SUBSCRIPTION: Array<string | number> | string;
-    _GUEST_IP_ADDRESS: string;
-    _GUEST_PASSCODE: string;
-    _GUEST_PASSCODE_CONFIRMED: boolean;
-    _GUEST_EMAIL: string;
-    _GUEST_EMAIL_CONFIRMED: boolean;
-    _GUEST_EMAIL_PASSCODE: string;
+    _ID: string;
+    _CREATED_AT: Date;
+    _UPDATED_AT: Date;
+    _ACCESS_TOKEN: string;
+    _FIRST_LOGIN: boolean
+    _ADMIN: boolean;
+    _SUBSCRIPTION: Array<string | number> | string;
+    _IP_ADDRESS: string;
+    _PASSCODE: string;
+    _PASSCODE_CONFIRMED: boolean;
+    _EMAIL: string;
+    _EMAIL_CONFIRMED: boolean;
+    _EMAIL_PASSCODE: string;
     _GUEST_PASSWORD: string;
-    _GUEST_DEFAULT_LANGUAGE: string;
-    _GUEST_DEFAULT_ROUTE: string;
-    _GUEST_POINTS_TOTAL: number;
-    _GUEST_POINTS_JAVASCRIPT: number;
-    _GUEST_POINTS_JAVA: number;
-    _GUEST_POINTS_PYTHON: number;
-    _GUEST_COURSES:  number[] | string[] | string;
+    _DEFAULT_LANGUAGE: string;
+    _DEFAULT_ROUTE: string;
+    _POINTS_TOTAL: number;
+    _POINTS_JAVASCRIPT: number;
+    _POINTS_JAVA: number;
+    _POINTS_PYTHON: number;
+    _COURSES:  number[] | string[] | string;
 }
 
 export type Course = {
