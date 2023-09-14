@@ -14,7 +14,7 @@ export interface _Guest {
     _EMAIL: string;
     _EMAIL_CONFIRMED: boolean;
     _EMAIL_PASSCODE: string;
-    _GUEST_PASSWORD: string;
+    _PASSWORD: string;
     _DEFAULT_LANGUAGE: string;
     _DEFAULT_ROUTE: string;
     _POINTS_TOTAL: number;

@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid';
  */
 
 export class Guest implements _Guest {
-    ID!: string;
+    _ID!: string;
     _CREATED_AT!: Date;
     _UPDATED_AT!: Date;
     _ACCESS_TOKEN!: string;
