@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -10,10 +10,11 @@ import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgr
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
-/** React Redux */
-//import { useAppDispatch } from '../../redux/reduxHooks.ts';
-//import type { RootState } from '../../redux/store.ts';
-//import { menuUser } from '../../redux/slices/dashboardSlice.ts';
+/** React Redux Hooks */
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
+import { 
+  menuUser,
+} from '../../redux/slices/dashboardSlice.ts';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -28,7 +29,7 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  //const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -39,6 +40,8 @@ const SignIn = () => {
   const onSubmit = handleSubmit((data) => {
     guestLogin(data)
   });
+
+  const [ guestData, setGuestData] = useState();
 
   /** Guest Login */
   const guestLogin = async (data) => {
@@ -59,16 +62,14 @@ const SignIn = () => {
       }).then(function(response) {
           //console.log(response)
           if(response.status === 200) {
-            console.log("✅ Guest Logged In");
+            console.log("🏠 Guest Logged In");
             // Success Notification
             notifications.show({
               id: 'success',
               withCloseButton: true,
-              onClose: () => console.log('unmounted'),
-              onOpen: () => console.log('mounted'),
               autoClose: 2000,
-              title: "👋 Welcome Back",
-              message: '',
+              title: "🥳 Login Successful",
+              message: 'Have fun Re-coding.',
               color: 'teal',
               icon: <IconCheck />,
               className: 'my-notification-class',
@@ -76,20 +77,12 @@ const SignIn = () => {
               sx: { backgroundColor: 'teal' },
               loading: false,
             });
-            //const user = response.json();
-            //console.log(user)
-            //dispatch(menuUser(user))
-            setTimeout(() => {
-              console.log("⏳ Delay for 2 seconds.");
-              navigate("/");
-            }, "2000");
+            return response.json();
           } else {
             // Failure Notification
             notifications.show({
               id: 'failure',
               withCloseButton: true,
-              onClose: () => console.log('unmounted'),
-              onOpen: () => console.log('mounted'),
               autoClose: 2000,
               title: "Failed Login Attempt",
               message: '',
@@ -101,12 +94,25 @@ const SignIn = () => {
               loading: false,
             });
           }
+      }).then(function(response) {
+        const userJson = response.data;
+        //console.log("userJson: ", userJson);
+        setGuestData(userJson);
+        setTimeout(() => {
+          console.log("⏳ Delay | Redirect in 1 second.");
+          navigate("/learn");
+        }, "1000");
       });
     } catch(error) {
       console.log("🚫 Guest Login Failed")
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    //console.log("guestData: ",guestData);
+    dispatch(menuUser(guestData));
+  },[dispatch, guestData]);
 
   return (
     <>
@@ -144,11 +150,11 @@ const SignIn = () => {
               [&>li>label]:tw-w-[10em] [&>li>label]:tw-bg-neutral-100 [&>li>label]:tw-border-y `}>
                 <li className="">
                   <label className="tw-text-campfire-blue">Email:</label>
-                  <input type="email" {...register('_GUEST_EMAIL')}/>
+                  <input type="email" {...register('_EMAIL')}/>
                 </li>
                 <li className="">
                   <label>Password:</label>
-                  <input type="password" {...register('_GUEST_PASSWORD')}/>
+                  <input type="password" {...register('_PASSWORD')}/>
                 </li>
                 <li className={`${darkMode ? 'hover:tw-bg-campfire-neutral-400/70' : 'hover:tw-bg-campfire-neutral-300/70'} tw-w-full 
                 tw-border-y tw-border-campfire-purple-light`}>

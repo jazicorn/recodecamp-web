@@ -76,7 +76,7 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { menu, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
+export const { menu, menuUser, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
 
 export default dashboardSlice.reducer;
 
