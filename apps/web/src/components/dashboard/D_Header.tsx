@@ -14,12 +14,15 @@ const HeaderDashboard = () => {
   const darkMode = theme.state.darkMode;
   const account = useAppSelector((state:RootState) => state?.dashboard?.user);
   //console.log("account", account);
-  const [ accountType, setAccountType] = useState();
+  const [ accountType, setAccountType] = useState('');
   const guestSub = () => {
     if(account !== undefined ) {
-      const sub = account._SUBSCRIPTION.split(',')[1];
-      const subType = sub.charAt(0).toUpperCase() + sub.slice(1);
-      setAccountType(subType);
+      if(Object.keys(account).length !== 0) {
+        const sub = account._SUBSCRIPTION.split(',')[1];
+        const subType = sub.charAt(0).toUpperCase() + sub.slice(1);
+        setAccountType(subType);
+      }
+      setAccountType('No Account');
     } else {
       setAccountType('No Account');
     }

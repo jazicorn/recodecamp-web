@@ -39,6 +39,7 @@ import D_Calendar from './layout/Layout.D_Calendar';
 import D_Docs from './layout/Layout.D_Docs';
 import D_Notes from './layout/Layout.D_Notes';
 import D_Settings from './layout/Layout.D_Settings';
+import D_Settings_User from './layout/Layout.D_Settings_User';
 
 const router = Router(
   createRoutesFromElements(
@@ -54,7 +55,8 @@ const router = Router(
         <Route path="calendar" element={<D_Calendar />} errorElement={<ErrorBoundary />}/>
         <Route path="docs" element={<D_Docs />} errorElement={<ErrorBoundary />}/>
         <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />}/>
-        <Route path="settings" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
+        <Route path="settings/user" element={<D_Settings_User />} errorElement={<ErrorBoundary />}/>
+        <Route path="settings/dashboard" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="/auth" element={<Auth />}>
         <Route path="admin/signup" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>

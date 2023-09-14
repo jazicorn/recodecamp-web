@@ -4,7 +4,7 @@ import { ThemeContext } from '../../../context/ThemeContext';
 //import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
 
-const D_Settings = () => {
+const D_Settings_User = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
@@ -20,7 +20,7 @@ const D_Settings = () => {
         <Transition>
           <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
             tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4`}>
-            Settings: Dashboard
+            Settings: User
           </h4>
         </Transition>
         <main className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-col">
@@ -32,4 +32,4 @@ const D_Settings = () => {
   )
 }
 
-export default D_Settings
+export default D_Settings_User

@@ -15,7 +15,8 @@ import {
   IconListDetails,
   IconHome,
   IconSearch,
-  IconBook2
+  IconBook2,
+  IconUser
 } from '@tabler/icons-react';
 
 const D_Banner = () => {
@@ -78,8 +79,12 @@ const D_Banner = () => {
               <Transition><Link to={''}>Search Dashboard</Link></Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
+              { darkMode ? <IconUser color="#d4d4d4" /> : <IconUser color="#000" />}
+              <Transition><Link to={'/learn/settings/user'}>User Settings</Link></Transition>
+            </li>
+            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
-              <Transition><Link to={'/learn/settings'}>Dashboard Settings</Link></Transition>
+              <Transition><Link to={'/learn/settings/dashboard'}>Dashboard Settings</Link></Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-pl-0.5`}>
               { darkMode ? <IconLogout color="#d4d4d4" /> : <IconLogout color="#000" />}

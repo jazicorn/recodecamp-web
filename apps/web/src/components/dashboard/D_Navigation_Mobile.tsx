@@ -12,7 +12,8 @@ import {
   IconListDetails,
   IconChevronsRight,
   IconChevronsDown,
-  IconBook2
+  IconBook2,
+  IconUser
 } from '@tabler/icons-react';
 import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg';
 
@@ -99,13 +100,20 @@ const D_Navigation = () => {
               </li>  
             </ul>
             <ul className='tw-flex tw-flex-col tw-place-items-start tw-space-y-2 [&>li]:tw-h-[30px]'>
+               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
+              tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
+                <Link to="/learn/settings/user" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
+                {darkMode ? <IconUser color="#2ca9bc" /> : <IconUser color="#000"/>}          
+                  Dashboard User
+                </Link>
+              </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                <Link to="/learn/settings" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
+                <Link to="/learn/settings/dashboard" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
                 {darkMode ? <IconSettings color="#2ca9bc" /> : <IconSettings color="#000"/>}          
                   Dashboard Settings
                 </Link>
-                </li>
+              </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
                 { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> } User Logout</li>

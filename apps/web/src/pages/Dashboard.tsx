@@ -166,7 +166,25 @@ const Dashboard = () => {
               </div>
             </main>
           }
-          { path === '/learn/settings' && 
+          { path === '/learn/settings/user' && 
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+                <D_Navigation/>
+              </section>
+              {!pathFilter &&
+              <section className={`tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1`}>
+                <D_Route/>
+              </section>
+              }
+              <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
+                <Outlet/>
+              </div>
+            </main>
+          }
+          { path === '/learn/settings/dashboard' && 
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
             [&>*]:tw-backdrop-blur-sm

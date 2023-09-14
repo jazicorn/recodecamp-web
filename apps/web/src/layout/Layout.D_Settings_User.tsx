@@ -4,9 +4,9 @@ import { ThemeContext } from '../context/ThemeContext';
 import useWindowSize from '../hooks/useWindowSize';
 //import Transition from '../hooks/useTransition';
 // components
-import D_Settings from '../components/dashboard/dashboard-settings/D_Settings';
+import D_Settings_User from '../components/dashboard/dashboard-settings/D_Settings_User';
 
-const Layout_D_Settings = () => {
+const Layout_D_Settings_User = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
@@ -19,7 +19,7 @@ const Layout_D_Settings = () => {
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-settings tw-grid-cols-layout-dashboard-settings tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
-              <D_Settings/>
+              <D_Settings_User/>
             </section>
         </main>
         :
@@ -27,7 +27,7 @@ const Layout_D_Settings = () => {
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-settings-mobile tw-grid-cols-layout-dashboard-settings-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
-              <D_Settings/>
+              <D_Settings_User/>
             </section>
         </main>
         }
@@ -35,5 +35,5 @@ const Layout_D_Settings = () => {
   )
 }
 
-export default Layout_D_Settings
+export default Layout_D_Settings_User
  
