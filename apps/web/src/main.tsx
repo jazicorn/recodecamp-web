@@ -57,11 +57,11 @@ const router = Router(
         <Route path="settings" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="/auth" element={<Auth />}>
-        <Route path="admin/register" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
+        <Route path="admin/signup" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
         <Route path="admin/login" element={<A_Admin_Login/>} errorElement={<ErrorBoundary />}/>
-        <Route path="guest/register" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="guest/signup" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
         <Route path="guest/login" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
-        <Route path="user/register" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
         <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
       </Route>
       {/* <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>

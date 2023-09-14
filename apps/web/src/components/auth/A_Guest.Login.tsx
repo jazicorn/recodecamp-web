@@ -125,7 +125,7 @@ const SignIn = () => {
             <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-w-full tw-pb-4 tw-px-2 tw-mb-4 `}>
               <p className="tw-w-fit tw-text-xs">
                 New User?:&nbsp;
-                <Link to={'/auth/guest/register'} className={`${darkMode ? 'hover:tw-text-campfire-neutral-200' : 'hover:tw-text-campfire-neutral-700'} tw-text-campfire-blue-300 tw-font-space_mono_bold`}>
+                <Link to={'/auth/guest/signup'} className={`${darkMode ? 'hover:tw-text-campfire-neutral-200' : 'hover:tw-text-campfire-neutral-700'} tw-text-campfire-blue-300 tw-font-space_mono_bold`}>
                   Register
                 </Link>
               </p>

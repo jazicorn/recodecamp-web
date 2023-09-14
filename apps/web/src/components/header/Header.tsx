@@ -73,7 +73,7 @@ const Header = () => {
   if(isMobile) {
     return (
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue' : 'tw-bg-light '
-        } ${menu ? "tw-h-fit" : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-place-items-center tw-relative tw-grow-0`}>
+        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-place-items-center tw-relative tw-grow-0`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
         >
@@ -113,7 +113,7 @@ const Header = () => {
           </div>
           </Transition>
           <Transition>
-          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1`}>
+          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1 tw-pr-3`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={'/about'}>About</Link>
             </li>
@@ -123,11 +123,19 @@ const Header = () => {
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/contact`}>Contact</Link>
             </li>
-            <li className={`${darkMode ? "tw-bg-neutral-300 tw-text-campfire-neutral-900 hover:tw-text-campfire-blue" 
-            : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-text-campfire-blue"} tw-font-space_mono tw-rounded tw-py-2 tw-flex tw-flex-row`}>
-              <Link to={'/auth/guest/login'}>
+            <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
+            : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+              <Link to={'/auth/guest/login'} className="tw-w-full">
                 <button className="tw-font-space_mono">
                   Login
+                </button>
+              </Link>
+            </li>
+             <li className={`${darkMode ? "tw-bg-campfire-blue-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
+            : "tw-bg-campfire-blue tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+              <Link to={'/auth/guest/signup'} className="tw-w-full">
+                <button className="tw-font-space_mono ">
+                  Signup
                 </button>
               </Link>
             </li>
@@ -147,10 +155,10 @@ const Header = () => {
       >
         <Link to={`/`} className="tw-flex tw-flex-row tw-place-self-center">
           <span className="tw-pt-1 ">
-            <Logo style={{ height: 22, width: 38 }} />
+            <Transition><Logo style={{ height: 22, width: 38 }} /></Transition>
           </span>
           <h5 className={`tw-text-lg ${darkMode ? '' : ''} hover:tw-text-campfire-blue`}>
-            ReCodeCamp
+            <Transition>ReCodeCamp</Transition>
           </h5>
         </Link>
         <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_mono">
@@ -164,11 +172,18 @@ const Header = () => {
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
             </li>
-            <li className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 "} hover:tw-text-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row`}>
-              <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
+            <li>
+              <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
+                <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
+              </button>
+            </li>
+            <li>
+              <button className={`${darkMode ? "tw-bg-campfire-blue-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-campfire-blue tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"}  tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
+                <Link to={'/auth/guest/signup'}><Transition>Signup</Transition></Link>
+              </button>
             </li>
           </ul>
-          <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-10">
+          <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-4">
             {!darkMode ? (
               <li>
                 <button className="tw-pt-1 tw-place-self-center" onClick={toggleTheme}>
