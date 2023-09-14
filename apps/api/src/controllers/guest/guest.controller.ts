@@ -119,6 +119,7 @@ class Guest_Routes {
             case('POST'):
                 try {
                     const data = req.body;
+                    //console.log("data:", data);
                     const guestIP = req.socket.remoteAddress;
                     const validIP = z.string().ip(guestIP);
                     const validEmail = z.string().email(data._EMAIL);
@@ -145,8 +146,10 @@ class Guest_Routes {
                         const encryptedPassword = await bcrypt.hash(data._PASSWORD, 10);
                         // set encrypted password
                         guest._PASSWORD = encryptedPassword;
+                        // convert subscription to string value
+                        guest._SUBSCRIPTION = guest._SUBSCRIPTION.toString().trim();
                         // convert courses to string value
-                        guest._COURSES = guest._COURSES.toString();
+                        guest._COURSES = guest._COURSES.toString().trim();
                         // guest after updates
                         //console.log("guest", guest);
                         const createGuest = await sql`INSERT INTO _GUEST(
@@ -170,8 +173,8 @@ class Guest_Routes {
                         _POINTS_JAVASCRIPT,
                         _POINTS_JAVA,
                         _POINTS_PYTHON,
-                        _COURSES)
-                        VALUES (
+                        _COURSES
+                        ) VALUES (
                             ${guest._ID},
                             ${guest._CREATED_AT},
                             ${guest._UPDATED_AT},

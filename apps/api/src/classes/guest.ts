@@ -44,10 +44,10 @@ export class Guest implements _Guest {
             _IP_ADDRESS: 'Empty',
             _PASSCODE: uuidv4(),
             _PASSCODE_CONFIRMED: false,
-            _EMAIL: data._GUEST_EMAIL.toLowerCase().trim(),
+            _EMAIL: data._EMAIL.toLowerCase().trim(),
             _EMAIL_CONFIRMED: false,
             _EMAIL_PASSCODE: uuidv4(),
-            _PASSWORD: data._GUEST_PASSWORD,
+            _PASSWORD: data._PASSWORD,
             _DEFAULT_LANGUAGE: 'javascript',
             _DEFAULT_ROUTE: 'var/declare/var',
             _POINTS_TOTAL: 0,
@@ -62,28 +62,28 @@ export class Guest implements _Guest {
         // Object.keys(defaults).forEach(prop => {
         //     this[prop] = opts[prop];
         // });
-        this._ID = opts._GUEST_ID ;
-        this._CREATED_AT = opts._GUEST_CREATED_AT;
-        this._UPDATED_AT = opts._GUEST_UPDATED_AT;
-        this._ACCESS_TOKEN = opts._GUEST_ACCESS_TOKEN;
-        this._FIRST_LOGIN = opts._GUEST_FIRST_LOGIN ;
-        this._ADMIN = opts._GUEST_ADMIN;
+        this._ID = opts._ID ;
+        this._CREATED_AT = opts._CREATED_AT;
+        this._UPDATED_AT = opts._UPDATED_AT;
+        this._ACCESS_TOKEN = opts._ACCESS_TOKEN;
+        this._FIRST_LOGIN = opts._FIRST_LOGIN ;
+        this._ADMIN = opts._ADMIN;
         /** 1234 === Subscription(Guest Account)*/
-        this._SUBSCRIPTION = opts._GUEST_SUBSCRIPTION,
-        this._IP_ADDRESS = opts._GUEST_IP_ADDRESS.trim();
-        this._PASSCODE = opts._GUEST_PASSCODE;
-        this._PASSCODE_CONFIRMED = opts._GUEST_PASSCODE_CONFIRMED;
-        this._EMAIL = opts._GUEST_EMAIL.toLowerCase().trim();
-        this._EMAIL_CONFIRMED = opts._GUEST_EMAIL_CONFIRMED;
-        this._EMAIL_PASSCODE = opts._GUEST_EMAIL_PASSCODE;
-        this._PASSWORD = opts._GUEST_PASSWORD.trim();
-        this._DEFAULT_LANGUAGE = opts._GUEST_DEFAULT_LANGUAGE.trim();
-        this._DEFAULT_ROUTE = opts._GUEST_DEFAULT_ROUTE.trim();
-        this._POINTS_TOTAL = opts._GUEST_POINTS_TOTAL;
-        this._POINTS_JAVASCRIPT = opts._GUEST_POINTS_JAVASCRIPT;
-        this._POINTS_JAVA = opts._GUEST_POINTS_JAVA;
-        this._POINTS_PYTHON = opts._GUEST_POINTS_PYTHON ;
-        this._COURSES = opts._GUEST_COURSES;
+        this._SUBSCRIPTION = opts._SUBSCRIPTION,
+        this._IP_ADDRESS = opts._IP_ADDRESS.trim();
+        this._PASSCODE = opts._PASSCODE;
+        this._PASSCODE_CONFIRMED = opts._PASSCODE_CONFIRMED;
+        this._EMAIL = opts._EMAIL.toLowerCase().trim();
+        this._EMAIL_CONFIRMED = opts._EMAIL_CONFIRMED;
+        this._EMAIL_PASSCODE = opts._EMAIL_PASSCODE;
+        this._PASSWORD = opts._PASSWORD.trim();
+        this._DEFAULT_LANGUAGE = opts._DEFAULT_LANGUAGE.trim();
+        this._DEFAULT_ROUTE = opts._DEFAULT_ROUTE.trim();
+        this._POINTS_TOTAL = opts._POINTS_TOTAL;
+        this._POINTS_JAVASCRIPT = opts._POINTS_JAVASCRIPT;
+        this._POINTS_JAVA = opts._POINTS_JAVA;
+        this._POINTS_PYTHON = opts._POINTS_PYTHON ;
+        this._COURSES = opts._COURSES;
     };
 
     /** _ID */
