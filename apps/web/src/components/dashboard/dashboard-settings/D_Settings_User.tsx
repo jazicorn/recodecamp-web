@@ -130,7 +130,7 @@ const D_Settings_User = () => {
               :<p className={`tw-self-center tw-py-2`}><img src={avatar} alt="Avatar" /></p> } */}
               <div className="tw-pt-4">
                 <table className={`${darkMode ? "[&>tbody>tr>th]:tw-bg-campfire-neutral-500 [&>tbody>tr>th]:" : "[&>tbody>tr>th]:tw-border-campfire-neutral-500  [&>tbody>tr>th]:tw-bg-campfire-neutral-100"} 
-                ${isMobile ? "[&>tbody>tr]:tw-flex-col [&>tbody>tr]:tw-flex [&>tbody>tr>td]:tw-py-1 [&>tbody>tr>th]:tw-py-1 tw-justify-center tw-m-auto" : 
+                ${isMobile ? "[&>tbody>tr]:tw-flex-col [&>tbody>tr]:tw-flex [&>tbody>tr>td]:tw-pt-1 [&>tbody>tr>td]:tw-pb-4 [&>tbody>tr>th]:tw-py-1 tw-justify-center tw-m-auto" : 
                 "[&>tbody>tr]:tw-flex-row [&>tbody>tr>td]:tw-pl-2 [&>tbody>tr>td]:tw-py-2 [&>tbody>tr>th]:tw-py-2 "}  
                 tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed [&>tbody>tr>td]:tw-text-sm [&>tbody>tr>th]:tw-pl-2
                 [&>tbody>tr>th]:tw-border-b `}>
@@ -163,7 +163,7 @@ const D_Settings_User = () => {
                     </tr>
                     <tr>
                       <th>User Password</th>
-                      <td>
+                      <td className={`${isMobile ? "[&>button]:tw-my-1 [&>button]:tw-py-1" : ""}`}>
                         <button onClick={(e) =>userRevealButton(e)} className={`${darkMode ? "hover:tw-bg-campfire-neutral-500 hover:tw-text-campfire-neutral-100 tw-border-campfire-purple-300 tw-text-campfire-purple-300" 
                         : "hover:tw-bg-campfire-neutral-400/30 hover:tw-text-campfire-neutral-200 tw-border-campfire-purple-400 tw-text-campfire-purple-400"}  
                         ${isMobile ? "tw-w-full" : ""}  tw-font-space_mono tw-border tw-py-0.5 tw-px-3 tw-mr-2`}>
@@ -176,7 +176,7 @@ const D_Settings_User = () => {
                     </tr>
                   </tbody>
                 </table>
-                <div className="tw-w-full tw-pt-8">
+                <div className={`${isMobile ? "tw-pt-4" : "tw-pt-10"} tw-w-full `}>
                   <button className={`${darkMode ? "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-50"
                   : "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-100"} tw-w-full tw-border tw-border-red-400 tw-font-space_mono tw-text-lg tw-text-red-400`}>Account Deletion</button>
                   <p className="tw-w-full tw-text-center">🚨!!!Warning!!! This Action Is Permanent🚨</p>
