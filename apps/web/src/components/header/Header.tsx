@@ -131,8 +131,8 @@ const Header = () => {
                 </button>
               </Link>
             </li>
-             <li className={`${darkMode ? "tw-bg-campfire-blue-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
-            : "tw-bg-campfire-blue tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+             <li className={`${darkMode ? "tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
+            : "tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-bg-campfire-blue tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
               <Link to={'/auth/guest/signup'} className="tw-w-full">
                 <button className="tw-font-space_mono ">
                   Signup
@@ -178,7 +178,7 @@ const Header = () => {
               </button>
             </li>
             <li>
-              <button className={`${darkMode ? "tw-bg-campfire-blue-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-campfire-blue tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"}  tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
+              <button className={`${darkMode ? "tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-bg-campfire-blue tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
                 <Link to={'/auth/guest/signup'}><Transition>Signup</Transition></Link>
               </button>
             </li>
