@@ -23,10 +23,10 @@ const D_Settings_User = () => {
   
   /** empty user placeholder values*/
   const emptyUser = {
-    _ID: '123456789',
+    _ID: '',
     _CREATED_AT: new Date,
     _UPDATED_AT: new Date,
-    _ACCESS_TOKEN: '123-456-789',
+    _ACCESS_TOKEN: '',
     _FIRST_LOGIN: false,
     _ADMIN: false,
     _SUBSCRIPTION: "[1000, 'Unknown']",
@@ -114,9 +114,9 @@ const D_Settings_User = () => {
           </h4>
         </Transition>
         
-        {Object.keys(getUser).length === 0 ?
+        {initialUser._ID.length === 0 ?
           <Transition> 
-          <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} `}>Want to save your progress? 
+          <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
           <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span></main>
           </Transition> 
           :
