@@ -222,11 +222,13 @@ class Guest_Routes {
                     const data = req.body;
                     //console.log(data);
 
+                    /**Retrieve Guest */
                     // Check Email in database
                     const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
                     const guestResult = getGuest[0];
                     //console.log("guestResult:", guestResult)
 
+                    /**Validate Guest Data */
                     // Check Guest IP Address
                     const guestIP = req.socket.remoteAddress;
                     const validIP = z.string().ip(guestIP);
@@ -239,6 +241,8 @@ class Guest_Routes {
                         guestResult._password
                     );
                     //console.log("validPasswordCompare:", validPasswordCompare);
+
+                    /**Transform Data */
                     // uppercase guestResult keys
                     Object.entries(guestResult).forEach(([key, value]) => {
                         guestResult[key.toUpperCase()] = guestResult[key];
@@ -247,8 +251,17 @@ class Guest_Routes {
                     // Create Guest Object
                     const guestObj = new Guest(guestResult);
                     //console.log("guest:", guestObj);
+
+                    /**Update Data */
                     // Set Guest IP Address
                     guestObj._IP_ADDRESS = guestIP as string;
+                    // Update Guest Login Time
+                    guestObj._UPDATED_AT = new Date();
+                    // Save Updated Time to DB
+
+                    await sql` UPDATE _GUEST SET _UPDATED_AT = ${guestObj._UPDATED_AT} WHERE _ID = ${guestObj._ID}`;
+
+                    /**Create JWT Token */
                     // Create Token
                     const getToken = jwt.sign({ _ID: guestObj._ID, _EMAIL: guestObj._EMAIL }, process.env.SECRET_TOKEN, {
                         algorithm: 'HS256',
