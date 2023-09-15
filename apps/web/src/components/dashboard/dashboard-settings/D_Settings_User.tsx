@@ -67,8 +67,9 @@ const D_Settings_User = () => {
       [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-4 
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2 [&>main]:tw-px-2`}>
         <Transition>
-          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
-            tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
+          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
+          ${initialUser._ID.length === 0 ? "tw-mb-4" : ""}  
+          tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
             Settings: User
           </h4>
         </Transition>

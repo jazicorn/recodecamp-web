@@ -19,23 +19,34 @@ import {
   IconUser
 } from '@tabler/icons-react';
 import { removeTokenFromLocalStorage } from '../../../utils/common';
+import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
+import { 
+  menuUser,
+} from '../../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../../utils/constants.ts';
 
 const D_Banner = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
+
   /** User Logout */
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
     removeTokenFromLocalStorage();
-    console.log("👋 Goodbye | Logged Out");
+    dispatch(menuUser(DEFAULT_USER));
+    console.log("👋 Goodbye | User Logged Out");
     setTimeout(() => {
-      console.log("⏳ Delay | Redirect in 1 second.");
+      console.log("⏳ Delay | Page Redirect In 1 Second.");
       navigate("/");
     }, '1000');
-  }
+  };
 
   return (
     <div className={`${darkMode ? '[&_section>ul]:tw-text-campfire-blue [&_section>h4]:tw-text-campfire-neutral-300' : 

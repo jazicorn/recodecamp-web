@@ -14,6 +14,14 @@ import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../uti
 /**Icons */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+/** */
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
+//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
+import { 
+  menuUser,
+} from '../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../utils/constants.ts';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
@@ -33,8 +41,8 @@ const Header = () => {
   const { isMobile } = useWindowSize();
 
   /** Set User Preferences */
-  const theme = useContext(ThemeContext)
-  const darkMode = theme.state.darkMode
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   //turn darkmode on and off
   const toggleTheme = () => {
     if (darkMode) {
@@ -44,19 +52,23 @@ const Header = () => {
       theme.dispatch({ type: 'DARKMODE', darkMode: true })
       localStorage.theme = 'dark'
     }
-  }
+  };
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
 
   /** User Logout */
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
     removeTokenFromLocalStorage();
-    console.log("👋 Goodbye | Logged Out");
+    dispatch(menuUser(DEFAULT_USER));
+    console.log("👋 Goodbye | User Logged Out");
     setTimeout(() => {
-      console.log("⏳ Delay | Redirect in 1 second.");
+      console.log("⏳ Delay | Page Redirect In 1 Second.");
       navigate("/");
     }, '1000');
-  }
+  };
 
   /** Get User Access Token From Storage */
   const accessToken = getTokenFromLocalStorage();
