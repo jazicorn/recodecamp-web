@@ -130,9 +130,8 @@ const D_Navigation = () => {
               </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                <button oonClick={(e) => logout(e)} className="tw-font-space_mono">
-                { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }
-                User Logout
+                <button oonClick={(e) => logout(e)} className="tw-font-space_mono tw-flex tw-flex-row tw-place-items-center tw-text-base">
+                { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }<span className="tw-pl-1">Logout</span>
                 </button>
               </li>
             </ul>
