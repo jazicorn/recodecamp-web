@@ -1,15 +1,16 @@
-import { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
 import { useLocation, useParams } from 'react-router-dom';
 // icons
 import { IconMenu2 } from '@tabler/icons-react';
-import { ThemeContext } from '../../context/ThemeContext'
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg'
+import { ThemeContext } from '../../context/ThemeContext';
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
+import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
+import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
@@ -27,6 +28,8 @@ const getRoutePath = (location: Location, params: Params): string => {
 
 const Header = () => {
   const { isMobile } = useWindowSize();
+
+  /** Set User Preferences */
   const theme = useContext(ThemeContext)
   const darkMode = theme.state.darkMode
   //turn darkmode on and off
@@ -39,6 +42,32 @@ const Header = () => {
       localStorage.theme = 'dark'
     }
   }
+
+  /** User Logout */
+  const navigate = useNavigate();
+  const logout = (e) => {
+    e.preventDefault();
+    removeTokenFromLocalStorage();
+    console.log("👋 Goodbye | Logged Out");
+    setTimeout(() => {
+      console.log("⏳ Delay | Redirect in 1 second.");
+      navigate("/");
+    }, '1000');
+  }
+
+  /** Get User Access Token From Storage */
+  const accessToken = getTokenFromLocalStorage();
+
+  const [ token, setToken] = useState('');
+  useEffect(() => {
+    if(accessToken === undefined || accessToken === null) {
+      setToken('');
+    } else {
+      setToken(accessToken);
+    }
+  },[accessToken]);
+
+  /** Get Route Parameters */
   const location = useLocation();
   const params = useParams();
   
@@ -123,22 +152,27 @@ const Header = () => {
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/contact`}>Contact</Link>
             </li>
-            <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
-            : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
-              <Link to={'/auth/guest/login'} className="tw-w-full">
-                <button className="tw-font-space_mono">
-                  Login
-                </button>
-              </Link>
-            </li>
-             <li className={`${darkMode ? "tw-bg-campfire-blue-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
-            : "tw-bg-campfire-blue tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
-              <Link to={'/auth/guest/signup'} className="tw-w-full">
-                <button className="tw-font-space_mono ">
-                  Signup
-                </button>
-              </Link>
-            </li>
+            {token === undefined || token.length === 0 || token === null ?
+            <>
+              <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
+              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+                <Link to={'/auth/guest/login'} className="tw-w-full">
+                  <button className="tw-font-space_mono">
+                    Login
+                  </button>
+                </Link>
+              </li>
+            </>
+            :
+            <>
+              <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
+              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+                  <button onClick={(e) => logout(e)} className="tw-font-space_mono ">
+                    Logout
+                  </button>
+              </li>
+            </>
+            }
           </ul>
           </Transition>
         </div>
@@ -172,16 +206,19 @@ const Header = () => {
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
             </li>
+            {token === undefined || token.length === 0 || token === null ?
             <li>
               <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
                 <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
               </button>
             </li>
+            :
             <li>
-              <button className={`${darkMode ? "tw-bg-campfire-blue-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-campfire-blue tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"}  tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
-                <Link to={'/auth/guest/signup'}><Transition>Signup</Transition></Link>
+              <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
+                <Transition>Logout</Transition>
               </button>
             </li>
+          }
           </ul>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-4">
             {!darkMode ? (

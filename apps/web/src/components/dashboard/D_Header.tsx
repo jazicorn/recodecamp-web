@@ -15,21 +15,21 @@ const HeaderDashboard = () => {
   const account = useAppSelector((state:RootState) => state?.dashboard?.user);
   //console.log("account", account);
   const [ accountType, setAccountType] = useState('');
-  const guestSub = () => {
+  const accountSub = () => {
     if(account !== undefined ) {
       if(Object.keys(account).length !== 0) {
         const sub = account._SUBSCRIPTION.split(',')[1];
         const subType = sub.charAt(0).toUpperCase() + sub.slice(1);
+        //console.log(subType)
         setAccountType(subType);
       }
-      setAccountType('No Account');
     } else {
       setAccountType('No Account');
     }
   }
   useEffect(() => {
-    guestSub();
-  })
+    accountSub();
+  });
 
   return (
     <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25' : '[&>*]:tw-backdrop-brightness-65 [&>*]:tw-backdrop-blur-sm'

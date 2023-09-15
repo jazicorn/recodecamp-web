@@ -26,13 +26,13 @@ class App {
         }));
         this.app.use(bodyParser.json());
         this.app.use(cors(this.corsOptions));
-        this.app.set('trust proxy', 1) // trust first proxy
-        this.app.use(session({
-            secret: process.env.SECRET_TOKEN,
-            saveUninitialized:true,
-            cookie: { sameSite: 'strict', secure: false, maxAge: 1000 * 60 * 60 * 24 },
-            resave: false
-        }));
+        // this.app.set('trust proxy', 1) // trust first proxy
+        // this.app.use(session({
+        //     secret: process.env.SECRET_TOKEN,
+        //     saveUninitialized:true,
+        //     cookie: { sameSite: 'strict', secure: false, maxAge: 1000 * 60 * 60 * 24 },
+        //     resave: false
+        // }));
     }
 
     private initControllers(controllers) {

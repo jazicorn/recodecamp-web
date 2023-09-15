@@ -51,7 +51,7 @@ const HomeBanner = () => {
                 </p>
                 {/**Link to dashboard */}
                 <Link
-                  to={`/learn`} id="banner-dashboard-link"
+                  to={`/auth/guest/signup`} target="_blank" id="banner-dashboard-link"
                   className={`${
                     darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
                     "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
@@ -97,7 +97,7 @@ const HomeBanner = () => {
                     <span className="tw-text-campfire-blue">arrays, functions, objects,</span> and other programming fundamentals
                   </p>
                   <Link
-                    to={`/learn`} id="banner-dashboard-link"
+                    to={`/auth/guest/signup`} target="_blank" id="banner-dashboard-link"
                     className={`${
                       darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple-light hover:tw-decoration-campfire-blue" : 
                       "tw-text-campfire-purple hover:tw-text-campfire-blue "} 
@@ -142,7 +142,7 @@ const HomeBanner = () => {
                   <span className="tw-text-campfire-blue">arrays, functions, objects,</span> and other programming fundamentals
                 </p>
                 <Link
-                  to={`/learn`} id="banner-dashboard-link"
+                  to={`/auth/guest/signup`} target="_blank" id="banner-dashboard-link"
                   className={`${
                     darkMode ? "hover:tw-text-campfire-neutral-300 tw-text-campfire-purple hover:tw-decoration-campfire-blue" : 
                     "tw-text-campfire-purple hover:tw-text-campfire-blue "} tw-font-space_mono_bold
