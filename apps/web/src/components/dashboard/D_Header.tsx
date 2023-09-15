@@ -43,7 +43,7 @@ const HeaderDashboard = () => {
           </Link>
         </div>
         <p className="tw-font-space_grotesk_medium tw-pt-1.5 tw-text-base">
-          Mode : <span className={`${darkMode ? "tw-text-campfire-purple-300" : ""} `}>{accountType}</span>
+          Mode : <span className={`${darkMode ? "" : ""} tw-text-campfire-purple-300 `}>{accountType}</span>
         </p>
       </header>
     </div>
