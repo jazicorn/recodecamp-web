@@ -11,8 +11,8 @@ import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgr
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** React Redux Hooks */
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
+//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
@@ -32,8 +32,6 @@ const SignIn = () => {
 
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
-  /** Retrieve User From Redux State */
-  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
 
   const {
     register,
