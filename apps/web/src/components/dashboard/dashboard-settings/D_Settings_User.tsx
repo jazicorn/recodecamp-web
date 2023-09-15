@@ -1,5 +1,6 @@
 // Dashboard Calender
-import { useContext, useState, useMemo, useRef } from 'react';
+// import { useContext, useState, useMemo, useRef } from 'react';
+import { useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../../context/ThemeContext';
 import useWindowSize from '../../../hooks/useWindowSize';
@@ -9,8 +10,8 @@ import { useAppSelector } from '../../../redux/reduxHooks.ts';
 import type { RootState } from '../../../redux/store.ts';
 //import bcrypt from 'bcryptjs';
 //avatars
-import { createAvatar } from '@dicebear/core';
-import { pixelArt } from '@dicebear/collection';
+// import { createAvatar } from '@dicebear/core';
+// import { pixelArt } from '@dicebear/collection';
 
 const D_Settings_User = () => {
   const { isMobile, isMobileMD } = useWindowSize();
@@ -21,51 +22,9 @@ const D_Settings_User = () => {
   const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   //console.log("getUser:", getUser);
   
-  /** empty user placeholder values*/
-  const emptyUser = {
-    _ID: '',
-    _CREATED_AT: new Date,
-    _UPDATED_AT: new Date,
-    _ACCESS_TOKEN: '',
-    _FIRST_LOGIN: false,
-    _ADMIN: false,
-    _SUBSCRIPTION: "[1000, 'Unknown']",
-    _IP_ADDRESS: '',
-    _PASSCODE: '',
-    _PASSCODE_CONFIRMED: false,
-    _EMAIL: '',
-    _EMAIL_CONFIRMED: false,
-    _EMAIL_PASSCODE: '',
-    _PASSWORD: '',
-    _DEFAULT_LANGUAGE: '',
-    _DEFAULT_ROUTE: '',
-    _POINTS_TOTAL: 0,
-    _POINTS_JAVASCRIPT: 0,
-    _POINTS_JAVA: 0 ,
-    _POINTS_PYTHON: 0,
-    _COURSES: '',
-  }
-
-  /**created userobj from redux data store*/
-  const userObj = () => { 
-    if(getUser !== undefined) {
-      //console.log("getUser:", getUser)
-      if(Object.keys(getUser).length !== 0) {
-        //console.log("user");
-        return getUser
-      } else {
-      //console.log("no user");
-      return emptyUser
-    }
-    } else {
-      //console.log("no user");
-      return emptyUser
-    }
-  };
-
-  /** set values from user obj*/
-  const initialUser = userObj();
+  const initialUser = getUser
   //console.log("initialUser", initialUser);
+
   /**User Id */
   const userId = useRef(initialUser._ID);
   const userIdHide = "********-****-****-****-************";
@@ -91,12 +50,12 @@ const D_Settings_User = () => {
   };
 
   /**Generate Avatar */
-  const avatar = useMemo(() => {
-    return createAvatar(pixelArt , {
-      size: 128,
-      // ... other options
-    }).toDataUriSync();
-  }, []);
+  // const avatar = useMemo(() => {
+  //   return createAvatar(pixelArt , {
+  //     size: 128,
+  //     // ... other options
+  //   }).toDataUriSync();
+  // }, []);
 
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
@@ -113,7 +72,6 @@ const D_Settings_User = () => {
             Settings: User
           </h4>
         </Transition>
-        
         {initialUser._ID.length === 0 ?
           <Transition> 
           <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
