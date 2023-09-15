@@ -1,7 +1,7 @@
 // Dashboard Navigation
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { Link, useNavigate } from 'react-router-dom';
 //icons
 import {
   IconCalendar,
@@ -13,10 +13,23 @@ import {
   IconBook2,
   IconUser
 } from '@tabler/icons-react';
+import { removeTokenFromLocalStorage } from '../../utils/common';
 
 const D_Navigation = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+
+  /** User Logout */
+  const navigate = useNavigate();
+  const logout = (e) => {
+    e.preventDefault();
+    removeTokenFromLocalStorage();
+    console.log("👋 Goodbye | Logged Out");
+    setTimeout(() => {
+      console.log("⏳ Delay | Redirect in 1 second.");
+      navigate("/");
+    }, '1000');
+  }
 
   return (
     <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-mb-1 tw-place-content-start tw-h-full tw-divide-y tw-p-2 tw-gap-y-4 `}>
@@ -67,7 +80,10 @@ const D_Navigation = () => {
         </li>
         <li className={`${darkMode ? "hover:tw-border-b hover:tw-border-campfire-neutral-300": "hover:tw-border-b-[1.5px] hover:tw-border-campfire-blue"} 
        tw-pl-1`}>
-          { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }</li>
+          <button onClick={(e) => logout(e)}>
+          { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }
+          </button>
+        </li>
       </ul>
     </menu>
   )

@@ -11,10 +11,12 @@ import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgr
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** React Redux Hooks */
-import { useAppDispatch } from '../../redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
+import { storeTokenInLocalStorage } from '../../utils/common';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -30,6 +32,8 @@ const SignIn = () => {
 
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
+  /** Retrieve User From Redux State */
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
 
   const {
     register,
@@ -37,11 +41,13 @@ const SignIn = () => {
   } = useForm<FormInputs>({
     criteriaMode: "all",
   })
-  const onSubmit = handleSubmit((data) => {
-    guestLogin(data)
-  });
 
   const [ guestData, setGuestData] = useState();
+
+  /**Request Guest Login Info */
+  const onSubmit = handleSubmit((data) => {
+    guestLogin(data);
+  });
 
   /** Guest Login */
   const guestLogin = async (data) => {
@@ -98,6 +104,10 @@ const SignIn = () => {
         const userJson = response.data;
         //console.log("userJson: ", userJson);
         setGuestData(userJson);
+        return userJson
+      }).then(function(data) {
+        storeTokenInLocalStorage(data._ACCESS_TOKEN);
+      }).then(function() {
         setTimeout(() => {
           console.log("⏳ Delay | Redirect in 1 second.");
           navigate("/learn");
@@ -113,7 +123,7 @@ const SignIn = () => {
     //console.log("guestData: ",guestData);
     dispatch(menuUser(guestData));
   },[dispatch, guestData]);
-
+  
   return (
     <>
       <div className={`${darkMode ? '' : ''} tw-h-full tw-w-full tw-px-6

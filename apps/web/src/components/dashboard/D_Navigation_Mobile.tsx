@@ -1,6 +1,6 @@
 // Dashboard Navigation | Mobile
 import { useContext, useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext';
 //icons
 import {
@@ -16,11 +16,25 @@ import {
   IconUser
 } from '@tabler/icons-react';
 import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg';
+import { removeTokenFromLocalStorage } from '../../utils/common';
+
 
 const D_Navigation = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   const [menu, setMenu] = useState(false);
+
+  /** User Logout */
+  const navigate = useNavigate();
+  const logout = (e) => {
+    e.preventDefault();
+    removeTokenFromLocalStorage();
+    console.log("👋 Goodbye | Logged Out");
+    setTimeout(() => {
+      console.log("⏳ Delay | Redirect in 1 second.");
+      navigate("/");
+    }, '1000');
+  }
 
   const toggleMenu = () => {
     setMenu(!menu);
@@ -116,7 +130,11 @@ const D_Navigation = () => {
               </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> } User Logout</li>
+                <button oonClick={(e) => logout(e)} className="tw-font-space_mono">
+                { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }
+                User Logout
+                </button>
+              </li>
             </ul>
           </div>
         }
