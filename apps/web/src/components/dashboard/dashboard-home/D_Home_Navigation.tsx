@@ -1,7 +1,7 @@
 // Dashboard Banner
 import { useContext } from 'react';
 import { ThemeContext } from '../../../context/ThemeContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Rocket } from '../../../assets/icons/others/rocket-right-svgrepo-com.svg';
 //import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
@@ -18,11 +18,25 @@ import {
   IconBook2,
   IconUser
 } from '@tabler/icons-react';
+import { removeTokenFromLocalStorage } from '../../../utils/common';
 
 const D_Banner = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+
+  /** User Logout */
+  const navigate = useNavigate();
+  const logout = (e) => {
+    e.preventDefault();
+    removeTokenFromLocalStorage();
+    console.log("👋 Goodbye | Logged Out");
+    setTimeout(() => {
+      console.log("⏳ Delay | Redirect in 1 second.");
+      navigate("/");
+    }, '1000');
+  }
+
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
     '[&_main]:tw-text-campfire-purple [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
@@ -90,7 +104,7 @@ const D_Banner = () => {
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-pl-0.5`}>
               { darkMode ? <IconLogout color="#d4d4d4" /> : <IconLogout color="#000" />}
-              <Transition><button to={''}>User Logout</button></Transition>
+              <Transition><button onClick={(e) => logout(e)} className="tw-font-space_mono">Logout</button></Transition>
             </li>
           </ul>
         </main>
