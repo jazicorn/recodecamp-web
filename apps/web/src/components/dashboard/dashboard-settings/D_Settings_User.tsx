@@ -26,12 +26,18 @@ const D_Settings_User = () => {
   //console.log("initialUser", initialUser);
 
   /**User Id */
-  const userId = useRef(initialUser._ID);
+  const id = initialUser._ID;
   const userIdHide = "********-****-****-****-************";
+  const [ userId, setUserId ] = useState(userIdHide);
   const [ userIdReveal, setUserIdReveal ]= useState(false);
   const userIdRevealButton = (e) => {
     e.preventDefault();
     setUserIdReveal(!userIdReveal);
+    if(userIdReveal === true) {
+      setUserId(id);
+    } else {
+      setUserId(userIdHide);
+    }
   };
   /**User Dates */
   const userCreatedDate = new Date(initialUser._CREATED_AT).toDateString();
@@ -90,13 +96,17 @@ const D_Settings_User = () => {
               <div className="tw-pt-4">
                 <table className={`${darkMode ? "[&>tbody>tr>th]:tw-bg-campfire-neutral-500 [&>tbody>tr>th]:" : "[&>tbody>tr>th]:tw-border-campfire-neutral-500  [&>tbody>tr>th]:tw-bg-campfire-neutral-100"} 
                 ${isMobile ? "[&>tbody>tr]:tw-flex-col [&>tbody>tr]:tw-flex [&>tbody>tr>td]:tw-pt-1 [&>tbody>tr>td]:tw-pb-4 [&>tbody>tr>th]:tw-py-1 tw-justify-center tw-m-auto" : 
-                "[&>tbody>tr]:tw-flex-row [&>tbody>tr>td]:tw-pl-2 [&>tbody>tr>td]:tw-py-2 [&>tbody>tr>th]:tw-py-2 "}  
-                tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed [&>tbody>tr>td]:tw-text-sm [&>tbody>tr>th]:tw-pl-2
+                "[&>tbody>tr]:tw-flex-row [&>tbody>tr>td]:tw-pl-2 [&>tbody>tr>td]:tw-py-2 [&>tbody>tr>th]:tw-py-2 "} tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed [&>tbody>tr>td]:tw-text-sm [&>tbody>tr>th]:tw-px-2
                 [&>tbody>tr>th]:tw-border-b `}>
                   <tbody>
                     <tr>
                       <th>User ID</th>
-                      <td className="">{userIdReveal === true ? <span>{userIdHide}</span> : <span>{userId.current}</span>}&nbsp;
+                      <td className="">
+                        {userIdReveal === true ? 
+                        <span>{userIdHide}</span> 
+                        : 
+                        <span>{userId}</span>
+                        }&nbsp;
                         <button onClick={(e) => userIdRevealButton(e)} 
                         className={`${darkMode ? "hover:tw-bg-campfire-neutral-500" : "tw-border-campfire-neutral-700 hover:tw-bg-campfire-neutral-400/40"} 
                         tw-font-space_mono tw-border tw-py-0.5 tw-px-3`}>
