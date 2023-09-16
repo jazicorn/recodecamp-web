@@ -192,7 +192,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
               tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
@@ -213,7 +213,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
               tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
@@ -234,7 +234,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-langauge tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-1 tw-col-end-1`}>
                 <D_Navigation/>
@@ -254,7 +254,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-langauge tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -273,7 +273,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -292,7 +292,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -311,7 +311,7 @@ const Dashboard = () => {
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
