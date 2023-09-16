@@ -15,7 +15,7 @@ const Layout_D_Settings = () => {
     <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
+        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-85 ' : '[&>*]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-settings tw-grid-cols-layout-dashboard-settings tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>

@@ -27,7 +27,7 @@ import {
 } from '../../../redux/slices/dashboardSlice.ts';
 import { DEFAULT_USER } from '../../../utils/constants.ts';
 
-const D_Banner = () => {
+const D_Home_Navigation = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
@@ -51,9 +51,9 @@ const D_Banner = () => {
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
     '[&_main]:tw-text-campfire-purple [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-50 custom-bg-waves-neutral-darker-inverse tw-bg-blend-overlay' : 
-      'custom-bg-waves-neutral-lighest tw-bg-blend-overlay tw-opacity-50'} tw-w-full tw-h-full `}>
-      <section className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-900': '[&>main>ul]:tw-border-campfire-blue'} 
+      <div className={`${darkMode ? 'custom-bg-waves-neutral-darker-inverse tw-bg-blend-overlay tw-opacity-70 ' : 
+      'custom-bg-waves-neutral-lighest tw-bg-blend-overlay tw-opacity-60'} tw-w-full tw-h-full `}>
+      <section className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-800': '[&>main>ul]:tw-border-campfire-blue'} 
        tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left
       [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-4 
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2`}>
@@ -76,7 +76,7 @@ const D_Banner = () => {
               { darkMode ? <IconCategory color="#d4d4d4" /> : <IconCategory color="#000" />}
               <Transition><Link to='/learn/categories' className="">Categories</Link></Transition>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-100 "}
+            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-300 "}
             tw-flex tw-flex-row tw-place-items-center tw-w-fit tw-pr-1 tw-rounded`}>
               { darkMode ? <IconListDetails color="#d4d4d4" /> : <IconListDetails color="#000" />}
               <Transition><Link to='/learn/code' className="">Start ReCoding</Link></Transition>
@@ -95,7 +95,7 @@ const D_Banner = () => {
               <Transition><Link to={'/learn/notes'}>Notes</Link></Transition>
             </li>
           </ul>
-          <hr className={`${darkMode ? 'tw-border-campfire-neutral-900' : 'tw-border-campfire-blue' } 
+          <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
         tw-place-self-left tw-ml-8 tw-my-3 tw-h-[px] tw-w-[100px]`}/>
           {/**Col 2 */}
           <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
@@ -125,4 +125,4 @@ const D_Banner = () => {
   )
 }
 
-export default D_Banner
+export default D_Home_Navigation
