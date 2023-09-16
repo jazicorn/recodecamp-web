@@ -113,13 +113,6 @@ const D_Navigation = () => {
           <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple-300' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit 
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              <Transition>
-                <Link to={''}>
-                  {darkMode ? <IconSearch color="#d4d4d4" /> : <IconSearch color="#000" />}
-                </Link>
-              </Transition>
-            </li>
              <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               <Transition>
                 <Link to={'/learn/settings/user'}>
