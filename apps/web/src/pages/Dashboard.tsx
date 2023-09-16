@@ -62,7 +62,7 @@ const Dashboard = () => {
   }, [location, params]);
 
   const noLanguagePaths = () => {
-    if( path === '/learn' || path === '/learn/calendar' || path === '/learn/docs' || path === '/learn/notes' || path === '/learn/settings') {
+    if( path === '/learn' || path === '/learn/calendar' || path === '/learn/docs' || path === '/learn/notes' || path === '/learn/settings/dashboard' ||  path === '/learn/settings/user') {
       return true
     } else {
       return false
