@@ -62,7 +62,7 @@ const Dashboard = () => {
   }, [location, params]);
 
   const noLanguagePaths = () => {
-    if( path === '/learn' || path === '/learn/calendar' || path === '/learn/docs' || path === '/learn/notes' || path === '/learn/settings') {
+    if( path === '/learn' || path === '/learn/calendar' || path === '/learn/docs' || path === '/learn/notes' || path === '/learn/settings/dashboard' ||  path === '/learn/settings/user') {
       return true
     } else {
       return false
@@ -157,10 +157,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     const auth = detectTokenFromLocalStorage();
+    if(auth && getUser === undefined) {
+      guestLogin();
+    }
     if(auth && getUser._ID.trim() === '123-456-789') {
       guestLogin();
     }
-    if(getUser === undefined) {
+    if(!auth && getUser === undefined) {
       dispatch(menuUser(DEFAULT_USER));
     }
   },[dispatch, getUser, guestLogin]);
@@ -177,7 +180,8 @@ const Dashboard = () => {
         {isDesktopMDXL || isDesktopXL ?
         <div className="tw-w-full tw-h-full">
           { path === '/learn' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
             [&>*]:tw-backdrop-blur-sm
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
@@ -185,9 +189,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/code' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
               tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
@@ -205,9 +210,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/categories' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
               tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
@@ -225,9 +231,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/calendar' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-langauge tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-1 tw-col-end-1`}>
                 <D_Navigation/>
@@ -244,9 +251,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/docs' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-langauge tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -262,9 +270,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/notes' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -280,9 +289,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/settings/user' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -298,9 +308,10 @@ const Dashboard = () => {
             </main>
           }
           { path === '/learn/settings/dashboard' && 
-            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'}
+            <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+            : '[&>section]:tw-backdrop-brightness-85'}
             tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
-            [&>*]:tw-backdrop-blur-sm
+            [&>*]:tw-backdrop-blur-sm tw-min-h-[30em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
                 <D_Navigation/>
@@ -317,7 +328,8 @@ const Dashboard = () => {
           }
         </div>
         :
-        <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-65'} 
+        <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
+        : '[&>section]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             {/** z index can't go higher than 50 to work*/}
