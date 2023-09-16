@@ -24,7 +24,7 @@ import {
   menuUser,
 } from '../redux/slices/dashboardSlice.ts';
 /**Custom Helpers */
-import { detectTokenFromLocalStorage, getTokenFromLocalStorage } from '../utils/common';
+import { detectTokenFromLocalStorage, getTokenFromLocalStorage, removeTokenFromLocalStorage } from '../utils/common';
 import { DEFAULT_USER } from '../utils/constants';
 
 const getRoutePath = (location: Location, params: Params): string => {
@@ -121,6 +121,7 @@ const Dashboard = () => {
               sx: { backgroundColor: 'red' },
               loading: false,
             });
+            removeTokenFromLocalStorage()
           }
       }).then(function(response) {
         //console.log("response", response);
@@ -132,8 +133,25 @@ const Dashboard = () => {
           console.log("✅ Guest | Verified");
           //console.log("data,user:", data.user)
           return data
-        }
-        console.log("🚫 Guest | Not Verified | Please Login")
+        } else {
+          console.log("🚫 Guest | Not Verified | Please Login");
+          notifications.show({
+              id: 'invalidUser',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "",
+              message: '',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: true,
+            });
+          setTimeout(() => {
+            navigate("/");
+          }, '1000');
+        };
       }).then(function(data) {
         if(data.user !== undefined && Object.keys(data.user).length > 0 ) {
           dispatch(menuUser(data.user));
