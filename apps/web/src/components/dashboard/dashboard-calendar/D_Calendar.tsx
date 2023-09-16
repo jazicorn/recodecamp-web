@@ -13,13 +13,16 @@ import Transition from '../../../hooks/useTransition';
 //import type { RootState } from '../../../redux/store.ts';
 /**Custom Helpers */
 //import { DEFAULT_USER } from '../../../utils/constants';
-import { getTokenFromLocalStorage } from '../../../utils/common';
+import { detectTokenFromLocalStorage } from '../../../utils/common';
 
 const D_Calendar = () => {
+  /**Detect Auth */
+  const detectUser = detectTokenFromLocalStorage();
+  /**Custom Hooks */
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  /** User from redux store */
+  /** Redux Store: User */
   // const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   // const [ user, setUser ] = useState(DEFAULT_USER);
   
@@ -43,7 +46,7 @@ const D_Calendar = () => {
             Calendar
           </h4>
         </Transition>
-        {getTokenFromLocalStorage === 0 ?
+        {!detectUser ?
           <Transition> 
           <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
           <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span>

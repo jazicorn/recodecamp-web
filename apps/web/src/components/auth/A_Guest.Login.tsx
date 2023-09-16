@@ -17,7 +17,7 @@ import { useAppDispatch } from '../../redux/reduxHooks.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
-import { getTokenFromLocalStorage, storeTokenInLocalStorage } from '../../utils/common';
+import { storeTokenInLocalStorage, detectTokenFromLocalStorage } from '../../utils/common';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -125,7 +125,8 @@ const SignIn = () => {
 
   const [status, setStatus] = useState(false);
   useEffect(() => {
-    if( getTokenFromLocalStorage) {
+    const detectUser = detectTokenFromLocalStorage();
+    if(detectUser) {
       setStatus(true);
     } else {
       setStatus(false);
