@@ -35,7 +35,7 @@ const HeaderDashboard = () => {
     <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25' : '[&>*]:tw-backdrop-brightness-85 [&>*]:tw-backdrop-blur-sm'
       } tw-font-mono tw-flex tw-flex-col tw-w-full tw-px-5 tw-mt-2 tw-relative tw-min-h-[44px] `}>
       <header
-        className={`${darkMode ? "tw-text-campfire-neutral-500" : ""} tw-grow-0 tw-h-full tw-w-full tw-pl-4 tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-gap-2 tw-justify-start tw-items-center tw-rounded`}
+        className={`${darkMode ? "tw-text-campfire-neutral-500" : ""} tw-grow-0 tw-h-full tw-w-full tw-pl-5 tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-gap-2 tw-justify-start tw-items-center tw-rounded`}
       >
         <h5 className="tw-font-space_grotesk_medium tw-pt-1.5 tw-text-base">
           Mode : <span className={`${darkMode ? "tw-text-campfire-purple-300" : "tw-text-campfire-purple-400"} tw-pl-1`}>{accountType}</span>

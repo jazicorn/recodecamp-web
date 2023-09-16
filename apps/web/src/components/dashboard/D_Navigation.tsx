@@ -52,13 +52,13 @@ const D_Navigation = () => {
     '[&_main]:tw-text-campfire-purple [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
       <div className={`${darkMode ? 'custom-bg-waves-neutral-darker-inverse tw-bg-blend-overlay tw-opacity-50 ' : 
       'custom-bg-waves-neutral-lighest tw-bg-blend-overlay tw-opacity-50'} tw-w-full tw-h-full  tw-rounded`}>
-      <section className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-800': '[&>main>ul]:tw-border-campfire-blue'} 
+      <section className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-800': '[&>main>ul]:tw-border-campfire-blue'} [&>main>ul>li]:tw-py-1 
        tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left
-      [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-2 
+      [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-3 
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2`}>
         <Transition>
         <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300 hover:tw-text-2 campfire-neutral-300' : 'tw-text-campfire-neutral-700 hover:tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
-          tw-border-b tw-text-2xl tw-h-[40px] tw-w-full tw-pl-2 tw-pb-3 tw-mb-4`}>
+          tw-border-b tw-text-2xl tw-h-[40px] tw-w-full tw-pl-3 tw-pb-3 tw-mb-4`}>
             <div className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue"} tw-border-l-2 tw-px-1.5 tw-flex tw-flex-row tw-place-self-center tw-h-full tw-px-2`}>
               <Transition>
                 <Link to={'/learn'} className='tw-h-full'>
@@ -71,7 +71,7 @@ const D_Navigation = () => {
         <main className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-col">
           {/**Col 1 */}
           <ul className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
-          [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-py-1 [&>*]:tw-justify-left
+          [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-justify-left
           `}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               <Transition>
@@ -108,9 +108,9 @@ const D_Navigation = () => {
             </li>
           </ul>
           <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
-        tw-place-self-left tw-ml-4 tw-mt-5 tw-mb-4 tw-h-[2px] tw-w-[40px]`}/>
+        tw-place-self-left tw-ml-4 tw-mt-5 tw-mb-4 tw-h-[2px] tw-w-[36px]`}/>
           {/**Col 2 */}
-          <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple-300' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
+          <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple-300' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit 
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
