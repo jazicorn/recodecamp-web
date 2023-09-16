@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -17,7 +17,8 @@ import { useAppDispatch } from '../../redux/reduxHooks.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
-import { storeTokenInLocalStorage, detectTokenFromLocalStorage } from '../../utils/common';
+//import { DEFAULT_USER } from '../../utils/constants';
+import { storeTokenInLocalStorage, detectTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -42,6 +43,7 @@ const SignIn = () => {
   })
 
   const [ guestData, setGuestData] = useState();
+  const [auth, setAuth] = useState(false);
 
   /**Request Guest Login Info */
   const onSubmit = handleSubmit( async (data) => {
@@ -49,7 +51,7 @@ const SignIn = () => {
   });
 
   /** Guest Login */
-  const guestLogin = async (data) => {
+  const guestLogin = useCallback( async(data) => {
     try {
       let url;
       if(import.meta.env.PROD) {
@@ -117,46 +119,114 @@ const SignIn = () => {
       console.log("🚫 Guest | Login Failed")
       console.log(error);
     }
-  };
+  },[navigate]);
 
   useEffect(() => {    
     dispatch(menuUser(guestData));
   },[dispatch, guestData, navigate]);
 
-  const [status, setStatus] = useState(false);
+  
   useEffect(() => {
     const detectUser = detectTokenFromLocalStorage();
     if(detectUser) {
-      setStatus(true);
+      setAuth(true);
     } else {
-      setStatus(false);
+      setAuth(false);
     }
   },[]);
 
+  /** Guest Verify*/
+  const guestVerify = useCallback(async () => {
+    try {
+      const token = getTokenFromLocalStorage();
+      //console.log("token:", token);
+      let url;
+      if(import.meta.env.PROD) {
+        url = `${baseURL}/guest/verify`;
+      } else {
+        url = `/api/guest/verify`;
+      }
+      await fetch(url, { 
+        method: 'POST',
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({token: `${token}`}),        
+      }).then(function(res) {
+          if(res.ok) {
+            console.log("🏠 Guest | Logged In");
+            // Success Notification
+            notifications.show({
+              id: 'success',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Guest Detected...",
+              message: '',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: true,
+            });
+            return res
+          } else {
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Verification Error",
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
+          }
+      }).then(function(response) {
+        //console.log("response", response);
+        return response.json()
+      }).then(function(response) {
+        const data = response;
+        //console.log("data auth:", data.authenticated)
+        if(data.authenticated) {
+          console.log("✅ Guest | Verified");
+          //console.log("data,user:", data.user)
+          return data
+        }
+        console.log("🚫 Guest | Not Verified | Please Login")
+      }).then(function(data) {
+        setGuestData(data.user);
+        return data
+      }).then(function() {
+        setTimeout(() => {
+          console.log("⏳ Delay | Redirect in 1 second.");
+          navigate("/learn");
+        }, "1000");
+      });
+    } catch(error) {
+      console.log("🚫 Guest | Failed to Verify | Please Login")
+      console.log(error);
+    }
+  },[navigate]);
+
   useEffect(() => {
-    const verify = () => {
-      navigate("/learn");
+    const result = () => {
+      console.log("⏳ Delay | Redirect in 1 second");
+      navigate("/");
     };
-    if(status === true) {
+    if(auth === true && guestData === undefined) {
       console.log("❓ Guest | Account Detected");
       console.log("⏳ Delay | Redirect in > 1 second");
-      // Guest Already Logged Notification
-      notifications.show({
-        id: 'success',
-        withCloseButton: true,
-        autoClose: 2000,
-        title: "Account Detected...",
-        message: '',
-        color: 'teal',
-        icon: <IconCheck />,
-        className: 'my-notification-class',
-        style: { backgroundColor: 'white' },
-        sx: { backgroundColor: 'teal' },
-        loading: true,
-      });
-      setTimeout(() => {verify()}, "600")
+      guestVerify();
+      //console.log("guestData", guestData);
+      setTimeout(() => {result}, "1000");
     }
-  });
+  },[auth, guestData, guestVerify, navigate]);
 
   return (
     <>
