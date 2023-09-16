@@ -57,7 +57,7 @@ const Register = () => {
       }).then(function(response) {
           //console.log(response)
           if(response.status === 200) {
-            console.log("🎉 Guest Created!");
+            console.log("🎉 Guest | Created!");
             // Success Notification
             notifications.show({
               id: 'created',
@@ -73,10 +73,11 @@ const Register = () => {
               loading: false,
             });
             setTimeout(() => {
-              console.log("⏳ Delay | Redirect in 1 second.");
+              console.log("⏳ Delay | Redirect in 1 second");
               navigate("/auth/guest/login");
             }, "1000");
           } else {
+            console.log("🚫 Guest | Login Failed")
             // Failure Notification
             notifications.show({
               id: 'failure',
@@ -94,7 +95,7 @@ const Register = () => {
           }
       });
     } catch(error) {
-      console.log("❌ Guest Creation Failed")
+      console.log("🚫 Guest | Creation Failed")
       console.log(error);
     }
   };

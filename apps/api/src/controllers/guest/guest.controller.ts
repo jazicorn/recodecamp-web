@@ -26,6 +26,8 @@ class Guest_Routes {
     public pathGuestAll = '/guest/all';
     /**Public: Create Guest*/
     public pathGuestNew = '/guest/new';
+     /**Public: Auth guest*/
+    public pathGuestAuth = '/guest/verify';
     /**Express Router*/
     public router = Router();
     /**Cors Options*/
@@ -46,6 +48,7 @@ class Guest_Routes {
         this.router.post(this.pathGuestNew, this.guestNew);
         this.router.put(this.pathGuestUpdate, this.guestUpdate);
         this.router.delete(this.pathGuestDelete, this.corsOptions, this.guestDelete);
+        this.router.post(this.pathGuestAuth, this.guestAuth);
     }
 
     /**Public: Get Guest by ID*/
@@ -222,11 +225,13 @@ class Guest_Routes {
                     const data = req.body;
                     //console.log(data);
 
+                    /**Retrieve Guest */
                     // Check Email in database
                     const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
                     const guestResult = getGuest[0];
                     //console.log("guestResult:", guestResult)
 
+                    /**Validate Guest Data */
                     // Check Guest IP Address
                     const guestIP = req.socket.remoteAddress;
                     const validIP = z.string().ip(guestIP);
@@ -239,6 +244,8 @@ class Guest_Routes {
                         guestResult._password
                     );
                     //console.log("validPasswordCompare:", validPasswordCompare);
+
+                    /**Transform Data */
                     // uppercase guestResult keys
                     Object.entries(guestResult).forEach(([key, value]) => {
                         guestResult[key.toUpperCase()] = guestResult[key];
@@ -247,8 +254,17 @@ class Guest_Routes {
                     // Create Guest Object
                     const guestObj = new Guest(guestResult);
                     //console.log("guest:", guestObj);
+
+                    /**Update Data */
                     // Set Guest IP Address
                     guestObj._IP_ADDRESS = guestIP as string;
+                    // Update Guest Login Time
+                    guestObj._UPDATED_AT = new Date();
+                    // Save Updated Time to DB
+
+                    await sql` UPDATE _GUEST SET _UPDATED_AT = ${guestObj._UPDATED_AT} WHERE _ID = ${guestObj._ID}`;
+
+                    /**Create JWT Token */
                     // Create Token
                     const getToken = jwt.sign({ _ID: guestObj._ID, _EMAIL: guestObj._EMAIL }, process.env.SECRET_TOKEN, {
                         algorithm: 'HS256',
@@ -293,6 +309,43 @@ class Guest_Routes {
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         };
     };
+    /**Public: Auth Guest*/
+    public guestAuth = async (req: Request, res: Response) => {
+        const defaultReturnObject = { authenticated: false, user: null };
+
+        try {
+            const { token } = req.body
+            // const token = String(req?.headers?.authorization?.replace('Bearer ', ''));
+            // console.log("token", token)
+            //console.log("data", token);
+            const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
+            //console.log("decoded", decoded)
+            // /**Retrieve Guest */
+            // Check Email in database
+            const getGuest = await sql`SELECT * FROM _GUEST WHERE _ID = ${decoded._ID}`;
+            const guestResult = getGuest[0];
+            //console.log("guest:", guestResult);
+            if (!guestResult) {
+            res.status(400).json(defaultReturnObject);
+                return;
+            }
+            /**Transform Data */
+            // uppercase guestResult keys
+            Object.entries(guestResult).forEach(([key, value]) => {
+                guestResult[key.toUpperCase()] = guestResult[key];
+                //console.log(`${key}: ${value}`);
+            });
+            // Create Guest Object
+            const guestObj = new Guest(guestResult);
+            //console.log("guest:", guestObj);
+            const result = { authenticated: true, user: guestObj }
+            res.status(200).json(result);
+        }
+        catch (err) {
+            console.log('POST auth/me, Something Went Wrong', err);
+            res.status(400).json(defaultReturnObject);
+        }
+    }
 }
 
 export default Guest_Routes;

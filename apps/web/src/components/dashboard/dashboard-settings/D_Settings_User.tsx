@@ -1,16 +1,21 @@
-// Dashboard Calender
-import { useContext, useState, useMemo, useRef } from 'react';
+// Page: Dashboard Settings (User)
+/**React */
+// import { useContext, useState, useMemo, useRef } from 'react';
+import { useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+/**Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
 import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
-// redux hooks
+/**Redux */
 import { useAppSelector } from '../../../redux/reduxHooks.ts';
 import type { RootState } from '../../../redux/store.ts';
 //import bcrypt from 'bcryptjs';
-//avatars
-import { createAvatar } from '@dicebear/core';
-import { pixelArt } from '@dicebear/collection';
+/**User Avatars */
+// import { createAvatar } from '@dicebear/core';
+// import { pixelArt } from '@dicebear/collection';
+/**Custom Helpers */
+import { getTokenFromLocalStorage } from '../../../utils/common';
 
 const D_Settings_User = () => {
   const { isMobile, isMobileMD } = useWindowSize();
@@ -21,58 +26,22 @@ const D_Settings_User = () => {
   const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   //console.log("getUser:", getUser);
   
-  /** empty user placeholder values*/
-  const emptyUser = {
-    _ID: '',
-    _CREATED_AT: new Date,
-    _UPDATED_AT: new Date,
-    _ACCESS_TOKEN: '',
-    _FIRST_LOGIN: false,
-    _ADMIN: false,
-    _SUBSCRIPTION: "[1000, 'Unknown']",
-    _IP_ADDRESS: '',
-    _PASSCODE: '',
-    _PASSCODE_CONFIRMED: false,
-    _EMAIL: '',
-    _EMAIL_CONFIRMED: false,
-    _EMAIL_PASSCODE: '',
-    _PASSWORD: '',
-    _DEFAULT_LANGUAGE: '',
-    _DEFAULT_ROUTE: '',
-    _POINTS_TOTAL: 0,
-    _POINTS_JAVASCRIPT: 0,
-    _POINTS_JAVA: 0 ,
-    _POINTS_PYTHON: 0,
-    _COURSES: '',
-  }
-
-  /**created userobj from redux data store*/
-  const userObj = () => { 
-    if(getUser !== undefined) {
-      //console.log("getUser:", getUser)
-      if(Object.keys(getUser).length !== 0) {
-        //console.log("user");
-        return getUser
-      } else {
-      //console.log("no user");
-      return emptyUser
-    }
-    } else {
-      //console.log("no user");
-      return emptyUser
-    }
-  };
-
-  /** set values from user obj*/
-  const initialUser = userObj();
+  const initialUser = getUser
   //console.log("initialUser", initialUser);
+
   /**User Id */
-  const userId = useRef(initialUser._ID);
+  const id = initialUser._ID;
   const userIdHide = "********-****-****-****-************";
+  const [ userId, setUserId ] = useState(userIdHide);
   const [ userIdReveal, setUserIdReveal ]= useState(false);
   const userIdRevealButton = (e) => {
     e.preventDefault();
     setUserIdReveal(!userIdReveal);
+    if(userIdReveal === true) {
+      setUserId(id);
+    } else {
+      setUserId(userIdHide);
+    }
   };
   /**User Dates */
   const userCreatedDate = new Date(initialUser._CREATED_AT).toDateString();
@@ -91,12 +60,12 @@ const D_Settings_User = () => {
   };
 
   /**Generate Avatar */
-  const avatar = useMemo(() => {
-    return createAvatar(pixelArt , {
-      size: 128,
-      // ... other options
-    }).toDataUriSync();
-  }, []);
+  // const avatar = useMemo(() => {
+  //   return createAvatar(pixelArt , {
+  //     size: 128,
+  //     // ... other options
+  //   }).toDataUriSync();
+  // }, []);
 
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
@@ -108,13 +77,13 @@ const D_Settings_User = () => {
       [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-4 
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2 [&>main]:tw-px-2`}>
         <Transition>
-          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
-            tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
+          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
+          ${!getTokenFromLocalStorage ? "tw-mb-4" : ""}  
+          tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
             Settings: User
           </h4>
         </Transition>
-        
-        {initialUser._ID.length === 0 ?
+        {!getTokenFromLocalStorage ?
           <Transition> 
           <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
           <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span></main>
@@ -131,13 +100,17 @@ const D_Settings_User = () => {
               <div className="tw-pt-4">
                 <table className={`${darkMode ? "[&>tbody>tr>th]:tw-bg-campfire-neutral-500 [&>tbody>tr>th]:" : "[&>tbody>tr>th]:tw-border-campfire-neutral-500  [&>tbody>tr>th]:tw-bg-campfire-neutral-100"} 
                 ${isMobile ? "[&>tbody>tr]:tw-flex-col [&>tbody>tr]:tw-flex [&>tbody>tr>td]:tw-pt-1 [&>tbody>tr>td]:tw-pb-4 [&>tbody>tr>th]:tw-py-1 tw-justify-center tw-m-auto" : 
-                "[&>tbody>tr]:tw-flex-row [&>tbody>tr>td]:tw-pl-2 [&>tbody>tr>td]:tw-py-2 [&>tbody>tr>th]:tw-py-2 "}  
-                tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed [&>tbody>tr>td]:tw-text-sm [&>tbody>tr>th]:tw-pl-2
+                "[&>tbody>tr]:tw-flex-row [&>tbody>tr>td]:tw-pl-2 [&>tbody>tr>td]:tw-py-2 [&>tbody>tr>th]:tw-py-2 "} tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed [&>tbody>tr>td]:tw-text-sm [&>tbody>tr>th]:tw-px-2
                 [&>tbody>tr>th]:tw-border-b `}>
                   <tbody>
                     <tr>
                       <th>User ID</th>
-                      <td className="">{userIdReveal === true ? <span>{userIdHide}</span> : <span>{userId.current}</span>}&nbsp;
+                      <td className="">
+                        {userIdReveal === true ? 
+                        <span>{userIdHide}</span> 
+                        : 
+                        <span>{userId}</span>
+                        }&nbsp;
                         <button onClick={(e) => userIdRevealButton(e)} 
                         className={`${darkMode ? "hover:tw-bg-campfire-neutral-500" : "tw-border-campfire-neutral-700 hover:tw-bg-campfire-neutral-400/40"} 
                         tw-font-space_mono tw-border tw-py-0.5 tw-px-3`}>

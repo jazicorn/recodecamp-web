@@ -14,22 +14,33 @@ import {
   IconUser
 } from '@tabler/icons-react';
 import { removeTokenFromLocalStorage } from '../../utils/common';
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
+//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
+import { 
+  menuUser,
+} from '../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../utils/constants.ts';
 
 const D_Navigation = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
 
   /** User Logout */
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
     removeTokenFromLocalStorage();
-    console.log("👋 Goodbye | Logged Out");
+    dispatch(menuUser(DEFAULT_USER));
+    console.log("👋 Goodbye | User Logged Out");
     setTimeout(() => {
-      console.log("⏳ Delay | Redirect in 1 second.");
+      console.log("⏳ Delay | Page Redirect In 1 Second.");
       navigate("/");
     }, '1000');
-  }
+  };
 
   return (
     <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-mb-1 tw-place-content-start tw-h-full tw-divide-y tw-p-2 tw-gap-y-4 `}>

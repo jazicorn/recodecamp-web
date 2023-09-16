@@ -11,6 +11,17 @@ import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgr
 import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
 import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
 import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
+/**Icons */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+/** */
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
+//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
+import { 
+  menuUser,
+} from '../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../utils/constants.ts';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
@@ -30,8 +41,8 @@ const Header = () => {
   const { isMobile } = useWindowSize();
 
   /** Set User Preferences */
-  const theme = useContext(ThemeContext)
-  const darkMode = theme.state.darkMode
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   //turn darkmode on and off
   const toggleTheme = () => {
     if (darkMode) {
@@ -41,19 +52,23 @@ const Header = () => {
       theme.dispatch({ type: 'DARKMODE', darkMode: true })
       localStorage.theme = 'dark'
     }
-  }
+  };
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
 
   /** User Logout */
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
     removeTokenFromLocalStorage();
-    console.log("👋 Goodbye | Logged Out");
+    dispatch(menuUser(DEFAULT_USER));
+    console.log("👋 Goodbye | User Logged Out");
     setTimeout(() => {
-      console.log("⏳ Delay | Redirect in 1 second.");
+      console.log("⏳ Delay | Page Redirect In 1 Second.");
       navigate("/");
     }, '1000');
-  }
+  };
 
   /** Get User Access Token From Storage */
   const accessToken = getTokenFromLocalStorage();
@@ -102,7 +117,7 @@ const Header = () => {
   if(isMobile) {
     return (
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue' : 'tw-bg-light '
-        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-place-items-center tw-relative tw-grow-0`}>
+        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-place-items-center tw-grow-0`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
         >
@@ -142,15 +157,22 @@ const Header = () => {
           </div>
           </Transition>
           <Transition>
-          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-2 [&>li]:tw-pl-1 tw-pr-3`}>
+          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-1
+          [&>li]:tw-pl-1 [&>li]:tw-h-[26px] tw-pr-3`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={'/about'}>About</Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link to={`/learn`}>Dashboard</Link>
+              <Link to={`/contact`}>Contact</Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link to={`/contact`}>Contact</Link>
+              <Link to={`/learn`}>Dashboard</Link>
+              <span className={`tw-float-top tw-pl-1.5 tw-self-start tw-text-xs`}>
+              {darkMode ?  
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+              }
+              </span>
             </li>
             {token === undefined || token.length === 0 || token === null ?
             <>
@@ -196,15 +218,25 @@ const Header = () => {
           </h5>
         </Link>
         <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_mono">
-          <ul className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5 tw-items-center`}>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+          <ul className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
               <Link to={'/about'}><Transition>About</Transition></Link>
             </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link to={`/learn`}><Transition>Dashboard</Transition></Link>
-            </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
+            </li>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center`}>
+              <Link to={`/learn`} target="_blank" className="tw-place-self-center">
+                <Transition>
+                  <span>Dashboard</span>
+                </Transition>
+              </Link>
+              <span className={`tw-float-top tw-pl-1 tw-pt-1 tw-self-start tw-text-xs`}>
+              {darkMode ?  
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+              }
+              </span>
             </li>
             {token === undefined || token.length === 0 || token === null ?
             <li>

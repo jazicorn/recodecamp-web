@@ -17,6 +17,13 @@ import {
 } from '@tabler/icons-react';
 import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg';
 import { removeTokenFromLocalStorage } from '../../utils/common';
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
+//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+//import type { RootState } from '../../redux/store.ts';
+import { 
+  menuUser,
+} from '../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../utils/constants.ts';
 
 
 const D_Navigation = () => {
@@ -24,21 +31,26 @@ const D_Navigation = () => {
   const darkMode = state.darkMode;
   const [menu, setMenu] = useState(false);
 
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
+  
   /** User Logout */
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
+    //console.log("goodbye")
     removeTokenFromLocalStorage();
-    console.log("👋 Goodbye | Logged Out");
+    dispatch(menuUser(DEFAULT_USER));
+    console.log("👋 Goodbye | User Logged Out");
     setTimeout(() => {
-      console.log("⏳ Delay | Redirect in 1 second.");
+      console.log("⏳ Delay | Page Redirect In 1 Second.");
       navigate("/");
     }, '1000');
-  }
+  };
 
   const toggleMenu = () => {
     setMenu(!menu);
-  }
+  };
 
   const ref = useRef();
 
@@ -57,7 +69,7 @@ const D_Navigation = () => {
       // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside)
     }
-  }, [menu])
+  }, [menu]);
 
   return (
     <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-pl-2 tw-place-content-start tw-h-full`}>
@@ -130,9 +142,8 @@ const D_Navigation = () => {
               </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                <button oonClick={(e) => logout(e)} className="tw-font-space_mono">
-                { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }
-                User Logout
+                <button onClick={(e) => logout(e)} className="tw-font-space_mono tw-flex tw-flex-row tw-place-items-center tw-text-base tw-w-full">
+                { darkMode ? <IconLogout color="#2ca9bc" /> : <IconLogout color="#000"/> }<span className="tw-pl-1">Logout</span>
                 </button>
               </li>
             </ul>
