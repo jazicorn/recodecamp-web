@@ -1,19 +1,31 @@
-import { useContext, useEffect, useState } from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+// Page: Dashboard
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
 import type { Location, Params } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
-//import { useAppSelector } from '../redux/reduxHooks.ts';
-//import type { RootState } from '../redux/store.ts'
-// hooks
+/** Custom Hooks */
 import useWindowSize from '../hooks/useWindowSize';
 //import Transition from '../hooks/useTransition';
-// components
+/** Components */
 import Header from '../components/header/Header';
 import Header_Dashboard from '../components/dashboard/D_Header';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_Navigation_Mobile';
 import D_Route from '../components/dashboard/D_Route';
 import D_Route_User_Editor from '../components/dashboard/D_Route_User_Editor';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
+/** React Redux Hooks */
+//import { useAppDispatch } from '../redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../redux/reduxHooks.ts';
+import type { RootState } from '../redux/store.ts';
+import { 
+  menuUser,
+} from '../redux/slices/dashboardSlice.ts';
+/**Custom Helpers */
+import { getTokenFromLocalStorage } from '../utils/common';
+import { DEFAULT_USER } from '../utils/constants';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
@@ -33,6 +45,13 @@ const Dashboard = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  const navigate = useNavigate();
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
+
+  /**Detect User Browser Path */
   const location = useLocation();
   const params = useParams();
   
@@ -51,6 +70,102 @@ const Dashboard = () => {
   };
 
   const pathFilter = noLanguagePaths();
+  /** Guest Login */
+  const guestLogin = useCallback(async () => {
+    const token = getTokenFromLocalStorage();
+    //console.log("token:", token)
+    if(token) {
+      try {
+        const token = getTokenFromLocalStorage();
+        //console.log("token:", token);
+        let url;
+        if(import.meta.env.PROD) {
+          url = `${baseURL}/guest/verify`;
+        } else {
+          url = `/api/guest/verify`;
+        }
+        await fetch(url, { 
+          method: 'POST',
+          headers: {
+            'Accept' : 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({token: `${token}`}),        
+        }).then(function(res) {
+            if(res.ok) {
+              console.log("🏠 Guest | Logged In");
+              // Success Notification
+              notifications.show({
+                id: 'success',
+                withCloseButton: true,
+                autoClose: 2000,
+                title: "Verifying...",
+                message: '',
+                color: 'teal',
+                icon: <IconCheck />,
+                className: 'my-notification-class',
+                style: { backgroundColor: 'white' },
+                sx: { backgroundColor: 'teal' },
+                loading: true,
+              });
+              return res
+            } else {
+              // Failure Notification
+              notifications.show({
+                id: 'failure',
+                withCloseButton: true,
+                autoClose: 2000,
+                title: "Verification Error",
+                message: '',
+                color: 'red',
+                icon: <IconX />,
+                className: 'my-notification-class',
+                style: { backgroundColor: 'white' },
+                sx: { backgroundColor: 'red' },
+                loading: false,
+              });
+            }
+        }).then(function(response) {
+          //console.log("response", response);
+          return response.json()
+        }).then(function(response) {
+          const data = response;
+          //console.log("data auth:", data.authenticated)
+          if(data.authenticated) {
+            console.log("✅ Guest | Verified");
+            //console.log("data,user:", data.user)
+            return data
+          }
+          console.log("🚫 Guest | Not Verified | Please Login")
+        }).then(function(data) {
+          if(data.user !== undefined && Object.keys(data.user).length > 0 ) {
+            dispatch(menuUser(data.user));
+          };
+          return data
+        }).then(function() {
+          /**Only redirect if not '/learn' path */
+          const result = () => {
+            console.log("⏳ Delay | Redirect in 1 second");
+            navigate("/learn");
+          };
+          if(path !== '/learn') {
+            setTimeout(() => {result}, "1000");
+          };  
+        })
+      } catch(error) {
+        console.log("🚫 Guest | Failed to Verify | Please Login")
+        console.log(error);
+      }
+    } else {
+      dispatch(menuUser(DEFAULT_USER));
+    }
+  },[dispatch, navigate, path]);
+
+  useEffect(() => {
+    if(getUser === undefined || getUser._ID?.length === 0) {
+      guestLogin();
+    }
+  },[dispatch, getUser, guestLogin]);
 
   return (
     <div className="tw-font-space_mono">

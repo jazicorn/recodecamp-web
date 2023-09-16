@@ -1,23 +1,32 @@
-// Dashboard Calender
+// Page: Dashboard Settings
 import { useContext } from 'react';
+//import { useContext, useState, useEffect } from 'react';
 // import { useContext, useState, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../../context/ThemeContext';
+/**Custom Hooks */
 //import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
-// redux hooks
-import { useAppSelector } from '../../../redux/reduxHooks.ts';
-import type { RootState } from '../../../redux/store.ts';
+/**Redux Hooks */
+//import { useAppSelector } from '../../../redux/reduxHooks.ts';
+//import type { RootState } from '../../../redux/store.ts';
+/**Custom Helpers */
+//import { DEFAULT_USER } from '../../../utils/constants';
+import { getTokenFromLocalStorage } from '../../../utils/common';
 
 const D_Settings = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
   /** User from redux store */
-  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
-  //console.log("getUser:", getUser);
-  const initialUser = getUser
-  //console.log("initialUser", initialUser);
+  // const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
+  // const [ user, setUser ] = useState(DEFAULT_USER);
+  
+  // useEffect(() => {
+  //   if(getUser !== undefined || Object.keys(getUser).length > 0) {
+  //     setUser(getUser);
+  //   }
+  // },[getUser]);
   
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
@@ -30,15 +39,15 @@ const D_Settings = () => {
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2`}>
         <Transition>
           <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
-          ${initialUser._ID.length === 0 ? "" : ""} tw-mb-4
-          tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2`}>
+          tw-mb-4 tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2`}>
             Settings: Dashboard
           </h4>
         </Transition>
-        {initialUser._ID.length === 0 ?
+        {!getTokenFromLocalStorage ?
           <Transition> 
           <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
-          <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span></main>
+          <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span>
+          </main>
           </Transition> 
           :
           <main className="tw-px-4">

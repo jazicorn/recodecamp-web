@@ -1,17 +1,21 @@
-// Dashboard Calender
+// Page: Dashboard Settings (User)
+/**React */
 // import { useContext, useState, useMemo, useRef } from 'react';
 import { useContext, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+/**Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
 import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
-// redux hooks
+/**Redux */
 import { useAppSelector } from '../../../redux/reduxHooks.ts';
 import type { RootState } from '../../../redux/store.ts';
 //import bcrypt from 'bcryptjs';
-//avatars
+/**User Avatars */
 // import { createAvatar } from '@dicebear/core';
 // import { pixelArt } from '@dicebear/collection';
+/**Custom Helpers */
+import { getTokenFromLocalStorage } from '../../../utils/common';
 
 const D_Settings_User = () => {
   const { isMobile, isMobileMD } = useWindowSize();
@@ -74,12 +78,12 @@ const D_Settings_User = () => {
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2 [&>main]:tw-px-2`}>
         <Transition>
           <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
-          ${initialUser._ID.length === 0 ? "tw-mb-4" : ""}  
+          ${!getTokenFromLocalStorage ? "tw-mb-4" : ""}  
           tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
             Settings: User
           </h4>
         </Transition>
-        {initialUser._ID.length === 0 ?
+        {!getTokenFromLocalStorage ?
           <Transition> 
           <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
           <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span></main>
