@@ -1,7 +1,7 @@
 // Page: Dashboard Settings (User)
 /**React */
 // import { useContext, useState, useMemo, useRef } from 'react';
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 /**Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
@@ -15,9 +15,15 @@ import type { RootState } from '../../../redux/store.ts';
 // import { createAvatar } from '@dicebear/core';
 // import { pixelArt } from '@dicebear/collection';
 /**Custom Helpers */
-import { getTokenFromLocalStorage } from '../../../utils/common';
+import { detectTokenFromLocalStorage } from '../../../utils/common';
+/**Modal */
+import { useDisclosure } from '@mantine/hooks';
+import { Modal} from '@mantine/core';
 
 const D_Settings_User = () => {
+  /**Detect Auth */
+  const detectUser = detectTokenFromLocalStorage();
+  /**Custom Hooks */
   const { isMobile, isMobileMD } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
@@ -25,12 +31,13 @@ const D_Settings_User = () => {
   /** User from redux store */
   const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   //console.log("getUser:", getUser);
-  
-  const initialUser = getUser
-  //console.log("initialUser", initialUser);
+
+  useEffect(() => {
+    getUser
+  })
 
   /**User Id */
-  const id = initialUser._ID;
+  const id = getUser._ID;
   const userIdHide = "********-****-****-****-************";
   const [ userId, setUserId ] = useState(userIdHide);
   const [ userIdReveal, setUserIdReveal ]= useState(false);
@@ -44,20 +51,20 @@ const D_Settings_User = () => {
     }
   };
   /**User Dates */
-  const userCreatedDate = new Date(initialUser._CREATED_AT).toDateString();
-  const userCreated = useRef(userCreatedDate);
-  const userUpdatedDate = new Date(initialUser._UPDATED_AT).toDateString();
-  const userUpdated = useRef(userUpdatedDate);
+  const userCreatedDate = new Date(getUser._CREATED_AT).toDateString();
+  const userUpdatedDate = new Date(getUser._UPDATED_AT).toDateString();
   /**User Subscription */
-  const sub = initialUser._SUBSCRIPTION.split(',')[1];
-  const subType = sub.charAt(0).toUpperCase() + sub.slice(1);
-  const userSubType = useRef(subType);
+  const sub = getUser._SUBSCRIPTION.split(',')[1];
+  const userSubType = sub.charAt(0).toUpperCase() + sub.slice(1);
   /**User Email */
-  const userEmail = useRef(initialUser._EMAIL);
+  const userEmail = getUser._EMAIL;
   const userRevealButton = (e) => {
     e.preventDefault();
     console.log("Password Reset");
   };
+  
+  /**Modal: Delete Account */
+  const [opened, { open, close }] = useDisclosure(false);
 
   /**Generate Avatar */
   // const avatar = useMemo(() => {
@@ -70,6 +77,14 @@ const D_Settings_User = () => {
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
     '[&_main]:tw-text-campfire-neutral-700 [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
+      <Modal opened={opened} onClose={close} title="Authentication" centered>
+        {/**#TODO Ask user to confirm delete account. 
+         * If no, close modal.
+         * If yes send api request to delete account
+         * If account confirmed as deleted. redirect to homepage.  
+         * */}
+        {/* Modal content */}
+      </Modal>
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-w-full tw-h-full `}>
       <article className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-900': '[&>main>ul]:tw-border-campfire-blue'} 
@@ -78,12 +93,12 @@ const D_Settings_User = () => {
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2 [&>main]:tw-px-2`}>
         <Transition>
           <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
-          ${!getTokenFromLocalStorage ? "tw-mb-4" : ""}  
+          ${!detectUser ? "tw-mb-4" : ""}  
           tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
             Settings: User
           </h4>
         </Transition>
-        {!getTokenFromLocalStorage ?
+        {!detectUser ?
           <Transition> 
           <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
           <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span></main>
@@ -111,7 +126,7 @@ const D_Settings_User = () => {
                         : 
                         <span>{userId}</span>
                         }&nbsp;
-                        <button onClick={(e) => userIdRevealButton(e)} 
+                        <button onClick={() => userIdRevealButton()} 
                         className={`${darkMode ? "hover:tw-bg-campfire-neutral-500" : "tw-border-campfire-neutral-700 hover:tw-bg-campfire-neutral-400/40"} 
                         tw-font-space_mono tw-border tw-py-0.5 tw-px-3`}>
                         {userIdReveal === true ? <span>Show</span> : <span>Hide</span> }
@@ -120,19 +135,19 @@ const D_Settings_User = () => {
                     </tr>
                     <tr>
                       <th>User Mode</th>
-                      <td>{userSubType.current}</td>
+                      <td>{userSubType}</td>
                     </tr>
                     <tr>
                       <th>User Created</th>
-                      <td>{userCreated.current}</td>
+                      <td>{userCreatedDate}</td>
                     </tr>
                     <tr>
                       <th>User Last Login</th>
-                      <td>{userUpdated.current}</td>
+                      <td>{userUpdatedDate}</td>
                     </tr>
                     <tr>
                       <th>User Email</th>
-                      <td>{userEmail.current}</td>
+                      <td>{userEmail}</td>
                     </tr>
                     <tr>
                       <th>User Password</th>
@@ -150,8 +165,10 @@ const D_Settings_User = () => {
                   </tbody>
                 </table>
                 <div className={`${isMobile ? "tw-pt-4" : "tw-pt-10"} tw-w-full `}>
-                  <button className={`${darkMode ? "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-50"
-                  : "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-100"} tw-w-full tw-border tw-border-red-400 tw-font-space_mono tw-text-lg tw-text-red-400`}>Account Deletion</button>
+                  <button onClick={open} className={`${darkMode ? "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-50"
+                  : "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-100"} tw-w-full tw-border tw-border-red-400 tw-font-space_mono tw-text-lg tw-text-red-400`}>
+                    Account Deletion
+                  </button>
                   <p className="tw-w-full tw-text-center">🚨!!!Warning!!! This Action Is Permanent🚨</p>
                 </div>
               </div>

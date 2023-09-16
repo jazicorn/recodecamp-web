@@ -13,13 +13,16 @@ import Transition from '../../../hooks/useTransition';
 //import type { RootState } from '../../../redux/store.ts';
 /**Custom Helpers */
 //import { DEFAULT_USER } from '../../../utils/constants';
-import { getTokenFromLocalStorage } from '../../../utils/common';
+import { detectTokenFromLocalStorage } from '../../../utils/common';
 
 const D_Notes = () => {
+  /**Detect Auth */
+  const detectUser = detectTokenFromLocalStorage();
+  /**Custom Hooks */
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  /** User from redux store */
+  /** Reduc Store: User */
   // const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   // const [ user, setUser ] = useState(DEFAULT_USER);
   
