@@ -28,7 +28,7 @@ const initialState: DashboardState = {
   points: 0,
   consoleMessage: '',
   user: {
-    _ID: '',
+    _ID: '123-456-789',
     _CREATED_AT: new Date,
     _UPDATED_AT: new Date,
     _ACCESS_TOKEN: '',
@@ -38,7 +38,7 @@ const initialState: DashboardState = {
     _IP_ADDRESS: '',
     _PASSCODE: '',
     _PASSCODE_CONFIRMED: false,
-    _EMAIL: '',
+    _EMAIL: 'john@doe.com',
     _EMAIL_CONFIRMED: false,
     _EMAIL_PASSCODE: '',
     _PASSWORD: '',
