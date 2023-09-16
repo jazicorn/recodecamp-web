@@ -226,7 +226,7 @@ const Header = () => {
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center`}>
-              <Link to={`/learn`} target="_blank" className="tw-place-self-center">
+              <Link to={`/learn`} className="tw-place-self-center">
                 <Transition>
                   <span>Dashboard</span>
                 </Transition>
