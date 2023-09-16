@@ -17,7 +17,7 @@ import { useAppDispatch } from '../../redux/reduxHooks.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
-import { storeTokenInLocalStorage } from '../../utils/common';
+import { getTokenFromLocalStorage, storeTokenInLocalStorage } from '../../utils/common';
 
 //const prodURL = import.meta.env.PROD;
 
@@ -44,7 +44,7 @@ const SignIn = () => {
   const [ guestData, setGuestData] = useState();
 
   /**Request Guest Login Info */
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit( async (data) => {
     guestLogin(data);
   });
 
@@ -67,14 +67,14 @@ const SignIn = () => {
       }).then(function(response) {
           //console.log(response)
           if(response.status === 200) {
-            console.log("🏠 Guest Logged In");
+            console.log("🏠 Guest | Logged In");
             // Success Notification
             notifications.show({
               id: 'success',
               withCloseButton: true,
               autoClose: 2000,
               title: "🥳 Login Successful",
-              message: 'Have fun Re-coding.',
+              message: 'Have Run ReCoding',
               color: 'teal',
               icon: <IconCheck />,
               className: 'my-notification-class',
@@ -84,6 +84,7 @@ const SignIn = () => {
             });
             return response.json();
           } else {
+            console.log("🚫 Guest | Login Failed")
             // Failure Notification
             notifications.show({
               id: 'failure',
@@ -113,16 +114,49 @@ const SignIn = () => {
         }, "1000");
       });
     } catch(error) {
-      console.log("🚫 Guest Login Failed")
+      console.log("🚫 Guest | Login Failed")
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    //console.log("guestData: ",guestData);
+  useEffect(() => {    
     dispatch(menuUser(guestData));
-  },[dispatch, guestData]);
-  
+  },[dispatch, guestData, navigate]);
+
+  const [status, setStatus] = useState(false);
+  useEffect(() => {
+    if( getTokenFromLocalStorage) {
+      setStatus(true);
+    } else {
+      setStatus(false);
+    }
+  },[]);
+
+  useEffect(() => {
+    const verify = () => {
+      navigate("/learn");
+    };
+    if(status === true) {
+      console.log("❓ Guest | Account Detected");
+      console.log("⏳ Delay | Redirect in > 1 second");
+      // Guest Already Logged Notification
+      notifications.show({
+        id: 'success',
+        withCloseButton: true,
+        autoClose: 2000,
+        title: "Account Detected...",
+        message: '',
+        color: 'teal',
+        icon: <IconCheck />,
+        className: 'my-notification-class',
+        style: { backgroundColor: 'white' },
+        sx: { backgroundColor: 'teal' },
+        loading: true,
+      });
+      setTimeout(() => {verify()}, "600")
+    }
+  });
+
   return (
     <>
       <div className={`${darkMode ? '' : ''} tw-h-full tw-w-full tw-px-6
@@ -130,7 +164,7 @@ const SignIn = () => {
         <Transition>
           <div className={`${darkMode ? 'tw-bg-gray-400/70 tw-border-campfire-blue-600' : 'tw-bg-gray-200/80 tw-border-campfire-blue-200'} ${isMobile ? 'tw-w-[24em]' : 'tw-w-[30em]'} tw-pt-2 tw-pb-6
           [&>div]:tw-h-[3em] [&>div]:tw-flex tw-h-full
-           tw-border-2 `}>
+          tw-border-2 `}>
             <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-w-full tw-pb-4 tw-px-2 tw-mb-4 `}>
               <p className="tw-w-fit tw-text-xs">
                 New User?:&nbsp;
