@@ -62,9 +62,9 @@ const Register = () => {
             notifications.show({
               id: 'created',
               withCloseButton: true,
-              autoClose: 5000,
+              autoClose: 3000,
               title: "🎉 Guest Created",
-              message: 'Registration Successful. Please Login',
+              message: 'Registration Successful. Please Login.',
               color: 'teal',
               icon: <IconCheck />,
               className: 'my-notification-class',
