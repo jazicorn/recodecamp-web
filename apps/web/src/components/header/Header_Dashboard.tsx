@@ -15,9 +15,9 @@ import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../uti
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 /** */
-import { useAppDispatch } from '../../redux/reduxHooks.ts';
-//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-//import type { RootState } from '../../redux/store.ts';
+//import { useAppDispatch } from '../../redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
@@ -37,8 +37,8 @@ const getRoutePath = (location: Location, params: Params): string => {
   return path;
 };
 
-const Header = () => {
-  const { isMobile } = useWindowSize();
+const Header_Dashboard = () => {
+  const { isMobile, isMobileMD } = useWindowSize();
 
   /** Set User Preferences */
   const theme = useContext(ThemeContext);
@@ -56,6 +56,33 @@ const Header = () => {
 
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
+  /** UserName */
+  const [userName, setUserName] = useState('');
+  const createUserName = () => {
+    if(getUser._EMAIL === undefined || getUser._EMAIL.toLowerCase() === 'john@doe.com' || getUser._EMAIL.length === 0) {
+      setUserName('Guest');
+    } else {
+      const emailName = getUser._EMAIL.split('@')[0];
+      setUserName(emailName);
+    }
+  }
+  useEffect(() => {
+    createUserName()
+  });
+
+  /**Link to User Profile */
+  const [profile, setProfile] = useState('');
+  const getProfile = () => {
+    if(userName === undefined || userName.toLowerCase() === "guest" || userName.length === 0) {
+      setProfile('guest');
+    } else {
+      setProfile(userName)
+    }
+  };
+  useEffect(() => {
+    getProfile()
+  });
 
   /** User Logout */
   const navigate = useNavigate();
@@ -160,13 +187,25 @@ const Header = () => {
           <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-1
           [&>li]:tw-pl-1 [&>li]:tw-h-[26px] tw-pr-3`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link to={'/about'}>About</Link>
+              <Link to={`/forum`} target="_blank">Forum</Link>
+              <span className={`tw-float-top tw-pl-1.5 tw-self-start tw-text-xs`}>
+              {darkMode ?  
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+              }
+              </span>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
-              <Link to={`/contact`}>Contact</Link>
+              <Link to={`/profile/${profile}`} target="_blank">Profile</Link>
+              <span className={`tw-float-top tw-pl-1.5 tw-self-start tw-text-xs`}>
+              {darkMode ?  
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+              }
+              </span>
             </li>
-            <li className={`${darkMode ? "" : ""} tw-underline tw-decoration-dashed tw-decoration-2 hover:tw-text-campfire-blue`}>
-              <Link to={`/learn`}>Dashboard</Link>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+              <Link to={'/dashboard'}>Dashboard</Link>
             </li>
             {token === undefined || token.length === 0 || token === null ?
             <>
@@ -203,28 +242,59 @@ const Header = () => {
       <header
         className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
       >
-        <Link to={`/`} className="tw-flex tw-flex-row tw-place-self-center">
-          <span className="tw-pt-1 ">
-            <Transition><Logo style={{ height: 22, width: 38 }} /></Transition>
-          </span>
-          <h5 className={`tw-text-lg ${darkMode ? '' : ''} hover:tw-text-campfire-blue`}>
-            <Transition>ReCodeCamp</Transition>
-          </h5>
-        </Link>
+        <div className="tw-flex tw-flex-row tw-h-full tw-py-2.5">
+          <Link to={`/`} className="tw-flex tw-flex-row tw-place-self-center tw-pr-3">
+            <span className="tw-pt-1 ">
+              <Transition><Logo style={{ height: 22, width: 38 }} /></Transition>
+            </span>
+            <h5 className={`tw-text-lg ${darkMode ? '' : ''} hover:tw-text-campfire-blue`}>
+              <Transition>ReCodeCamp</Transition>
+            </h5>
+          </Link>
+          <Transition>
+          {!isMobileMD &&
+            <p className={`${darkMode ? "" : ""} tw-font-space_grotesk_medium tw-border-campfire-blue tw-border-l-2 tw-text-[16px]
+            tw-flex tw-row tw-items-center tw-w-full tw-h-full tw-p-2 `}>
+              <span className="tw-pl-1 tw-pr-2">👋</span>
+              <span className="tw-pr-2">Welcome:</span>
+              <Link to={`/profile/${profile}`} target="_blank" className={`${darkMode ? 
+                "tw-decoration-campfire-blue tw-text-campfire-purple-300 hover:tw-text-campfire-neutral-500" : "tw-decoration-campfire-purple-300 tw-text-campfire-blue hover:tw-text-campfire-neutral-400"} 
+                tw-font-space_grotesk_medium tw-underline tw-decoration-[3px] tw-pt-0.5`}>{userName}
+              </Link>
+            </p>
+            }
+          </Transition>        
+        </div>
         <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_mono">
-          <ul className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5`}>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
-              <Link to={'/about'}><Transition>About</Transition></Link>
-            </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
-              <Link to={`/contact`}><Transition>Contact</Transition></Link>
-            </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center tw-underline tw-decoration-dashed tw-decoration-2`}>
-              <Link to={`/learn`} className="tw-place-self-center">
+          <ul className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-4`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center`}>
+              <Link to={`/forum`} target="_blank" className="tw-place-self-center">
                 <Transition>
-                  <span>Dashboard</span>
+                  <span>Forum</span>
                 </Transition>
               </Link>
+              <span className={`tw-float-top tw-pl-1 tw-pt-1 tw-self-start tw-text-xs`}>
+              {darkMode ?  
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+              }
+              </span>
+            </li>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center`}>
+              <Link to={`/profile/${profile}`} target="_blank" className="tw-place-self-center">
+                <Transition>
+                  <span>Profile</span>
+                </Transition>
+              </Link>
+              <span className={`tw-float-top tw-pl-1 tw-pt-1 tw-self-start tw-text-xs`}>
+              {darkMode ?  
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
+              }
+              </span>
+            </li>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
+              <Link to={'/dashboard'}><Transition>Dashboard</Transition></Link>
             </li>
             {token === undefined || token.length === 0 || token === null ?
             <li>
@@ -261,4 +331,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header_Dashboard

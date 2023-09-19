@@ -7,8 +7,8 @@ import { ThemeContext } from '../context/ThemeContext';
 import useWindowSize from '../hooks/useWindowSize';
 //import Transition from '../hooks/useTransition';
 /** Components */
-import Header from '../components/header/Header';
-import Header_Dashboard from '../components/dashboard/D_Header';
+import Header from '../components/header/Header_Dashboard';
+import D_Header from '../components/dashboard/D_Header';
 import D_Navigation from '../components/dashboard/D_Navigation';
 import D_NavigationMobile from '../components/dashboard/D_Navigation_Mobile';
 import D_Route from '../components/dashboard/D_Route';
@@ -121,7 +121,10 @@ const Dashboard = () => {
               sx: { backgroundColor: 'red' },
               loading: false,
             });
-            removeTokenFromLocalStorage()
+            removeTokenFromLocalStorage();
+              setTimeout(() => {
+              navigate("/");
+            }, '1000');
           }
       }).then(function(response) {
         //console.log("response", response);
@@ -194,7 +197,7 @@ const Dashboard = () => {
       {/**Page Content | Position: Relative */}
       <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-w-full tw-relative tw-z-10 tw-h-screen tw-flex tw-flex-col tw-grow tw-place-items-center`}>
         <Header />
-        {path !== '/learn' && <Header_Dashboard />}
+        {path !== '/learn' && <D_Header/>}
         {isDesktopMDXL || isDesktopXL ?
         <div className="tw-w-full tw-h-full">
           { path === '/learn' && 
