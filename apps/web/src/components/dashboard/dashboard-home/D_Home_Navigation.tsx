@@ -88,7 +88,7 @@ const D_Home_Navigation = () => {
             </li>
              <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconBook2 color="#d4d4d4" /> : <IconBook2 color="#000" />}
-              <Link to={'/learn/docs'}>Documentation</Link>
+              <Transition><Link to={'/learn/docs'}>Documentation</Link></Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
