@@ -46,7 +46,9 @@ const D_Settings_User = () => {
     setUserIdReveal(!userIdReveal);
     if(userIdReveal === true) {
       setUserId(id);
-    } else {
+    }
+
+    if(userIdReveal === false) {
       setUserId(userIdHide);
     }
   };
@@ -126,7 +128,7 @@ const D_Settings_User = () => {
                         : 
                         <span>{userId}</span>
                         }&nbsp;
-                        <button onClick={() => userIdRevealButton()} 
+                        <button onClick={(e) => userIdRevealButton(e)} 
                         className={`${darkMode ? "hover:tw-bg-campfire-neutral-500" : "tw-border-campfire-neutral-700 hover:tw-bg-campfire-neutral-400/40"} 
                         tw-font-space_mono tw-border tw-py-0.5 tw-px-3`}>
                         {userIdReveal === true ? <span>Show</span> : <span>Hide</span> }
