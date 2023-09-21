@@ -3,19 +3,19 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { Link, useNavigate } from 'react-router-dom';
 //import useWindowSize from '../../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+//import Transition from '../../hooks/useTransition';
 //icons
 import {
   IconCalendar,
+  IconTerminal2,
   IconCategory,
   IconLogout,
   IconNotes,
   IconSettings,
+  IconSearch,
   IconListDetails,
   IconHome,
-  IconSearch,
   IconBook2,
-  IconUser
 } from '@tabler/icons-react';
 import { removeTokenFromLocalStorage } from '../../utils/common';
 import { useAppDispatch } from '../../redux/reduxHooks.ts';
@@ -56,43 +56,45 @@ const D_Navigation = () => {
        tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left
       [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-3 
       [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2`}>
-        <Transition>
         <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300 hover:tw-text-2 campfire-neutral-300' : 'tw-text-campfire-neutral-700 hover:tw-text-campfire-neutral-700'} tw-border-campfire-purple-light
           tw-border-b tw-text-2xl tw-h-[40px] tw-w-full tw-pl-3 tw-pb-3 tw-mb-4`}>
             <div className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue"} tw-border-l-2 tw-px-1.5 tw-flex tw-flex-row tw-place-self-center tw-h-full tw-px-2`}>
-              <Transition>
                 <Link to={'/learn'} className='tw-h-full'>
                 { darkMode ? <IconHome color="#d4d4d4" /> : <IconHome color="#000" />}
                 </Link>
-              </Transition>
             </div>
         </h4>
-        </Transition>
         <main className="tw-overflow-auto tw-mb-1 tw-flex tw-flex-col">
           {/**Col 1 */}
           <ul className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-justify-left
           `}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              <Transition>
                 <Link to='/learn/categories' className="">
                   { darkMode ? <IconCategory color="#d4d4d4" /> : <IconCategory color="#000" />}
                 </Link>
-              </Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue "}`}>
-              <Transition>
                 <Link to='/learn/code' className="">
+                  {darkMode ? <IconTerminal2 color="#d4d4d4" /> : <IconTerminal2 color="#000" />}
+                </Link>
+            </li>
+          </ul>
+          <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
+        tw-place-self-left tw-ml-4 tw-mt-5 tw-mb-4 tw-h-[2px] tw-w-[36px]`}/>
+          {/** */}
+          <ul className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
+          [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-justify-left
+          `}>
+            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue "}`}>
+                <Link to='/learn/plans' className="">
                   {darkMode ? <IconListDetails color="#d4d4d4" /> : <IconListDetails color="#000" />}
                 </Link>
-              </Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              <Transition>
                 <Link to={'/learn/calendar'}>
                   {darkMode ? <IconCalendar color="#d4d4d4" /> : <IconCalendar color="#000" />}
                 </Link>
-              </Transition>
             </li>
              <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               <Link to={'/learn/docs'}>
@@ -100,11 +102,9 @@ const D_Navigation = () => {
               </Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              <Transition>
                 <Link to={'/learn/notes'}>
                   { darkMode ? <IconNotes color="#d4d4d4" /> : <IconNotes color="#000" />}
                 </Link>
-              </Transition>
             </li>
           </ul>
           <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
@@ -114,25 +114,19 @@ const D_Navigation = () => {
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
              <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              <Transition>
-                <Link to={'/learn/settings/user'}>
-                  {darkMode ? <IconUser color="#d4d4d4" /> : <IconUser color="#000" />}
-                </Link>
-              </Transition>
+              <Link to={'/learn/search'}>
+                {darkMode ? <IconSearch color="#d4d4d4" /> : <IconSearch color="#000" />}
+              </Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
-              <Transition>
-                <Link to={'/learn/settings/dashboard'}>
-                  {darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
-                </Link>
-              </Transition>
+              <Link to={'/learn/settings/dashboard'}>
+                {darkMode ? <IconSettings color="#d4d4d4" /> : <IconSettings color="#000" />}
+              </Link>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-pl-0.5`}>
-              <Transition>
-                <button onClick={(e) => logout(e)} className="tw-font-space_mono">
-                  {darkMode ? <IconLogout color="#d4d4d4" /> : <IconLogout color="#000" />}
-                </button>
-              </Transition>
+              <button onClick={(e) => logout(e)} className="tw-font-space_mono">
+                {darkMode ? <IconLogout color="#d4d4d4" /> : <IconLogout color="#000" />}
+              </button>
             </li>
           </ul>
         </main>

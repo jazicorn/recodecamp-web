@@ -11,7 +11,12 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './redux/store.ts';
 /**React Router*/
-import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route} from 'react-router-dom'
+import { 
+  RouterProvider, 
+  createHashRouter as Router, 
+  createRoutesFromElements, 
+  Route
+} from 'react-router-dom'
 import ErrorBoundary from "./ErrorBoundary.tsx";
 /**React Query */
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -20,6 +25,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from './pages/Home.tsx';
 import Auth from './pages/Auth.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import Profile from './pages/Profile.tsx';
 // import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
 /**Auth Components */
 import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
@@ -35,9 +41,11 @@ import H_About from './layout/Layout.H_About';
 import D_Home from './layout/Layout.D_Home';
 import D_Code from './layout/Layout.D_Code';
 import D_Categories from './layout/Layout.D_Categories';
+import D_Plans from './layout/Layout.D_Plans';
 import D_Calendar from './layout/Layout.D_Calendar';
 import D_Docs from './layout/Layout.D_Docs';
 import D_Notes from './layout/Layout.D_Notes';
+import D_Search from './layout/Layout.D_Search';
 import D_Settings from './layout/Layout.D_Settings';
 import D_Settings_User from './layout/Layout.D_Settings_User';
 
@@ -52,9 +60,11 @@ const router = Router(
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
+        <Route path="plans" element={<D_Plans />} errorElement={<ErrorBoundary />}/>
         <Route path="calendar" element={<D_Calendar />} errorElement={<ErrorBoundary />}/>
         <Route path="docs" element={<D_Docs />} errorElement={<ErrorBoundary />}/>
         <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />}/>
+        <Route path="search" element={<D_Search />} errorElement={<ErrorBoundary />}/>
         <Route path="settings/user" element={<D_Settings_User />} errorElement={<ErrorBoundary />}/>
         <Route path="settings/dashboard" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
       </Route>
@@ -66,6 +76,9 @@ const router = Router(
         <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
         <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
       </Route>
+      <Route path="/profile/:id" element={<Profile />} errorElement={<ErrorBoundary />}/>
+      <Route path="/profile/settings" element={<Profile />} errorElement={<ErrorBoundary />}/>
+      <Route path="/profile/dashboard" element={<Profile />} errorElement={<ErrorBoundary />}/>
       {/* <Route path="admin/dashboard" element={<Dashboard_Admin />} errorElement={<ErrorBoundary />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>

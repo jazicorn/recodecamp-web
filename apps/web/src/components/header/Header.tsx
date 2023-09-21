@@ -12,8 +12,8 @@ import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-
 import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
 import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 /**Icons */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 /** */
 import { useAppDispatch } from '../../redux/reduxHooks.ts';
 //import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
@@ -117,12 +117,12 @@ const Header = () => {
   if(isMobile) {
     return (
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue' : 'tw-bg-light '
-        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-place-items-center tw-grow-0`}>
+        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-relative tw-z-20 tw-place-items-center tw-grow-0`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
         >
           <nav className="tw-flex tw-flex-row tw-place-self-center">
-            <button className="tw-place-self-center">
+            <button onClick={(e) => isMenu(e)} className="tw-place-self-center">
               <Transition><IconMenu2 style={{ height: 22, width: 36 }} /></Transition>
             </button>
           </nav>
@@ -157,29 +157,23 @@ const Header = () => {
           </div>
           </Transition>
           <Transition>
-          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col tw-gap-y-1
-          [&>li]:tw-pl-1 [&>li]:tw-h-[26px] tw-pr-3`}>
+          <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col [&>li]:tw-text-xl
+          [&>li]:tw-pl-1 [&>li]:tw-h-[32px] tw-pr-3`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={'/about'}>About</Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/contact`}>Contact</Link>
             </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+            <li className={`${darkMode ? "" : ""} tw-underline tw-decoration-dashed tw-decoration-2 hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}>Dashboard</Link>
-              <span className={`tw-float-top tw-pl-1.5 tw-self-start tw-text-xs`}>
-              {darkMode ?  
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
-              }
-              </span>
             </li>
             {token === undefined || token.length === 0 || token === null ?
             <>
               <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
               : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
                 <Link to={'/auth/guest/login'} className="tw-w-full">
-                  <button className="tw-font-space_mono">
+                  <button className="tw-font-space_mono tw-text-lg">
                     Login
                   </button>
                 </Link>
@@ -187,9 +181,9 @@ const Header = () => {
             </>
             :
             <>
-              <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
-              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
-                  <button onClick={(e) => logout(e)} className="tw-font-space_mono ">
+              <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300"
+              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-pl-1 tw-mt-1 tw-ml-1 tw-flex tw-flex-row`}>
+                  <button onClick={(e) => logout(e)} className="tw-font-space_mono tw-text-lg">
                     Logout
                   </button>
               </li>
@@ -205,48 +199,42 @@ const Header = () => {
 
   return (
     <div className={`${pathFilter && !darkMode && 'tw-bg-campfire-neutral-200/70 '} ${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-neutral-300' : 'tw-bg-light'
-      } tw-dark tw-font-space_mono tw-flex tw-flex-col tw-w-full tw-place-items-center tw-px-5 tw-relative`}>
+      } tw-font-space_mono tw-flex tw-flex-col tw-w-full tw-place-items-center tw-px-5 tw-relative`}>
       <header
         className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
       >
         <Link to={`/`} className="tw-flex tw-flex-row tw-place-self-center">
           <span className="tw-pt-1 ">
-            <Transition><Logo style={{ height: 22, width: 38 }} /></Transition>
+            <Transition><Logo style={{ height: 24, width: 24 }} /></Transition>
           </span>
-          <h5 className={`tw-text-lg ${darkMode ? '' : ''} hover:tw-text-campfire-blue`}>
+          <h5 className={`tw-text-2xl  tw-pl-2 hover:tw-text-campfire-blue`}>
             <Transition>ReCodeCamp</Transition>
           </h5>
         </Link>
-        <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_mono">
-          <ul className={`${darkMode ? "" : ""} tw-text-sm tw-flex tw-flex-row tw-gap-5`}>
+        <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_grotesk_medium">
+          <ul className={`${darkMode ? "" : ""} [&>li]:tw-text-lg tw-flex tw-flex-row tw-gap-5`}>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
               <Link to={'/about'}><Transition>About</Transition></Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
             </li>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center`}>
+            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center tw-underline tw-decoration-dashed tw-decoration-2`}>
               <Link to={`/learn`} className="tw-place-self-center">
                 <Transition>
                   <span>Dashboard</span>
                 </Transition>
               </Link>
-              <span className={`tw-float-top tw-pl-1 tw-pt-1 tw-self-start tw-text-xs`}>
-              {darkMode ?  
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#d4d4d4',}} /> :
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="xs" style={{color: '#404040',}} />
-              }
-              </span>
             </li>
             {token === undefined || token.length === 0 || token === null ?
             <li>
-              <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
+              <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px]`}>
                 <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
               </button>
             </li>
             :
             <li>
-              <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono`}>
+              <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px]`}>
                 <Transition>Logout</Transition>
               </button>
             </li>

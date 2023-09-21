@@ -1,15 +1,10 @@
-import { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { ThemeContext } from '../../context/ThemeContext'
-//icons
-import {
-  IconHome,
-} from '@tabler/icons-react';
+import { useContext, useState, useEffect } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 // redux hooks
 import { useAppSelector } from '../../redux/reduxHooks.ts';
 import type { RootState } from '../../redux/store.ts';
 
-const HeaderDashboard = () => {
+const D_Header = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const account = useAppSelector((state:RootState) => state?.dashboard?.user);
@@ -33,11 +28,13 @@ const HeaderDashboard = () => {
 
   return (
     <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25' : '[&>*]:tw-backdrop-brightness-85 [&>*]:tw-backdrop-blur-sm'
-      } tw-font-mono tw-flex tw-flex-col tw-w-full tw-px-5 tw-mt-2 tw-relative tw-min-h-[44px] `}>
+      } tw-flex tw-flex-col tw-w-full tw-px-5 tw-mt-2 tw-relative tw-min-h-[44px] `}>
       <header
-        className={`${darkMode ? "tw-text-campfire-neutral-500" : ""} tw-grow-0 tw-h-full tw-w-full tw-pl-5 tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-gap-2 tw-justify-start tw-items-center tw-rounded`}
+        className={`${darkMode ? "tw-text-campfire-neutral-500" : ""} 
+        tw-grow-0 tw-h-full tw-w-full tw-pl-5 tw-py-2 tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-gap-2 tw-justify-start tw-items-center tw-rounded`}
       >
-        <h5 className="tw-font-space_grotesk_medium tw-pt-1.5 tw-text-base">
+        <h5 className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue-300"} 
+        tw-border-l-2 tw-px-2.5 tw-pt-0.5 tw-h-full tw-font-space_grotesk_medium  tw-text-[17px]`}>
           Mode : <span className={`${darkMode ? "tw-text-campfire-purple-300" : "tw-text-campfire-purple-400"} tw-pl-1`}>{accountType}</span>
         </h5>
       </header>
@@ -45,4 +42,4 @@ const HeaderDashboard = () => {
   )
 }
 
-export default HeaderDashboard
+export default D_Header
