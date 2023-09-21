@@ -11,10 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import { ThemeContext } from '../../../context/ThemeContext';
 import { Transition2 } from '../../../hooks/useTransition';
 import useWindowSize from '../../../hooks/useWindowSize';
-import { Center } from '@mantine/core';
 /** Custom State Components*/
-import ErrorDashboard from '../../dashboard/error';
-import {LoadingDashboardMD} from '../../dashboard/loading';
+//import ErrorDashboard from '../../dashboard/error';
+//import {LoadingDashboardMD} from '../../dashboard/loading';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
@@ -64,7 +63,7 @@ const D_Editor = () => {
   }, [getMenuRoute]);
 
   /** Generate Question */
-  const { isLoading, isFetching, isError, isSuccess, error, data } = useQuery({ 
+  const { isSuccess, data } = useQuery({ 
     queryKey: ['questionData'], 
     queryFn: getQuestion,
     refetchOnWindowFocus: false,
@@ -230,14 +229,6 @@ const D_Editor = () => {
   useEffect(() => {
     dispatch(menuConsoleMessage(consoleMessage));
   },[consoleMessage, dispatch]);
-
-  /** Render if Loading */
-  if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-      <Center><LoadingDashboardMD /></Center>
-  )
-
-  /** Render if Error */
-  if (isError) return <ErrorDashboard error={error.message}/>
 
   /** Render if Successful */
   if (isSuccess) return (

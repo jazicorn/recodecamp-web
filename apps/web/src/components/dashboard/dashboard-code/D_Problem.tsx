@@ -6,9 +6,6 @@ import { useContext, useCallback, useEffect } from 'react';
 /** Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
 import { Transition2 } from '../../../hooks/useTransition';
-/** Custom State Components*/
-import ErrorDashboard from '../error';
-import {LoadingDashboardLG, LoadingDashboardMD} from '../loading';
 /** React Redux Hooks */
 import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
 import { 
@@ -16,7 +13,6 @@ import {
 } from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
-import { Center } from '@mantine/core';
 /** API url | Custom env mandatory to begin with VITE 
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -52,7 +48,7 @@ const D_Problem = () => {
   }, [getMenuRoute]);
 
   /** Generate Question */
-  const { isLoading, isFetching, isError, isSuccess, error, data, refetch } = useQuery({ 
+  const { isSuccess, data, refetch } = useQuery({ 
     queryKey: ['questionData'], 
     queryFn: getQuestion,
     refetchOnWindowFocus: false,
@@ -75,14 +71,6 @@ const D_Problem = () => {
     // manually refetch
     refetch();
   }
-
-  /** Render if Loading */
-  if (isLoading || isFetching || getMenuQuestion === undefined) return  (
-      <Center><LoadingDashboardLG/></Center>
-  )
-
-  /** Render if Error */
-  if (isError) return <ErrorDashboard error={error.message}/>
 
   /** Render if Successful */
   if(isSuccess) return (
@@ -109,7 +97,7 @@ const D_Problem = () => {
               </header>
               {/**Question: Task */}
               {getMenuQuestion._QUESTION_TASK === undefined ?
-                <LoadingDashboardMD/>
+                <div/>
                 :
                 <div className={`${darkMode ? 'tw-text-campfire-neutral-100' : 'tw-text-campfire-neutral-700'} tw-px-2 tw-pb-2`}>
                   {/**Question: Task */}

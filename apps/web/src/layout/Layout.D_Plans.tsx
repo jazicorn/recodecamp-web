@@ -1,15 +1,33 @@
-import { useContext } from 'react';
+/**React */
+import { useContext, useState } from 'react';
+/** Custom State Components*/
+import {LoadingDashboardXL} from '../components/dashboard/loading';
+/**Custom Hooks */
 import { ThemeContext } from '../context/ThemeContext';
-// hooks
 import useWindowSize from '../hooks/useWindowSize';
-//import Transition from '../hooks/useTransition';
-// components
+/**Custom Components*/
 import D_Plans from '../components/dashboard/dashboard-plans/D_Plans';
 
 const Layout_D_Plans = () => {
+  /**Custom Hooks */
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+
+  /**Loading Screen */
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false)
+  }, "600");
+
+  if(loading) {
+    return (
+      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+        <LoadingDashboardXL />
+      </div>
+    )
+  }
 
   return (
     <div className="tw-h-full">
