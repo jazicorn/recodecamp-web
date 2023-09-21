@@ -1,13 +1,13 @@
-// Categories
-import { useContext, useEffect } from 'react'
+// Page: Dashboard Categories
+/**React */
+import { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
-// hooks
+/*Custom Hooks*/
 //import Transition from '../hooks/useTransition';
 import useWindowSize from '../hooks/useWindowSize';
-// components
+/**Custom Components */
 import ErrorDashboard from '../components/dashboard/error';
 import { LoadingDashboardXL } from '../components/dashboard/loading';
-// components
 import D_Category from '../components/dashboard/dashboard-categories/D_Category';
 import D_Category_Menu from '../components/dashboard/dashboard-categories/D_Category_Menu';
 // import D_Languages from '../components/dashboard/dashboard-categories/D_Languages';
@@ -18,7 +18,6 @@ import { useAppSelector, useAppDispatch } from '../redux/reduxHooks.ts';
 import { 
   menuLanguage, menuCategoryInfo
 } from '../redux/slices/dashboardSlice.ts';
-import { Center } from '@mantine/core';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -58,7 +57,7 @@ const Layout_D_Categories = () => {
   };
 
   /** Generate Categories */
-  const { isLoading, isError, error, data} = useQuery({
+  const { isFetching, isLoading, isError, error, isSuccess, data} = useQuery({
     queryKey: ['categoriesData'], 
     queryFn: getCategories, 
     refetchOnWindowFocus: false,
@@ -76,38 +75,61 @@ const Layout_D_Categories = () => {
     dispatch(menuCategoryInfo(results))
   },[data, dispatch, getMenuCategory, getMenuCategoryInfo]);
 
-  if (isLoading) return ( <Center><LoadingDashboardXL/></Center>)
+  /**Delay Loading Screen */
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false)
+  }, "600");
+
+  /** Render if Loading */
+  if (isFetching || isLoading) return  (
+    <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+      <LoadingDashboardXL />
+    </div>
+  )
 
   if (isError) return <ErrorDashboard error={error.message}/>
 
-  return (
-    <div className="tw-h-full">
-      {/**Page Content | Position: Relative */}
-        {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/90' : '[&>*]:tw-bg-neutral-300/90'} 
-          [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
-          tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1  `}>
-            <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 tw-bg-campfire-neutral-600' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-divide-x-2 tw-p-2`}>
-              <section className={`${darkMode ? "" : ""} tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2`}>
-                <D_Category_Menu data={data}/>
-              </section>
-              <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
-                <div className=''><D_Category /></div>
-              </section>
-            </div>
-        </main>
-        :
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-          tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-          <section className={`${darkMode ? "tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2`}>
-            <D_Category_Menu data={data}/>
-          </section>
-          <section className=''><D_Category/></section>
-        </main>
-        }
-    </div>
-  )
+  if(isSuccess && loading) {
+    return (
+      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
+      ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+        <LoadingDashboardXL />
+      </div>
+    )
+  }
+
+  if(isSuccess && !loading) {
+    return (
+      <div className="tw-h-full">
+        {/**Page Content | Position: Relative */}
+          {isDesktopMDXL || isDesktopXL ? 
+          <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/90' : '[&>*]:tw-bg-neutral-300/90'} 
+            [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
+            tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1  `}>
+              <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 tw-bg-campfire-neutral-600' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-divide-x-2 tw-p-2`}>
+                <section className={`${darkMode ? "" : ""} tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2`}>
+                  <D_Category_Menu data={data}/>
+                </section>
+                <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
+                  <div className=''><D_Category /></div>
+                </section>
+              </div>
+          </main>
+          :
+          <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
+            tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+            <section className={`${darkMode ? "tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2`}>
+              <D_Category_Menu data={data}/>
+            </section>
+            <section className=''><D_Category/></section>
+          </main>
+          }
+      </div>
+    )
+  }
 }
 
 export default Layout_D_Categories

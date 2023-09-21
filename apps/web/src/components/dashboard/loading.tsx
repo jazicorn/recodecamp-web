@@ -11,13 +11,13 @@ export const LoadingDashboardXS = () => {
         <>
         {darkMode ?
             <Center>
-                <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-sm`}>
+                <div className={`tw-bg-neutral-700/90 tw-flex tw-flex-col tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-sm`}>
                     <Center><Loader color="gray" size="xs"/></Center>
                 </div>
             </Center>
             :
             <Center>
-                <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-sm`}>
+                <div className={`tw-bg-neutral-400/80 tw-flex tw-flex-col tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-sm`}>
                     <Center><Loader color="dark" size="xs"/></Center>
                 </div>
             </Center>
@@ -33,17 +33,17 @@ export const LoadingDashboardSM = () => {
     return (
         <>
         {darkMode ?
-            <Center>
-                <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-base`}>
-                    <Center><Loader color="gray" size="sm"/></Center>
+
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="gray" size="sm"/>
                 </div>
-            </Center>
+          
             :
-            <Center>
-                <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-base`}>
-                    <Center><Loader color="dark" size="sm"/></Center>
+       
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="dark" size="sm"/>
                 </div>
-            </Center>
+          
         }
         </>
     )
@@ -55,17 +55,13 @@ export const LoadingDashboardMD = () => {
     return (
         <>
         {darkMode ?
-            <Center>
-                <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-xl`}>
-                    <Center><Loader color="gray" size="md"/></Center>
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="gray" size="md"/>
                 </div>
-            </Center>
             :
-            <Center>
-                <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-xl`}>
-                    <Center><Loader color="dark" size="md"/></Center>
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="dark" size="md"/>
                 </div>
-            </Center>
         }
         </>
     )
@@ -77,17 +73,17 @@ export const LoadingDashboardLG = () => {
     return (
         <>
         {darkMode ?
-            <Center>
-                <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-2xl`}>
+
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
                     <Loader color="gray" size="lg" className="tw-place-self-center"/>
                 </div>
-            </Center>
+      
             :
-            <Center>
-                <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-2xl`}>
-                    <Center><Loader color="dark" size="lg"/></Center>
+    
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="dark" size="lg"/>
                 </div>
-            </Center>
+        
         }
         </>
     )
@@ -99,17 +95,18 @@ export const LoadingDashboardXL = () => {
     return (
         <>
         {darkMode ?
-            <Center>
-            <div className={`tw-bg-neutral-700/90 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-4xl`}>
-                <Loader color="gray" size="xl"/>
-            </div>
-            </Center>
+ 
+                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="white" size="xl"/>
+                </div>
+         
             :
-            <Center>
-            <div className={`tw-bg-neutral-400/80 tw-w-full tw-h-full tw-place-content-center tw-place-items-center tw-font-space_mono tw-text-4xl`}>
-                <Loader color="dark" size="xl"/>
-            </div>
-            </Center>
+       
+                <div className={`${darkMode ? 'tw-backdrop-brightness-80 ' : 'tw-backdrop-brightness-85'}
+                 tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                    <Loader color="gray" size="xl"/>
+                </div>
+       
         }
         </>
     )

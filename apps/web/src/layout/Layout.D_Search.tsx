@@ -1,15 +1,34 @@
-import { useContext } from 'react';
+/**React */
+import { useContext, useState } from 'react';
+/** Custom State Components*/
+import {LoadingDashboardXL} from '../components/dashboard/loading';
+/**Custom Hooks */
 import { ThemeContext } from '../context/ThemeContext';
-// hooks
 import useWindowSize from '../hooks/useWindowSize';
-//import Transition from '../hooks/useTransition';
-// components
+/**Custom Components*/
 import D_Search from '../components/dashboard/dashboard-search/D_Search';
 
 const Layout_D_Search = () => {
+  /**Custom Hooks */
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+
+  /**Loading Screen */
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false)
+  }, "600");
+
+  if(loading) {
+    return (
+      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
+      tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+        <LoadingDashboardXL />
+      </div>
+    )
+  }
 
   return (
     <div className="tw-h-full">
