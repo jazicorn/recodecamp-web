@@ -31,10 +31,10 @@ const HeaderDashboard = () => {
       <header
         className={`${darkMode ? "tw-text-campfire-neutral-400 tw-opacity-70 tw-bg-campfire-neutral-600 " 
         : "tw-bg-campfire-neutral-100 tw-opacity-60 tw-text-campfire-neutral-700"} 
-        tw-grow-0 tw-h-full tw-h-full tw-w-full tw-flex tw-flex-row tw-justify-start tw-items-center tw-px-4 tw-py-1`}
+        tw-grow-0 tw-h-full tw-h-full tw-w-full tw-flex tw-flex-row tw-justify-start tw-items-center tw-px-4 tw-py-1.5`}
       >
-        <div className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue"} tw-border-l-2 tw-px-1.5 tw-flex tw-flex-row tw-place-self-center tw-h-full tw-px-2`}>
-          <h5 className="tw-font-space_grotesk_bold tw-text-[17px] tw-h-full"> 
+        <div className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue"} tw-border-l-2 tw-px-2 tw-flex tw-flex-row tw-place-self-center tw-h-full`}>
+          <h5 className="tw-font-space_grotesk_bold tw-text-[18px] tw-h-full"> 
             Mode : <span className={`${darkMode ? " tw-text-campfire-purple-300" : "tw-text-campfire-purple-400"} `}>{accountType}</span>
           </h5>
         </div>

@@ -6,6 +6,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import {
   IconCalendar,
   IconCategory,
+  IconTerminal2,
   IconLogout,
   IconNotes,
   IconSettings,
@@ -13,7 +14,7 @@ import {
   IconChevronsRight,
   IconChevronsDown,
   IconBook2,
-  IconUser
+  IconSearch,
 } from '@tabler/icons-react';
 import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg';
 import { removeTokenFromLocalStorage } from '../../utils/common';
@@ -72,7 +73,7 @@ const D_Navigation = () => {
   }, [menu]);
 
   return (
-    <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-pl-2 tw-place-content-start tw-h-full`}>
+    <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-pl-2 tw-place-content-start tw-h-full `}>
       {!menu ? 
         <button onClick={toggleMenu} className={`${darkMode ? "tw-bg-campfire-neutral-500 hover:tw-bg-campfire-neutral-300": "tw-bg-campfire-neutral-300 hover:tw-bg-campfire-neutral-400"} tw-my-1 tw-mr-2 tw-border-transparent tw-rounded`}>
           { darkMode ? <IconChevronsRight color="#2ca9bc" /> : <IconChevronsRight color="#000" />}
@@ -83,7 +84,7 @@ const D_Navigation = () => {
           {darkMode ? <IconChevronsDown color="#2ca9bc" /> : <IconChevronsDown color="#000" />}
         </button>
         {menu && 
-          <div ref={ref} className={`${darkMode ? 'tw-bg-campfire-blue-100 tw-border-campfire-neutral-600' : 'tw-bg-campfire-neutral-300 tw-border-campfire-blue-200'} tw-border  tw-rounded-b`}>
+          <div ref={ref} className={`${darkMode ? 'tw-bg-campfire-blue-100 tw-border-campfire-neutral-600' : 'tw-bg-campfire-neutral-300 tw-border-campfire-blue-200'} tw-border tw-rounded-b tw-p-2`}>
             <ul className='tw-flex tw-flex-col tw-place-items-start tw-space-y-2 [&>li]:tw-h-[30px] tw-py-1'>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
@@ -95,7 +96,7 @@ const D_Navigation = () => {
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
                 <Link to="/learn/code" className="tw-flex tw-flex-row tw-gap-1 tw-w-full tw-place-items-center tw-h-[18px]">
-                  {darkMode ? <IconListDetails color="#2ca9bc" /> : <IconListDetails color="#000" />}
+                  {darkMode ? <IconTerminal2 color="#2ca9bc" /> : <IconTerminal2 color="#000" />}
                   <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-400": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-100 "}
               tw-flex tw-flex-row tw-place-items-center tw-w-fit tw-pr-1 tw-rounded`}>
                     Start ReCoding
@@ -103,6 +104,17 @@ const D_Navigation = () => {
                   </span>
                 </Link>
                 </li>
+            </ul>
+            <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
+        tw-place-self-left tw-ml-8 tw-my-3 tw-h-[px] tw-w-[100px]`}/>
+            <ul className='tw-flex tw-flex-col tw-place-items-start tw-space-y-2 [&>li]:tw-h-[30px] tw-py-1'>
+              <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
+              tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
+                <Link to="/learn/plans" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
+                  { darkMode ? <IconListDetails color="#2ca9bc" /> : <IconListDetails color="#000" />}
+                  Learning Plans
+                </Link>
+              </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
                 <Link to="/learn/calendar" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
@@ -125,12 +137,14 @@ const D_Navigation = () => {
                 </Link>
               </li>  
             </ul>
+            <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
+        tw-place-self-left tw-ml-8 tw-my-3 tw-h-[px] tw-w-[100px]`}/>
             <ul className='tw-flex tw-flex-col tw-place-items-start tw-space-y-2 [&>li]:tw-h-[30px]'>
-               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
+              <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>
-                <Link to="/learn/settings/user" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
-                {darkMode ? <IconUser color="#2ca9bc" /> : <IconUser color="#000"/>}          
-                  Dashboard User
+                <Link to="/learn/search" className="tw-flex tw-flex-row tw-gap-1 tw-w-full">
+                {darkMode ? <IconSearch color="#2ca9bc" /> : <IconSearch color="#000"/>}          
+                  Dashboard Search
                 </Link>
               </li>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 

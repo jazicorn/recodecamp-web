@@ -13,6 +13,7 @@ import {
   IconNotes,
   IconSettings,
   IconListDetails,
+  IconTerminal2,
   IconHome,
   IconSearch,
   IconBook2,
@@ -66,7 +67,7 @@ const D_Banner = () => {
             </h4>
           </Transition>
           <ul className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
-          [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
+          [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left [&>li]:tw-text-lg
           `}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconHome color="#d4d4d4" /> : <IconHome color="#000" />}
@@ -78,9 +79,13 @@ const D_Banner = () => {
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-100 "}
             tw-flex tw-flex-row tw-place-items-center tw-w-fit tw-pr-1 tw-rounded`}>
-              { darkMode ? <IconListDetails color="#d4d4d4" /> : <IconListDetails color="#000" />}
+              { darkMode ? <IconTerminal2 color="#d4d4d4" /> : <IconTerminal2 color="#000" />}
               <Transition><Link to='/learn/code' className="">Start ReCoding</Link></Transition>
               <Transition><Rocket style={{ height: 22, width: 32 }} /></Transition>
+            </li>
+            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
+              { darkMode ? <IconListDetails color="#d4d4d4" /> : <IconListDetails color="#000" />}
+              <Transition><Link to={'/learn/plans'}>Learning Plans</Link></Transition>
             </li>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
               { darkMode ? <IconCalendar color="#d4d4d4" /> : <IconCalendar color="#000" />}
@@ -95,8 +100,8 @@ const D_Banner = () => {
               <Transition><Link to={'/learn/notes'}>Notes</Link></Transition>
             </li>
           </ul>
-          <hr className={`${darkMode ? '' : 'tw-bg-campfire-neutral-600' } tw-ml-8 tw-my-3 tw-w-[100px] tw-h-[1px]`}/>
-          <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit
+          <hr className={`${darkMode ? '' : 'tw-bg-campfire-neutral-600' } [&>li]:tw-text-lg tw-ml-8 tw-my-3 tw-w-[100px] tw-h-[1px]`}/>
+          <ul className={`${darkMode ? '[&>li]:tw-text-campfire-purple' : '[&>li]:tw-text-campfire-blue-600'} tw-flex tw-flex-col tw-flex-wrap tw-h-full tw-w-fit [&>li]:tw-text-lg
           [&>*]:tw-flex [&>*]:tw-flex-row [&>*]:tw-gap-1 [&>*]:tw-justify-left
           `}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"}`}>
@@ -117,15 +122,6 @@ const D_Banner = () => {
             </li>
           </ul>
         </section>
-        {/* <hr className={`${darkMode ? 'tw-bg-campfire-neutral-200' : 'tw-bg-campfire-neutral-600' } 
-        tw-place-self-center tw-ml-8 tw-my-3 tw-h-[200px] tw-w-[1px]`}/> */}
-        {/**Descriptions */}
-        {/* <section className={`${darkMode ? '' : '' } tw-ml-8 tw-mt-1`}>
-          <h4 className="tw-text-3xl">Description</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-        </section> */}
       </main>
       </div>
     </div>
