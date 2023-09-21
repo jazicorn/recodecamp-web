@@ -102,7 +102,8 @@ export const LoadingDashboardXL = () => {
          
             :
        
-                <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <div className={`${darkMode ? 'tw-backdrop-brightness-80 ' : 'tw-backdrop-brightness-85'}
+                 tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
                     <Loader color="gray" size="xl"/>
                 </div>
        
