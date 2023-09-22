@@ -2,6 +2,7 @@
 import { useContext, useState } from 'react';
 /** Custom State Components*/
 import {LoadingDashboardXL} from '../components/dashboard/loading';
+//import ErrorDashboard from '../components/dashboard/error';
 /**Custom Hooks */
 import { ThemeContext } from '../context/ThemeContext';
 import useWindowSize from '../hooks/useWindowSize';

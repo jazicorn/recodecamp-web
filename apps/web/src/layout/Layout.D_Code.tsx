@@ -16,7 +16,7 @@ import { menuQuestion } from '../redux/slices/dashboardSlice.ts';
 import { useQuery } from "@tanstack/react-query";
 /** Custom State Components*/
 import {LoadingDashboardXL} from '../components/dashboard/loading';
-//import ErrorDashboard from '../components/dashboard/error';
+import ErrorDashboard from '../components/dashboard/error';
 
 /** API url | Custom env mandatory to begin with VITE  
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
