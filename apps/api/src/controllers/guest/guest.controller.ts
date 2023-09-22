@@ -51,70 +51,7 @@ class Guest_Routes {
         this.router.post(this.pathGuestAuth, this.guestAuth);
     }
 
-    /**Public: Get Guest by ID*/
-    public guestId = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('GET'):
-                try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Public: Update Guest by ID*/
-    public guestUpdate = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('PUT'):
-                 try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Public: Guest Registers Passcode*/
-    public guestRegister = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('POST'):
-                 try {
-                    const { email, passcode } = req.body;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _PASSCODE = ${passcode} AND _EMAIL = ${email}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Private: Admin Gets All Guests*/
-    public guestAll = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('GET'):
-                 try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
+
     /**Public: Create Guest*/
     public guestNew = async (req: Request, res: Response) => {
         //console.log("route: api/guest/new")
@@ -297,13 +234,46 @@ class Guest_Routes {
     public guestDelete = async (req: Request, res: Response) => {
         switch(req.method) {
             case('DELETE'):
-                 try {
-                    const id = req.params.id;
-                    const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
-                    return res.status(200);
+                try {
+                    /** <-- Validate User Info --> */
+                    const data = req.body;
+                    /**Retrieve Guest */
+                    // Check Email in database
+                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
+                    const guestResult = getGuest[0];
+                    //console.log("guestResult:", guestResult)
+
+                    /**Validate Guest Data */
+                    // Check Guest IP Address
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
+                    // Check Email & Password
+                    //const validEmail = data._EMAIL === guestResult._email;
+                    //console.log("validEmail", validEmail);
+                    // Compare Encrypted Password
+                    const validPasswordCompare = bcrypt.compareSync(
+                        data._PASSWORD,
+                        guestResult._password
+                    );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+
+                    if(!validIP) {
+                        return res.status(400).send({ error: "Invalid IP Address" })
+                    }
+                    if(!validPasswordCompare) {
+                        return res.status(400).send({ error: "Invalid Password" })
+                    }
+                    try {
+                        const id = req.params.id;
+                        const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
+                        return res.status(200);
+                    } catch {
+                        return res.status(500).send({ error: "Guest Not Found" })
+                    }
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});
                 }
+
                 break
             default:
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
@@ -346,6 +316,70 @@ class Guest_Routes {
             res.status(400).json(defaultReturnObject);
         }
     }
+    /**Public: Get Guest by ID*/
+    public guestId = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('GET'):
+                try {
+                    const id = req.params.id;
+                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
+                    return res.status(200).send(data);
+                } catch {
+                    return res.status(500).send({ error: "Something went wrong"});
+                }
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        };
+    };
+    /**Public: Update Guest by ID*/
+    public guestUpdate = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('PUT'):
+                 try {
+                    const id = req.params.id;
+                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
+                    return res.status(200).send(data);
+                } catch {
+                    return res.status(500).send({ error: "Something went wrong"});
+                }
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        };
+    };
+    /**Public: Guest Registers Passcode*/
+    public guestRegister = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('POST'):
+                 try {
+                    const { email, passcode } = req.body;
+                    const data = await sql`SELECT * FROM _GUEST WHERE _PASSCODE = ${passcode} AND _EMAIL = ${email}`;
+                    return res.status(200).send(data);
+                } catch {
+                    return res.status(500).send({ error: "Something went wrong"});
+                }
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        };
+    };
+    /**Private: Admin Gets All Guests*/
+    public guestAll = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('GET'):
+                 try {
+                    const id = req.params.id;
+                    const data = await sql`SELECT * FROM _GUEST`;
+                    return res.status(200).send(data);
+                } catch {
+                    return res.status(500).send({ error: "Something went wrong"});
+                }
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        };
+    };
 }
 
 export default Guest_Routes;
