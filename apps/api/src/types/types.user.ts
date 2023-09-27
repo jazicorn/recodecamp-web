@@ -23,31 +23,33 @@ export interface Admin extends User {
 }
 
 export interface User {
-    _USER_ID: string;
-    _USER_CREATED_AT: Date;
-    _USER_UPDATED_AT: Date;
-    _USER_GUEST: boolean;
-    _USER_ADMIN: boolean;
-    _USER_SUBSCRIPTION: number;
-    _USER_IP_ADDRESS: string;
-    _USER_PASSCODE: string;
-    _USER_PASSCODE_CONFIRMED: boolean
-    _USER_EMAIL: string;
-    _USER_EMAIL_CONFIRMED: boolean;
-    _USER_PASSWORD: string;
-    _USER_USERNAME: string;
-    _USER_FIRST_NAME: string | null;
-    _USER_LAST_NAME: string | null;
-    _USER_SOCIAL_HANDLE_GITHUB: string | null;
-    _USER_SOCIAL_HANDLE_GOOGLE: string | null;
-    _USER_SOCIAL_HANDLE_APPLE: string | null;
-    _USER_SOCIAL_HANDLE_FACEBOOK: string | null;
-    _USER_SOCIAL_HANDLE_TWITTER: string | null;
-    _USER_SOCIAL_HANDLE_LINKEDIN: string | null;
-    _USER_DEFAULT_LANGUAGE: string | null;
-    _USER_DEFAULT_ROUTE: string | null;
-    _USER_POINTS_TOTAL: number | null;
-    _USER_COURSES: Course[] | null;
+    _ID: string;
+    _CREATED_AT: Date;
+    _UPDATED_AT: Date;
+    _GUEST: boolean;
+    _ADMIN: boolean;
+    _ACCESS_TOKEN: boolean;
+    _SUBSCRIPTION: number;
+    _IP_ADDRESS: string;
+    _PASSCODE: string;
+    _PASSCODE_CONFIRMED: boolean
+    _EMAIL: string;
+    _EMAIL_PASSCODE: string;
+    _EMAIL_CONFIRMED: boolean;
+    _PASSWORD: string;
+    _USERNAME: string;
+    _FIRST_NAME: string;
+    _LAST_NAME: string;
+    _SOCIAL_HANDLE_GITHUB: string;
+    _SOCIAL_HANDLE_GOOGLE: string;
+    _SOCIAL_HANDLE_APPLE: string;
+    _SOCIAL_HANDLE_FACEBOOK: string;
+    _SOCIAL_HANDLE_TWITTER: string;
+    _SOCIAL_HANDLE_LINKEDIN: string;
+    _DEFAULT_LANGUAGE: string;
+    _DEFAULT_ROUTE: string;
+    _POINTS_TOTAL: number;
+    _COURSES: Course[] | string[] | string;
 
 }
 

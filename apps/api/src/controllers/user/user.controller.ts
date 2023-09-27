@@ -1,25 +1,27 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import { User } from '../../classes/user';
-import { User } from  '../../types/types.user';
+import { user } from '../../classes/user';
+import { _user } from  '../../types/types.user';
 import sql from '../../config/db';
 import cors from 'cors';
+import { z } from "zod";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import * as dotenv from 'dotenv';
 
-class User {
-    /**Public: Get User by ID*/
-    public pathUser = '/user/:id';
-    /**Public: User Registers Passcode*/
-    public pathUserRegister = '/user/register';
-    /**Public: Update User*/
-    public pathUserUpdate = '/user/update/:id';
-    /**Private: Admin Deletes User*/
-    public pathUserDelete = '/user/delete/:id';
-    /**Private: Admin Gets All Users*/
-    public pathUserAll = '/user/all';
-    /**Private: Admin Creates User*/
-    public pathUserNew = '/user/new';
+dotenv.config();
+
+class user_Routes {
+    /**Public: user Delete Routes*/
+    public pathUserDelete = '/delete/:id';
+    /**Public: Create user*/
+    public pathUserNew = '/new';
+    /**Public: Validate user*/
+    public pathUserLogin = '/login';
+    /**Public: Auth user*/
+    public pathUserAuth = '/verify';
     /**Express Router*/
-    public router = Router();
+    public router = Router({ mergeParams: true });
     /**Cors Options*/
     private corsOptions = cors({
         origin: process.env.WEBURL,
@@ -31,135 +33,333 @@ class User {
     }
 
     public initializeRoutes() {
-        this.router.get(this.pathUser, this.userId);
-        this.router.get(this.pathUserRegister, this.userRegister);
-        this.router.get(this.pathUserAll, this.corsOptions, this.userAll);
-        this.router.post(this.pathUserNew, this.corsOptions, this.userNew);
-        this.router.put(this.pathUserUpdate, this.userUpdate);
-        this.router.delete(this.pathUserDelete, this.corsOptions, this.userDelete);
+        this.router.post(this.pathuserNew, this.userNew);
+        this.router.post(this.pathuserLogin, this.userLogin);
+        this.router.delete(this.pathuserDelete, this.corsOptions, this.userDelete);
+        this.router.post(this.pathuserAuth, this.userAuth);
     }
 
-    /**Public: Get User by ID*/
-    public userId = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('GET'):
-                try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _User WHERE _USER_ID = ${id}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Public: Update User by ID*/
-    public userUpdate = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('PUT'):
-                 try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _User WHERE _USER_ID = ${id}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Public: User Registers Passcode*/
-    public userRegister = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('POST'):
-                 try {
-                    const { email, passcode } = req.body;
-                    const data = await sql`SELECT * FROM _User WHERE _USER_PASSCODE = ${passcode} AND _USER_EMAIL = ${email}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Private: Admin Gets All Users*/
-    public userAll = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('GET'):
-                 try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _User`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Private: Admin Creates User*/
+
+    /**Public: Create user*/
     public userNew = async (req: Request, res: Response) => {
+        //console.log("route: api/user/new")
         switch(req.method) {
             case('POST'):
                 try {
-                    const data: JS_Type = req.body;
-                    const user = new User(data);
-                    const encryptedUserPassword = await bcrypt.hash(user._USER_PASSWORD, 10);
-                    const results = await sql`INSERT INTO _USER (
-                            _USER_CREATED_AT,
-                            _USER_UPDATED_AT,
-                            _USER_ID,
-                            _USER_PASSCODE,
-                            _USER_PASSCODE_CONFIRMED,
-                            _USER_EMAIL,
-                            _USER_EMAIL_CONFIRMED,
-                            _USER_PASSWORD,
-                            _USER_FIRSTNAME,
-                            _USER_LASTNAME,
-                            _USER_DEFAULT_LANGUAGE,
-                            _USER_DEFAULT_ROUTE,
-                            _USER_POINTS,
-                            _USER_COURSES,
+                    const data = req.body;
+                    //console.log("data:", data);
+                    const userIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(userIP);
+                    const validEmail = z.string().email(data._EMAIL);
+                    const validPasswordMin = z.string().min(8,data._PASSWORD);
+                    const validPasswordMax = z.string().max(16,data._PASSWORD);
+                    const validPasswordRegex = z.string().regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$,;%^*-]).{8,16}$/,data._PASSWORD);
+                    //console.log('validIP', validIP);
+                    //console.log('validEmail', validEmail);
+                    if(!validIP) {
+                        return res.status(400).send({ error: "user Network Error" });
+                    } else if(!validEmail) {
+                        return res.status(400).send({ error: "Invalid Email" });
+                    } else if(!validPasswordMin) {
+                        return res.status(400).send({ error: "Password Not Minimum Length" });
+                    } else if(!validPasswordMax) {
+                        return res.status(400).send({ error: "Password Bigger than Max Length" });
+                    } else if(!validPasswordRegex) {
+                        return res.status(400).send({ error: "Password Requires At Least One Special Character" });
+                    } else if(validIP && validEmail && validPasswordMin && validPasswordMax && validPasswordRegex) {
+                        const user = new user(data);
+                        // set user ip address
+                        user._IP_ADDRESS = userIP as string;
+                        // Encrypt user password
+                        const encryptedPassword = await bcrypt.hash(data._PASSWORD, 10);
+                        // set encrypted password
+                        user._PASSWORD = encryptedPassword;
+                        // convert subscription to string value
+                        user._SUBSCRIPTION = user._SUBSCRIPTION.toString().trim();
+                        // convert courses to string value
+                        user._COURSES = user._COURSES.toString().trim();
+                        // user after updates
+                        //console.log("user", user);
+                        const createUser = await sql`INSERT INTO _USER(
+                        _ID,
+                        _CREATED_AT,
+                        _UPDATED_AT,
+                        _GUEST,
+                        _ADMIN,
+                        _FIRST_LOGIN,
+                        _ACCESS_TOKEN,
+                        _SUBSCRIPTION,
+                        _IP_ADDRESS,
+                        _PASSCODE,
+                        _PASSCODE_CONFIRMED,
+                        _EMAIL,
+                        _EMAIL_CONFIRMED,
+                        _EMAIL_PASSCODE,
+                        _USERNAME,
+                        _PASSWORD,
+                        _FIRST_NAME,
+                        _LAST_NAME,
+                        _SOCIAL_HANDLE_GITHUB,
+                        _SOCIAL_HANDLE_GOOGLE,
+                        _SOCIAL_HANDLE_APPLE,
+                        _SOCIAL_HANDLE_FACEBOOK,
+                        _SOCIAL_HANDLE_TWITTER,
+                        _SOCIAL_HANDLE_LINKEDIN,
+                        _DEFAULT_LANGUAGE,
+                        _DEFAULT_ROUTE,
+                        _POINTS_TOTAL,
+                        _COURSES,
                         ) VALUES (
-                            ${user._USER_CREATED_AT},
-                            ${user._USER_UPDATED_AT},
-                            ${user._USER_ID},
-                            ${user._USER_PASSCODE},
-                            ${user._USER_PASSCODE_CONFIRMED},
-                            ${user._USER_EMAIL},
-                            ${user._USER_EMAIL_CONFIRMED},
-                            ${encryptedUserPassword},
-                            ${user._USER_FIRSTNAME},
-                            ${user._USER_LASTNAME},
-                            ${user._USER_DEFAULT_LANGUAGE},
-                            ${user._USER_DEFAULT_ROUTE},
-                            ${user._USER_POINTS},
-                            ${user._USER_COURSES},
+                            ${user._ID},
+                            ${user._CREATED_AT},
+                            ${user._UPDATED_AT},
+                            ${user._GUEST},
+                            ${user._ADMIN},
+                            ${user._FIRST_LOGIN},
+                            ${user._ACCESS_TOKEN},
+                            ${user._SUBSCRIPTION},
+                            ${user._IP_ADDRESS},
+                            ${user._PASSCODE},
+                            ${user._PASSCODE_CONFIRMED},
+                            ${user._EMAIL},
+                            ${user._EMAIL_CONFIRMED},
+                            ${user._EMAIL_PASSCODE},
+                            ${user._USERNAME},
+                            ${user._PASSWORD},
+                            ${user._FIRST_NAME},
+                            ${user._LAST_NAME},
+                            ${user._SOCIAL_HANDLE_GITHUB},
+                            ${user._SOCIAL_HANDLE_GOOGLE},
+                            ${user._SOCIAL_HANDLE_APPLE},
+                            ${user._SOCIAL_HANDLE_FACEBOOK},
+                            ${user._SOCIAL_HANDLE_TWITTER},
+                            ${user._SOCIAL_HANDLE_LINKEDIN},
+                            ${user._DEFAULT_LANGUAGE},
+                            ${user._DEFAULT_ROUTE},
+                            ${user._POINTS_TOTAL},
+                            ${user._COURSES},
                         )`;
-                    const getUser = await sql`SELECT * FROM _User WHERE _USER_ID = ${user.id}`;
-                    return res.status(200).send(getUser);
+                        const getuser = await sql`SELECT * FROM _user WHERE _ID = ${user._ID}`;
+                        //console.log("user info:", getuser);
+                        if(getUser !== undefined) {
+                            return res.sendStatus(200);
+                        } else {
+                            return res.status(500).send({ error: "user Creation Error" });
+                        }
+                    } else {
+                        return res.status(400).send({ error: "Invalid Data" });
+                    }
                 } catch {
-                    return res.status(500).send({ error: "Something went wrong" });
+                    return res.status(500).send({ error: "Database Connection Error" });
                 }
                 break
             default:
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
-    /**Private: Admin Deletes User*/
+    /**Public: Login user*/
+    public userLogin = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('POST'):
+                try {
+                    const data = req.body;
+                    //console.log(data);
+
+                    /**Retrieve user */
+                    // Check Email in database
+                    const getUser = await sql`SELECT * FROM _user WHERE _EMAIL = ${data._EMAIL}`;
+                    const userResult = getuser[0];
+                    //console.log("userResult:", userResult)
+
+                    /**Validate user Data */
+                    // Check user IP Address
+                    const userIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(userIP);
+                    // Check Email & Password
+                    const validEmail = data._EMAIL === userResult._email;
+                    //console.log("validEmail", validEmail);
+                    // Compare Encrypted Password
+                    const validPasswordCompare = bcrypt.compareSync(
+                        data._PASSWORD,
+                        userResult._password
+                    );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+
+                    /**Transform Data */
+                    // uppercase userResult keys
+                    Object.entries(userResult).forEach(([key, value]) => {
+                        userResult[key.toUpperCase()] = userResult[key];
+                        //console.log(`${key}: ${value}`);
+                    });
+                    // Create user Object
+                    const userObj = new user(userResult);
+                    //console.log("user:", userObj);
+
+                    /**Update Data */
+                    // Set user IP Address
+                    userObj._IP_ADDRESS = userIP as string;
+                    // Update user Login Time
+                    userObj._UPDATED_AT = new Date();
+                    // Save Updated Time to DB
+
+                    await sql` UPDATE _user SET _UPDATED_AT = ${userObj._UPDATED_AT} WHERE _ID = ${userObj._ID}`;
+
+                    /**Create JWT Token */
+                    // Create Token
+                    const getToken = jwt.sign({ _ID: userObj._ID, _EMAIL: userObj._EMAIL }, process.env.SECRET_TOKEN, {
+                        algorithm: 'HS256',
+                        allowInsecureKeySizes: true,
+                        expiresIn: 86400, // 24 hours
+                    });
+                    // Save user Token
+                    userObj._ACCESS_TOKEN = getToken;
+
+                    //console.log("userObj:", userObj)
+
+                    if(!validIP) {
+                        return res.status(400).send({ error: "User Network Error" });
+                    } else if(!validEmail || !validPasswordCompare) {
+                        return res.status(400).send({ error: "Invalid user Information" });
+                    } else if(validIP && validEmail && validPasswordCompare) {
+                        return res.cookie("access_token", getToken, {
+                            httpOnly: true,
+                            secure: process.env.NODE_ENV === "production",
+                        }).status(200).send({data: userObj});
+                    } else {
+                        return res.status(400).send({ error: "Invalid Data" });
+                    }
+                } catch {
+                    return res.status(500).send({ error: "Database Connection Error" });
+                }
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        }
+    };
+
+    /**Private: Admin Deletes user*/
     public userDelete = async (req: Request, res: Response) => {
         switch(req.method) {
             case('DELETE'):
+                try {
+                    /** <-- Validate User Info --> */
+                    const data = req.body;
+                    /**Retrieve user */
+                    // Check Email in database
+                    const getuser = await sql`SELECT * FROM _user WHERE _EMAIL = ${data._EMAIL}`;
+                    const userResult = getuser[0];
+                    //console.log("userResult:", userResult)
+
+                    /**Validate user Data */
+                    // Check user IP Address
+                    const userIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(userIP);
+                    // Check Email & Password
+                    //const validEmail = data._EMAIL === userResult._email;
+                    //console.log("validEmail", validEmail);
+                    // Compare Encrypted Password
+                    const validPasswordCompare = bcrypt.compareSync(
+                        data._PASSWORD,
+                        userResult._password
+                    );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+
+                    if(!validIP) {
+                        return res.status(400).send({ error: "Invalid IP Address" })
+                    }
+                    if(!validPasswordCompare) {
+                        return res.status(400).send({ error: "Invalid Password" })
+                    }
+
+                    /**Delete user */
+                    try {
+                        const id = req.params.id;
+                        const results = await sql`DELETE * FROM _user WHERE _ID = ${id}`;
+                        return res.status(200);
+                    } catch {
+                        return res.status(500).send({ error: "user Not Found" })
+                    }
+                } catch {
+                    return res.status(500).send({ error: "Something went wrong"});
+                }
+
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        };
+    };
+    /**Public: Auth user*/
+    public userAuth = async (req: Request, res: Response) => {
+        const defaultReturnObject = { authenticated: false, user: null };
+
+        try {
+            const { token } = req.body
+            // const token = String(req?.headers?.authorization?.replace('Bearer ', ''));
+            // console.log("token", token)
+            //console.log("data", token);
+            const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
+            //console.log("decoded", decoded)
+            // /**Retrieve user */
+            // Check Email in database
+            const getuser = await sql`SELECT * FROM _user WHERE _ID = ${decoded._ID}`;
+            const userResult = getuser[0];
+            //console.log("user:", userResult);
+            if (!userResult) {
+            res.status(400).json(defaultReturnObject);
+                return;
+            }
+            /**Transform Data */
+            // uppercase userResult keys
+            Object.entries(userResult).forEach(([key, value]) => {
+                userResult[key.toUpperCase()] = userResult[key];
+                //console.log(`${key}: ${value}`);
+            });
+            // Create user Object
+            const userObj = new user(userResult);
+            //console.log("user:", userObj);
+            const result = { authenticated: true, user: userObj }
+            res.status(200).json(result);
+        }
+        catch (err) {
+            console.log('POST auth/me, Something Went Wrong', err);
+            res.status(400).json(defaultReturnObject);
+        }
+    }
+
+    /**Public: Delete user*/
+    public userRemove = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('DELETE'):
                  try {
-                    const id = req.params.id;
-                    const results = await sql`DELETE * FROM _USER WHERE _USER_ID = ${id}`;
-                    return res.status(200);
+                    const data = req.body;
+                    const userResult = await sql`SELECT * FROM _user WHERE _EMAIL = ${data._EMAIL}`;
+                     /**Validate user Data */
+                    // Check user IP Address
+                    const userIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(userIP);
+                    // Check Email & Password
+                    //const validEmail = data._EMAIL === userResult._email;
+                    //console.log("validEmail", validEmail);
+                    // Compare Encrypted Password
+                    const validPasswordCompare = bcrypt.compareSync(
+                        data._PASSWORD,
+                        userResult._password
+                    );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+                     if(!validIP) {
+                        return res.status(400).send({ error: "Invalid IP Address" })
+                    }
+                    if(!validPasswordCompare) {
+                        return res.status(400).send({ error: "Invalid Password" })
+                    }
+                    try {
+                        const id = req.params.id;
+                        const results = await sql`DELETE * FROM _user WHERE _ID = ${id}`;
+                        return res.status(200);
+                    } catch {
+                        return res.status(500).send({ error: "user Not Found" })
+                    }
+                    return res.status(200).send(data);
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});
                 }
@@ -170,4 +370,4 @@ class User {
     };
 }
 
-export default User;
+export default user_Routes;

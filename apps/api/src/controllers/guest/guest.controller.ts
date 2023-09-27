@@ -12,21 +12,13 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 class Guest_Routes {
-    /**Public: Get Guest by ID*/
-    public pathGuest = '/guest/:id';
-    /**Public: Validate Guest*/
-    public pathGuestLogin = '/guest/login';
-    /**Public: Guest Registers Passcode*/
-    public pathGuestRegister = '/guest/register';
-    /**Public: Update Guest*/
-    public pathGuestUpdate = '/guest/update/:id';
-    /**Private: Admin Deletes Guest*/
+    /**Public: Guest Delete Routes*/
     public pathGuestDelete = '/guest/delete/:id';
-    /**Private: Admin Gets All Guests*/
-    public pathGuestAll = '/guest/all';
     /**Public: Create Guest*/
     public pathGuestNew = '/guest/new';
-     /**Public: Auth guest*/
+    /**Public: Validate Guest*/
+    public pathGuestLogin = '/guest/login';
+    /**Public: Auth guest*/
     public pathGuestAuth = '/guest/verify';
     /**Express Router*/
     public router = Router();
@@ -41,12 +33,8 @@ class Guest_Routes {
     }
 
     public initializeRoutes() {
-        this.router.get(this.pathGuest, this.guestId);
-        this.router.post(this.pathGuestLogin, this.guestLogin);
-        this.router.get(this.pathGuestRegister, this.guestRegister);
-        this.router.get(this.pathGuestAll, this.corsOptions, this.guestAll);
         this.router.post(this.pathGuestNew, this.guestNew);
-        this.router.put(this.pathGuestUpdate, this.guestUpdate);
+        this.router.post(this.pathGuestLogin, this.guestLogin);
         this.router.delete(this.pathGuestDelete, this.corsOptions, this.guestDelete);
         this.router.post(this.pathGuestAuth, this.guestAuth);
     }
@@ -218,7 +206,10 @@ class Guest_Routes {
                     } else if(!validEmail || !validPasswordCompare) {
                         return res.status(400).send({ error: "Invalid Guest Information" });
                     } else if(validIP && validEmail && validPasswordCompare) {
-                        return res.status(200).send({data: guestObj});
+                        return res.cookie("access_token", getToken, {
+                            httpOnly: true,
+                            secure: process.env.NODE_ENV === "production",
+                        }).status(200).send({data: guestObj});
                     } else {
                         return res.status(400).send({ error: "Invalid Data" });
                     }
@@ -230,6 +221,7 @@ class Guest_Routes {
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
+
     /**Private: Admin Deletes Guest*/
     public guestDelete = async (req: Request, res: Response) => {
         switch(req.method) {
@@ -263,6 +255,8 @@ class Guest_Routes {
                     if(!validPasswordCompare) {
                         return res.status(400).send({ error: "Invalid Password" })
                     }
+
+                    /**Delete Guest */
                     try {
                         const id = req.params.id;
                         const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
@@ -316,61 +310,40 @@ class Guest_Routes {
             res.status(400).json(defaultReturnObject);
         }
     }
-    /**Public: Get Guest by ID*/
-    public guestId = async (req: Request, res: Response) => {
+
+    /**Public: Delete Guest*/
+    public guestRemove = async (req: Request, res: Response) => {
         switch(req.method) {
-            case('GET'):
-                try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Public: Update Guest by ID*/
-    public guestUpdate = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('PUT'):
+            case('DELETE'):
                  try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _ID = ${id}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Public: Guest Registers Passcode*/
-    public guestRegister = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('POST'):
-                 try {
-                    const { email, passcode } = req.body;
-                    const data = await sql`SELECT * FROM _GUEST WHERE _PASSCODE = ${passcode} AND _EMAIL = ${email}`;
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
-    /**Private: Admin Gets All Guests*/
-    public guestAll = async (req: Request, res: Response) => {
-        switch(req.method) {
-            case('GET'):
-                 try {
-                    const id = req.params.id;
-                    const data = await sql`SELECT * FROM _GUEST`;
+                    const data = req.body;
+                    const guestResult = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
+                     /**Validate Guest Data */
+                    // Check Guest IP Address
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
+                    // Check Email & Password
+                    //const validEmail = data._EMAIL === guestResult._email;
+                    //console.log("validEmail", validEmail);
+                    // Compare Encrypted Password
+                    const validPasswordCompare = bcrypt.compareSync(
+                        data._PASSWORD,
+                        guestResult._password
+                    );
+                    //console.log("validPasswordCompare:", validPasswordCompare);
+                     if(!validIP) {
+                        return res.status(400).send({ error: "Invalid IP Address" })
+                    }
+                    if(!validPasswordCompare) {
+                        return res.status(400).send({ error: "Invalid Password" })
+                    }
+                    try {
+                        const id = req.params.id;
+                        const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
+                        return res.status(200);
+                    } catch {
+                        return res.status(500).send({ error: "Guest Not Found" })
+                    }
                     return res.status(200).send(data);
                 } catch {
                     return res.status(500).send({ error: "Something went wrong"});

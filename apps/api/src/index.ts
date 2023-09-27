@@ -9,15 +9,18 @@ import VarDeclare from './controllers/variables/var.declare.controller';
 import VarScope from './controllers/variables/var.scope.controller';
 import VarScopeReassign from './controllers/variables/var.scope.reassign.controller';
 
-const app = new App([
-    new Index(),
-    new Guest_Routes(),
-    new Comments(),
-    new VarGeneral(),
-    new VarDeclare(),
-    new VarScope(),
-    new VarScopeReassign()
-]);
+const app = new App(
+    [],
+    [
+        new Index(),
+        new Guest_Routes(),
+        new Comments(),
+        new VarGeneral(),
+        new VarDeclare(),
+        new VarScope(),
+        new VarScopeReassign()
+    ]
+);
 
 app.listen();
 
