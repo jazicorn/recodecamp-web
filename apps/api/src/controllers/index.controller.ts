@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import { ROUTES } from '../constants/categories.routes'
+import { _ROUTES_JAVASCRIPT } from '../constants/javascript.routes';
+import { _ROUTES_JAVA } from '../constants/java.routes';
+import { _ROUTES_PYTHON } from '../constants/python.routes';
 
 class Index {
     public path = '/';
-    public pathCategories = '/categories';
+    public pathCategories = '/categories/:id';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -33,8 +35,17 @@ class Index {
     public categories = async (req: Request, res: Response) => {
         switch(req.method) {
             case('GET'):
-                 try {
-                    res.status(200).send({ data: ROUTES });
+                try {
+                    switch(req.params.id) {
+                        case('javascript'):
+                            return res.status(200).send({ data: _ROUTES_JAVASCRIPT });
+                        case('java'):
+                            return res.status(200).send({ data: _ROUTES_JAVA });
+                        case('python'):
+                            return res.status(200).send({ data: _ROUTES_PYTHON });
+                        default:
+                            return res.status(200).send({ data: _ROUTES_JAVASCRIPT });
+                    }
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
                 }
