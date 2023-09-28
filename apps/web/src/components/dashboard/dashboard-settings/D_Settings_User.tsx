@@ -1,24 +1,39 @@
 // Page: Dashboard Settings (User)
 /**React */
-// import { useContext, useState, useMemo, useRef } from 'react';
-import { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 /**Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
 import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
-/**Redux */
-import { useAppSelector } from '../../../redux/reduxHooks.ts';
-import type { RootState } from '../../../redux/store.ts';
 //import bcrypt from 'bcryptjs';
 /**User Avatars */
 // import { createAvatar } from '@dicebear/core';
 // import { pixelArt } from '@dicebear/collection';
-/**Custom Helpers */
-import { detectTokenFromLocalStorage } from '../../../utils/common';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+//import { IconX, IconCheck } from '@tabler/icons-react';
+import Emoji from 'react-emojis';
 /**Modal */
 import { useDisclosure } from '@mantine/hooks';
-import { Modal} from '@mantine/core';
+import { Modal, TextInput } from '@mantine/core';
+/**Redux */
+import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
+import { 
+  menuUser,
+} from '../../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../../utils/constants';
+/**Custom Helpers */
+import { 
+  detectTokenFromLocalStorage,
+  removeTokenFromLocalStorage 
+} from '../../../utils/common';
+
+interface FormInputs {
+  multipleErrorInput: string
+}
 
 const D_Settings_User = () => {
   /**Detect Auth */
@@ -27,8 +42,14 @@ const D_Settings_User = () => {
   const { isMobile, isMobileMD } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
+  
+  /**Browser Navigation */
+  const navigate = useNavigate();
 
-  /** User from redux store */
+  /** Redux | Dispatch Instance */
+  const dispatch = useAppDispatch();
+
+  /** Redux | User from redux store */
   const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   //console.log("getUser:", getUser);
 
@@ -52,6 +73,7 @@ const D_Settings_User = () => {
       setUserId(userIdHide);
     }
   };
+
   /**User Dates */
   const userCreatedDate = new Date(getUser._CREATED_AT).toDateString();
   const userUpdatedDate = new Date(getUser._UPDATED_AT).toDateString();
@@ -76,16 +98,114 @@ const D_Settings_User = () => {
   //   }).toDataUriSync();
   // }, []);
 
+  /**Delete Modal Input */
+  const {
+    register,
+    handleSubmit,
+  } = useForm<FormInputs>({
+    criteriaMode: "all",
+  })
+
+  /**Request Guest Login Info */
+  const onSubmit = handleSubmit( async (data) => {
+    guestLogin(data);
+  });
+
+  /** Guest Login */
+  const guestLogin = useCallback( async(data) => {
+    try {
+      let url;
+      if(import.meta.env.PROD) {
+        url = `${baseURL}/guest/delete/${getUser._ID}`;
+      } else {
+        url = `/api/guest/delete/${getUser._ID}`;
+      }
+      await fetch(url, { 
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(function(response) {
+          //console.log(response)
+          if(response.ok) {
+            removeTokenFromLocalStorage();
+            console.log("😿 Guest | Deleted Account");
+            // Success Notification
+            notifications.show({
+              id: 'success',
+              withCloseButton: true,
+              autoClose: 4000,
+              title: "Successful Account Deletion",
+              message: 'Sad to see you go',
+              color: 'teal',
+              icon: <Emoji emoji="crying-cat"/> ,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: false,
+            });
+            return
+          } else {
+            console.log("🚫 Guest | Delete Account Failed")
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Failed Account Deletion",
+              message: 'Please try again',
+              color: 'red',
+              icon: <Emoji emoji="face-with-monocle"/>,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
+          }
+      }).then(function() {
+        dispatch(menuUser(DEFAULT_USER));
+        setTimeout(() => {
+          console.log("⏳ Delay | Redirect in 1 second.");
+          navigate("/");
+        }, "1000");
+      });
+    } catch(error) {
+      console.log("🚫 Guest | Delete Failed")
+      console.log(error);
+    }
+  },[dispatch, getUser._ID, navigate]);
+
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
     '[&_main]:tw-text-campfire-neutral-700 [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
-      <Modal opened={opened} onClose={close} title="Authentication" centered>
-        {/**#TODO Ask user to confirm delete account. 
-         * If no, close modal.
-         * If yes send api request to delete account
-         * If account confirmed as deleted. redirect to homepage.  
-         * */}
-        {/* Modal content */}
+      <Modal opened={opened} onClose={close} withCloseButton={true} title="Account Deletion" centered>
+        <div className={`${isMobile ? "tw-pt-4" : "tw-pt-4"} tw-w-full tw-h-full`}>
+          <form onSubmit={onSubmit} autoComplete="new-password">
+            <TextInput 
+              label="Confirm Email" 
+              placeholder="john@doe.com" 
+              type="email"
+              autoComplete="off"
+              {...register('_EMAIL')}
+            />
+            <TextInput
+              mt="md"
+              label="Confirm Password"
+              placeholder="Password1!"
+              type="text" 
+              autoComplete="off"
+              {...register('_PASSWORD')}
+            />
+            <button onClick={open} 
+            className={`${darkMode ? "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-50"
+            : "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-100"} 
+            tw-mt-4 tw-w-full tw-border tw-border-red-400 tw-font-space_mono tw-text-lg tw-text-red-400`}>
+              Delete Account
+            </button>
+          </form>
+        </div>
       </Modal>
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
       'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-w-full tw-h-full `}>
@@ -171,7 +291,7 @@ const D_Settings_User = () => {
                   : "hover:tw-bg-campfire-neutral-400/50 hover:tw-text-campfire-neutral-100"} tw-w-full tw-border tw-border-red-400 tw-font-space_mono tw-text-lg tw-text-red-400`}>
                     Account Deletion
                   </button>
-                  <p className="tw-w-full tw-text-center">🚨!!!Warning!!! This Action Is Permanent🚨</p>
+                  <p className="tw-w-full tw-text-center">🚨!!!Warning!!!🚨 This Action Is Permanent</p>
                 </div>
               </div>
             </section>

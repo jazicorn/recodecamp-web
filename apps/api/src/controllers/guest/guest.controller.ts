@@ -35,7 +35,7 @@ class Guest_Routes {
     public initializeRoutes() {
         this.router.post(this.pathGuestNew, this.guestNew);
         this.router.post(this.pathGuestLogin, this.guestLogin);
-        this.router.delete(this.pathGuestDelete, this.corsOptions, this.guestDelete);
+        this.router.delete(this.pathGuestDelete, this.guestDelete);
         this.router.post(this.pathGuestAuth, this.guestAuth);
     }
 
@@ -249,6 +249,7 @@ class Guest_Routes {
                     );
                     //console.log("validPasswordCompare:", validPasswordCompare);
 
+                    /**Return Error if Invalid Return 400*/
                     if(!validIP) {
                         return res.status(400).send({ error: "Invalid IP Address" })
                     }
@@ -257,15 +258,13 @@ class Guest_Routes {
                     }
 
                     /**Delete Guest */
-                    try {
-                        const id = req.params.id;
-                        const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
-                        return res.status(200);
-                    } catch {
-                        return res.status(500).send({ error: "Guest Not Found" })
-                    }
+                    const id = req.params.id;
+                    //console.log(id)
+                    const result = await sql`DELETE FROM _GUEST WHERE _id = ${id}`;
+                    //console.log(result);
+                    return res.sendStatus(200);
                 } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
+                    return res.status(500).send({ error: "Guest Not Found"});
                 }
 
                 break
