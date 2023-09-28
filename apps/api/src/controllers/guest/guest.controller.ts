@@ -208,7 +208,8 @@ class Guest_Routes {
                     } else if(validIP && validEmail && validPasswordCompare) {
                         return res.cookie("access_token", getToken, {
                             httpOnly: true,
-                            secure: process.env.NODE_ENV === "production",
+                            secure: true,
+                            sameSite: 'strict',
                         }).status(200).send({data: guestObj});
                     } else {
                         return res.status(400).send({ error: "Invalid Data" });
