@@ -29,8 +29,8 @@ const initialState: DashboardState = {
   consoleMessage: '',
   user: {
     _ID: '123-456-789',
-    _CREATED_AT: new Date,
-    _UPDATED_AT: new Date,
+    _CREATED_AT: new Date().toISOString(),
+    _UPDATED_AT: new Date().toISOString(),
     _ACCESS_TOKEN: '',
     _FIRST_LOGIN: false,
     _ADMIN: false,
