@@ -1,14 +1,14 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import sql from '../../config/db';
+import sql from '../../../config/db';
 import { faker } from '@faker-js/faker';
-import { Question } from '../../classes/question';
-import { Q_Type } from  '../../types/types.question';
-import { getRandomInt } from '../../utils/index';
-import { objRandom as objDeclare } from '../../data/var.declare.data';
-import { objGlobalScope, objFuncScope, objBlockScope } from '../../data/var.scope.data';
-import { objBlockScopeReassign } from '../../data/var.scope.reassign.data';
+import { Question } from '../../../classes/question';
+import { Q_Type } from  '../../../types/types.question';
+import { getRandomInt } from '../../../utils/index';
+import { objRandom as objDeclare } from '../../../data/js/var.declare.data';
+import { objGlobalScope, objFuncScope, objBlockScope } from '../../../data/js/var.scope.data';
+import { objBlockScopeReassign } from '../../../data/js/var.scope.reassign.data';
 import cors from 'cors';
 
 export default class VarGeneral {

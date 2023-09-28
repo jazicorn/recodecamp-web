@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import { Guest } from '../../classes/guest';
-import { _Guest } from  '../../types/types.guest';
-import sql from '../../config/db';
+import { Guest } from '../../../classes/guest';
+import { _Guest } from  '../../../types/types.guest';
+import sql from '../../../config/db';
 import cors from 'cors';
 import { z } from "zod";
 import jwt from "jsonwebtoken";

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import { user } from '../../classes/user';
-import { _user } from  '../../types/types.user';
-import sql from '../../config/db';
+import { Guest } from '../../../classes/guest';
+import { _Guest } from  '../../../types/types.guest';
+import sql from '../../../config/db';
 import cors from 'cors';
 import { z } from "zod";
 import jwt from "jsonwebtoken";
@@ -11,17 +11,17 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-class user_Routes {
-    /**Public: user Delete Routes*/
-    public pathUserDelete = '/delete/:id';
-    /**Public: Create user*/
-    public pathUserNew = '/new';
-    /**Public: Validate user*/
-    public pathUserLogin = '/login';
-    /**Public: Auth user*/
-    public pathUserAuth = '/verify';
+class Guest_Routes {
+    /**Public: Guest Delete Routes*/
+    public pathGuestDelete = '/guest/delete/:id';
+    /**Public: Create Guest*/
+    public pathGuestNew = '/guest/new';
+    /**Public: Validate Guest*/
+    public pathGuestLogin = '/guest/login';
+    /**Public: Auth guest*/
+    public pathGuestAuth = '/guest/verify';
     /**Express Router*/
-    public router = Router({ mergeParams: true });
+    public router = Router();
     /**Cors Options*/
     private corsOptions = cors({
         origin: process.env.WEBURL,
@@ -33,23 +33,23 @@ class user_Routes {
     }
 
     public initializeRoutes() {
-        this.router.post(this.pathuserNew, this.userNew);
-        this.router.post(this.pathuserLogin, this.userLogin);
-        this.router.delete(this.pathuserDelete, this.corsOptions, this.userDelete);
-        this.router.post(this.pathuserAuth, this.userAuth);
+        this.router.post(this.pathGuestNew, this.guestNew);
+        this.router.post(this.pathGuestLogin, this.guestLogin);
+        this.router.delete(this.pathGuestDelete, this.guestDelete);
+        this.router.post(this.pathGuestAuth, this.guestAuth);
     }
 
 
-    /**Public: Create user*/
-    public userNew = async (req: Request, res: Response) => {
-        //console.log("route: api/user/new")
+    /**Public: Create Guest*/
+    public guestNew = async (req: Request, res: Response) => {
+        //console.log("route: api/guest/new")
         switch(req.method) {
             case('POST'):
                 try {
                     const data = req.body;
                     //console.log("data:", data);
-                    const userIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(userIP);
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
                     const validEmail = z.string().email(data._EMAIL);
                     const validPasswordMin = z.string().min(8,data._PASSWORD);
                     const validPasswordMax = z.string().max(16,data._PASSWORD);
@@ -57,7 +57,7 @@ class user_Routes {
                     //console.log('validIP', validIP);
                     //console.log('validEmail', validEmail);
                     if(!validIP) {
-                        return res.status(400).send({ error: "user Network Error" });
+                        return res.status(400).send({ error: "Guest Network Error" });
                     } else if(!validEmail) {
                         return res.status(400).send({ error: "Invalid Email" });
                     } else if(!validPasswordMin) {
@@ -67,27 +67,26 @@ class user_Routes {
                     } else if(!validPasswordRegex) {
                         return res.status(400).send({ error: "Password Requires At Least One Special Character" });
                     } else if(validIP && validEmail && validPasswordMin && validPasswordMax && validPasswordRegex) {
-                        const user = new user(data);
+                        const guest = new Guest(data);
                         // set user ip address
-                        user._IP_ADDRESS = userIP as string;
+                        guest._IP_ADDRESS = guestIP as string;
                         // Encrypt user password
                         const encryptedPassword = await bcrypt.hash(data._PASSWORD, 10);
                         // set encrypted password
-                        user._PASSWORD = encryptedPassword;
+                        guest._PASSWORD = encryptedPassword;
                         // convert subscription to string value
-                        user._SUBSCRIPTION = user._SUBSCRIPTION.toString().trim();
+                        guest._SUBSCRIPTION = guest._SUBSCRIPTION.toString().trim();
                         // convert courses to string value
-                        user._COURSES = user._COURSES.toString().trim();
-                        // user after updates
-                        //console.log("user", user);
-                        const createUser = await sql`INSERT INTO _USER(
+                        guest._COURSES = guest._COURSES.toString().trim();
+                        // guest after updates
+                        //console.log("guest", guest);
+                        const createGuest = await sql`INSERT INTO _GUEST(
                         _ID,
                         _CREATED_AT,
                         _UPDATED_AT,
-                        _GUEST,
-                        _ADMIN,
-                        _FIRST_LOGIN,
                         _ACCESS_TOKEN,
+                        _FIRST_LOGIN,
+                        _ADMIN,
                         _SUBSCRIPTION,
                         _IP_ADDRESS,
                         _PASSCODE,
@@ -95,56 +94,42 @@ class user_Routes {
                         _EMAIL,
                         _EMAIL_CONFIRMED,
                         _EMAIL_PASSCODE,
-                        _USERNAME,
                         _PASSWORD,
-                        _FIRST_NAME,
-                        _LAST_NAME,
-                        _SOCIAL_HANDLE_GITHUB,
-                        _SOCIAL_HANDLE_GOOGLE,
-                        _SOCIAL_HANDLE_APPLE,
-                        _SOCIAL_HANDLE_FACEBOOK,
-                        _SOCIAL_HANDLE_TWITTER,
-                        _SOCIAL_HANDLE_LINKEDIN,
                         _DEFAULT_LANGUAGE,
                         _DEFAULT_ROUTE,
                         _POINTS_TOTAL,
-                        _COURSES,
+                        _POINTS_JAVASCRIPT,
+                        _POINTS_JAVA,
+                        _POINTS_PYTHON,
+                        _COURSES
                         ) VALUES (
-                            ${user._ID},
-                            ${user._CREATED_AT},
-                            ${user._UPDATED_AT},
-                            ${user._GUEST},
-                            ${user._ADMIN},
-                            ${user._FIRST_LOGIN},
-                            ${user._ACCESS_TOKEN},
-                            ${user._SUBSCRIPTION},
-                            ${user._IP_ADDRESS},
-                            ${user._PASSCODE},
-                            ${user._PASSCODE_CONFIRMED},
-                            ${user._EMAIL},
-                            ${user._EMAIL_CONFIRMED},
-                            ${user._EMAIL_PASSCODE},
-                            ${user._USERNAME},
-                            ${user._PASSWORD},
-                            ${user._FIRST_NAME},
-                            ${user._LAST_NAME},
-                            ${user._SOCIAL_HANDLE_GITHUB},
-                            ${user._SOCIAL_HANDLE_GOOGLE},
-                            ${user._SOCIAL_HANDLE_APPLE},
-                            ${user._SOCIAL_HANDLE_FACEBOOK},
-                            ${user._SOCIAL_HANDLE_TWITTER},
-                            ${user._SOCIAL_HANDLE_LINKEDIN},
-                            ${user._DEFAULT_LANGUAGE},
-                            ${user._DEFAULT_ROUTE},
-                            ${user._POINTS_TOTAL},
-                            ${user._COURSES},
-                        )`;
-                        const getuser = await sql`SELECT * FROM _user WHERE _ID = ${user._ID}`;
-                        //console.log("user info:", getuser);
-                        if(getUser !== undefined) {
+                            ${guest._ID},
+                            ${guest._CREATED_AT},
+                            ${guest._UPDATED_AT},
+                            ${guest._ACCESS_TOKEN},
+                            ${guest._FIRST_LOGIN},
+                            ${guest._ADMIN},
+                            ${guest._SUBSCRIPTION},
+                            ${guest._IP_ADDRESS},
+                            ${guest._PASSCODE},
+                            ${guest._PASSCODE_CONFIRMED},
+                            ${guest._EMAIL},
+                            ${guest._EMAIL_CONFIRMED},
+                            ${guest._EMAIL_PASSCODE},
+                            ${guest._PASSWORD},
+                            ${guest._DEFAULT_LANGUAGE},
+                            ${guest._DEFAULT_ROUTE},
+                            ${guest._POINTS_TOTAL},
+                            ${guest._POINTS_JAVASCRIPT},
+                            ${guest._POINTS_JAVA},
+                            ${guest._POINTS_PYTHON},
+                            ${guest._COURSES})`;
+                        const getGuest = await sql`SELECT * FROM _GUEST WHERE _ID = ${guest._ID}`;
+                        //console.log("guest info:", getGuest);
+                        if(getGuest !== undefined) {
                             return res.sendStatus(200);
                         } else {
-                            return res.status(500).send({ error: "user Creation Error" });
+                            return res.status(500).send({ error: "Guest Creation Error" });
                         }
                     } else {
                         return res.status(400).send({ error: "Invalid Data" });
@@ -157,74 +142,75 @@ class user_Routes {
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         }
     };
-    /**Public: Login user*/
-    public userLogin = async (req: Request, res: Response) => {
+    /**Public: Login Guest*/
+    public guestLogin = async (req: Request, res: Response) => {
         switch(req.method) {
             case('POST'):
                 try {
                     const data = req.body;
                     //console.log(data);
 
-                    /**Retrieve user */
+                    /**Retrieve Guest */
                     // Check Email in database
-                    const getUser = await sql`SELECT * FROM _user WHERE _EMAIL = ${data._EMAIL}`;
-                    const userResult = getuser[0];
-                    //console.log("userResult:", userResult)
+                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
+                    const guestResult = getGuest[0];
+                    //console.log("guestResult:", guestResult)
 
-                    /**Validate user Data */
-                    // Check user IP Address
-                    const userIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(userIP);
+                    /**Validate Guest Data */
+                    // Check Guest IP Address
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
                     // Check Email & Password
-                    const validEmail = data._EMAIL === userResult._email;
+                    const validEmail = data._EMAIL === guestResult._email;
                     //console.log("validEmail", validEmail);
                     // Compare Encrypted Password
                     const validPasswordCompare = bcrypt.compareSync(
                         data._PASSWORD,
-                        userResult._password
+                        guestResult._password
                     );
                     //console.log("validPasswordCompare:", validPasswordCompare);
 
                     /**Transform Data */
-                    // uppercase userResult keys
-                    Object.entries(userResult).forEach(([key, value]) => {
-                        userResult[key.toUpperCase()] = userResult[key];
+                    // uppercase guestResult keys
+                    Object.entries(guestResult).forEach(([key, value]) => {
+                        guestResult[key.toUpperCase()] = guestResult[key];
                         //console.log(`${key}: ${value}`);
                     });
-                    // Create user Object
-                    const userObj = new user(userResult);
-                    //console.log("user:", userObj);
+                    // Create Guest Object
+                    const guestObj = new Guest(guestResult);
+                    //console.log("guest:", guestObj);
 
                     /**Update Data */
-                    // Set user IP Address
-                    userObj._IP_ADDRESS = userIP as string;
-                    // Update user Login Time
-                    userObj._UPDATED_AT = new Date();
+                    // Set Guest IP Address
+                    guestObj._IP_ADDRESS = guestIP as string;
+                    // Update Guest Login Time
+                    guestObj._UPDATED_AT = new Date();
                     // Save Updated Time to DB
 
-                    await sql` UPDATE _user SET _UPDATED_AT = ${userObj._UPDATED_AT} WHERE _ID = ${userObj._ID}`;
+                    await sql` UPDATE _GUEST SET _UPDATED_AT = ${guestObj._UPDATED_AT} WHERE _ID = ${guestObj._ID}`;
 
                     /**Create JWT Token */
                     // Create Token
-                    const getToken = jwt.sign({ _ID: userObj._ID, _EMAIL: userObj._EMAIL }, process.env.SECRET_TOKEN, {
+                    const getToken = jwt.sign({ _ID: guestObj._ID, _EMAIL: guestObj._EMAIL }, process.env.SECRET_TOKEN, {
                         algorithm: 'HS256',
                         allowInsecureKeySizes: true,
                         expiresIn: 86400, // 24 hours
                     });
-                    // Save user Token
-                    userObj._ACCESS_TOKEN = getToken;
+                    // Save Guest Token
+                    guestObj._ACCESS_TOKEN = getToken;
 
-                    //console.log("userObj:", userObj)
+                    //console.log("guestObj:", guestObj)
 
                     if(!validIP) {
                         return res.status(400).send({ error: "User Network Error" });
                     } else if(!validEmail || !validPasswordCompare) {
-                        return res.status(400).send({ error: "Invalid user Information" });
+                        return res.status(400).send({ error: "Invalid Guest Information" });
                     } else if(validIP && validEmail && validPasswordCompare) {
                         return res.cookie("access_token", getToken, {
                             httpOnly: true,
-                            secure: process.env.NODE_ENV === "production",
-                        }).status(200).send({data: userObj});
+                            secure: true,
+                            sameSite: 'strict',
+                        }).status(200).send({data: guestObj});
                     } else {
                         return res.status(400).send({ error: "Invalid Data" });
                     }
@@ -237,33 +223,34 @@ class user_Routes {
         }
     };
 
-    /**Private: Admin Deletes user*/
-    public userDelete = async (req: Request, res: Response) => {
+    /**Private: Admin Deletes Guest*/
+    public guestDelete = async (req: Request, res: Response) => {
         switch(req.method) {
             case('DELETE'):
                 try {
                     /** <-- Validate User Info --> */
                     const data = req.body;
-                    /**Retrieve user */
+                    /**Retrieve Guest */
                     // Check Email in database
-                    const getuser = await sql`SELECT * FROM _user WHERE _EMAIL = ${data._EMAIL}`;
-                    const userResult = getuser[0];
-                    //console.log("userResult:", userResult)
+                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
+                    const guestResult = getGuest[0];
+                    //console.log("guestResult:", guestResult)
 
-                    /**Validate user Data */
-                    // Check user IP Address
-                    const userIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(userIP);
+                    /**Validate Guest Data */
+                    // Check Guest IP Address
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
                     // Check Email & Password
-                    //const validEmail = data._EMAIL === userResult._email;
+                    //const validEmail = data._EMAIL === guestResult._email;
                     //console.log("validEmail", validEmail);
                     // Compare Encrypted Password
                     const validPasswordCompare = bcrypt.compareSync(
                         data._PASSWORD,
-                        userResult._password
+                        guestResult._password
                     );
                     //console.log("validPasswordCompare:", validPasswordCompare);
 
+                    /**Return Error if Invalid Return 400*/
                     if(!validIP) {
                         return res.status(400).send({ error: "Invalid IP Address" })
                     }
@@ -271,16 +258,14 @@ class user_Routes {
                         return res.status(400).send({ error: "Invalid Password" })
                     }
 
-                    /**Delete user */
-                    try {
-                        const id = req.params.id;
-                        const results = await sql`DELETE * FROM _user WHERE _ID = ${id}`;
-                        return res.status(200);
-                    } catch {
-                        return res.status(500).send({ error: "user Not Found" })
-                    }
+                    /**Delete Guest */
+                    const id = req.params.id;
+                    //console.log(id)
+                    const result = await sql`DELETE FROM _GUEST WHERE _id = ${id}`;
+                    //console.log(result);
+                    return res.sendStatus(200);
                 } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
+                    return res.status(500).send({ error: "Guest Not Found"});
                 }
 
                 break
@@ -288,8 +273,8 @@ class user_Routes {
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
         };
     };
-    /**Public: Auth user*/
-    public userAuth = async (req: Request, res: Response) => {
+    /**Public: Auth Guest*/
+    public guestAuth = async (req: Request, res: Response) => {
         const defaultReturnObject = { authenticated: false, user: null };
 
         try {
@@ -299,25 +284,25 @@ class user_Routes {
             //console.log("data", token);
             const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
             //console.log("decoded", decoded)
-            // /**Retrieve user */
+            // /**Retrieve Guest */
             // Check Email in database
-            const getuser = await sql`SELECT * FROM _user WHERE _ID = ${decoded._ID}`;
-            const userResult = getuser[0];
-            //console.log("user:", userResult);
-            if (!userResult) {
+            const getGuest = await sql`SELECT * FROM _GUEST WHERE _ID = ${decoded._ID}`;
+            const guestResult = getGuest[0];
+            //console.log("guest:", guestResult);
+            if (!guestResult) {
             res.status(400).json(defaultReturnObject);
                 return;
             }
             /**Transform Data */
-            // uppercase userResult keys
-            Object.entries(userResult).forEach(([key, value]) => {
-                userResult[key.toUpperCase()] = userResult[key];
+            // uppercase guestResult keys
+            Object.entries(guestResult).forEach(([key, value]) => {
+                guestResult[key.toUpperCase()] = guestResult[key];
                 //console.log(`${key}: ${value}`);
             });
-            // Create user Object
-            const userObj = new user(userResult);
-            //console.log("user:", userObj);
-            const result = { authenticated: true, user: userObj }
+            // Create Guest Object
+            const guestObj = new Guest(guestResult);
+            //console.log("guest:", guestObj);
+            const result = { authenticated: true, user: guestObj }
             res.status(200).json(result);
         }
         catch (err) {
@@ -326,24 +311,24 @@ class user_Routes {
         }
     }
 
-    /**Public: Delete user*/
-    public userRemove = async (req: Request, res: Response) => {
+    /**Public: Delete Guest*/
+    public guestRemove = async (req: Request, res: Response) => {
         switch(req.method) {
             case('DELETE'):
                  try {
                     const data = req.body;
-                    const userResult = await sql`SELECT * FROM _user WHERE _EMAIL = ${data._EMAIL}`;
-                     /**Validate user Data */
-                    // Check user IP Address
-                    const userIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(userIP);
+                    const guestResult = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
+                     /**Validate Guest Data */
+                    // Check Guest IP Address
+                    const guestIP = req.socket.remoteAddress;
+                    const validIP = z.string().ip(guestIP);
                     // Check Email & Password
-                    //const validEmail = data._EMAIL === userResult._email;
+                    //const validEmail = data._EMAIL === guestResult._email;
                     //console.log("validEmail", validEmail);
                     // Compare Encrypted Password
                     const validPasswordCompare = bcrypt.compareSync(
                         data._PASSWORD,
-                        userResult._password
+                        guestResult._password
                     );
                     //console.log("validPasswordCompare:", validPasswordCompare);
                      if(!validIP) {
@@ -354,10 +339,10 @@ class user_Routes {
                     }
                     try {
                         const id = req.params.id;
-                        const results = await sql`DELETE * FROM _user WHERE _ID = ${id}`;
+                        const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
                         return res.status(200);
                     } catch {
-                        return res.status(500).send({ error: "user Not Found" })
+                        return res.status(500).send({ error: "Guest Not Found" })
                     }
                     return res.status(200).send(data);
                 } catch {
@@ -370,4 +355,4 @@ class user_Routes {
     };
 }
 
-export default user_Routes;
+export default Guest_Routes;

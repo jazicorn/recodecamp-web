@@ -1,6 +1,6 @@
-import { Q_Type } from  '../types/types.question';
+import { Q_Type } from  '../../types/types.question';
 import { faker } from '@faker-js/faker';
-import { getRandomInt } from '../utils/index';
+import { getRandomInt } from '../../utils/index';
 
 export const objSingle = (): Q_Type => {
     const personName = faker.person.firstName();

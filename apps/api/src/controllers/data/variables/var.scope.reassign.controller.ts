@@ -1,11 +1,11 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import client from '../../config/db';
-import { Question } from '../../classes/question';
-import { Q_Type } from  '../../types/types.question';
-import { getRandomInt } from '../../utils/index';
-import { objBlockScopeReassign } from '../../data/var.scope.reassign.data';
+import client from '../../../config/db';
+import { Question } from '../../../classes/question';
+import { Q_Type } from  '../../../types/types.question';
+import { getRandomInt } from '../../../utils/index';
+import { objBlockScopeReassign } from '../../../data/js/var.scope.reassign.data';
 
 export default class VarScopeReassign {
     public pathVarReassignBlock = '/var/scope/reassign/block';
