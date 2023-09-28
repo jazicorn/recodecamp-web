@@ -141,7 +141,7 @@ export default {
         'dashboard-no-language-extended': 'minmax(28em, auto)',
         'dashboard-no-language-mobile': '3em, 28em, auto, auto, auto',
         'layout-dashboard-home': '3.5em, auto',
-        'layout-dashboard-home-mobile': '3em, auto',
+        'layout-dashboard-home-mobile': '3.5em, auto, minmax(20em, auto)',
         'layout-dashboard-code': '3.2em, 25em, minmax(15.8em, auto)',
         'layout-dashboard-code-mobile': '3em, minmax(20em, auto), minmax(22em, auto), minmax(10em, auto)',
         'layout-dashboard-code-editor': '28.2em, minmax(15.8em, auto)',
