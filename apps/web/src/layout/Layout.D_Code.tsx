@@ -32,27 +32,28 @@ const Layout_D_Code = () => {
 
   /** Retrieve Category Route From Redux State */
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
+  const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
   /** Retrieve Category Based Question */
   const getQuestion = useCallback( async () => {
     /** Retrieve Question from API */
-    try {
+   try {
       let res;
-      const prodURL = `${baseURL}/${getMenuRoute}`;
-      const devURL = `/api/${getMenuRoute}`;
+      const prodURL = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`;
+      const devURL = `/api/${getMenuLanguage}/${getMenuRoute}`;
       if(import.meta.env.PROD) {
-          res = await fetch(prodURL);
-          const resJSON = res.json();
-          return resJSON;
-        } else {
-          res = await fetch(devURL);
-          const resJSON = res.json();
-          return resJSON;
-        }
+        res = await fetch(prodURL);
+        const resJSON = res.json();
+        return resJSON;
+      } else {
+        res = await fetch(devURL);
+        const resJSON = res.json();
+        return resJSON;
+      }
     } catch(error) {
       console.log(error);
     }
-  }, [getMenuRoute]);
+  }, [getMenuLanguage, getMenuRoute]);
 
   /** Generate Question */
   const { isLoading, isFetching, isError, error, isSuccess, data } = useQuery({ 
@@ -89,7 +90,7 @@ const Layout_D_Code = () => {
 
   if(isSuccess && loading) {
     return (
-      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
+      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
       tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
         <LoadingDashboardXL />
       </div>

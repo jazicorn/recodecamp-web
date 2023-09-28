@@ -1,3 +1,8 @@
+/** Icons */
+import JS_Icon from "../assets/tech/javascript/javascript-original.svg";
+import JAVA_Icon from "../assets/tech/java/java-original.svg";
+import PY_Icon from "../assets/tech/python/python-original.svg";
+
 export const DEFAULT_USER = {
     _ID: '',
     _CREATED_AT: new Date().toISOString(),
@@ -20,4 +25,10 @@ export const DEFAULT_USER = {
     _POINTS_JAVA: 0 ,
     _POINTS_PYTHON: 0,
     _COURSES: '',
+}
+
+export const _LANGUAGES_ALL = {
+    javascript: JS_Icon,
+    java: JAVA_Icon,
+    python: PY_Icon,
 }

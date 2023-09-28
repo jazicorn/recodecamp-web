@@ -1,12 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore} from '@reduxjs/toolkit';
 //import { createStore, applyMiddleware, combineReducers } from 'redux';
 // import monitorReducersEnhancer from './enhancers/monitorReducers'
-// import thunkMiddleware from 'redux-thunk'
+//import thunkMiddleware from 'redux-thunk'
 import { dashboardSlice } from './slices/dashboardSlice.ts'
 
 const store = configureStore({
   reducer: {
-    dashboard: dashboardSlice.reducer
+    dashboard: dashboardSlice.reducer,
+    devTools: process.env.NODE_ENV !== 'production',
   },
 })
 

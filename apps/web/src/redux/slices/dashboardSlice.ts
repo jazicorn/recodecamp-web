@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // Define a type for the slice state
 interface DashboardState {
+  languages: string[],
   languageDefault: string,
   categoryDefault: string,
   categoryRouteDefault: string,
@@ -18,10 +19,12 @@ interface DashboardState {
 
 // Define the initial state using that type
 const initialState: DashboardState = {
+  languages: ['javascript'],
   languageDefault: import.meta.env.VITE_DEFAULT_LANGUAGE,
   categoryDefault: import.meta.env.VITE_DEFAULT_CATEGORY,
   categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
   category: import.meta.env.VITE_DEFAULT_CATEGORY,
+  language: import.meta.env.VITE_DEFAULT_LANGUAGE,
   categoryInfo: {},
   categoryRoute: import.meta.env.VITE_DEFAULT_ROUTE,
   question: {},
@@ -42,7 +45,7 @@ const initialState: DashboardState = {
     _EMAIL_CONFIRMED: false,
     _EMAIL_PASSCODE: '',
     _PASSWORD: '',
-    _DEFAULT_LANGUAGE: '',
+    _DEFAULT_LANGUAGE: 'javascript',
     _DEFAULT_ROUTE: '',
     _POINTS_TOTAL: 0,
     _POINTS_JAVASCRIPT: 0,
@@ -58,6 +61,7 @@ export const dashboardSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   reducers: {
     menu: (state) => {
+      state.languages;
       state.language;
       state.languageDefault;
       state.category;
@@ -69,6 +73,9 @@ export const dashboardSlice = createSlice({
       state.points;
       state.consoleMessage;
       state.user;
+    },
+    menuLanguages: (state, action) => {
+      state.languages = action.payload;
     },
     menuLanguage: (state, action) => {
       state.language = action.payload;
@@ -98,7 +105,7 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { menu, menuUser, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
+export const { menu, menuUser, menuLanguages, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
 
 export default dashboardSlice.reducer;
 

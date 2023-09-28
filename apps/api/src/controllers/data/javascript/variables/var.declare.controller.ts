@@ -1,17 +1,17 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import client from '../../../config/db';
-import { Question } from '../../../classes/question';
-import { Q_Type } from  '../../../types/types.question';
-import { getRandomInt } from '../../../utils/index';
-import { objRandom, objRandomVar, objRandomConst, objRandomLet } from '../../../data/js/var.declare.data'
+import client from '../../../../config/db';
+import { Question } from '../../../../classes/question';
+import { Q_Type } from  '../../../../types/types.question';
+import { getRandomInt } from '../../../../utils/index';
+import { objRandom, objRandomVar, objRandomConst, objRandomLet } from '../../../../data/javascript/javascript.var.declare'
 
 export default class VarDeclare {
-    public pathVarRandomDeclare = '/var/declare/all'
-    public pathVarDeclareVar = '/var/declare/var';
-    public pathVarDeclareConst = '/var/declare/const';
-    public pathVarDeclareLet = '/var/declare/let';
+    public pathVarRandomDeclare = '/:id/var/declare/all'
+    public pathVarDeclareVar = '/:id/var/declare/var';
+    public pathVarDeclareConst = '/:id/var/declare/const';
+    public pathVarDeclareLet = '/:id/var/declare/let';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -30,7 +30,9 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
-                    return res.status(200).send({ data: question });
+                    if(req.params.id.toLowerCase() === 'javascript') {
+                        return res.status(200).send({ data: question });
+                    }
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -45,8 +47,10 @@ export default class VarDeclare {
         const question: Q_Type = new Question(data);
         switch(req.method) {
             case('GET'):
-                 try {
-                    return res.status(200).send({ data: question });
+                try {
+                    if(req.params.id.toLowerCase() === 'javascript') {
+                        return res.status(200).send({ data: question });
+                    }
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -62,7 +66,9 @@ export default class VarDeclare {
          switch(req.method) {
             case('GET'):
                  try {
-                    return res.status(200).send({ data: question });
+                    if(req.params.id.toLowerCase() === 'javascript') {
+                        return res.status(200).send({ data: question });
+                    }
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -77,8 +83,10 @@ export default class VarDeclare {
         const question: Q_Type = new Question(data);
         switch(req.method) {
             case('GET'):
-                 try {
-                    return res.status(200).send({ data: question });
+                try {
+                    if(req.params.id.toLowerCase() === 'javascript') {
+                        return res.status(200).send({ data: question });
+                    }
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }

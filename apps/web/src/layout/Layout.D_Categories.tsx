@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
 /*Custom Hooks*/
-//import Transition from '../hooks/useTransition';
+import Transition from '../hooks/useTransition';
 import useWindowSize from '../hooks/useWindowSize';
 /**Custom Components */
 import ErrorDashboard from '../components/dashboard/error';
@@ -15,6 +15,7 @@ import D_Category_Menu from '../components/dashboard/dashboard-categories/D_Cate
 import { useQuery } from "@tanstack/react-query";
 /** React Redux Hooks */
 import { useAppSelector, useAppDispatch } from '../redux/reduxHooks.ts';
+import type { RootState } from '../redux/store.ts';
 import { 
   menuLanguage, menuCategoryInfo
 } from '../redux/slices/dashboardSlice.ts';
@@ -33,10 +34,16 @@ const Layout_D_Categories = () => {
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
   const getMenuCategory = useAppSelector((state:RootState) => state?.dashboard?.category);
   const getMenuCategoryInfo = useAppSelector((state:RootState) => state?.dashboard?.categoryInfo);
+  const getMenuUser = useAppSelector((state:RootState) => state?.dashboard?.user);
 
   async function setLanguage() {
-    if(getMenuLanguage === undefined || getMenuLanguage === '') {
-      dispatch(menuLanguage(getMenuLanguageDefault));
+    if(getMenuLanguage === undefined || getMenuLanguage.length === 0) {
+      if(getMenuUser._DEFAULT_LANGUAGE === undefined || getMenuUser._DEFAULT_LANGUAGE.length === 0) {
+        dispatch(menuLanguage(getMenuLanguageDefault));
+      } else {
+        //console.log("getMenuUser._DEFAULT_LANGUAGE",getMenuUser._DEFAULT_LANGUAGE)
+        dispatch(menuLanguage(getMenuUser._DEFAULT_LANGUAGE));
+      }
     }
   }
 
@@ -45,9 +52,9 @@ const Layout_D_Categories = () => {
       await setLanguage();
       let res;
       if(import.meta.env.PROD) {
-        res = await fetch(`${baseURL}/categories`);
+        res = await fetch(`${baseURL}/categories/${getMenuLanguage}`);
       } else {
-        res = await fetch(`api/categories`);
+        res = await fetch(`api/categories/${getMenuLanguage}`);
       }
       const resJSON = res.json();
       return resJSON;
@@ -59,10 +66,10 @@ const Layout_D_Categories = () => {
   /** Generate Categories */
   const { isFetching, isLoading, isError, error, isSuccess, data} = useQuery({
     queryKey: ['categoriesData'], 
-    queryFn: getCategories, 
+    queryFn: getCategories,
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
-    cacheTime: 100 * (60 * 1000),
+    cacheTime: 0,
   });
 
   useEffect(() => {
@@ -109,23 +116,35 @@ const Layout_D_Categories = () => {
             [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
             tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1  `}>
               <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 tw-bg-campfire-neutral-600' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-divide-x-2 tw-p-2`}>
-                <section className={`${darkMode ? "" : ""} tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2`}>
-                  <D_Category_Menu data={data}/>
+                <section className={`${darkMode ? "" : ""} 
+                tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2 tw-z-50 tw-relative`}>
+                  <Transition>
+                    <D_Category_Menu menuData={data}/>
+                  </Transition>
                 </section>
                 <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
-                  <div className=''><D_Category /></div>
+                  <div className='tw-z-40 tw-relative'>
+                    <Transition>
+                      <D_Category />
+                    </Transition>
+                  </div>
                 </section>
               </div>
           </main>
           :
-          <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
+          <Transition>
+            <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
             tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
             tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className={`${darkMode ? "tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2`}>
-              <D_Category_Menu data={data}/>
-            </section>
-            <section className=''><D_Category/></section>
-          </main>
+              <section className={`${darkMode ? "tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} 
+              tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2 tw-z-50 tw-relative tw-h-full`}>
+                  <D_Category_Menu menuData={data}/>
+              </section>
+              <section className='tw-z-40 tw-relative tw-h-full'>
+                  <D_Category/>
+              </section>
+            </main>
+          </Transition>
           }
       </div>
     )

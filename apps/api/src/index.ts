@@ -4,10 +4,10 @@ import App from './server';
 import Index from './controllers/index.controller';
 import Guest_Routes from './controllers/auth/guest/guest.controller';
 import Comments from './controllers/data/comments/comments.controller';
-import VarGeneral from './controllers/data/variables/var.controller';
-import VarDeclare from './controllers/data/variables/var.declare.controller';
-import VarScope from './controllers/data/variables/var.scope.controller';
-import VarScopeReassign from './controllers/data/variables/var.scope.reassign.controller';
+import VarGeneral from './controllers/data/javascript/variables/var.controller';
+import VarDeclare from './controllers/data/javascript/variables/var.declare.controller';
+import VarScope from './controllers/data/javascript/variables/var.scope.controller';
+import VarScopeReassign from './controllers/data/javascript/variables/var.scope.reassign.controller';
 
 const app = new App(
     [],

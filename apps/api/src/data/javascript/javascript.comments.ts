@@ -10,7 +10,7 @@ export const objSingle = (): Q_Type => {
         _QUESTION_ID: '',
         _QUESTION_LEVEL: 1,
         _QUESTION_POINTS: 1,
-        _QUESTION_TASK: `Using ${keyword} comments, comment the statement: Greeting User abouve the console.log('Hello ${personName}') method `,
+        _QUESTION_TASK: `Using ${keyword} comments, comment the statement: 'Greeting User' abouve the console.log('Hello ${personName}') method `,
         _QUESTION_DATA: { keyword: keyword, value: personName, returnValue: `console.log('Hello ${personName})` },
         _QUESTION_RESULT: {
             0: {
