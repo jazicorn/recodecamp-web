@@ -79,6 +79,7 @@ export const dashboardSlice = createSlice({
     },
     menuLanguage: (state, action) => {
       state.language = action.payload;
+      state.categoryRoute = import.meta.env.VITE_DEFAULT_ROUTE;
     },
     menuCategory: (state, action) => {
       state.category = action.payload;

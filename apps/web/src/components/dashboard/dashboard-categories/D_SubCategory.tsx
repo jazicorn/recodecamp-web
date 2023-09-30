@@ -37,18 +37,15 @@ const D_SubCategory = (subCategory) => {
               routes.map((route, i) => {
                 const strRoute = route.split('/').slice(-1);
                 return (
-                  <li key={i} 
+                  <button key={i} onClick={() => setCategory(route)} 
                   className={`${darkMode ? "hover:tw-bg-campfire-neutral-200 tw-text-campfire-blue" 
                   : "hover:tw-bg-campfire-neutral-400 tw-text-campfire-neutral-900 tw-border-campfire-blue" } 
                   tw-min-w-[5em] tw-border tw-rounded tw-flex tw-flex-wrap tw-mb-1`}>
-                    <Transition>
-                      <button 
-                      onClick={() => setCategory(route)} 
-                      className="tw-px-2 tw-text-sm tw-font-space_grotesk_bold">
-                          {strRoute}
-                      </button>
-                    </Transition>
-                  </li>
+                      <span
+                      className="tw-px-2 tw-pt-0.5 tw-text-sm tw-font-space_grotesk_bold">
+                          <Transition>{strRoute}</Transition>
+                      </span>
+                  </button>
                 )
               })
             }
