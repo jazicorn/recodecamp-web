@@ -34,32 +34,40 @@ const Layout_D_Code = () => {
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
+  /**Get question url */
+  let url;
+  if(import.meta.env.PROD) {
+    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+  } else {
+    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+  }
+
   /** Retrieve Category Based Question */
-  const getQuestion = useCallback( async () => {
+  const getQuestion = useCallback(async (url) => {
     /** Retrieve Question from API */
    try {
-      let res;
-      const prodURL = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`;
-      const devURL = `/api/${getMenuLanguage}/${getMenuRoute}`;
-      if(import.meta.env.PROD) {
-        res = await fetch(prodURL);
-        const resJSON = res.json();
-        return resJSON;
-      } else {
-        res = await fetch(devURL);
-        const resJSON = res.json();
-        return resJSON;
-      }
+      const result = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Accept' : 'application/json',
+              'Content-Type': 'application/json',
+          },
+        }
+      );
+      const resJSON = await result.json();
+      //console.log("resjson", resJSON)
+      return resJSON;
     } catch(error) {
       console.log(error);
     }
-  }, [getMenuLanguage, getMenuRoute]);
+  },[]);
 
   /** Generate Question */
   const { isLoading, isFetching, isError, error, isSuccess, data } = useQuery({ 
-    queryKey: ['questionData'], 
-    queryFn: getQuestion,
+    queryKey: ['questionData', url], 
+    queryFn: () => getQuestion(url),
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
   });
@@ -67,6 +75,7 @@ const Layout_D_Code = () => {
   /** Save Question to Redux Store */
   useEffect(() => {
     if(data !== undefined) {
+      //console.log(data.data)
       dispatch(menuQuestion(data.data));
     }
   }, [dispatch, data]);

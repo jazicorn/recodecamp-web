@@ -19,10 +19,17 @@ import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** Codemirror */
 import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import lightTheme from '../../../styles/style.codemirror.light';
-import darkTheme from '../../../styles/style.codemirror.dark';
-const extensions = [ javascript({ jsx: true })];
+/**CodeMirror Languages */
+//import lightTheme from '../../../styles/style.codemirror.light';
+//import darkTheme from '../../../styles/style.codemirror.dark';
+//const extensions = [ javascript({ jsx: true })];
+import { _LANGUAGES_CODE_MIRROR,  _LANGUAGES_RAPID_API } from '../../../utils/constants';
+//import { dracula } from '@uiw/codemirror-theme-dracula';
+import { materialDark } from '@uiw/codemirror-theme-material';
+import { githubLight } from '@uiw/codemirror-theme-github'
+//import { quietlight } from '@uiw/codemirror-theme-quietlight';
+//import { xcodeLight, xcodeLightInit, xcodeDark, xcodeDarkInit  } from '@uiw/codemirror-theme-xcode';
+
 
 /** API url | Custom env mandatory to begin with VITE  
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
@@ -42,31 +49,38 @@ const D_Editor = () => {
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
+  /**Get question url */
+  let url;
+  if(import.meta.env.PROD) {
+    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+  } else {
+    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+  }
+
   /** Retrieve Category Based Question */
-  const getQuestion = useCallback( async () => {
+  const getQuestion = useCallback(async (url) => {
     /** Retrieve Question from API */
-    try {
-      let res;
-      const prodURL = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`;
-      const devURL = `/api/${getMenuLanguage}/${getMenuRoute}`;
-      if(import.meta.env.PROD) {
-        res = await fetch(prodURL);
-        const resJSON = res.json();
-        return resJSON;
-      } else {
-        res = await fetch(devURL);
-        const resJSON = res.json();
-        return resJSON;
-      }
+   try {
+      const result = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Accept' : 'application/json',
+              'Content-Type': 'application/json',
+          },
+        }
+      );
+      const resJSON = await result.json();
+      //console.log("resjson", resJSON)
+      return resJSON;
     } catch(error) {
       console.log(error);
     }
-  }, [getMenuLanguage, getMenuRoute]);
+  },[]);
 
   /** Generate Question */
   const { isSuccess, data } = useQuery({ 
-    queryKey: ['questionData'], 
-    queryFn: getQuestion,
+    queryKey: ['questionData', url], 
+    queryFn: () => getQuestion(url),
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
@@ -171,8 +185,6 @@ const D_Editor = () => {
           notifications.show({
             id: 'correct',
             withCloseButton: true,
-            onClose: () => console.log('unmounted'),
-            onOpen: () => console.log('mounted'),
             autoClose: 2000,
             title: "Answer Correct",
             message: '',
@@ -204,7 +216,8 @@ const D_Editor = () => {
     const resultsStrip = getMenuQuestion._QUESTION_RESULT[1].answer.replace(/\s+/g, '');
     try {
       if( userCode === resultsStrip ) {
-        consoleTest(93, editor, '');
+        const languageId = _LANGUAGES_RAPID_API[getMenuLanguage.toLowerCase()];
+        consoleTest(languageId, editor, '');
         setPoints(getMenuPoints + getMenuQuestion._QUESTION_POINTS);
       }
     } catch (e) {
@@ -212,8 +225,6 @@ const D_Editor = () => {
       notifications.show({
         id: 'incorrect',
         withCloseButton: true,
-        onClose: () => console.log('unmounted'),
-        onOpen: () => console.log('mounted'),
         autoClose: 2000,
         title: "Answer Incorrect",
         message: '',
@@ -225,11 +236,15 @@ const D_Editor = () => {
         loading: false,
       });
     }
-  }, [editor, getMenuQuestion._QUESTION_RESULT, getMenuQuestion._QUESTION_POINTS, consoleTest, setPoints, getMenuPoints]);
+  }, [editor, getMenuQuestion._QUESTION_RESULT, getMenuQuestion._QUESTION_POINTS, getMenuLanguage, consoleTest, setPoints, getMenuPoints]);
 
   useEffect(() => {
     dispatch(menuConsoleMessage(consoleMessage));
   },[consoleMessage, dispatch]);
+
+
+  const editorLanguage = _LANGUAGES_CODE_MIRROR[getMenuLanguage.toLowerCase()];
+  //console.log(editorLanguage);
 
   /** Render if Successful */
   if (isSuccess) return (
@@ -261,8 +276,8 @@ const D_Editor = () => {
               value={editor}
               height={isMobile ? "250px" : "300px"}
               maxHeight="100%"
-              theme={darkMode ? darkTheme : lightTheme}
-              extensions={extensions}
+              theme={darkMode ? materialDark : githubLight }
+              extensions={editorLanguage}
               onChange={onChange}
             />
           </div>
