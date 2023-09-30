@@ -1,17 +1,17 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import client from '../../config/db';
-import { Question } from '../../classes/question';
-import { Q_Type } from  '../../types/types.question';
-import { getRandomInt } from '../../utils/index';
-import { objBlockScope, objFuncScope, objGlobalScope } from '../../data/var.scope.data';
+import client from '../../../../config/db';
+import { Question } from '../../../../classes/question';
+import { Q_Type } from  '../../../../types/types.question';
+import { getRandomInt } from '../../../../utils/index';
+import { objBlockScope, objFuncScope, objGlobalScope } from '../../../../data/javascript/javascript.var.scope';
 
 export default class VarScope {
-    public pathVarRandomScope = '/var/scope/all';
-    public pathVarScopeBlock = '/var/scope/block';
-    public pathVarScopeFunc = '/var/scope/func';
-    public pathVarScopeGlobal = '/var/scope/global';
+    public pathVarRandomScope = '/javascript/var/scope/all';
+    public pathVarScopeBlock = '/javascript/var/scope/block';
+    public pathVarScopeFunc = '/javascript/var/scope/func';
+    public pathVarScopeGlobal = '/javascript/var/scope/global';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -58,7 +58,7 @@ export default class VarScope {
     };
 
     public varFuncScope = async (req: Request, res: Response) => {
-        const obj =objFuncScope();
+        const obj = objFuncScope();
         const question = new Question(obj);
         switch(req.method) {
             case('GET'):

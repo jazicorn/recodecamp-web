@@ -1,4 +1,4 @@
-export const ROUTES = [
+export const _ROUTES_JAVASCRIPT = [
     {
         "id": 1,
         "category": ["comments", "comments/all"],

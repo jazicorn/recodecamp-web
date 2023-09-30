@@ -25,32 +25,40 @@ const D_Problem = () => {
   /** Retrieve Category From Redux State */
   const dispatch = useAppDispatch();
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
+  const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
+
+  /**Get question url */
+  let url;
+  if(import.meta.env.PROD) {
+    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+  } else {
+    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+  }
 
   /** Retrieve Category Based Question */
-  const getQuestion = useCallback( async () => {
+  const getQuestion = useCallback(async (url) => {
     /** Retrieve Question from API */
     try {
-      let res;
-      const prodURL = `${baseURL}/${getMenuRoute}`;
-      const devURL = `/api/${getMenuRoute}`;
-      if(import.meta.env.PROD) {
-          res = await fetch(prodURL);
-          const resJSON = res.json();
-          return resJSON;
-        } else {
-          res = await fetch(devURL);
-          const resJSON = res.json();
-          return resJSON;
+      const result = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Accept' : 'application/json',
+              'Content-Type': 'application/json',
+          },
         }
+      );
+      const resJSON = await result.json();
+      //console.log("resJSON",resJSON);
+      return resJSON;
     } catch(error) {
       console.log(error);
     }
-  }, [getMenuRoute]);
+  },[]);
 
   /** Generate Question */
   const { isSuccess, data, refetch } = useQuery({ 
-    queryKey: ['questionData'], 
-    queryFn: getQuestion,
+    queryKey: ['questionData', url], 
+    queryFn: () => getQuestion(url),
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
@@ -59,6 +67,7 @@ const D_Problem = () => {
   /** Save Question to Redux Store */
   useEffect(() => {
     if(data !== undefined) {
+      //console.log(data.data)
       dispatch(menuQuestion(data.data));
     }
   }, [dispatch, data]);
@@ -107,11 +116,11 @@ const D_Problem = () => {
                       const regex = /[""]/g;
                       const wordStrip = word.replace(regex, '');
                       if(word.match(regex)) {
-                        return <span>
+                        return (
                           <span key={index} className={`${darkMode ? '' : 'tw-bg-campfire-neutral-400'} tw-border-no-border tw-rounded tw-px-1`}>
-                            {wordStrip}
-                          </span>&nbsp;
-                        </span>
+                            {wordStrip}&nbsp;
+                          </span>
+                        )
                       }
                       return <span key={index}>{word} </span>
                     })}

@@ -1,14 +1,14 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import client from '../../config/db';
-import { Question } from '../../classes/question';
-import { Q_Type } from  '../../types/types.question';
-import { getRandomInt } from '../../utils/index';
-import { objBlockScopeReassign } from '../../data/var.scope.reassign.data';
+import client from '../../../../config/db';
+import { Question } from '../../../../classes/question';
+import { Q_Type } from  '../../../../types/types.question';
+import { getRandomInt } from '../../../../utils/index';
+import { objBlockScopeReassign } from '../../../../data/javascript/javascript.var.scope.reassign';
 
 export default class VarScopeReassign {
-    public pathVarReassignBlock = '/var/scope/reassign/block';
+    public pathVarReassignBlock = '/javascript/var/scope/reassign/block';
     public router = Router();
     constructor() {
         this.initializeRoutes();

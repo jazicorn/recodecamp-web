@@ -12,10 +12,11 @@ class App {
     public port: number;
     private corsOptions;
 
-    constructor(controllers) {
+    constructor(authControllers, controllers) {
         this.app = express();
         this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
+        this.initAuthControllers(authControllers);
         this.initControllers(controllers);
         this.corsOptions = process.env.CORS_URLS;
     }
@@ -33,6 +34,12 @@ class App {
         //     cookie: { sameSite: 'strict', secure: false, maxAge: 1000 * 60 * 60 * 24 },
         //     resave: false
         // }));
+    }
+
+    private initAuthControllers(controllers) {
+        controllers.forEach((controller) => {
+            this.app.use('/auth', controller.router);
+        });
     }
 
     private initControllers(controllers) {

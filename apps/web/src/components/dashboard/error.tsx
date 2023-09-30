@@ -7,7 +7,7 @@ const DashboardError = (error) => {
     const darkMode = state.darkMode;
 
     return (
-        <div className={`${darkMode ? 'tw-bg-neutral-700/90' : 'tw-bg-neutral-400/80'} tw-w-full tw-h-full`}>{error}</div>
+        <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-200/50'} tw-w-full tw-h-full`}>{error}</div>
     )
 }
 

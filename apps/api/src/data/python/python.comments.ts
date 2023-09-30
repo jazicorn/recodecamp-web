@@ -1,12 +1,12 @@
-import { Q_Type } from  '../types/types.question';
+import { Q_Type } from  '../../types/types.question';
 import { faker } from '@faker-js/faker';
-import { getRandomInt } from '../utils/index';
+import { getRandomInt } from '../../utils/index';
 
 export const objSingle = (): Q_Type => {
     const personName = faker.person.firstName();
     const keyword = "SingleLine";
     const data = {
-        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_LANGUAGE: "Python",
         _QUESTION_ID: '',
         _QUESTION_LEVEL: 1,
         _QUESTION_POINTS: 1,
@@ -40,7 +40,7 @@ export const objMulti = (): Q_Type => {
     const personName = faker.person.firstName();
     const keyword = "MultiLine";
     const data = {
-        _QUESTION_LANGUAGE: "Javascript",
+        _QUESTION_LANGUAGE: "Python",
         _QUESTION_ID: '',
         _QUESTION_LEVEL: 1,
         _QUESTION_POINTS: 1,

@@ -1,11 +1,11 @@
 'use strict';
 import { Request, Response } from 'express';
 import Router from 'express-promise-router';
-import sql from '../../config/db';
+import sql from '../../../config/db';
 import { faker } from '@faker-js/faker';
-import { JS_Question } from '../../classes/javascript.question';
-import { JS_Type } from  '../../types/types.question';
-import { getRandomInt } from '../../utils/index';
+import { JS_Question } from '../../../classes/javascript.question';
+import { JS_Type } from  '../../../types/types.question';
+import { getRandomInt } from '../../../utils/index';
 import cors from 'cors';
 
 export default class Questions {

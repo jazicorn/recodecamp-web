@@ -2,6 +2,7 @@
 import { useContext, useState } from 'react';
 /** Custom State Components*/
 import {LoadingDashboardXL} from '../components/dashboard/loading';
+//import ErrorDashboard from '../components/dashboard/error';
 /**Custom Hooks */
 import { ThemeContext } from '../context/ThemeContext';
 import useWindowSize from '../hooks/useWindowSize';
@@ -52,13 +53,13 @@ const Layout_D_Home = () => {
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-home-mobile tw-grid-cols-layout-dashboard-home-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className='tw-col-start-1 tw-col-end-2 tw-row-start-1 tw-row-end-1'>
-              <D_Home_Navigation/>
-              </section>
             <section className='tw-row-start-1 tw-row-end-1'>
+              <D_Home_Header/>
+              </section>
+            <section className='tw-row-start-2 tw-row-end-2'>
               <D_Home_Navigation_Mobile/>
             </section>
-            <section className='tw-row-start-2 tw-row-end-2'>
+            <section className='tw-row-start-3 tw-row-end-3'>
               <D_User_Landing/>
             </section>
         </main>

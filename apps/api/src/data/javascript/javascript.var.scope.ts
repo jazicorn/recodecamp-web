@@ -1,4 +1,4 @@
-import { Q_Type } from  '../types/types.question';
+import { Q_Type } from  '../../types/types.question';
 import { faker } from '@faker-js/faker';
 
 export const objGlobalScope = (): Q_Type => {

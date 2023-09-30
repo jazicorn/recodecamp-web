@@ -1,6 +1,6 @@
-import { Q_Type } from  '../types/types.question';
+import { Q_Type } from  '../../types/types.question';
 import { faker } from '@faker-js/faker';
-import { getRandomInt } from '../utils/index';
+import { getRandomInt } from '../../utils/index';
 
 export const objRandom = (): Q_Type => {
     const random = getRandomInt(3);
