@@ -8,10 +8,10 @@ import { getRandomInt } from '../../../../utils/index';
 import { objBlockScope, objFuncScope, objGlobalScope } from '../../../../data/javascript/javascript.var.scope';
 
 export default class VarScope {
-    public pathVarRandomScope = '/:id/var/scope/all';
-    public pathVarScopeBlock = '/:id/var/scope/block';
-    public pathVarScopeFunc = '/:id/var/scope/func';
-    public pathVarScopeGlobal = '/:id/var/scope/global';
+    public pathVarRandomScope = '/javascript/var/scope/all';
+    public pathVarScopeBlock = '/javascript/var/scope/block';
+    public pathVarScopeFunc = '/javascript/var/scope/func';
+    public pathVarScopeGlobal = '/javascript/var/scope/global';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -31,9 +31,7 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    if(req.params.id.toLowerCase() === 'javascript') {
-                        return res.status(200).send({ data: question });
-                    }
+                    return res.status(200).send({ data: question });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -49,9 +47,7 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    if(req.params.id.toLowerCase() === 'javascript') {
-                        return res.status(200).send({ data: question });
-                    }
+                    return res.status(200).send({ data: question });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -67,9 +63,7 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    if(req.params.id.toLowerCase() === 'javascript') {
-                        return res.status(200).send({ data: question });
-                    }
+                    return res.status(200).send({ data: question });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
@@ -85,9 +79,7 @@ export default class VarScope {
         switch(req.method) {
             case('GET'):
                 try {
-                    if(req.params.id.toLowerCase() === 'javascript') {
-                        return res.status(200).send({ data: question });
-                    }
+                    return res.status(200).send({ data: question });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }

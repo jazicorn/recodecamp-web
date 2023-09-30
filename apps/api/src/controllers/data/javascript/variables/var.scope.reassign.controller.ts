@@ -8,7 +8,7 @@ import { getRandomInt } from '../../../../utils/index';
 import { objBlockScopeReassign } from '../../../../data/javascript/javascript.var.scope.reassign';
 
 export default class VarScopeReassign {
-    public pathVarReassignBlock = '/:id/var/scope/reassign/block';
+    public pathVarReassignBlock = '/javascript/var/scope/reassign/block';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -24,9 +24,7 @@ export default class VarScopeReassign {
         switch(req.method) {
             case('GET'):
                 try {
-                    if(req.params.id.toLowerCase() === 'javascript') {
-                        return res.status(200).send({ data: question });
-                    }
+                    return res.status(200).send({ data: question });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }

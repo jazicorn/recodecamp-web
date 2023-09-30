@@ -6,13 +6,11 @@ import { Question } from '../../../classes/question';
 import { Q_Type } from  '../../../types/types.question';
 import { getRandomInt } from '../../../utils/index';
 import { objSingle as objSingleJs, objMulti as objMultiJs } from '../../../data/javascript/javascript.comments';
-import { objSingle as objSingleJava, objMulti as objMultiJava } from '../../../data/java/java.comments';
-import { objSingle as objSinglePy, objMulti as objMultiPy } from '../../../data/python/python.comments';
 
 export default class VarDeclare {
-    public pathCommentsRandom = '/:id/comments/all';
-    public pathCommentsSingle = '/:id/comments/single/all';
-    public pathCommentsMulti = '/:id/comments/multi/all';
+    public pathCommentsRandom = '/javascript/comments/all';
+    public pathCommentsSingle = '/javascript/comments/single/all';
+    public pathCommentsMulti = '/javascript/comments/multi/all';
     public router = Router();
     constructor() {
         this.initializeRoutes();
@@ -25,26 +23,8 @@ export default class VarDeclare {
     }
 
     public commentsRandom = async (req: Request, res: Response) => {
-        let dataSingle
-        let dataMulti
-
-        switch(req.params.id.toLowerCase()) {
-            case("javascript"):
-                dataSingle = objSingleJs();
-                dataMulti = objMultiJs();
-                break
-            case("java"):
-                dataSingle = objSingleJava();
-                dataMulti = objMultiJava();
-                break
-            case("python"):
-                dataSingle = objSinglePy();
-                dataMulti = objMultiPy();
-                break
-            default:
-                dataSingle = objSingleJs();
-                dataMulti = objMultiJs();
-        }
+        const dataSingle = objSingleJs();
+        const dataMulti = objMultiJs();
 
         const questionSingle = new Question(dataSingle);
         const questionMulti = new Question(dataMulti);
@@ -54,7 +34,7 @@ export default class VarDeclare {
 
         switch(req.method) {
             case('GET'):
-                 try {
+                try {
                     res.status(200).send({ data: randomQuestion });
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
@@ -66,24 +46,11 @@ export default class VarDeclare {
     };
 
     public commentsSingle = async (req: Request, res: Response) => {
-        let data;
-        switch(req.params.id.toLowerCase()) {
-            case("javascript"):
-                data = objSingleJs();
-                break
-            case("java"):
-                data = objSingleJava();
-                break
-            case("python"):
-                data = objSinglePy();
-                break
-            default:
-                data = objSingleJs();
-        }
+        const data = objSingleJs();
         const question = new Question(data);
         switch(req.method) {
             case('GET'):
-                 try {
+                try {
                     res.status(200).send({ data: question });
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
@@ -95,24 +62,11 @@ export default class VarDeclare {
     };
 
     public commentsMulti = async (req: Request, res: Response) => {
-        let data;
-        switch(req.params.id.toLowerCase()) {
-            case("javascript"):
-                data = objMultiJs();
-                break
-            case("java"):
-                data = objMultiJava();
-                break
-            case("python"):
-                data = objMultiPy();
-                break
-            default:
-                data = objMultiJs();
-        }
+        const data = objMultiJs();
         const question = new Question(data);
          switch(req.method) {
             case('GET'):
-                 try {
+                try {
                     return res.status(200).send({ data: question });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });

@@ -22,24 +22,49 @@ export class Question implements Q {
     _QUESTION_REFS!: object;
 
     constructor(data) {
-        this._QUESTION_CREATED_AT = new Date();
-        this._QUESTION_UPDATED_AT = new Date();
-        this._QUESTION_ID = data._QUESTION_ID || '';
-        this._QUESTION_LANGUAGE = data._QUESTION_LANGUAGE;
-        this._QUESTION_LEVEL = data._QUESTION_LEVEL || 1;
-        this._QUESTION_POINTS = data._QUESTION_POINTS || 1;
-        this._QUESTION_TASK  = data._QUESTION_TASK || '';
-        this._QUESTION_DATA = data._QUESTION_DATA || {};
-        this._QUESTION_RESULT = data._QUESTION_RESULT || {};
-        this._QUESTION_HINTS = data._QUESTION_HINTS || {};
-        this._QUESTION_BOILERPLATE = data._QUESTION_BOILERPLATE || '';
-        this._QUESTION_CONDITIONS = data._QUESTION_CONDITIONS || {};
-        this._QUESTION_CONSTRAINTS = data._QUESTION_CONSTRAINTS || {};
-        this._QUESTION_CATEGORY = data._QUESTION_CATEGORY || '';
-        this._QUESTION_CATEGORY_SUB = data._QUESTION_CATEGORY_SUB || '';
-        this._QUESTION_TAGS = data._QUESTION_TAGS || [];
-        this._QUESTION_REFS = data._QUESTION_REFS || {};
-        this.set_QUESTION_ID(data._QUESTION_LANGUAGE);
+        const defaults = {
+            _QUESTION_CREATED_AT: new Date(),
+            _QUESTION_UPDATED_AT: new Date(),
+            _QUESTION_ID: `js-${nanoid(10)}`,
+            _QUESTION_LANGUAGE: "Javascript",
+            _QUESTION_LEVEL: 1,
+            _QUESTION_POINTS: 1,
+            _QUESTION_TASK: "",
+            _QUESTION_DATA: {},
+            _QUESTION_RESULT: {},
+            _QUESTION_HINTS: {},
+            _QUESTION_BOILERPLATE: "",
+            _QUESTION_CONDITIONS: {},
+            _QUESTION_CONSTRAINTS: {},
+            _QUESTION_CATEGORY: "",
+            _QUESTION_CATEGORY_SUB: "",
+            _QUESTION_TAGS: [],
+            _QUESTION_REFS: {},
+        }
+        let opts = Object.assign({}, defaults, data);
+        // assign options to instance data (using only property names contained
+        // in defaults object to avoid copying properties we don't want)
+        // Object.keys(defaults).forEach(prop => {
+        //     this[prop] = opts[prop];
+        // });
+        this._QUESTION_CREATED_AT = opts._QUESTION_CREATED_AT;
+        this._QUESTION_UPDATED_AT = opts._QUESTION_UPDATED_AT;
+        this._QUESTION_ID = opts._QUESTION_ID;
+        this._QUESTION_LANGUAGE = opts._QUESTION_LANGUAGE;
+        this._QUESTION_LEVEL = opts._QUESTION_LEVEL;
+        this._QUESTION_POINTS = opts._QUESTION_POINTS;
+        this._QUESTION_TASK  = opts._QUESTION_TASK;
+        this._QUESTION_DATA = opts._QUESTION_DATA;
+        this._QUESTION_RESULT = opts._QUESTION_RESULT;
+        this._QUESTION_HINTS = opts._QUESTION_HINTS;
+        this._QUESTION_BOILERPLATE = opts._QUESTION_BOILERPLATE;
+        this._QUESTION_CONDITIONS = opts._QUESTION_CONDITIONS;
+        this._QUESTION_CONSTRAINTS = opts._QUESTION_CONSTRAINTS;
+        this._QUESTION_CATEGORY = opts._QUESTION_CATEGORY;
+        this._QUESTION_CATEGORY_SUB = opts._QUESTION_CATEGORY_SUB;
+        this._QUESTION_TAGS = opts._QUESTION_TAGS;
+        this._QUESTION_REFS = opts._QUESTION_REFS;
+        this.set_QUESTION_ID(opts._QUESTION_LANGUAGE);
     }
 
     public set_QUESTION_ID(_QUESTION_LANGUAGE) {
