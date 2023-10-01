@@ -117,8 +117,12 @@ const D_Problem = () => {
                       const wordStrip = word.replace(regex, '');
                       if(word.match(regex)) {
                         return (
-                          <span key={index} className={`${darkMode ? '' : 'tw-bg-campfire-neutral-400'} tw-border-no-border tw-rounded tw-px-1`}>
-                            {wordStrip}&nbsp;
+                          <span>
+                            <span key={index} 
+                            className={`${darkMode ? 'tw-bg-campfire-neutral-500' : 'tw-bg-campfire-neutral-300'} 
+                            tw-border-no-border tw-rounded tw-px-1`}>
+                              {wordStrip}
+                            </span>&nbsp;
                           </span>
                         )
                       }
