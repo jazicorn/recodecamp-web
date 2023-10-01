@@ -1,6 +1,6 @@
 // Page: Dashboard Categories
 /**React */
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
 /*Custom Hooks*/
 import Transition from '../hooks/useTransition';
@@ -19,7 +19,8 @@ import type { RootState } from '../redux/store.ts';
 import { 
   menuLanguage, menuCategoryInfo
 } from '../redux/slices/dashboardSlice.ts';
-
+/** API url | Custom env mandatory to begin with VITE 
+ * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Categories = () => {
@@ -30,19 +31,59 @@ const Layout_D_Categories = () => {
 
   const dispatch = useAppDispatch();
   /** Retrieve Category From Redux State */
+  const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguageDefault = useAppSelector((state:RootState) => state?.dashboard?.languageDefault);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
   const getMenuCategory = useAppSelector((state:RootState) => state?.dashboard?.category);
   const getMenuCategoryInfo = useAppSelector((state:RootState) => state?.dashboard?.categoryInfo);
   const getMenuUser = useAppSelector((state:RootState) => state?.dashboard?.user);
 
+  /**Get question url */
+  let url;
+  if(import.meta.env.PROD) {
+    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+  } else {
+    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+  }
+
+  /** Retrieve Category Based Question */
+  const getQuestion = useCallback(async (url) => {
+    /** Retrieve Question from API */
+    try {
+      const result = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Accept' : 'application/json',
+              'Content-Type': 'application/json',
+          },
+        }
+      );
+      const resJSON = await result.json();
+      //console.log("resJSON",resJSON);
+      return resJSON;
+    } catch(error) {
+      console.log(error);
+    }
+  },[]);
+
+  /** Generate Question */
+  const { refetch } = useQuery({ 
+    queryKey: ['questionData', url], 
+    queryFn: () => getQuestion(url),
+    refetchOnWindowFocus: false,
+    staleTime: 100 * (60 * 1000),
+    cacheTime: 100 * (60 * 1000),
+  });
+
   async function setLanguage() {
     if(getMenuLanguage === undefined || getMenuLanguage.length === 0) {
       if(getMenuUser._DEFAULT_LANGUAGE === undefined || getMenuUser._DEFAULT_LANGUAGE.length === 0) {
-        dispatch(menuLanguage(getMenuLanguageDefault));
+        await dispatch(menuLanguage(getMenuLanguageDefault));
+        await refetch();
       } else {
         //console.log("getMenuUser._DEFAULT_LANGUAGE",getMenuUser._DEFAULT_LANGUAGE)
-        dispatch(menuLanguage(getMenuUser._DEFAULT_LANGUAGE));
+        await dispatch(menuLanguage(getMenuUser._DEFAULT_LANGUAGE));
+        await refetch();
       }
     }
   }
@@ -69,18 +110,23 @@ const Layout_D_Categories = () => {
     queryFn: getCategories,
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
-    cacheTime: 0,
+    cacheTime: 100 * (60 * 1000),
   });
 
-  useEffect(() => {
+  const fetchCategoryInfo = useCallback(async () => {
     let results;
     data?.data.find((item) => {
       if(item.category[0] === getMenuCategory) {
         results = item;
       }
     });
-    dispatch(menuCategoryInfo(results))
-  },[data, dispatch, getMenuCategory, getMenuCategoryInfo]);
+    await dispatch(menuCategoryInfo(results));
+    await refetch();
+  },[data?.data, dispatch, getMenuCategory, refetch]);
+
+  useEffect(() => {
+    fetchCategoryInfo();
+  },[data, dispatch, fetchCategoryInfo, getMenuCategory, getMenuCategoryInfo]);
 
   /**Delay Loading Screen */
   const [loading, setLoading] = useState(true);
