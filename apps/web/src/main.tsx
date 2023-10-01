@@ -36,7 +36,7 @@ import A_User_Register from './components/auth/A_User.Register.tsx';
 import A_User_Login from './components/auth/A_User.Login.tsx';
 /**Layouts | Home Pages*/
 import H_Home from './layout/Layout.H_Banner';
-import H_About from './layout/Layout.H_About';
+//import H_About from './layout/Layout.H_About';
 /**Layouts | Dashboard Pages*/
 import D_Home from './layout/Layout.D_Home';
 import D_Code from './layout/Layout.D_Code';
@@ -54,7 +54,7 @@ const router = Router(
     <Route>
       <Route path="/" element={<Home />} errorElement={<ErrorBoundary />} >
         <Route path="" element={<H_Home />} errorElement={<ErrorBoundary />}/>
-        <Route path="about" element={<H_About />} errorElement={<ErrorBoundary />}/>
+        <Route path="*" element={<H_Home />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="/learn" element={<Dashboard />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />}/>
@@ -67,6 +67,7 @@ const router = Router(
         <Route path="search" element={<D_Search />} errorElement={<ErrorBoundary />}/>
         <Route path="settings/user" element={<D_Settings_User />} errorElement={<ErrorBoundary />}/>
         <Route path="settings/dashboard" element={<D_Settings />} errorElement={<ErrorBoundary />}/>
+        <Route path="*" element={<D_Home />} errorElement={<ErrorBoundary />}/>
       </Route>
       <Route path="/auth" element={<Auth />}>
         <Route path="admin/signup" element={<A_Admin_Register/>} errorElement={<ErrorBoundary />}/>
@@ -75,6 +76,7 @@ const router = Router(
         <Route path="guest/login" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
         <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
         <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
+         <Route path="*" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
       </Route>
       <Route path="/profile/:id" element={<Profile />} errorElement={<ErrorBoundary />}/>
       <Route path="/profile/settings" element={<Profile />} errorElement={<ErrorBoundary />}/>

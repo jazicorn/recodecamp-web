@@ -159,12 +159,12 @@ const Header = () => {
           <Transition>
           <ul className={`${darkMode ? "tw-text-neutral-300" : ""} [&>li]:tw-font-space_mono tw-flex tw-flex-col [&>li]:tw-text-xl
           [&>li]:tw-pl-1 [&>li]:tw-h-[32px] tw-pr-3`}>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
+            {/* <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={'/about'}>About</Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue`}>
               <Link to={`/contact`}>Contact</Link>
-            </li>
+            </li> */}
             <li className={`${darkMode ? "" : ""} tw-underline tw-decoration-dashed tw-decoration-2 hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}>Dashboard</Link>
             </li>
@@ -213,12 +213,12 @@ const Header = () => {
         </Link>
         <nav className="tw-flex tw-flex-row tw-items-center tw-pl-4 tw-ml-2 tw-font-space_grotesk_medium">
           <ul className={`${darkMode ? "" : ""} [&>li]:tw-text-lg tw-flex tw-flex-row tw-gap-5`}>
-            <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
+            {/* <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
               <Link to={'/about'}><Transition>About</Transition></Link>
             </li>
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-self-center`}>
               <Link to={`/contact`}><Transition>Contact</Transition></Link>
-            </li>
+            </li> */}
             <li className={`${darkMode ? "" : ""} hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center tw-underline tw-decoration-dashed tw-decoration-2`}>
               <Link to={`/learn`} className="tw-place-self-center">
                 <Transition>
