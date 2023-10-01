@@ -1,6 +1,7 @@
 'use strict';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import express, { Application } from 'express';
+import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -27,6 +28,7 @@ class App {
         }));
         this.app.use(bodyParser.json());
         this.app.use(cors(this.corsOptions));
+        this.app.use(cookieParser())
         // this.app.set('trust proxy', 1) // trust first proxy
         // this.app.use(session({
         //     secret: process.env.SECRET_TOKEN,

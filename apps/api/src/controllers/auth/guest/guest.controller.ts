@@ -8,6 +8,7 @@ import { z } from "zod";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import * as dotenv from 'dotenv';
+import auth from '../../../middleware/auth';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ class Guest_Routes {
     public pathGuestNew = '/guest/new';
     /**Public: Validate Guest*/
     public pathGuestLogin = '/guest/login';
+    /**Public: Validate Guest*/
+    public pathGuestLogout = '/guest/logout';
     /**Public: Auth guest*/
     public pathGuestAuth = '/guest/verify';
     /**Express Router*/
@@ -35,8 +38,9 @@ class Guest_Routes {
     public initializeRoutes() {
         this.router.post(this.pathGuestNew, this.guestNew);
         this.router.post(this.pathGuestLogin, this.guestLogin);
-        this.router.delete(this.pathGuestDelete, this.guestDelete);
-        this.router.post(this.pathGuestAuth, this.guestAuth);
+        this.router.delete(this.pathGuestLogout, auth, this.guestLogout);
+        this.router.delete(this.pathGuestDelete, auth, this.guestDelete);
+        this.router.get(this.pathGuestAuth, auth, this.guestAuth);
     }
 
 
@@ -206,7 +210,7 @@ class Guest_Routes {
                     } else if(!validEmail || !validPasswordCompare) {
                         return res.status(400).send({ error: "Invalid Guest Information" });
                     } else if(validIP && validEmail && validPasswordCompare) {
-                        return res.cookie("access_token", getToken, {
+                        return res.cookie("_ACCESS_TOKEN", getToken, {
                             httpOnly: true,
                             secure: true,
                             sameSite: 'strict',
@@ -223,19 +227,40 @@ class Guest_Routes {
         }
     };
 
-    /**Private: Admin Deletes Guest*/
+    /**Private: Logout Guest*/
+    public guestLogout = async (req: Request, res: Response) => {
+        switch(req.method) {
+            case('DELETE'):
+                return res.clearCookie("_ACCESS_TOKEN").sendStatus(200);
+                break
+            default:
+                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        }
+    }
+
+    /**Private: Deletes Guest*/
     public guestDelete = async (req: Request, res: Response) => {
         switch(req.method) {
             case('DELETE'):
                 try {
+                    /**token */
+                    const token = req.cookies._ACCESS_TOKEN;
+                    //console.log("token:", token)
+                    /**jwt token */
+                    const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
+                    //console.log("decoded:", decoded)
                     /** <-- Validate User Info --> */
                     const data = req.body;
+
                     /**Retrieve Guest */
                     // Check Email in database
                     const getGuest = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
                     const guestResult = getGuest[0];
                     //console.log("guestResult:", guestResult)
-
+                    /**Validate user === token */
+                    if(decoded._EMAIL !==  guestResult._email) {
+                        return res.status(403).send("Valid token is required for account deletion");
+                    }
                     /**Validate Guest Data */
                     // Check Guest IP Address
                     const guestIP = req.socket.remoteAddress;
@@ -263,11 +288,10 @@ class Guest_Routes {
                     //console.log(id)
                     const result = await sql`DELETE FROM _GUEST WHERE _id = ${id}`;
                     //console.log(result);
-                    return res.sendStatus(200);
+                    return res.clearCookie("_ACCESS_TOKEN").sendStatus(200);
                 } catch {
                     return res.status(500).send({ error: "Guest Not Found"});
                 }
-
                 break
             default:
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
@@ -275,84 +299,44 @@ class Guest_Routes {
     };
     /**Public: Auth Guest*/
     public guestAuth = async (req: Request, res: Response) => {
-        const defaultReturnObject = { authenticated: false, user: null };
-
-        try {
-            const { token } = req.body
-            // const token = String(req?.headers?.authorization?.replace('Bearer ', ''));
-            // console.log("token", token)
-            //console.log("data", token);
-            const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-            //console.log("decoded", decoded)
-            // /**Retrieve Guest */
-            // Check Email in database
-            const getGuest = await sql`SELECT * FROM _GUEST WHERE _ID = ${decoded._ID}`;
-            const guestResult = getGuest[0];
-            //console.log("guest:", guestResult);
-            if (!guestResult) {
-            res.status(400).json(defaultReturnObject);
-                return;
-            }
-            /**Transform Data */
-            // uppercase guestResult keys
-            Object.entries(guestResult).forEach(([key, value]) => {
-                guestResult[key.toUpperCase()] = guestResult[key];
-                //console.log(`${key}: ${value}`);
-            });
-            // Create Guest Object
-            const guestObj = new Guest(guestResult);
-            //console.log("guest:", guestObj);
-            const result = { authenticated: true, user: guestObj }
-            res.status(200).json(result);
-        }
-        catch (err) {
-            console.log('POST auth/me, Something Went Wrong', err);
-            res.status(400).json(defaultReturnObject);
-        }
-    }
-
-    /**Public: Delete Guest*/
-    public guestRemove = async (req: Request, res: Response) => {
         switch(req.method) {
-            case('DELETE'):
-                 try {
-                    const data = req.body;
-                    const guestResult = await sql`SELECT * FROM _GUEST WHERE _EMAIL = ${data._EMAIL}`;
-                     /**Validate Guest Data */
-                    // Check Guest IP Address
-                    const guestIP = req.socket.remoteAddress;
-                    const validIP = z.string().ip(guestIP);
-                    // Check Email & Password
-                    //const validEmail = data._EMAIL === guestResult._email;
-                    //console.log("validEmail", validEmail);
-                    // Compare Encrypted Password
-                    const validPasswordCompare = bcrypt.compareSync(
-                        data._PASSWORD,
-                        guestResult._password
-                    );
-                    //console.log("validPasswordCompare:", validPasswordCompare);
-                     if(!validIP) {
-                        return res.status(400).send({ error: "Invalid IP Address" })
+            case('GET'):
+                try {
+                    /**token */
+                    const token = req.cookies._ACCESS_TOKEN;
+                    //console.log("token:", token)
+                    /**jwt token */
+                    const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
+                    //console.log("decoded:", decoded)
+                    // /**Retrieve Guest */
+                    // Check Email in database
+                    const getGuest = await sql`SELECT * FROM _GUEST WHERE _ID = ${decoded._ID}`;
+                    const guestResult = getGuest[0];
+                    //console.log("guest:", guestResult);
+                    if (!guestResult) {
+                        const result = { authenticated: false, data: {} }
+                        return res.status(400).json(result);
                     }
-                    if(!validPasswordCompare) {
-                        return res.status(400).send({ error: "Invalid Password" })
-                    }
-                    try {
-                        const id = req.params.id;
-                        const results = await sql`DELETE * FROM _GUEST WHERE _ID = ${id}`;
-                        return res.status(200);
-                    } catch {
-                        return res.status(500).send({ error: "Guest Not Found" })
-                    }
-                    return res.status(200).send(data);
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong"});
+                    /**Transform Data */
+                    // uppercase guestResult keys
+                    Object.entries(guestResult).forEach(([key, value]) => {
+                        guestResult[key.toUpperCase()] = guestResult[key];
+                        //console.log(`${key}: ${value}`);
+                    });
+                    // Create Guest Object
+                    const guestObj = new Guest(guestResult);
+                    //console.log("guest:", guestObj);
+                    const result = { authenticated: true, data: guestObj }
+                    res.status(200).json(result);
+                }
+                catch (err) {
+                    return res.status(500).send({ error: "Guest Not Found"});
                 }
                 break
             default:
                 return res.status(400).send({ error: `${req.method} Method Not Allowed` });
-        };
-    };
+        }
+    }
 }
 
 export default Guest_Routes;
