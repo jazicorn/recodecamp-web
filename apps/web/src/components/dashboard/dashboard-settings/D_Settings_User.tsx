@@ -146,7 +146,7 @@ const D_Settings_User = () => {
               sx: { backgroundColor: 'teal' },
               loading: false,
             });
-            return
+            return true
           } else {
             console.log("🚫 Guest | Delete Account Failed")
             // Failure Notification
@@ -163,13 +163,16 @@ const D_Settings_User = () => {
               sx: { backgroundColor: 'red' },
               loading: false,
             });
+            return false
           }
-      }).then(function() {
-        dispatch(menuUser(DEFAULT_USER));
-        setTimeout(() => {
-          console.log("⏳ Delay | Redirect in 1 second.");
-          navigate("/");
-        }, "1000");
+      }).then(function(status) {
+        if(status) {
+          dispatch(menuUser(DEFAULT_USER));
+          setTimeout(() => {
+            console.log("⏳ Delay | Redirect in 1 second.");
+            navigate("/");
+          }, "1000");
+        }
       });
     } catch(error) {
       console.log("🚫 Guest | Delete Failed")
