@@ -22,6 +22,10 @@ import {
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
 import { DEFAULT_USER } from '../../utils/constants.ts';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+//import { IconX, IconCheck } from '@tabler/icons-react';
+import Emoji from 'react-emojis';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;

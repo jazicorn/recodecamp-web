@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useCallback, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
@@ -28,6 +28,10 @@ import {
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
 import { DEFAULT_USER } from '../../utils/constants.ts';
+/** Notifications */
+import { notifications } from '@mantine/notifications';
+//import { IconX, IconCheck } from '@tabler/icons-react';
+import Emoji from 'react-emojis';
 
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
@@ -60,10 +64,8 @@ const Header_Dashboard = () => {
     }
   };
 
-  /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch();
-  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   /** UserName */
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
   const [userName, setUserName] = useState('');
   const createUserName = () => {
     if(getUser._EMAIL === undefined || getUser._EMAIL.toLowerCase() === 'john@doe.com' || getUser._EMAIL.length === 0) {
@@ -90,17 +92,82 @@ const Header_Dashboard = () => {
     getProfile()
   });
 
+  /**Get logout url */
+  let url;
+  if(import.meta.env.PROD) {
+    url = `${baseURL}/guest/logout`
+  } else {
+    url = `/api/guest/logout`
+  }
+
+  /** Retrieve Category Based Question */
+  const logoutUser = useCallback(async (url) => {
+    /** Retrieve Question from API */
+   try {
+      const result = await fetch(url, {
+          method: 'DELETE',
+          headers: {
+              'Accept' : 'application/json',
+              'Content-Type': 'application/json',
+          },
+        }
+      );
+      if(result.status === "200") {
+        return true
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  },[]);
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
+  
   /** User Logout */
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
-    removeTokenFromLocalStorage();
-    dispatch(menuUser(DEFAULT_USER));
-    console.log("👋 Goodbye | User Logged Out");
-    setTimeout(() => {
-      console.log("⏳ Delay | Page Redirect In 1 Second.");
-      navigate("/");
-    }, '1000');
+    //console.log("goodbye");
+    const removeUser = logoutUser(url);
+    if(removeUser) {
+      removeTokenFromLocalStorage();
+      dispatch(menuUser(DEFAULT_USER));
+      console.log("👋 Goodbye | User Logged Out");
+      // Success Notification
+      notifications.show({
+        id: 'success',
+        withCloseButton: true,
+        autoClose: 2000,
+        title: "User Logged Out",
+        message: 'See you next time.',
+        color: 'cyan',
+        icon: <Emoji emoji="waving-hand"/> ,
+        className: 'my-notification-class',
+        style: { backgroundColor: 'white' },
+        sx: { backgroundColor: 'teal' },
+        loading: false,
+      });
+      setTimeout(() => {
+        console.log("⏳ Delay | Page Redirect In 1 Second.");
+        navigate("/");
+      }, '1000');
+    } else {
+      console.log("🚫 Guest | Account Deletion Failed");
+      // Failure Notification
+      notifications.show({
+        id: 'failure',
+        withCloseButton: true,
+        autoClose: 2000,
+        title: "Failed to Logout",
+        message: 'Please try again.',
+        color: 'red',
+        icon: <Emoji emoji="face-with-monocle"/>,
+        className: 'my-notification-class',
+        style: { backgroundColor: 'white' },
+        sx: { backgroundColor: 'red' },
+        loading: false,
+      });
+    }
   };
 
   /** Get User Access Token From Storage */
