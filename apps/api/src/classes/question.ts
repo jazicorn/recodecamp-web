@@ -1,5 +1,5 @@
 'use strict';
-import { Q } from '../types/types.question';
+import { Q, Answer } from '../types/types.question';
 import { nanoid } from 'nanoid';
 
 export class Question implements Q {
@@ -11,6 +11,8 @@ export class Question implements Q {
     _QUESTION_POINTS!: number;
     _QUESTION_TASK !: string;
     _QUESTION_DATA!: object;
+    _QUESTION_ANSWER_REGEX!: string;
+    _QUESTION_ANSWER!: Answer | Answer[] | string | string[];
     _QUESTION_RESULT!: object;
     _QUESTION_HINTS!: object;
     _QUESTION_BOILERPLATE!: string;
@@ -25,12 +27,22 @@ export class Question implements Q {
         const defaults = {
             _QUESTION_CREATED_AT: new Date(),
             _QUESTION_UPDATED_AT: new Date(),
-            _QUESTION_ID: `js-${nanoid(10)}`,
+            _QUESTION_ID: `js-${nanoid(12)}`,
             _QUESTION_LANGUAGE: "Javascript",
             _QUESTION_LEVEL: 1,
             _QUESTION_POINTS: 1,
             _QUESTION_TASK: "",
             _QUESTION_DATA: {},
+            _QUESTION_ANSWER_REGEX: "",
+            _QUESTION_ANSWER: (userAnswer: string, answer: string) => {
+                const regex =  new RegExp(answer);
+                const result = userAnswer.match(regex);
+                if(result) {
+                    return true
+                } else {
+                    return false
+                }
+            },
             _QUESTION_RESULT: {},
             _QUESTION_HINTS: {},
             _QUESTION_BOILERPLATE: "",
@@ -55,6 +67,8 @@ export class Question implements Q {
         this._QUESTION_POINTS = opts._QUESTION_POINTS;
         this._QUESTION_TASK  = opts._QUESTION_TASK;
         this._QUESTION_DATA = opts._QUESTION_DATA;
+        this._QUESTION_ANSWER_REGEX = opts._QUESTION_ANSWER_REGEX;
+        this._QUESTION_ANSWER = opts._QUESTION_ANSWER;
         this._QUESTION_RESULT = opts._QUESTION_RESULT;
         this._QUESTION_HINTS = opts._QUESTION_HINTS;
         this._QUESTION_BOILERPLATE = opts._QUESTION_BOILERPLATE;
@@ -64,19 +78,18 @@ export class Question implements Q {
         this._QUESTION_CATEGORY_SUB = opts._QUESTION_CATEGORY_SUB;
         this._QUESTION_TAGS = opts._QUESTION_TAGS;
         this._QUESTION_REFS = opts._QUESTION_REFS;
-        this.set_QUESTION_ID(opts._QUESTION_LANGUAGE);
     }
 
     public set_QUESTION_ID(_QUESTION_LANGUAGE) {
         switch(_QUESTION_LANGUAGE.toLowerCase()) {
             case('javascript'):
-                this._QUESTION_ID = `js-${nanoid(10)}`;
+                this._QUESTION_ID = `js-${nanoid(12)}`;
                 break
             case('java'):
-                this._QUESTION_ID = `java-${nanoid(10)}`;
+                this._QUESTION_ID = `java-${nanoid(12)}`;
                 break
             case('python'):
-                this._QUESTION_ID = `py-${nanoid(10)}`;
+                this._QUESTION_ID = `py-${nanoid(12)}`;
                 break
             default:
                 return
