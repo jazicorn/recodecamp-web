@@ -48,7 +48,7 @@ const D_Problem = () => {
         }
       );
       const resJSON = await result.json();
-      //console.log("resJSON",resJSON);
+      //console.log("resJSON", resJSON);
       return resJSON;
     } catch(error) {
       console.log(error);
@@ -67,7 +67,7 @@ const D_Problem = () => {
   /** Save Question to Redux Store */
   useEffect(() => {
     if(data !== undefined) {
-      //console.log(data.data)
+      //console.log("data", data)
       dispatch(menuQuestion(data.data));
     }
   }, [dispatch, data]);
@@ -79,7 +79,7 @@ const D_Problem = () => {
   const newQuestion = () => {
     // manually refetch
     refetch();
-  }
+  };
 
   /** Render if Successful */
   if(isSuccess) return (
@@ -115,18 +115,20 @@ const D_Problem = () => {
                     {getMenuQuestion._QUESTION_TASK.split(' ').map((word, index) => {
                       const regex = /[""]/g;
                       const wordStrip = word.replace(regex, '');
+
                       if(word.match(regex)) {
                         return (
-                          <span>
+                          <span key={index}>
                             <span key={index} 
-                            className={`${darkMode ? 'tw-bg-campfire-neutral-500' : 'tw-bg-campfire-neutral-300'} 
-                            tw-border-no-border tw-rounded tw-px-1`}>
+                            className={`${darkMode ? 'tw-bg-campfire-neutral-500' : 'tw-bg-campfire-neutral-400/40'} 
+                            tw-border-no-border tw-px-1`}>
                               {wordStrip}
-                            </span>&nbsp;
+                            </span>
                           </span>
                         )
                       }
-                      return <span key={index}>{word} </span>
+                      
+                      return <span key={index} className="tw-leading-7"> {word} </span>
                     })}
                   </p>
                 </div>
