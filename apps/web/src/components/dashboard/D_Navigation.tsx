@@ -115,7 +115,7 @@ const D_Navigation = () => {
 
   return (
     <div className={`${darkMode ? '[&_main>ul]:tw-text-campfire-blue [&_main>h4]:tw-text-campfire-neutral-300' : 
-    '[&_main]:tw-text-campfire-purple [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2`}>
+    '[&_main]:tw-text-campfire-purple [&_main>h4]:tw-text-campfire-neutral-600'} tw-w-full tw-h-full tw-p-2 `}>
       <div className={`${darkMode ? 'custom-bg-waves-neutral-darker-inverse tw-bg-blend-overlay tw-opacity-50 ' : 
       'custom-bg-waves-neutral-lighest tw-bg-blend-overlay tw-opacity-50'} tw-w-full tw-h-full  tw-rounded`}>
       <section className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-800': '[&>main>ul]:tw-border-campfire-blue'} [&>main>ul>li]:tw-py-1 

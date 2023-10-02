@@ -208,7 +208,7 @@ const Dashboard = () => {
         <Header />
         {path !== '/learn' && <D_Header/>}
         {isDesktopMDXL || isDesktopXL ?
-        <div className="tw-w-full tw-h-full tw-min-h-screen">
+        <div className="tw-w-full tw-h-full">
           { path === '/learn' && 
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
             : '[&>section]:tw-backdrop-brightness-85'} [&>section]:tw-min-h-screen
@@ -220,12 +220,12 @@ const Dashboard = () => {
           }
           { path === '/learn/code' && 
             <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
-            : '[&>section]:tw-backdrop-brightness-85'}
-            tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full 
+            : '[&>section]:tw-backdrop-brightness-85'} tw-h-max
+            tw-grid-rows-dashboard-extended tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full
             [&>*]:tw-backdrop-blur-sm tw-min-h-[34em]
             tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
               <section className={`${pathFilter ? 'tw-row-end-2' : 'tw-row-end-3'} 
-              tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+              tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-h-auto`}>
                 <D_Navigation/>
               </section>
               {!pathFilter &&

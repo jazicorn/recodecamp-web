@@ -41,10 +41,8 @@ const D_Console = () => {
   },[dispatch]);
   
   return (
-   <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
-      tw-w-full tw-h-full tw-flex tw-flex-col tw-items-between`}>
-        <main className='tw-h-full'>
+      <main className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
+      tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2 tw-overflow-y-auto tw-items-between`}>
           <Transition>
             <header className={`${darkMode ? '' : ''}
               tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
@@ -70,8 +68,6 @@ const D_Console = () => {
             </ul>
           }
         </main>
-      </div>
-    </div>
   )
 }
 
