@@ -19,6 +19,8 @@ import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** Codemirror */
 import CodeMirror from '@uiw/react-codemirror';
+import { EditorView } from 'codemirror';
+
 /**CodeMirror Languages */
 //import lightTheme from '../../../styles/style.codemirror.light';
 //import darkTheme from '../../../styles/style.codemirror.dark';
@@ -41,9 +43,16 @@ const D_Editor = () => {
   const { isMobile } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-
+  
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
+  
+  /** Update User Points */
+  const getMenuPoints = useAppSelector((state:RootState) => state?.dashboard?.points);
+
+  const setPoints = useCallback((points: number) => {
+    dispatch(menuPoints(points))
+  },[dispatch]);
 
   /** Retrieve Category Route From Redux State */
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
@@ -118,13 +127,6 @@ const D_Editor = () => {
   const onChange = useCallback((value) => {
     setEditor(value);
   }, []);
-
-  /** Update User Points */
-  const getMenuPoints = useAppSelector((state:RootState) => state?.dashboard?.points);
-
-  const setPoints = useCallback((points: number) => {
-    dispatch(menuPoints(points))
-  },[dispatch]);
 
   /** Compile and Execute Code */
 
@@ -242,9 +244,11 @@ const D_Editor = () => {
     dispatch(menuConsoleMessage(consoleMessage));
   },[consoleMessage, dispatch]);
 
-
+  /**Set Editor Language */
   const editorLanguage = _LANGUAGES_CODE_MIRROR[getMenuLanguage.toLowerCase()];
   //console.log(editorLanguage);
+
+  const extensions = [EditorView.lineWrapping, editorLanguage];
 
   /** Render if Successful */
   if (isSuccess) return (
@@ -277,7 +281,7 @@ const D_Editor = () => {
               height={isMobile ? "250px" : "300px"}
               maxHeight="100%"
               theme={darkMode ? materialDark : githubLight }
-              extensions={editorLanguage}
+              extensions={extensions}
               onChange={onChange}
             />
           </div>

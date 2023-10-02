@@ -38,9 +38,9 @@ export const _LANGUAGES_ALL = {
 }
 
 export const _LANGUAGES_CODE_MIRROR = {
-    javascript: [ javascript({ jsx: true })],
-    java: [java()],
-    python: [python()],
+    javascript: javascript({ jsx: true }),
+    java: java(),
+    python: python(),
 }
 
 export const _LANGUAGES_RAPID_API = {
