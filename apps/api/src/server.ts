@@ -27,8 +27,16 @@ class App {
             extended: true
         }));
         this.app.use(bodyParser.json());
-        this.app.use(cors({origin:this.corsOptions}));
-        this.app.use(cookieParser())
+        this.app.use(cookieParser());
+        this.app.use(cors({
+            origin: this.corsOptions
+        }));
+        this.app.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+            res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+            next();
+        });
         // this.app.set('trust proxy', 1) // trust first proxy
         // this.app.use(session({
         //     secret: process.env.SECRET_TOKEN,
