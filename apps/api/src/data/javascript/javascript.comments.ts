@@ -43,7 +43,7 @@ export const objSingle = (): Q_Type => {
             }
         },
         _QUESTION_HINTS: {},
-        _QUESTION_BOILERPLATE: `function greetingUser() {\n\t// ⬇️ Only change code bellow this line \n\n\tGreeting User\n\tconsole.log(\'Hello ${personName}\');\n\n\t\/\/ ⬆️ Only change code abouve this line\n}\n\n\tgreetingUser()\n`,
+        _QUESTION_BOILERPLATE: `function greetingUser() {\n\t// ⬇️ Only change code bellow this line \n\n\tGreeting User\n\tconsole.log(\'Hello ${personName}\');\n\n\t\/\/ ⬆️ Only change code abouve this line\n}\n\ngreetingUser()\n`,
         _QUESTION_CONDITIONS: {},
         _QUESTION_CONSTRAINTS: {},
         _QUESTION_CATEGORY: 'Comments',

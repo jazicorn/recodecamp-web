@@ -10,6 +10,7 @@ import ErrorDashboard from '../components/dashboard/error';
 import { LoadingDashboardXL } from '../components/dashboard/loading';
 import D_Category from '../components/dashboard/dashboard-categories/D_Category';
 import D_Category_Menu from '../components/dashboard/dashboard-categories/D_Category_Menu';
+import D_Route from '../components/dashboard/D_Route';
 // import D_Languages from '../components/dashboard/dashboard-categories/D_Languages';
 /**React Query */
 import { useQuery } from "@tanstack/react-query";
@@ -155,44 +156,52 @@ const Layout_D_Categories = () => {
 
   if(isSuccess && !loading) {
     return (
-      <div className="tw-h-full">
+      <>
         {/**Page Content | Position: Relative */}
           {isDesktopMDXL || isDesktopXL ? 
           <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/90' : '[&>*]:tw-bg-neutral-300/90'} 
             [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
-            tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1  `}>
-              <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 tw-bg-campfire-neutral-600' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-divide-x-2 tw-p-2`}>
-                <section className={`${darkMode ? "" : ""} 
-                tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2 tw-z-50 tw-relative`}>
+            tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1`}>
+              <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 tw-bg-campfire-neutral-600' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-p-2`}>
+                <section className={`${darkMode ? "tw-bg-campfire-neutral-500/50" : "tw-bg-campfire-neutral-100/50"} 
+                tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1 tw-p-2 `}>
+                  <Transition>
+                    <D_Route/>
+                  </Transition>
+                </section>
+                <section className={`${darkMode ? "" : ""}
+                tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2 tw-p-2`}>
                   <Transition>
                     <D_Category_Menu menuData={data}/>
                   </Transition>
                 </section>
-                <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
-                  <div className='tw-z-40 tw-relative'>
-                    <Transition>
-                      <D_Category />
-                    </Transition>
-                  </div>
+                <section className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-2'>
+                  <Transition>
+                    <D_Category />
+                  </Transition>
                 </section>
               </div>
           </main>
           :
           <Transition>
             <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
-            tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-            tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-              <section className={`${darkMode ? "tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} 
-              tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2 tw-z-50 tw-relative tw-h-full`}>
-                  <D_Category_Menu menuData={data}/>
+            tw-bg-transparent tw-pb-1 tw-w-full tw-h-fit tw-grow [&>*]:tw-backdrop-blur-sm
+            tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-grid-col-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <section className={`${darkMode ? "tw-bg-campfire-neutral-500/50" : "tw-bg-campfire-neutral-100/50"} 
+                tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2 `}>
+                <D_Route/>
               </section>
-              <section className='tw-z-40 tw-relative tw-h-full'>
-                  <D_Category/>
+              <section className={`${darkMode ? "[&>*]:tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} 
+              tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2 tw-p-2`}>
+                <D_Category_Menu menuData={data}/>
+              </section>
+              <section className='tw-col-start-1 tw-col-end-1 tw-row-start-3 tw-row-end-3'>
+                <D_Category/>
               </section>
             </main>
           </Transition>
           }
-      </div>
+      </>
     )
   }
 }

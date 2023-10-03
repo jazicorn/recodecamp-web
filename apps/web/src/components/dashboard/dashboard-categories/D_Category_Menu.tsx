@@ -213,7 +213,7 @@ const D_Category_Menu = ({menuData}) => {
     }
 
     return (
-    <div className={` ${isMobile ? "tw-pb-4 tw-pt-2" : ""} tw-h-full`}>
+    <div className={` ${isMobile ? "tw-pb-4 tw-pt-2" : "tw-px-4 tw-border-r"} ${darkMode ? "tw-border-campfire-neutral-500" : ""} tw-h-full`}>
         <Transition>
             <div className={`${darkMode ? "" : ""} tw-py-2 tw-h-full tw-mb-2 tw-z-50 tw-relative`}>
                 <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light tw-border-b tw-text-xl tw-h-[36px] tw-w-full tw-pl-2 

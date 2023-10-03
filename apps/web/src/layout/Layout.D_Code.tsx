@@ -6,6 +6,7 @@ import D_Editor from '../components/dashboard/dashboard-code/D_Editor';
 import D_Problem from '../components/dashboard/dashboard-code/D_Problem';
 import D_Console from '../components/dashboard/dashboard-code/D_Console';
 import D_Scoreboard from '../components/dashboard/dashboard-code/D_Scoreboard';
+import D_Route from '../components/dashboard/D_Route';
 /** React Hooks */
 import { useContext, useEffect, useCallback, useState } from 'react';
 /** React Redux */
@@ -115,15 +116,18 @@ const Layout_D_Code = () => {
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm [&>*]:tw-w-full [&>*]:tw-h-full
           tw-grid tw-grid-rows-layout-dashboard-code tw-grid-cols-layout-dashboard-code tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
+              <D_Route/>
+            </section>
+            <section className='tw-col-start-1 tw-col-end-3 tw-row-start-2 tw-row-end-2'>
               <D_Scoreboard/>
             </section>
-            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-4'>
+            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-3 tw-row-end-5'>
               <D_Problem/>
             </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-2'>
+            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-3 tw-row-end-3'>
               <D_Editor/>
             </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-3 tw-row-end-4 tw-p-2'>
+            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-4 tw-row-end-5 tw-p-2'>
               <D_Console/>
             </section>
         </main>
