@@ -30,6 +30,10 @@ import { notifications } from '@mantine/notifications';
 //import { IconX, IconCheck } from '@tabler/icons-react';
 import Emoji from 'react-emojis';
 
+/** API url | Custom env mandatory to begin with VITE  
+ * https://vitejs.dev/guide/env-and-mode.html#env-files */
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 const D_Navigation = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
