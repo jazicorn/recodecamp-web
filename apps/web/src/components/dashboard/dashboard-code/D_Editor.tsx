@@ -275,23 +275,23 @@ const D_Editor = () => {
           {code  === undefined ?
             "loading"
             :
-            <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-h-full`}>
-            <CodeMirror
-              value={editor}
-              height={isMobile ? "250px" : "300px"}
-              maxHeight="100%"
-              theme={darkMode ? materialDark : githubLight }
-              extensions={extensions}
-              onChange={onChange}
-            />
-          </div>
+            <div className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-h-full tw-pb-2`}>
+              <CodeMirror
+                value={editor}
+                height={isMobile ? "300px" : "300px"}
+                maxHeight="100%"
+                theme={darkMode ? materialDark : githubLight }
+                extensions={extensions}
+                onChange={onChange}
+              />
+            </div>
           }
         </Transition2>
         <Transition2>
           <div className={`${darkMode ? '' : ''} tw-flex tw-flex-row tw-justify-between tw-content-center tw-h-[36px]`}>
             <button
               onClick={(e) => onSubmission(e)}
-              className={`${darkMode ? 'hover:tw-bg-campfire-neutral-500' : 'hover:tw-bg-campfire-neutral-100'} tw-border-campfire-purple-light tw-border-t tw-font-gro tw-w-full tw-h-full hover:tw-text-campfire-purple-light hover:tw-border-b`}
+              className={`${darkMode ? 'hover:tw-bg-campfire-neutral-500' : 'hover:tw-bg-campfire-neutral-100'} tw-border-campfire-purple-light tw-border-t tw-font-gro tw-w-full tw-h-full hover:tw-text-campfire-purple-light tw-border-b`}
             >
               Submit
             </button>

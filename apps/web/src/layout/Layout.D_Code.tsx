@@ -45,8 +45,8 @@ const Layout_D_Code = () => {
 
   /** Retrieve Category Based Question */
   const getQuestion = useCallback(async (url) => {
-    /** Retrieve Question from API */
-   try {
+  /** Retrieve Question from API */
+  try {
       const result = await fetch(url, {
           method: 'GET',
           headers: {
@@ -137,15 +137,18 @@ const Layout_D_Code = () => {
           tw-grid tw-grid-rows-layout-dashboard-code-mobile tw-grid-cols-layout-dashboard-code-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             {/** z index can't go higher than 50 to work*/}
             <section className='tw-row-start-1 tw-row-end-1'>
-              <D_Scoreboard/>
+              <D_Route/>
             </section>
             <section className='tw-row-start-2 tw-row-end-2'>
+              <D_Scoreboard/>
+            </section>
+            <section className='tw-row-start-3 tw-row-end-3'>
               <D_Problem/>
             </section>
-             <section className='tw-row-start-3 tw-row-end-3'>
+            <section className='tw-row-start-4 tw-row-end-4'>
               <D_Editor/>
             </section>
-            <section className='tw-row-start-4 tw-row-end-4 tw-p-2'>
+            <section className='tw-row-start-5 tw-row-end-5 tw-p-2'>
               <D_Console/>
             </section>
         </main>

@@ -42,7 +42,7 @@ const D_Console = () => {
   
   return (
       <main className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
-      tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2 tw-overflow-y-auto tw-items-between`}>
+      tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-overflow-y-auto tw-items-between`}>
           <Transition>
             <header className={`${darkMode ? '' : ''}
               tw-flex tw-flex-row tw-justify-between tw-content-center tw-pb-2`}>
@@ -58,15 +58,17 @@ const D_Console = () => {
             </button>
             </header>
           </Transition>
-          { message !== undefined &&
-            <ul className="tw-max-h-[100px] tw-pl-2">
-              {
-                message.map((item, i) => {
-                  return <li key={i}>{item}</li>;
-                })
-              }
-            </ul>
-          }
+          <div className="tw-px-4 tw-pb-2">
+            { message !== undefined &&
+              <ul className="tw-max-h-[100px]">
+                {
+                  message.map((item, i) => {
+                    return <li key={i}>{item}</li>;
+                  })
+                }
+              </ul>
+            }
+          </div>
         </main>
   )
 }

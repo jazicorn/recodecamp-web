@@ -204,7 +204,7 @@ const Dashboard = () => {
       <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' : 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'}
       tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full`}/>
       {/**Page Content | Position: Relative */}
-      <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-relative tw-z-10 tw-w-full tw-h-screen tw-flex tw-flex-col tw-grow tw-place-items-center tw-font-space_mono`}>
+      <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-relative tw-z-10 tw-w-full tw-h-full tw-flex tw-flex-col tw-grow tw-place-items-center tw-font-space_mono`}>
         <Header />
         {path !== '/learn' && <D_Header/>}
         {isDesktopMDXL || isDesktopXL ?
@@ -220,13 +220,13 @@ const Dashboard = () => {
               :
               <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-85'}
               tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-w-full tw-h-full
-              [&>*]:tw-backdrop-blur-sm tw-min-h-[34em] tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-                <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1 `}>
+              [&>*]:tw-backdrop-blur-sm tw-min-h-full tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+                <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1`}>
                   <D_Navigation/>
                 </section>
-                <div className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
+                <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
                   <Outlet/>
-                </div>
+                </section>
               </main>
             }
           </div>
@@ -238,9 +238,9 @@ const Dashboard = () => {
               <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-z-20'>
                 <D_Navigation_Mobile/>
               </section>
-              <div className='tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2'>
+              <section className='tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2'>
                 <Outlet/>
-              </div>
+              </section>
           </main>
         }
       </article>
