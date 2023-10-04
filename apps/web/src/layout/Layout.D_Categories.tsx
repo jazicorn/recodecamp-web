@@ -159,12 +159,12 @@ const Layout_D_Categories = () => {
       <>
         {/**Page Content | Position: Relative */}
           {isDesktopMDXL || isDesktopXL ? 
-          <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/90' : '[&>*]:tw-bg-neutral-300/90'} 
-            [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full 
+          <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/60' : '[&>*]:tw-bg-neutral-300/60'} 
+            [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full tw-p-2
             tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1`}>
-              <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 tw-bg-campfire-neutral-600' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-p-2`}>
-                <section className={`${darkMode ? "tw-bg-campfire-neutral-500/50" : "tw-bg-campfire-neutral-100/50"} 
-                tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1 tw-p-2 `}>
+              <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 ' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-p-2`}>
+                <section className={`${darkMode ? "" : ""} 
+                tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1 `}>
                   <Transition>
                     <D_Route/>
                   </Transition>

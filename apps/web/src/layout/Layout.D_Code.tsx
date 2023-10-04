@@ -112,7 +112,7 @@ const Layout_D_Code = () => {
       <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopLG ? 
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
+        <main className={`${darkMode ? '' : ''} [&>*]:tw-backdrop-brightness-85
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm [&>*]:tw-w-full [&>*]:tw-h-full
           tw-grid tw-grid-rows-layout-dashboard-code tw-grid-cols-layout-dashboard-code tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1'>

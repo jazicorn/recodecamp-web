@@ -45,8 +45,8 @@ const D_Header = () => {
   }
 
   return (
-    <menu className={`${darkMode ? 'tw-text-campfire-neutral-500' : 'tw-text-campfire-neutral-500'} 
-    tw-shrink-0 tw-flex tw-flex-row tw-h-full tw-w-full tw-font-roboto_mono_medium tw-items-center tw-place-content-between tw-pr-3 `}>
+    <menu className={`${darkMode ? 'tw-text-campfire-neutral-400 tw-border-campfire-neutral-400' : 'tw-text-campfire-neutral-600'} tw-border-b
+    tw-shrink-0 tw-flex tw-flex-row tw-h-full tw-w-full tw-font-roboto_mono_medium tw-text-sm tw-items-center tw-place-content-between tw-pr-3`}>
       {isMobile ? 
       <ul>
         <ul className='tw-flex tw-flex-row tw-items-center'>
