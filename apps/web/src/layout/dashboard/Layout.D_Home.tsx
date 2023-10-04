@@ -1,16 +1,16 @@
 /**React */
 import { useContext, useState } from 'react';
 /** Custom State Components*/
-import {LoadingDashboardXL} from '../components/dashboard/loading';
-//import ErrorDashboard from '../components/dashboard/error';
+import {LoadingDashboardXL} from '../../components/dashboard/loading';
+//import ErrorDashboard from '../../components/dashboard/error';
 /**Custom Hooks */
-import { ThemeContext } from '../context/ThemeContext';
-import useWindowSize from '../hooks/useWindowSize';
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components*/
-import D_User_Landing from '../components/dashboard/dashboard-home/D_User_Landing';
-import D_Home_Navigation from '../components/dashboard/dashboard-home/D_Home_Navigation';
-import D_Home_Navigation_Mobile from '../components/dashboard/dashboard-home/D_Home_Navigation_Mobile';
-import D_Home_Header from '../components/dashboard/dashboard-home/D_Home_Header';
+import D_User_Landing from '../../components/dashboard/dashboard-home/D_User_Landing';
+import D_Home_Navigation from '../../components/dashboard/dashboard-home/D_Home_Navigation';
+import D_Home_Navigation_Mobile from '../../components/dashboard/dashboard-home/D_Home_Navigation_Mobile';
+import D_Home_Header from '../../components/dashboard/dashboard-home/D_Home_Header';
 
 const Layout_D_Home = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();

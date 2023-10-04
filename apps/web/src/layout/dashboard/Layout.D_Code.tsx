@@ -1,23 +1,23 @@
 /**Custom Hooks */
-import { ThemeContext } from '../context/ThemeContext'
-import useWindowSize from '../hooks/useWindowSize';
+import { ThemeContext } from '../../context/ThemeContext'
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components */
-import D_Editor from '../components/dashboard/dashboard-code/D_Editor';
-import D_Problem from '../components/dashboard/dashboard-code/D_Problem';
-import D_Console from '../components/dashboard/dashboard-code/D_Console';
-import D_Scoreboard from '../components/dashboard/dashboard-code/D_Scoreboard';
-import D_Route from '../components/dashboard/D_Route';
+import D_Editor from '../../components/dashboard/dashboard-code/D_Editor';
+import D_Problem from '../../components/dashboard/dashboard-code/D_Problem';
+import D_Console from '../../components/dashboard/dashboard-code/D_Console';
+import D_Scoreboard from '../../components/dashboard/dashboard-code/D_Scoreboard';
+import D_Route from '../../components/dashboard/D_Route';
 /** React Hooks */
 import { useContext, useEffect, useCallback, useState } from 'react';
 /** React Redux */
-import { useAppDispatch, useAppSelector } from '../redux/reduxHooks.ts';
-import type { RootState } from '../redux/store.ts';
-import { menuQuestion } from '../redux/slices/dashboardSlice.ts';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
+import { menuQuestion } from '../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
 /** Custom State Components*/
-import {LoadingDashboardXL} from '../components/dashboard/loading';
-import ErrorDashboard from '../components/dashboard/error';
+import {LoadingDashboardXL} from '../../components/dashboard/loading';
+import ErrorDashboard from '../../components/dashboard/error';
 
 /** API url | Custom env mandatory to begin with VITE  
  * https://vitejs.dev/guide/env-and-mode.html#env-files */

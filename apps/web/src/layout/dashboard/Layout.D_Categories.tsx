@@ -1,25 +1,25 @@
 // Page: Dashboard Categories
 /**React */
 import { useContext, useEffect, useState, useCallback } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
+import { ThemeContext } from '../../context/ThemeContext'
 /*Custom Hooks*/
-import Transition from '../hooks/useTransition';
-import useWindowSize from '../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components */
-import ErrorDashboard from '../components/dashboard/error';
-import { LoadingDashboardXL } from '../components/dashboard/loading';
-import D_Category from '../components/dashboard/dashboard-categories/D_Category';
-import D_Category_Menu from '../components/dashboard/dashboard-categories/D_Category_Menu';
-import D_Route from '../components/dashboard/D_Route';
-// import D_Languages from '../components/dashboard/dashboard-categories/D_Languages';
+import ErrorDashboard from '../../components/dashboard/error';
+import { LoadingDashboardXL } from '../../components/dashboard/loading';
+import D_Category from '../../components/dashboard/dashboard-categories/D_Category';
+import D_Category_Menu from '../../components/dashboard/dashboard-categories/D_Category_Menu';
+import D_Route from '../../components/dashboard/D_Route';
+// import D_Languages from '../../components/dashboard/dashboard-categories/D_Languages';
 /**React Query */
 import { useQuery } from "@tanstack/react-query";
 /** React Redux Hooks */
-import { useAppSelector, useAppDispatch } from '../redux/reduxHooks.ts';
-import type { RootState } from '../redux/store.ts';
+import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import { 
   menuLanguage, menuCategoryInfo
-} from '../redux/slices/dashboardSlice.ts';
+} from '../../redux/slices/dashboardSlice.ts';
 /** API url | Custom env mandatory to begin with VITE 
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;

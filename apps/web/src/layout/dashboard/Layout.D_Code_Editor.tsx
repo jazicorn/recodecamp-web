@@ -1,11 +1,11 @@
 import { useContext } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
+import { ThemeContext } from '../../context/ThemeContext'
 // hooks
-import useWindowSize from '../hooks/useWindowSize';
+import useWindowSize from '../../hooks/useWindowSize';
 // components
-import D_User_Editor from '../components/dashboard/dashboard-code-editor/D_User_Editor';
-import D_User_Files from '../components/dashboard/dashboard-code-editor/D_User_Editor_Files';
-import D_User_Console from '../components/dashboard/dashboard-code-editor/D_User_Editor_Console';
+import D_User_Editor from '../../components/dashboard/dashboard-code-editor/D_User_Editor';
+import D_User_Files from '../../components/dashboard/dashboard-code-editor/D_User_Editor_Files';
+import D_User_Console from '../../components/dashboard/dashboard-code-editor/D_User_Editor_Console';
 
 const Layout_D_CodeEditor = () => {
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();

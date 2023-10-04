@@ -1,15 +1,15 @@
 /**React */
 import { useContext, useState } from 'react';
 /** Custom State Components*/
-import {LoadingDashboardXL} from '../components/dashboard/loading';
-//import ErrorDashboard from '../components/dashboard/error';
+import {LoadingDashboardXL} from '../../components/dashboard/loading';
+//import ErrorDashboard from '../../components/dashboard/error';
 /**Custom Hooks */
-import { ThemeContext } from '../context/ThemeContext';
-import useWindowSize from '../hooks/useWindowSize';
-/**Custom Components */
-import D_Calendar from '../components/dashboard/dashboard-calendar/D_Calendar';
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
+/**Custom Components*/
+import D_Settings from '../../components/dashboard/dashboard-settings/D_Settings';
 
-const Layout_D_Calender = () => {
+const Layout_D_Settings = () => {
   /**Custom Hooks */
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
@@ -20,7 +20,7 @@ const Layout_D_Calender = () => {
 
   setTimeout(() => {
     setLoading(false)
-  }, "1000");
+  }, "600");
 
   if(loading) {
     return (
@@ -37,17 +37,17 @@ const Layout_D_Calender = () => {
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-calender tw-grid-cols-layout-dashboard-calender tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+          tw-grid tw-grid-rows-layout-dashboard-settings tw-grid-cols-layout-dashboard-settings tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
-              <D_Calendar/>
+              <D_Settings/>
             </section>
         </main>
         :
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-calender-mobile tw-grid-cols-layout-dashboard-calender-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+          tw-grid tw-grid-rows-layout-dashboard-settings-mobile tw-grid-cols-layout-dashboard-settings-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
-              <D_Calendar/>
+              <D_Settings/>
             </section>
         </main>
         }
@@ -55,5 +55,5 @@ const Layout_D_Calender = () => {
   )
 }
 
-export default Layout_D_Calender
+export default Layout_D_Settings
  

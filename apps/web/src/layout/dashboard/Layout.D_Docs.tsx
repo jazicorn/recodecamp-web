@@ -1,13 +1,13 @@
 /**React */
 import { useContext, useState } from 'react';
 /** Custom State Components*/
-import {LoadingDashboardXL} from '../components/dashboard/loading';
-//import ErrorDashboard from '../components/dashboard/error';
+import {LoadingDashboardXL} from '../../components/dashboard/loading';
+//import ErrorDashboard from '../../components/dashboard/error';
 /**Custom Hooks */
-import { ThemeContext } from '../context/ThemeContext';
-import useWindowSize from '../hooks/useWindowSize';
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components*/
-import D_Docs from '../components/dashboard/dashboard-docs/D_Docs';
+import D_Docs from '../../components/dashboard/dashboard-docs/D_Docs';
 
 const Layout_D_Docs = () => {
   /**Custom Hooks */

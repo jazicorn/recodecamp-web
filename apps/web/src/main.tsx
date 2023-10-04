@@ -38,16 +38,16 @@ import A_User_Login from './components/auth/A_User.Login.tsx';
 import H_Home from './layout/Layout.H_Banner';
 //import H_About from './layout/Layout.H_About';
 /**Layouts | Dashboard Pages*/
-import D_Home from './layout/Layout.D_Home';
-import D_Code from './layout/Layout.D_Code';
-import D_Categories from './layout/Layout.D_Categories';
-import D_Plans from './layout/Layout.D_Plans';
-import D_Calendar from './layout/Layout.D_Calendar';
-import D_Docs from './layout/Layout.D_Docs';
-import D_Notes from './layout/Layout.D_Notes';
-import D_Search from './layout/Layout.D_Search';
-import D_Settings from './layout/Layout.D_Settings';
-import D_Settings_User from './layout/Layout.D_Settings_User';
+import D_Home from './layout/dashboard/Layout.D_Home';
+import D_Code from './layout/dashboard/Layout.D_Code';
+import D_Categories from './layout/dashboard/Layout.D_Categories';
+import D_Plans from './layout/dashboard/Layout.D_Plans';
+import D_Calendar from './layout/dashboard/Layout.D_Calendar';
+import D_Docs from './layout/dashboard/Layout.D_Docs';
+import D_Notes from './layout/dashboard/Layout.D_Notes';
+import D_Search from './layout/dashboard/Layout.D_Search';
+import D_Settings from './layout/dashboard/Layout.D_Settings';
+import D_Settings_User from './layout/dashboard/Layout.D_Settings_User';
 
 const router = Router(
   createRoutesFromElements(

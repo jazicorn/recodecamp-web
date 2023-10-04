@@ -1,15 +1,15 @@
 /**React */
 import { useContext, useState } from 'react';
 /** Custom State Components*/
-import {LoadingDashboardXL} from '../components/dashboard/loading';
+import {LoadingDashboardXL} from '../../components/dashboard/loading';
 //import ErrorDashboard from '../components/dashboard/error';
 /**Custom Hooks */
-import { ThemeContext } from '../context/ThemeContext';
-import useWindowSize from '../hooks/useWindowSize';
-/**Custom Components*/
-import D_Settings_User from '../components/dashboard/dashboard-settings/D_Settings_User';
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
+/**Custom Components */
+import D_Notes from '../../components/dashboard/dashboard-notes/D_Notes';
 
-const Layout_D_Settings_User = () => {
+const Layout_D_Notes = () => {
   /**Custom Hooks */
   const { isDesktopMDXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
@@ -37,17 +37,17 @@ const Layout_D_Settings_User = () => {
         {isDesktopMDXL || isDesktopXL ? 
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-settings tw-grid-cols-layout-dashboard-settings tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+          tw-grid tw-grid-rows-layout-dashboard-notes tw-grid-cols-layout-dashboard-notes tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
-              <D_Settings_User/>
+              <D_Notes/>
             </section>
         </main>
         :
         <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-settings-mobile tw-grid-cols-layout-dashboard-settings-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+          tw-grid tw-grid-rows-layout-dashboard-notes-mobile tw-grid-cols-layout-dashboard-notes-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
-              <D_Settings_User/>
+              <D_Notes/>
             </section>
         </main>
         }
@@ -55,5 +55,5 @@ const Layout_D_Settings_User = () => {
   )
 }
 
-export default Layout_D_Settings_User
+export default Layout_D_Notes
  
