@@ -9,7 +9,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 
-const corsOpt = process.env.CORS_URLS;
+const corsOpt = process.env.CORS_URLS || '';
 
 class App {
     public app: Application;
