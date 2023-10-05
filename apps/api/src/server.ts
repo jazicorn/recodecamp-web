@@ -32,7 +32,7 @@ class App {
         this.app.use(cors({
             origin: this.corsOptions,
             credentials :  true,
-            methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+            methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
             preflightContinue: false,
             optionsSuccessStatus: 204
             allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
