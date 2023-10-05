@@ -35,7 +35,7 @@ class App {
             res.sendStatus(204);
         });
         this.app.use(cors({
-            origin: this.corsOptions
+            origin: this.corsOptions.replace(/['"`]/g, '');
         }));
         // this.app.use( "/", (req, res, next) => {
         //     res.setHeader('access-control-allow-origin', '*');
