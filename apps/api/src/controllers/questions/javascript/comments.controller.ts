@@ -35,7 +35,10 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
-                    const result = await randomQuestion
+                    const result = await randomQuestion;
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
                     return res.status(200).send({ data: result });
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
@@ -52,7 +55,10 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
-                    const result = await question
+                    const result = await question;
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
                     return res.status(200).send({ data: result });
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
@@ -69,7 +75,10 @@ export default class VarDeclare {
          switch(req.method) {
             case('GET'):
                 try {
-                    const result = await question
+                    const result = await question;
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
                     return res.status(200).send({ data: result });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
