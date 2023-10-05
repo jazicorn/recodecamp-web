@@ -54,12 +54,12 @@ class App {
             "preflightContinue": false,
             "optionsSuccessStatus": 204
         }));
-        // this.app.use( "/", (req, res, next) => {
-        //     res.setHeader('access-control-allow-origin', '*');
-        //     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-        //     res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-        //     next();
-        // });
+        this.app.use( "/", (req, res, next) => {
+            res.setHeader('access-control-allow-origin', '*');
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+            res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+            next();
+        });
         // this.app.set('trust proxy', 1) // trust first proxy
         // this.app.use(session({
         //     secret: process.env.SECRET_TOKEN,
