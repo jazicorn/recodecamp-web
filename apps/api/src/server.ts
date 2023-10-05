@@ -8,13 +8,27 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+// function transformCorsOrg() {
+//     const result = [];
+//     const corsOrgEnv = process.env.CORS_URLS || '';
+//     const corsOrg = corsOrgEnv.split(',') ;
+//     console.log(corsOrg);
+//     return corsOrg
+// }
+
 class App {
     public app: Application;
     public port: number;
     private corsOptions;
 
     constructor(authControllers, controllers) {
-        this.corsOptions = process.env.CORS_URLS || '';
+        // #TODO | figure out how to turn env var string to an array of strings
+        this.corsOptions = [
+            "https://vercel.com/jazicorn/recodecamp-web",
+            "https://recodecamp-web.vercel.app",
+            "https://www.recodecamp.com"
+        ];
+        console.log(this.corsOptions)
         this.app = express();
         this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
@@ -35,7 +49,7 @@ class App {
             res.sendStatus(204);
         });
         this.app.use(cors({
-            origin: this.corsOptions.replace(/['"`]/g, '');
+            origin: this.corsOptions
         }));
         // this.app.use( "/", (req, res, next) => {
         //     res.setHeader('access-control-allow-origin', '*');
