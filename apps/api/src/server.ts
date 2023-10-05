@@ -14,12 +14,12 @@ class App {
     private corsOptions;
 
     constructor(authControllers, controllers) {
+        this.corsOptions = process.env.CORS_URLS;
         this.app = express();
         this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
         this.initAuthControllers(authControllers);
         this.initControllers(controllers);
-        this.corsOptions = process.env.CORS_URLS;
     }
 
     private initMiddlewares() {
@@ -28,16 +28,17 @@ class App {
         }));
         this.app.use(bodyParser.json());
         this.app.use(cookieParser());
-        this.app.use(cors({
-            origin: this.corsOptions
-        }));
+
         this.app.options("*", (req, res) => {
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
             res.setHeader("Access-Control-Allow-Headers", "Content-Type");
             res.sendStatus(204);
         });
-        this.app.use( "*", (req, res, next) => {
+        this.app.use(cors({
+            origin: this.corsOptions
+        }));
+        this.app.use( "/", (req, res, next) => {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
             res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
