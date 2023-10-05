@@ -23,12 +23,7 @@ class App {
 
     constructor(authControllers, controllers) {
         // #TODO | figure out how to turn env var string to an array of strings
-        this.corsOptions = [
-            "https://vercel.com/jazicorn/recodecamp-web",
-            "https://recodecamp-web.vercel.app",
-            "https://www.recodecamp.com"
-        ];
-        console.log(this.corsOptions)
+        this.corsOptions = '';
         this.app = express();
         this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
@@ -44,12 +39,20 @@ class App {
         this.app.use(cookieParser());
         this.app.options("*", (req, res) => {
             res.setHeader("Access-Control-Allow-Origin", "*");
-            res.setHeader("Access-Control-Allow-Methods", "PUT, PATCH, POST, GET, DELETE, OPTIONS");
+            res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS");
             res.setHeader("Access-Control-Allow-Headers", "Content-Type");
             res.sendStatus(204);
         });
         this.app.use(cors({
-            origin: this.corsOptions
+            origin: [
+                "https://vercel.com/jazicorn/recodecamp-web",
+                "https://recodecamp-web.vercel.app",
+                "https://recodecamp-web.vercel.app/#/",
+                "https://www.recodecamp.com"
+            ],
+            "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+            "preflightContinue": false,
+            "optionsSuccessStatus": 204
         }));
         // this.app.use( "/", (req, res, next) => {
         //     res.setHeader('access-control-allow-origin', '*');
