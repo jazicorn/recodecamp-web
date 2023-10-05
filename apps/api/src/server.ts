@@ -28,7 +28,7 @@ class App {
         }));
         this.app.use(bodyParser.json());
         this.app.use(cookieParser());
-        this.app.use(cors({
+        this.app.options("*", cors({
             origin: this.corsOptions,
             credentials :  true,
             methods: 'GET,PUT,POST,DELETE,OPTIONS',
@@ -43,7 +43,7 @@ class App {
         // this.app.options("/", (req, res) => {
         //     res.setHeader("Access-Control-Allow-Origin", "*");
         //     res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
-        //     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        //     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorizatione");
         //     res.sendStatus(204);
         // });
         // this.app.set('trust proxy', 1) // trust first proxy
