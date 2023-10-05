@@ -8,13 +8,16 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+
+const corsOpt = process.env.CORS_URLS;
+
 class App {
     public app: Application;
     public port: number;
     private corsOptions;
 
     constructor(authControllers, controllers) {
-        this.corsOptions = process.env.CORS_URLS;
+        this.corsOptions = corsOpt.split(',');
         this.app = express();
         this.port = parseInt(process.env.PORT as string) || 8000;
         this.initMiddlewares();
