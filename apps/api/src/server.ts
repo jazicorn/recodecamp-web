@@ -28,32 +28,15 @@ class App {
         }));
         this.app.use(bodyParser.json());
         this.app.use(cookieParser());
-        this.app.options('*', cors())
+        this.app.options('*', cors());
         this.app.use(cors({
             origin: this.corsOptions,
             credentials :  true,
-            methods: 'GET,PUT,POST,DELETE,OPTIONS',
+            methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+            preflightContinue: false,
+            optionsSuccessStatus: 204
             allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
         }));
-        this.app.use( (req, res, next) => {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-            res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-            next();
-        });
-        // this.app.options("/", (req, res) => {
-        //     res.setHeader("Access-Control-Allow-Origin", "*");
-        //     res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
-        //     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorizatione");
-        //     res.sendStatus(204);
-        // });
-        // this.app.set('trust proxy', 1) // trust first proxy
-        // this.app.use(session({
-        //     secret: process.env.SECRET_TOKEN,
-        //     saveUninitialized:true,
-        //     cookie: { sameSite: 'strict', secure: false, maxAge: 1000 * 60 * 60 * 24 },
-        //     resave: false
-        // }));
     }
 
     private initAuthControllers(controllers) {
