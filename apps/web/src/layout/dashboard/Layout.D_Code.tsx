@@ -49,10 +49,6 @@ const Layout_D_Code = () => {
   try {
       const result = await fetch(url, {
           method: 'GET',
-          headers: {
-              'Accept' : 'application/json',
-              'Content-Type': 'application/json',
-          },
         }
       );
       const resJSON = await result.json();

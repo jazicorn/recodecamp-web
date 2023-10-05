@@ -41,10 +41,6 @@ const D_Problem = () => {
     try {
       const result = await fetch(url, {
           method: 'GET',
-          headers: {
-              'Accept' : 'application/json',
-              'Content-Type': 'application/json',
-          },
         }
       );
       const resJSON = await result.json();
