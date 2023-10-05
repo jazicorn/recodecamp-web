@@ -35,7 +35,8 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).send({ data: randomQuestion });
+                    const result = await randomQuestion
+                    return res.status(200).send({ data: result });
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
                 }
@@ -51,7 +52,8 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
-                    res.status(200).send({ data: question });
+                    const result = await question
+                    return res.status(200).send({ data: result });
                 } catch {
                     res.status(500).send({ error: "Something went wrong" });
                 }
@@ -67,7 +69,8 @@ export default class VarDeclare {
          switch(req.method) {
             case('GET'):
                 try {
-                    return res.status(200).send({ data: question });
+                    const result = await question
+                    return res.status(200).send({ data: result });
                 } catch {
                     return res.status(500).send({ error: "Something went wrong" });
                 }
