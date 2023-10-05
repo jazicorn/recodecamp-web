@@ -54,12 +54,12 @@ class App {
             "preflightContinue": false,
             "optionsSuccessStatus": 204
         }));
-        this.app.use( "/", (req, res, next) => {
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-            res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-            next();
-        });
+        // this.app.use( "/", (req, res, next) => {
+        //     res.setHeader('Access-Control-Allow-Origin', '*');
+        //     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+        //     res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+        //     next();
+        // });
         // this.app.set('trust proxy', 1) // trust first proxy
         // this.app.use(session({
         //     secret: process.env.SECRET_TOKEN,
@@ -77,7 +77,14 @@ class App {
 
     private initControllers(controllers) {
         controllers.forEach((controller) => {
-            this.app.use('/', controller.router);
+            this.app.use('/', (req, res, next) => {
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
+                    next();
+                },
+                controller.router
+            );
         });
     }
 
