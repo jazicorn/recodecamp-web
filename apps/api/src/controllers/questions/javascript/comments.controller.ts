@@ -35,7 +35,15 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
+                    res.options("*", (req, res) => {
+                        res.setHeader("Access-Control-Allow-Origin", "*");
+                        res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS");
+                        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+                        res.sendStatus(204);
+                    });
+
                     const result = await randomQuestion;
+
                     res.setHeader('Access-Control-Allow-Origin', '*');
                     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
                     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
@@ -55,6 +63,13 @@ export default class VarDeclare {
         switch(req.method) {
             case('GET'):
                 try {
+                    res.options("*", (req, res) => {
+                        res.setHeader("Access-Control-Allow-Origin", "*");
+                        res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS");
+                        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+                        res.sendStatus(204);
+                    });
+
                     const result = await question;
                     res.setHeader('Access-Control-Allow-Origin', '*');
                     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -75,6 +90,12 @@ export default class VarDeclare {
          switch(req.method) {
             case('GET'):
                 try {
+                    res.options("*", (req, res) => {
+                        res.setHeader("Access-Control-Allow-Origin", "*");
+                        res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS");
+                        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+                        res.sendStatus(204);
+                    });
                     const result = await question;
                     res.setHeader('Access-Control-Allow-Origin', '*');
                     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");

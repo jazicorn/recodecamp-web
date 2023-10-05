@@ -47,10 +47,11 @@ class App {
             origin: [
                 "https://vercel.com/jazicorn/recodecamp-web",
                 "https://recodecamp-web.vercel.app",
+                "https://recodecamp-web.vercel.app/",
                 "https://recodecamp-web.vercel.app/#/",
                 "https://www.recodecamp.com"
             ],
-            "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+            "methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
             "preflightContinue": false,
             "optionsSuccessStatus": 204
         }));
@@ -80,7 +81,7 @@ class App {
             this.app.use('/', (req, res, next) => {
                     res.setHeader('Access-Control-Allow-Origin', '*');
                     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-                    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE, OPTIONS');
                     next();
                 },
                 controller.router
