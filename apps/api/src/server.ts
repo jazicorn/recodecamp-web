@@ -55,7 +55,7 @@ class App {
             "optionsSuccessStatus": 204
         }));
         this.app.use( "/", (req, res, next) => {
-            res.setHeader('Access-control-allow-origin', '*');
+            res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
             res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
             next();
