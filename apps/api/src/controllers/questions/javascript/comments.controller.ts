@@ -23,57 +23,78 @@ export default class VarDeclare {
     }
 
     public commentsRandom = async (req: Request, res: Response) => {
-        const dataSingle = objSingleJs();
-        const dataMulti = objMultiJs();
+        try {
+            const dataSingle = objSingleJs();
+            const dataMulti = objMultiJs();
 
-        const questionSingle = new Question(dataSingle);
-        const questionMulti = new Question(dataMulti);
-        const random = getRandomInt(2);
+            const questionSingle = new Question(dataSingle);
+            const questionMulti = new Question(dataMulti);
+            const random = getRandomInt(2);
 
-        const randomQuestion = [dataSingle, dataMulti][random];
+            const randomQuestion = [dataSingle, dataMulti][random];
 
-        switch(req.method) {
-            case('GET'):
-                try {
-                    res.status(200).send({ data: randomQuestion });
-                } catch {
-                    res.status(500).send({ error: "Something went wrong" });
-                }
-                break
-            default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+            switch(req.method) {
+                case('OPTIONS'):
+                    res.setHeader("Access-Control-Allow-Origin", "*");
+                    res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE");
+                    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+                    res.sendStatus(204);
+                case('GET'):
+                    if(randomQuestion !== undefined || Object.keys(randomQuestion).length !== 0 ) {
+                        res.status(200).send({ data: randomQuestion });
+                    }
+                    break
+                default:
+                    res.status(400).send({ error: `${req.method} Method Not Allowed` });
+            }
+        } catch {
+            res.status(500).send({ error: "Something went wrong" });
         };
     };
 
     public commentsSingle = async (req: Request, res: Response) => {
-        const data = objSingleJs();
-        const question = new Question(data);
-        switch(req.method) {
-            case('GET'):
-                try {
-                    res.status(200).send({ data: question });
-                } catch {
-                    res.status(500).send({ error: "Something went wrong" });
-                }
-                break
-            default:
-                res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        try {
+            const data = objSingleJs();
+            const question = new Question(data);
+            switch(req.method) {
+                case('OPTIONS'):
+                    res.setHeader("Access-Control-Allow-Origin", "*");
+                    res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE");
+                    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+                    res.sendStatus(204);
+                case('GET'):
+                    if(question !== undefined || Object.keys(question).length !== 0 ) {
+                        res.status(200).send({ data: question });
+                    };
+                    break
+                default:
+                    res.status(400).send({ error: `${req.method} Method Not Allowed` });
+            }
+        } catch {
+            res.status(500).send({ error: "Something went wrong" });
         }
     };
 
     public commentsMulti = async (req: Request, res: Response) => {
-        const data = objMultiJs();
-        const question = new Question(data);
-         switch(req.method) {
-            case('GET'):
-                try {
-                    return res.status(200).send({ data: question });
-                } catch {
-                    return res.status(500).send({ error: "Something went wrong" });
-                }
-                break
-            default:
-                return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+        try {
+            const data = objMultiJs();
+            const question = new Question(data);
+            switch(req.method) {
+                case('OPTIONS'):
+                    res.setHeader("Access-Control-Allow-Origin", "*");
+                    res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, PATCH, POST, DELETE");
+                    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+                    res.sendStatus(204);
+                case('GET'):
+                    if(question !== undefined || Object.keys(question).length !== 0 ) {
+                        res.status(200).send({ data: question });
+                    };
+                    break
+                default:
+                    return res.status(400).send({ error: `${req.method} Method Not Allowed` });
+            }
+        } catch {
+            return res.status(500).send({ error: "Something went wrong" });
         }
     };
 
