@@ -18,8 +18,8 @@ import useWindowSize from '../../../hooks/useWindowSize';
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** Codemirror */
-import CodeMirror from '@uiw/react-codemirror';
-import { EditorView } from 'codemirror';
+import * as CodeMirror from '@uiw/react-codemirror';
+import { EditorView } from '@codemirror/view';
 
 /**CodeMirror Languages */
 //import lightTheme from '../../../styles/style.codemirror.light';
