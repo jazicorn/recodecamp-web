@@ -25,7 +25,7 @@ const Layout_D_Home = () => {
 
   if(loading) {
     return (
-      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-screen tw-place-self-center tw-place-content-center tw-place-items-center`}>
+      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-900/80' : '[&>*]:tw-bg-neutral-300/80'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-screen tw-place-self-center tw-place-content-center tw-place-items-center`}>
         <LoadingDashboardXL />
       </div>
     )
@@ -35,9 +35,8 @@ const Layout_D_Home = () => {
     <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ?
-          <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
-            tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
-            tw-grid tw-grid-rows-layout-dashboard-home tw-grid-cols-layout-dashboard-home tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+          <main className={`${darkMode ? 'layout-home-dark' : 'layout-home-light'} 
+            layout-home`}>
               <section className='tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
                 <D_Home_Header/>
               </section>
@@ -49,9 +48,8 @@ const Layout_D_Home = () => {
               </section>
           </main>
         :
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
-          tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-home-mobile tw-grid-cols-layout-dashboard-home-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+        <main className={`${darkMode ? 'layout-home-dark' : 'layout-home-light'} 
+          layout-home-mobile tw-px-2`}>
             <section className='tw-row-start-1 tw-row-end-1'>
               <D_Home_Header/>
               </section>

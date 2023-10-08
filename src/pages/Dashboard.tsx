@@ -199,29 +199,22 @@ const Dashboard = () => {
   },[dispatch, getUser, guestLogin]);
 
   return (
-    <>
+    <div className="tw-h-screen">
       {/**Background | Position: Absolute */}
-      <div className={`${ darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40' : 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-40'}
-      tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full`}/>
+      <div className={`${ darkMode ? 'home-bg-dark' : 'home-bg-light' } home-bg-container`}/>
       {/**Page Content | Position: Relative */}
-      <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} tw-relative tw-z-10 tw-w-full tw-h-full tw-flex tw-flex-col tw-grow tw-place-items-center tw-font-space_mono`}>
-        <Header />
-        {path !== '/learn' && <D_Header/>}
+      <article className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} dashboard-article`}>
+        <header className="tw-w-full"><Header /></header>
+        <header className="tw-w-full">{path !== '/learn' && <D_Header/>}</header>
         {isDesktopMDXL || isDesktopXL ?
-          <div className="tw-w-full tw-h-full tw-pt-1">
+          <div className="">
             { path === '/learn' ?
-              <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' 
-              : '[&>section]:tw-backdrop-brightness-85'}
-              tw-bg-transparent tw-pb-5 tw-mt-1 tw-w-full tw-h-full
-              [&>*]:tw-backdrop-blur-sm
-              tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+              <main className={`${darkMode ? 'dashboard-container-dark' : 'dashboard-container-light'} dashboard-container-desktop-learn`}>
                 <Outlet/>
               </main>
               :
-              <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-85'}
-              tw-grid-rows-dashboard-no-language tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-w-full tw-h-full
-              [&>*]:tw-backdrop-blur-sm tw-min-h-full tw-grid tw-gap-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-                <section className={`tw-row-end-2 tw-col-start-1 tw-col-end-1 tw-row-start-1`}>
+              <main className={`${darkMode ? 'dashboard-container-dark' : 'dashboard-container-light'} dashboard-container-desktop`}>
+                <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-1 tw-col-end-1 `}>
                   <D_Navigation/>
                 </section>
                 <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-2 tw-col-end-3 `}>
@@ -231,20 +224,17 @@ const Dashboard = () => {
             }
           </div>
           :
-          <main className={`${darkMode ? '[&>section]:tw-backdrop-brightness-25 ' : '[&>section]:tw-backdrop-brightness-85'} 
-            tw-bg-transparent tw-pb-5 tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
-            tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-pt-1 tw-px-5 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-              {/** z index can't go higher than 50 to work*/}
-              <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-z-20'>
-                <D_Navigation_Mobile/>
-              </section>
-              <section className='tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2'>
-                <Outlet/>
-              </section>
+          <main className={`${darkMode ? 'dashboard-container-dark' : 'dashboard-container-light'} tw-px-5 tw-py-2 tw-w-full`}>
+            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-z-20'>
+              <D_Navigation_Mobile/>
+            </section>
+            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2'>
+              <Outlet/>
+            </section>
           </main>
         }
       </article>
-    </>
+    </div>
   )
 }
 

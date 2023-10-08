@@ -24,7 +24,7 @@ const Layout_D_Calender = () => {
 
   if(loading) {
     return (
-      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
+      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
       tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
         <LoadingDashboardXL />
       </div>
@@ -35,7 +35,7 @@ const Layout_D_Calender = () => {
     <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
+        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
           tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-calender tw-grid-cols-layout-dashboard-calender tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>
@@ -43,7 +43,7 @@ const Layout_D_Calender = () => {
             </section>
         </main>
         :
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
+        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
           tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-calender-mobile tw-grid-cols-layout-dashboard-calender-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
             <section className='tw-h-full'>

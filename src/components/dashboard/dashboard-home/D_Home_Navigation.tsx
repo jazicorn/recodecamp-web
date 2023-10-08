@@ -155,7 +155,7 @@ const D_Home_Navigation = () => {
               { darkMode ? <IconCategory color="#d4d4d4" /> : <IconCategory color="#000" />}
               <Transition><Link to='/learn/categories' className="">Categories</Link></Transition>
             </li>
-            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500": "hover:tw-text-campfire-neutral-700 tw-text-campfire-blue tw-bg-campfire-neutral-300 "}
+            <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300 tw-bg-campfire-neutral-500/70": "hover:tw-text-campfire-neutral-200 tw-text-campfire-blue tw-bg-campfire-neutral-300/70"}
             tw-flex tw-flex-row tw-place-items-center tw-w-fit tw-pr-1 tw-rounded`}>
               { darkMode ? <IconTerminal2 color="#d4d4d4" /> : <IconTerminal2 color="#000" />}
               <Transition><Link to='/learn/code' className="">Start ReCoding</Link></Transition>

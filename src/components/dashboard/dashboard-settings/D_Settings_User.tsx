@@ -210,38 +210,39 @@ const D_Settings_User = () => {
           </form>
         </div>
       </Modal>
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
-      'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-w-full tw-h-full `}>
-      <article className={`${darkMode ? '[&>main>ul]:tw-border-campfire-neutral-900': '[&>main>ul]:tw-border-campfire-blue'} 
-       tw-pt-4 tw-pb-1 tw-h-full tw-w-full tw-flex tw-flex-col tw-items-left
-      [&>main>ul]:tw-h-fit [&>main>ul]:tw-px-2 [&>main>ul]:tw-border-l-2 [&>main>ul]:tw-ml-4 
-      [&>main>ul]:tw-flex [&>main>ul]:tw-flex-col [&>main>ul]:tw-gap-2 [&>main]:tw-px-2`}>
-        <Transition>
-          <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
-          ${!detectUser ? "tw-mb-4" : ""}  
-          tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 `}>
-            Settings: User
-          </h4>
-        </Transition>
-        {!detectUser ?
-          <Transition> 
-          <main className={`${darkMode ? "tw-text-campfire-neutral-300" : ""} tw-pl-2.5`}>Want to save your progress? 
-          <span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-px-2`}><Link to="/auth/guest/login">Login</Link></span>or<span className={`${darkMode ? "hover:tw-text-campfire-neutral-300" : "hover:tw-text-campfire-neutral-700"} tw-text-campfire-blue tw-pl-2`}><Link to="/auth/guest/signup">Register</Link></span></main>
+      <div className={`${isMobile? 'tw-pt-2' : ''} ${darkMode ? 'layout-template-dark' : 'layout-template-light'} layout-template`}>
+        <article className={`${darkMode ? '': ''}`}>
+          <Transition>
+            <h3 className={`${darkMode ? '' : ''} layout-template-header`}>
+              User Settings
+            </h3>
+          </Transition>
+          {!detectUser ?
+            <Transition> 
+            <main className={`${darkMode ? "" : ""} tw-pl-2.5`}>
+              <p>Want to save your progress? 
+                <span id="dashboard-template-call-to-action" className={`${darkMode ? "" : ""}`}>
+                  <Link to="/auth/guest/login">Login</Link>
+                </span>
+                  or
+                <span id="dashboard-template-call-to-action" className={`${darkMode ? "" : ""}`}>
+                  <Link to="/auth/guest/signup">Register</Link>
+                </span>
+              </p>
+            </main>
           </Transition> 
           :
-          <main className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
-          tw-overflow-auto tw-pt-2 tw-flex tw-flex-col tw-gap-y-4 tw-h-full tw-w-full`}>
+          <main className={`${isMobile ? '' : ''}  ${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
+          d-settings-user-container `}>
             {/** */}
             <Transition>
-            <section className={`${darkMode ? "" : ""} ${isMobile ? "tw-basis-1/2" : "tw-basis-2/3"} ${isMobileMD ? "tw-flex-col [&>p]:tw-basis-5/12 [&>table]:tw-basis-7/12" 
-            : "tw-flex-row [&>p]:tw-w-[20em] [&>table]:"} tw-flex `}>
+            <section className={`${isMobile ? "tw-basis-1/2" : "tw-basis-2/3"} ${isMobileMD ? "tw-flex-col [&>p]:tw-basis-5/12 [&>table]:tw-basis-7/12" 
+            : "tw-flex-row [&>p]:tw-w-[20em]"} tw-flex `}>
               {/* {isMobile ? <p className={`tw-self-center tw-py-2`}><img src={avatar} alt="Avatar"/></p> 
               :<p className={`tw-self-center tw-py-2`}><img src={avatar} alt="Avatar" /></p> } */}
-              <div className="tw-pt-4">
+              <div className={`${isMobile ? "tw-flex tw-flex-col" : ""} tw-pt-4`}>
                 <table className={`${darkMode ? "[&>tbody>tr>th]:tw-bg-campfire-neutral-500 [&>tbody>tr>th]:" : "[&>tbody>tr>th]:tw-border-campfire-neutral-500  [&>tbody>tr>th]:tw-bg-campfire-neutral-100"} 
-                ${isMobile ? "[&>tbody>tr]:tw-flex-col [&>tbody>tr]:tw-flex [&>tbody>tr>td]:tw-pt-1 [&>tbody>tr>td]:tw-pb-4 [&>tbody>tr>th]:tw-py-1 tw-justify-center tw-m-auto" : 
-                "[&>tbody>tr]:tw-flex-row [&>tbody>tr>td]:tw-pl-2 [&>tbody>tr>td]:tw-py-2 [&>tbody>tr>th]:tw-py-2 "} tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed [&>tbody>tr>td]:tw-text-sm [&>tbody>tr>th]:tw-px-2
-                [&>tbody>tr>th]:tw-border-b `}>
+                ${isMobile ? " d-settings-user-table-mobile" : "d-settings-user-table-desktop"} d-settings-user-table`}>
                   <tbody>
                     <tr>
                       <th>User ID</th>

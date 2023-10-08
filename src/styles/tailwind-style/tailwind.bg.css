@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .tw-bg-sw-1 {
+        background-image: url('./src/assets/bg/sw-1.jpg');
+    }
+    .tw-bg-sw-2 {
+        background-image: url('./src/assets/bg/sw-2.jpg');
+    }
+    .tw-bg-sw-3 {
+        background-image: url('./src/assets/bg/sw-3.jpg');
+    }
+    .tw-bg-nature {
+        background-image: url('./src/assets/bg/nature.jpg');
+    }
+    .tw-bg-transparent {
+        background-color: transparent;
+    }
+    /* gray */
+    .tw-bg-campfire-neutral {
+        background-color: #a3a3a3;
+    }
+    .tw-bg-campfire-neutral-50 {
+        background-color: #f5f5f5;
+    }
+    .tw-bg-campfire-neutral-100 {
+        background-color: #e5e5e5;
+    }
+    .tw-bg-campfire-neutral-200 {
+        background-color: #a3a3a3;
+    }
+    .tw-bg-campfire-neutral-300 {
+        background-color: #737373;
+    }
+    .tw-bg-campfire-neutral-400 {
+        background-color: #525252;
+    }
+    .tw-bg-campfire-neutral-500 {
+        background-color: #737373;
+    }
+    .tw-bg-campfire-neutral-600 {
+        background-color: #525252;
+    }
+    .tw-bg-campfire-neutral-700 {
+        background-color: #404040;
+    }
+    .tw-bg-campfire-neutral-800 {
+        background-color: #262626;
+    }
+    .tw-bg-campfire-neutral-900 {
+        background-color: #171717;
+    }
+    /* blue */
+    .tw-bg-campfire-blue {
+        background-color: #2ca9bc;
+    }
+    .tw-bg-campfire-blue-50 {
+        background-color: #eff6ff;
+    }
+    .tw-bg-campfire-blue-100 {
+        background-color: #d7ecf0;
+    }
+    .tw-bg-campfire-blue-200 {
+        background-color: #afd9e1;
+    }
+    .tw-bg-campfire-blue-300 {
+        background-color: #6cbccb;
+    }
+    .tw-bg-campfire-blue-400 {
+        background-color: #2ca9bc;
+    }
+    .tw-bg-campfire-blue-500 {
+        background-color: #008396;
+    }
+    .tw-bg-campfire-blue-600 {
+        background-color: #006072;
+    }
+    .tw-bg-campfire-blue-700 {
+        background-color: #004e60;
+    }
+    .tw-bg-campfire-blue-800 {
+        background-color: #003e4f;
+    }
+    .tw-bg-campfire-blue-900 {
+        background-color: #00212f;
+    }
+    .tw-bg-campfire-blue-950 {
+        background-color: #082f49;
+    }
+    /* purple */
+    .tw-bg-campfire-purple {
+        background-color: #8b5cf6;
+    }
+    .tw-bg-campfire-purple-light {
+        background-color: #c4b5fd;
+    }
+    .tw-bg-campfire-purple-dark {
+        background-color: #6d28d9;
+    }
+    .tw-bg-campfire-purple-darker {
+        background-color: #581c87;
+    }
+    .tw-bg-campfire-purple-darkest {
+        background-color: #2e1065;
+    }
+    .tw-bg-campfire-purple-200 {
+        background-color: #ddd6fe;
+    }
+    .tw-bg-campfire-purple-300 {
+        background-color: #c4b5fd;
+    }
+    .tw-bg-campfire-purple-400 {
+        background-color: #a78bfa;
+    }
+    .tw-bg-campfire-purple-500 {
+        background-color: #8b5cf6;
+    }
+    .tw-bg-campfire-purple-700 {
+        background-color: #6d28d9;
+    }
+    .tw-bg-campfire-purple-900 {
+        background-color: #4c1d95;
+    }
+    .tw-bg-campfire-purple-950 {
+        background-color: #2e1065;
+    }
+    /* green */
+    .tw-bg-campfire-green {
+        background-color: #22c55e;
+    }       
+}

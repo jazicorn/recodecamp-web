@@ -37,7 +37,7 @@ const D_Header = () => {
 
   if(loading) {
     return (
-      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
+      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/70' : '[&>*]:tw-bg-neutral-300/70'}
       tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
         <LoadingDashboardXS />
       </div>

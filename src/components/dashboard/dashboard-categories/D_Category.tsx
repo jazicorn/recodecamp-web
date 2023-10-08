@@ -37,8 +37,8 @@ const D_Category = () => {
 
   return (
     <>
-      <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600 tw-text-campfire-blue' 
-      : '[&>*]:tw-bg-campfire-neutral-300'} tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
+      <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600/70 tw-text-campfire-blue' 
+      : '[&>*]:tw-bg-campfire-neutral-200/90'} tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
         <article className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
         'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-py-2 tw-h-full`}>
           <Transition>

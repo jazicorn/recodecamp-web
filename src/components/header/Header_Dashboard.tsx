@@ -237,8 +237,8 @@ const Header_Dashboard = () => {
   /**Desktop Dropdown Menu */
   const [ menuDropdown, setMenuDropdown] = useState(false);
 
-  function toggleMenuDropdown(e) {
-    e.preventDefault();
+  function toggleMenuDropdown() {
+    // e.preventDefault();
     setMenuDropdown(!menuDropdown);
     //console.log(dropdown)
   };
@@ -270,14 +270,14 @@ const Header_Dashboard = () => {
           className={`${mobileMenuDropdown ? "tw-px-7" : "tw-px-2"} tw-grow-0 tw-h-[48px] tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded tw-py-2`}
         >
           <nav className="tw-flex tw-flex-row tw-place-self-center">
-            <button onClick ={(e) => toggleMobileMenuDropdown(e)} className="tw-place-self-center">
+            <button onClick ={() => toggleMobileMenuDropdown()} className="tw-place-self-center">
               <Transition><IconMenu2 style={{ height: 22, width: 36 }} /></Transition>
             </button>
           </nav>
             <ol className=" tw-h-full tw-flex tw-flex-row tw-items-center tw-pl-2 tw-ml-2">
               <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-self-items-center tw-pr-4 tw-h-full`}>
               <Transition>
-                <button onClick={(e) => toggleMenuDropdown(e)}>
+                <button onClick={() => toggleMenuDropdown()}>
                   {darkMode ? <IconUserCircle color="#d4d4d4" width={30} height={30}/> : <IconUserCircle color="#000" width={34} height={34} />} 
                 </button>
               </Transition>
@@ -299,7 +299,7 @@ const Header_Dashboard = () => {
             </span>
           </ol>
         </header>
-        {menuDropdown &&
+        {menuDropdown ?
         <div ref={ref} className={`${darkMode ? 
         "tw-bg-campfire-blue-300/90 tw-border-campfire-neutral-500/50" 
         : "tw-bg-campfire-blue-200/90 tw-border-campfire-neutral-50/50"} 
@@ -361,7 +361,7 @@ const Header_Dashboard = () => {
             }
           </ul>
           </Transition>
-        </div>
+        </div> : <div/>
         }
       </div>
     )
@@ -399,7 +399,7 @@ const Header_Dashboard = () => {
           <ul className={`${darkMode ? "" : ""} tw-px-2 tw-py-2 tw-text-sm tw-flex tw-flex-row tw-gap-4 tw-h-full`}>
             <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-self-items-center`}>
               <Transition>
-                <button onClick={(e) => toggleMenuDropdown(e)}>
+                <button onClick={() => toggleMenuDropdown()}>
                   {darkMode ? <IconUserCircle color="#d4d4d4" width={30} height={30}/> : <IconUserCircle color="#000" width={34} height={34} />} 
                 </button>
               </Transition>
@@ -424,7 +424,7 @@ const Header_Dashboard = () => {
           </div>      
         </nav>
       </header>
-      {menuDropdown &&
+      {menuDropdown ?
       <div ref={ref} className={`${darkMode ? 
       "tw-bg-campfire-blue-300/90 tw-border-campfire-neutral-500/50" 
       : "tw-bg-campfire-blue-200/90 tw-border-campfire-neutral-50/50"} 
@@ -507,7 +507,7 @@ const Header_Dashboard = () => {
           }
           </ul>
           </Transition>
-        </div>
+        </div> : <div/>
       }
     </div>
   )

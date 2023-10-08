@@ -10,13 +10,13 @@ export const LoadingDashboardXS = () => {
     return (
         <>
         {darkMode ?
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="gray" size="xs"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="gray" size="xs" className="tw-place-self-center"/>
             </div>
           
             :
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="dark" size="xs"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="dark" size="xs" className="tw-place-self-center"/>
             </div>
         }
         </>
@@ -30,12 +30,12 @@ export const LoadingDashboardSM = () => {
     return (
         <>
         {darkMode ?
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="gray" size="sm"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="gray" size="sm" className="tw-place-self-center"/>
             </div>
             :
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="dark" size="sm"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="dark" size="sm" className="tw-place-self-center"/>
             </div>
         }
         </>
@@ -48,12 +48,12 @@ export const LoadingDashboardMD = () => {
     return (
         <>
         {darkMode ?
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="gray" size="md"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="gray" size="md" className="tw-place-self-center"/>
             </div>
             :
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="dark" size="md"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="dark" size="md" className="tw-place-self-center"/>
             </div>
         }
         </>
@@ -66,12 +66,12 @@ export const LoadingDashboardLG = () => {
     return (
         <>
         {darkMode ?
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
                 <Loader color="gray" size="lg" className="tw-place-self-center"/>
             </div>
             :
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="dark" size="lg"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="dark" size="lg" className="tw-place-self-center"/>
             </div>
         }
         </>
@@ -84,13 +84,13 @@ export const LoadingDashboardXL = () => {
     return (
         <>
         {darkMode ?
-            <div className={`${darkMode ? 'tw-backdrop-brightness-25 ' : 'tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="white" size="xl"/>
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
+                <Loader color="white" size="xl" className="tw-place-self-center"/>
             </div>
             :
-            <div className={`${darkMode ? 'tw-backdrop-brightness-80 ' : 'tw-backdrop-brightness-85'}
+            <div className={`${darkMode ? 'tw-bg-neutral-700/50' : 'tw-bg-neutral-300/50'}
                 tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center tw-p-2 tw-border tw-border-transparent tw-rounded`}>
-                <Loader color="gray" size="xl"/>
+                <Loader color="gray" size="xl" className="tw-place-self-center"/>
             </div>
         }
         </>

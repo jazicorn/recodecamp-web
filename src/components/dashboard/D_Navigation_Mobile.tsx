@@ -37,7 +37,6 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 const D_Navigation = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  const [menu, setMenu] = useState(false);
 
   /**Get question url */
   let url;
@@ -116,9 +115,11 @@ const D_Navigation = () => {
       });
     }
   };
-
+  
   /**Toggle Menu */
-  const toggleMenu = () => {
+  const [menu, setMenu] = useState(false);
+  
+  function toggleMenu() {
     setMenu(!menu);
   };
 
