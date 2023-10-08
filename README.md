@@ -1,8 +1,8 @@
 <div align="center">
 
 <h1 align="center" >
-    <a href="https://recodecamp-web.vercel.app/" class="title">
     <img src="src/assets/campfire-svgrepo-com.svg" alt="logo" height='30' width='30' >
+    <a href="https://recodecamp-web.vercel.app/" class="title">
     ReCodeCamp
     </a>
 </h1>
@@ -17,7 +17,7 @@
 <a href="https://recodecamp-web.vercel.app/" class="title">Recodecamp</a> is the leetcode for coding fundamentals. While their are plenty of resources on the web about programming, their aren't a lot of resources for repeated practical practice of the fundamentals. Recodecamp allows you to build your programming skills by reproducing <span> arrays, functions, objects,</span> and other essential concepts. 
 </p>
 
-### Features
+## Features
 
 ...
 
