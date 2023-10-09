@@ -17,6 +17,10 @@
 <a href="https://recodecamp-web.vercel.app/" class="title">Recodecamp</a> is the leetcode for coding fundamentals. While their are plenty of resources on the web about programming, their aren't a lot of resources for repeated practical practice of the fundamentals. Recodecamp allows you to build your programming skills by reproducing <span> arrays, functions, objects,</span> and other essential concepts. 
 </p>
 
+<p id="about">
+I additionally created the API for Recodecamp. The repository for can be found <a href="https://github.com/jazicorn/recodecamp-api" class="title">here</a>. 
+</p>
+
 ## Features
 
 ...
