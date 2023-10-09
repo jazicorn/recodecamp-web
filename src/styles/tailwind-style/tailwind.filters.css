@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    /* brightness */
+    .tw-brightness-10 {
+        filter: brightness(.10);
+    }
+    .tw-brightness-15 {
+        filter: brightness(.15);
+    }
+    .tw-brightness-20 {
+        filter: brightness(.20);
+    }
+    .tw-brightness-25 {
+        filter: brightness(.25);
+    }
+    .tw-brightness-30 {
+        filter: brightness(.30);
+    }
+    .tw-brightness-40 {
+        filter: brightness(.40);
+    }
+    .tw-brightness-50 {
+        filter: brightness(.50);
+    }
+    .tw-brightness-60 {
+        filter: brightness(.60);
+    }
+    .tw-brightness-70 {
+        filter: brightness(.70);
+    }
+    .tw-brightness-80 {
+        filter: brightness(.80);
+    }
+    .tw-brightness-90 {
+        filter: brightness(.90);
+    }
+    .tw-brightness-175 {
+        filter: brightness(1.75);
+    }
+    /* backdrop */
+    .tw-backdrop-brightness-10 {
+        backdrop-filter: brightness(10);
+    }
+    .tw-backdrop-brightness-15 {
+        backdrop-filter: brightness(15);
+    }
+    .tw-backdrop-brightness-20 {
+        backdrop-filter: brightness(20);
+    }
+    .tw-backdrop-brightness-25 {
+        backdrop-filter: brightness(25);
+    }
+    .tw-backdrop-brightness-30 {
+        backdrop-filter: brightness(30);
+    }
+    .tw-backdrop-brightness-35 {
+        backdrop-filter: brightness(35);
+    }
+    .tw-backdrop-brightness-40 {
+        backdrop-filter: brightness(40);
+    }
+    .tw-backdrop-brightness-45 {
+        backdrop-filter: brightness(45);
+    }
+    .tw-backdrop-brightness-50 {
+        backdrop-filter: brightness(50);
+    }
+    .tw-backdrop-brightness-55 {
+        backdrop-filter: brightness(55);
+    }
+    .tw-backdrop-brightness-60 {
+        backdrop-filter: brightness(60);
+    }
+    .tw-backdrop-brightness-65 {
+        backdrop-filter: brightness(65);
+    }
+    .tw-backdrop-brightness-70 {
+        backdrop-filter: brightness(70);
+    }
+    .tw-backdrop-brightness-75 {
+        backdrop-filter: brightness(75);
+    }
+    .tw-backdrop-brightness-80 {
+        backdrop-filter: brightness(80);
+    }
+    .tw-backdrop-brightness-85 {
+        backdrop-filter: brightness(85);
+    }
+    .tw-backdrop-brightness-90 {
+        backdrop-filter: brightness(90);
+    }
+    .tw-backdrop-brightness-95 {
+        backdrop-filter: brightness(95);
+    }
+    .tw-backdrop-brightness-175 {
+        backdrop-filter: brightness(175);
+    }
+    .tw-contrast {
+        filter: contrast(25);
+    }
+}

@@ -84,8 +84,8 @@ const D_Problem = () => {
   /** Render if Successful */
   if(isSuccess) return (
     <div className={`${darkMode ? '' : ''} overflow-y-scroll tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2`}>
-      <article className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
-      'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-gap-1 tw-h-full tw-flex tw-flex-col tw-content-around`}>
+      <article className={`${darkMode ? 'tw-bg-campfire-neutral-600/70' : 
+      'tw-bg-campfire-neutral-200/90'} tw-gap-1 tw-h-full tw-flex tw-flex-col tw-content-around`}>
         <span className="tw-h-full tw-flex tw-flex-col">
           <div className="tw-flex tw-flex-col tw-justify-between tw-h-3/4">
             {/**Question Task */}

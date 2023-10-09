@@ -253,7 +253,7 @@ const D_Editor = () => {
   /** Render if Successful */
   if (isSuccess) return (
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
-     <div className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
+     <div className={`${darkMode ? 'tw-bg-campfire-neutral-600/70' : 'tw-bg-campfire-neutral-200/90'} 
       tw-w-full tw-h-full tw-flex tw-flex-col tw-items-between`}>
         <Transition2>
           <header className={`${darkMode ? '' : ''} 

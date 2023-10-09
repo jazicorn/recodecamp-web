@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 // redux hooks
 import { useAppSelector } from '../../redux/reduxHooks.ts';
@@ -27,11 +27,10 @@ const D_Header = () => {
   });
 
   return (
-    <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25' : '[&>*]:tw-backdrop-brightness-85 [&>*]:tw-backdrop-blur-sm'
-      } tw-flex tw-flex-col tw-w-full tw-px-5 tw-mt-2 tw-relative tw-min-h-[44px] `}>
+    <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-900/70' : '[&>*]:tw-bg-campfire-neutral-300/70'} [&>*]:tw-backdrop-blur-sm tw-flex tw-flex-col tw-w-full tw-px-5 tw-mt-2 tw-relative tw-min-h-[44px] `}>
       <header
         className={`${darkMode ? "tw-text-campfire-neutral-500" : ""} 
-        tw-grow-0 tw-h-full tw-w-full tw-pl-5 tw-py-2 tw-backdrop-brightness-65 tw-px-2 tw-w-full tw-flex tw-flex-row tw-gap-2 tw-justify-start tw-items-center tw-rounded`}
+        tw-grow-0 tw-h-full tw-w-full tw-pl-5 tw-py-2 tw-px-2 tw-w-full tw-flex tw-flex-row tw-gap-2 tw-justify-start tw-items-center tw-rounded`}
       >
         <h5 className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue-300"} 
         tw-border-l-2 tw-px-2.5 tw-pt-0.5 tw-h-full tw-font-space_grotesk_medium  tw-text-[17px]`}>

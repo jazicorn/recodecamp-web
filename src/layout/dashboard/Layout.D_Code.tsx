@@ -93,15 +93,14 @@ const Layout_D_Code = () => {
 
   /** Render if Loading */
   if (isFetching || isLoading) { return  (
-    <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+    <div className={`${darkMode ? '[&>*]:tw-bg-neutral-900/80' : '[&>*]:tw-bg-neutral-300/80'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
       <LoadingDashboardXL />
     </div>
   )}
 
   if(isSuccess && loading) {
     return (
-      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
-      ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-900/80' : '[&>*]:tw-bg-neutral-300/80'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
         <LoadingDashboardXL />
       </div>
     )
@@ -112,9 +111,7 @@ const Layout_D_Code = () => {
       <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
         {isDesktopLG ? 
-        <main className={`${darkMode ? '' : ''} [&>*]:tw-backdrop-brightness-85
-          tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm [&>*]:tw-w-full [&>*]:tw-h-full
-          tw-grid tw-grid-rows-layout-dashboard-code tw-grid-cols-layout-dashboard-code tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
+        <main className={`${darkMode ? 'layout-container-dark' : 'layout-container-light'} layout-code`}>
             <section className='tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
               <D_Route/>
             </section>
@@ -132,10 +129,7 @@ const Layout_D_Code = () => {
             </section>
         </main>
         :
-        <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
-          tw-bg-transparent tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-code-mobile tw-grid-cols-layout-dashboard-code-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            {/** z index can't go higher than 50 to work*/}
+        <main className={`${darkMode ? 'layout-container-dark' : 'layout-container-light'} layout-code-mobile`}>
             <section className='tw-row-start-1 tw-row-end-1'>
               <D_Route/>
             </section>

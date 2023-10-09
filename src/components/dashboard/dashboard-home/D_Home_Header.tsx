@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 import { ThemeContext } from '../../../context/ThemeContext';
 // redux hooks
 import { useAppSelector } from '../../../redux/reduxHooks.ts';
@@ -27,13 +27,12 @@ const HeaderDashboard = () => {
   });
 
   return (
-    <div className={` ${darkMode ? "" : ""}  tw-font-mono tw-flex tw-flex-col tw-w-full tw-h-full tw-items-center tw-relative tw-min-h-[44px] tw-px-2 tw-py-2`}>
+    <div className={` ${darkMode ? "" : ""} d-home-header-container`}>
       <header
-        className={`${darkMode ? "tw-text-campfire-neutral-400 tw-opacity-70 tw-bg-campfire-neutral-600 " 
-        : "tw-bg-campfire-neutral-100 tw-opacity-60 tw-text-campfire-neutral-700"} 
-        tw-grow-0 tw-h-full tw-h-full tw-w-full tw-flex tw-flex-row tw-justify-start tw-items-center tw-px-4 tw-py-1.5`}
+        className={`${darkMode ? "tw-text-campfire-neutral-400 tw-bg-campfire-neutral-600/70 " 
+        : "tw-bg-campfire-neutral-200/70 tw-text-campfire-neutral-700"} `}
       >
-        <div className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue"} tw-border-l-2 tw-px-2 tw-flex tw-flex-row tw-place-self-center tw-h-full`}>
+        <div className={`${darkMode ? "tw-border-campfire-neutral-800" : "tw-border-campfire-blue"}`}>
           <h5 className="tw-font-space_grotesk_bold tw-text-[18px] tw-h-full"> 
             Mode : <span className={`${darkMode ? " tw-text-campfire-purple-300" : "tw-text-campfire-purple-400"} `}>{accountType}</span>
           </h5>

@@ -138,7 +138,7 @@ const Layout_D_Categories = () => {
 
   /** Render if Loading */
   if (isFetching || isLoading) return  (
-    <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+    <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
       <LoadingDashboardXL />
     </div>
   )
@@ -147,8 +147,7 @@ const Layout_D_Categories = () => {
 
   if(isSuccess && loading) {
     return (
-      <div className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-85'} 
-      ${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+      <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
         <LoadingDashboardXL />
       </div>
     )
@@ -159,7 +158,7 @@ const Layout_D_Categories = () => {
       <>
         {/**Page Content | Position: Relative */}
           {isDesktopMDXL || isDesktopXL ? 
-          <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/60' : '[&>*]:tw-bg-neutral-300/60'} 
+          <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
             [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full tw-p-2
             tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1`}>
               <div className={`${darkMode ? 'tw-divide-campfire-neutral-500 ' : 'tw-divide-campfire-neutral-200 '} tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-categories tw-grid-cols-layout-dashboard-categories tw-p-2`}>
@@ -184,14 +183,14 @@ const Layout_D_Categories = () => {
           </main>
           :
           <Transition>
-            <main className={`${darkMode ? '[&>*]:tw-backdrop-brightness-25 ' : '[&>*]:tw-backdrop-brightness-65'} 
+            <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
             tw-bg-transparent tw-pb-1 tw-w-full tw-h-fit tw-grow [&>*]:tw-backdrop-blur-sm
-            tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-grid-col-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-              <section className={`${darkMode ? "tw-bg-campfire-neutral-500/50" : "tw-bg-campfire-neutral-100/50"} 
+            tw-grid tw-grid-rows-layout-dashboard-categories-mobile tw-grid-col-layout-dashboard-categories-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent tw-gap-y-3 tw-pt-2`}>
+              <section className={`${darkMode ? "tw-bg-campfire-neutral-500/50" : "tw-bg-campfire-neutral-300/50"} 
                 tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-p-2 `}>
                 <D_Route/>
               </section>
-              <section className={`${darkMode ? "[&>*]:tw-bg-campfire-neutral-600" : "[&>*]:tw-bg-campfire-neutral-300"} 
+              <section className={`${darkMode ? "[&>*]:tw-bg-campfire-neutral-700/50" : "[&>*]:tw-bg-campfire-neutral-200/50"} 
               tw-col-start-1 tw-col-end-1 tw-row-start-2 tw-row-end-2 tw-p-2`}>
                 <D_Category_Menu menuData={data}/>
               </section>

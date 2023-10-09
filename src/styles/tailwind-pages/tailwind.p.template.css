@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .tw-bg-campfire-light {
+    @apply tw-bg-[url(../../assets/bg/sw-1.jpg),_url(../../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50;
+  }
+  .tw-bg-campfire-dark {
+    @apply tw-bg-[url(../../assets/bg/sw-1.jpg),_url(../../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60;
+  }
+  .tw-bg-campfire-container {
+    @apply tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full;
+  }
+}

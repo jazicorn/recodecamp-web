@@ -18,10 +18,9 @@ const D_Scoreboard = () => {
   const points = getMenuPoints;
 
   return (
-     <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600 tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-300'} 
+     <div className={`${darkMode ? '[&>*]:tw-bg-campfire-neutral-600/70 tw-text-campfire-blue' : '[&>*]:tw-bg-campfire-neutral-200/90'} 
     tw-w-full tw-h-full tw-flex tw-flex-col tw-p-2 tw-content-center`}>
-      <menu className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 
-      'tw-bg-campfire-neutral-300 tw-opacity-70 '} tw-h-full tw-pt-1`}>
+      <menu className={`tw-h-full tw-pt-1`}>
         <Transition>
           <ul className='tw-flex tw-flex-row tw-items-center '>
             <li className=''><img src={Trophy} alt="Trophy" style={{ height: 18, width: 36 }}></img></li>

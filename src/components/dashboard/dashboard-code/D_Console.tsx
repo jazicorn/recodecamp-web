@@ -41,7 +41,7 @@ const D_Console = () => {
   },[dispatch]);
   
   return (
-      <main className={`${darkMode ? 'tw-bg-campfire-neutral-600 tw-opacity-70 ' : 'tw-bg-campfire-neutral-300 tw-opacity-70 '} 
+      <main className={`${darkMode ? 'tw-bg-campfire-neutral-600/70' : 'tw-bg-campfire-neutral-200/90'} 
       tw-text-campfire-blue tw-w-full tw-h-full tw-flex tw-flex-col tw-overflow-y-auto tw-items-between`}>
           <Transition>
             <header className={`${darkMode ? '' : ''}

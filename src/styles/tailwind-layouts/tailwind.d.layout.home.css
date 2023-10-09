@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .layout-home {
+        @apply tw-bg-transparent tw-w-full tw-h-full tw-grid tw-grid-rows-layout-dashboard-home tw-grid-cols-layout-dashboard-home tw-gap-1 tw-border tw-border-transparent ;
+    }
+    .layout-home > * {
+        @apply tw-backdrop-blur-sm tw-rounded;
+    }
+    .layout-home-mobile {
+        @apply tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow tw-grid tw-grid-rows-layout-dashboard-home-mobile tw-grid-cols-layout-dashboard-home-mobile tw-gap-1 tw-border tw-border-transparent;
+    }
+    .layout-home-mobile > * {
+        @apply tw-backdrop-blur-sm tw-rounded;
+    }
+    .layout-home-light > section {
+        @apply tw-bg-neutral-300/50;
+    }
+    .layout-home-dark > section {
+        @apply tw-bg-neutral-900/50;
+    }
+}

@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .tw-grid-cols-dashboard {
+      grid-template-columns: 5em, auto;
+    }
+    .tw-grid-cols-dashboard-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-home {
+      grid-template-columns: minmax(16em, 20em), minmax(32em, auto);
+    }
+    .tw-grid-cols-dashboard-home-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-code {
+      grid-template-columns: minmax(20em, 28em), minmax(24em, auto);
+    }
+    .tw-grid-cols-dashboard-code-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-code-editor {
+      grid-template-columns: minmax(100px, 200px), minmax(20em, auto);
+    }
+    .tw-grid-cols-dashboard-code-editor-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-categories {
+      grid-template-columns: minmax(14em, 22em), auto;
+    }
+    .tw-grid-cols-dashboard-categories-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-categories-container {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-categories-container-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-plans {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-plans-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-calendar {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-calendar-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-docs {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-docs-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-notes {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-notes-mobile {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-settings {
+      grid-template-columns: auto;
+    }
+    .tw-grid-cols-dashboard-settings-mobile {
+      grid-template-columns: auto;
+    }
+}

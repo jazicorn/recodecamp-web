@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .layout-code {
+        @apply tw-grid tw-grid-rows-layout-dashboard-code tw-grid-cols-layout-dashboard-code tw-gap-1 tw-border tw-border-transparent tw-bg-transparent tw-w-full tw-h-full;
+    }
+    .layout-code > * {
+        @apply tw-backdrop-blur-sm tw-w-full tw-h-full tw-rounded; 
+    }
+    .layout-code-mobile {
+        @apply tw-bg-transparent tw-w-full tw-h-full tw-grow tw-border tw-border-transparent tw-grid tw-grid-rows-layout-dashboard-code-mobile tw-grid-cols-layout-dashboard-code-mobile tw-gap-1;
+    }
+    .layout-code-mobile > * {
+        @apply tw-backdrop-blur-sm tw-w-full tw-h-full tw-rounded; 
+    }
+}
