@@ -7,7 +7,6 @@
 @import "./backgrounds/backgroundPatterns.css";
 @import "./backgrounds/backgroundShapes.css";
 /* Tailwind Styles */
-@import "./tailwind-style/tailwind.bg.css";
 @import "./tailwind-style/tailwind.colors.css";
 @import "./tailwind-style/tailwind.fonts.css";
 @import "./tailwind-style/tailwind.filters.css";

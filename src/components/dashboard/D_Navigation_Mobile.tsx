@@ -145,16 +145,16 @@ const D_Navigation = () => {
   return (
     <menu className={`${darkMode ? '' : ''} tw-flex tw-flex-col tw-py-2 tw-pl-2 tw-place-content-start tw-h-full `}>
       {!menu ? 
-        <button onClick={toggleMenu} className={`${darkMode ? "tw-bg-campfire-neutral-500 hover:tw-bg-campfire-neutral-300": "tw-bg-campfire-neutral-300 hover:tw-bg-campfire-neutral-400"} tw-my-1 tw-mr-2 tw-border-transparent tw-rounded`}>
+        <button onClick={toggleMenu} className={`${darkMode ? "tw-bg-campfire-neutral-500/70 hover:tw-bg-campfire-neutral-300/70": "tw-bg-campfire-neutral-300/70 hover:tw-bg-campfire-neutral-400/70"} tw-my-1 tw-mr-2 tw-border-transparent tw-rounded`}>
           { darkMode ? <IconChevronsRight color="#2ca9bc" /> : <IconChevronsRight color="#000" />}
         </button>
       :
       <div className={`${darkMode ? '' : ''} tw-mr-2 tw-z-30 tw-relative tw-rounded`}>
-        <button onClick={toggleMenu} className={`${darkMode ? "tw-bg-campfire-neutral-500 hover:tw-bg-campfire-neutral-300": "tw-bg-campfire-blue-100 hover:tw-bg-campfire-neutral-400"} tw-my-1  tw-mr-2 tw-border-transparent tw-rounded tw-w-full`}>
+        <button onClick={toggleMenu} className={`${darkMode ? "tw-bg-campfire-neutral-500/70 hover:tw-bg-campfire-neutral-300/70": "tw-bg-campfire-blue-100/70 hover:tw-bg-campfire-neutral-400/70"} tw-my-1  tw-mr-2 tw-border-transparent tw-rounded tw-w-full`}>
           {darkMode ? <IconChevronsDown color="#2ca9bc" /> : <IconChevronsDown color="#000" />}
         </button>
         {menu && 
-          <div ref={ref} className={`${darkMode ? 'tw-bg-campfire-blue-100 tw-border-campfire-neutral-600' : 'tw-bg-campfire-neutral-300 tw-border-campfire-blue-200'} tw-border tw-rounded-b tw-p-2`}>
+          <div ref={ref} className={`${darkMode ? 'tw-bg-campfire-blue-100/70 tw-border-campfire-neutral-600' : 'tw-bg-campfire-neutral-300/70 tw-border-campfire-blue-200'} tw-border tw-rounded-b tw-p-2`}>
             <ul className='tw-flex tw-flex-col tw-place-items-start tw-space-y-2 [&>li]:tw-h-[30px] tw-py-1'>
               <li className={`${darkMode ? "hover:tw-bg-campfire-neutral-400 hover:tw-text-campfire-neutral-200": "hover:tw-bg-campfire-neutral-100 hover:tw-text-campfire-blue"} 
               tw-flex tw-flex-row tw-gap-1 tw-w-full tw-py-1`}>

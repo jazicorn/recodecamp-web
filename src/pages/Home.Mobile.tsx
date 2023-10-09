@@ -9,8 +9,8 @@ function HomeMobile() {
 
   return (
     <div className='tw-dark'>
-      <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60': 
-      'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50' } tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
+      <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken': 
+      'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay' } tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
       <article className={`${darkMode ? '' : ''} tw-relative tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between tw-min-h-[40em]`}>
         {/** Navigation */}
         <Header />

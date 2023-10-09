@@ -269,10 +269,17 @@ const Header_Dashboard = () => {
         <header
           className={`${mobileMenuDropdown ? "tw-px-7" : "tw-px-2"} tw-grow-0 tw-h-[48px] tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded tw-py-2`}
         >
-          <nav className="tw-flex tw-flex-row tw-place-self-center">
-            <button onClick ={() => toggleMobileMenuDropdown()} className="tw-place-self-center">
-              <Transition><IconMenu2 style={{ height: 22, width: 36 }} /></Transition>
-            </button>
+           <nav className="tw-flex tw-flex-row tw-place-items-center tw-h-full">
+            <div className="tw-flex tw-flex-row tw-h-full tw-items-center">
+              <Link to={`/`} className="tw-flex tw-flex-row tw-pr-3">
+                <span className="tw-pt-1 ">
+                  <Transition><Logo style={{ height: 20, width: 20 }} /></Transition>
+                </span>
+                <h5 className={`tw-text-[22px] ${darkMode ? '' : ''} tw-pt-1 tw-pl-1.5 hover:tw-text-campfire-blue`}>
+                  <Transition>ReCodeCamp</Transition>
+                </h5>
+              </Link>     
+            </div>
           </nav>
             <ol className=" tw-h-full tw-flex tw-flex-row tw-items-center tw-pl-2 tw-ml-2">
               <li className={`${darkMode ? "hover:tw-text-campfire-neutral-300": "hover:tw-text-campfire-neutral-700"} tw-self-items-center tw-pr-4 tw-h-full`}>

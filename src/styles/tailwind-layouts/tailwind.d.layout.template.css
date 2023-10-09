@@ -4,10 +4,10 @@
 
 @layer components {
     .layout-container-light > * {
-        @apply tw-bg-neutral-300/30;
+        @apply tw-bg-neutral-300/50;
     }
     .layout-container-dark > * {
-        @apply tw-bg-neutral-900/30;
+        @apply tw-bg-neutral-900/50;
     }
     .layout-template-container {
         @apply tw-w-full tw-h-full tw-p-2;

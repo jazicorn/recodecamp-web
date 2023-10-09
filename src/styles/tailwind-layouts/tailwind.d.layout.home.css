@@ -16,9 +16,9 @@
         @apply tw-backdrop-blur-sm tw-rounded;
     }
     .layout-home-light > section {
-        @apply tw-bg-neutral-400/40;
+        @apply tw-bg-neutral-300/50;
     }
     .layout-home-dark > section {
-        @apply tw-bg-neutral-900/40;
+        @apply tw-bg-neutral-900/50;
     }
 }

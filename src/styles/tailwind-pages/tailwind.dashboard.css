@@ -19,10 +19,10 @@
     @apply tw-grid-row-dashboard tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-min-h-full tw-grid tw-gap-1 tw-px-5 tw-border tw-border-transparent;
   }
   .dashboard-container-light > section {
-    @apply tw-bg-neutral-300/70;
+    @apply tw-bg-neutral-400/50;
   }
   .dashboard-container-dark > section {
-    @apply tw-bg-neutral-900/70;
+    @apply tw-bg-neutral-900/50;
   }
   .dashboard-mobile-container {
     @apply tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-border tw-border-transparent tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-pt-1 tw-px-5; 
