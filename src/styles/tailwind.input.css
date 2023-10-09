@@ -13,8 +13,9 @@
 @import "./tailwind-style/tailwind.grid-cols.css";
 @import "./tailwind-style/tailwind.grid-row.css";
 /* Tailwind Pages */
-@import "./tailwind-pages/tailwind.home.css";
-@import "./tailwind-pages/tailwind.dashboard.css";
+@import "./tailwind-pages/tailwind.p.template.css";
+@import "./tailwind-pages/tailwind.p.home.css";
+@import "./tailwind-pages/tailwind.p.dashboard.css";
 /* Tailwind Layouts */
 @import "./tailwind-layouts/tailwind.d.layout.template.css";
 @import "./tailwind-layouts/tailwind.d.layout.code.css";
@@ -22,10 +23,6 @@
 /* Tailwind Components*/
 @import "./tailwind-components/tailwind.d.home.css";
 @import "./tailwind-components/tailwind.d.settings.user.css";
-
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
 
 :root {
   line-height: 1.5;

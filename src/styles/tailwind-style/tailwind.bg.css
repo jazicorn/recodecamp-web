@@ -4,16 +4,16 @@
 
 @layer utilities {
     .tw-bg-sw-1 {
-        background-image: url('./src/assets/bg/sw-1.jpg');
+        background-image: url('../../assets/bg/sw-1.jpg');
     }
     .tw-bg-sw-2 {
-        background-image: url('./src/assets/bg/sw-2.jpg');
+        background-image: url('../../assets/bg/sw-2.jpg');
     }
     .tw-bg-sw-3 {
-        background-image: url('./src/assets/bg/sw-3.jpg');
+        background-image: url('../../assets/bg/sw-3.jpg');
     }
     .tw-bg-nature {
-        background-image: url('./src/assets/bg/nature.jpg');
+        background-image: url('../../assets/bg/landscape.jpg');
     }
     .tw-bg-transparent {
         background-color: transparent;

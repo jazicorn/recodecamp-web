@@ -30,8 +30,8 @@ const Auth = () => {
 
   return (
     <div className='tw-dark tw-font-roboto_mono tw-min-h-[40em]'>
-      <div className={`${darkMode ? 'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-50': 
-      'tw-bg-[url(../assets/bg/sw-1.jpg),_url(../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50' } tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full` }/>
+      <div className={`${darkMode ? 'tw-bg-campfire-dark': 
+      'tw-bg-campfire-light' } tw-bg-campfire-container` }/>
       <article className="tw-relative tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between tw-min-h-[40em]">
         <div className={`${darkMode ? "tw-border-neutral-500" : "tw-border-neutral-800"} 
         tw-border tw-h-full tw-flex tw-flex-row `}>

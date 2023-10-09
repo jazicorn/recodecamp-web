@@ -120,8 +120,8 @@ const Header = () => {
 
   if(isMobile) {
     return (
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue' : 'tw-bg-light '
-        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-dark tw-flex tw-flex-col tw-w-full tw-relative tw-z-20 tw-place-items-center tw-grow-0`}>
+      <div className={`${darkMode ? 'tw-bg-campfire-neutral-900/70 tw-text-campfire-blue' : 'tw-bg-light '
+        } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-flex tw-flex-col tw-w-full tw-relative tw-z-20 tw-place-items-center tw-grow-0`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
         >
@@ -202,7 +202,7 @@ const Header = () => {
   }
 
   return (
-    <div className={`${pathFilter && !darkMode && 'tw-bg-campfire-neutral-200/70 '} ${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-neutral-300' : 'tw-bg-light'
+    <div className={`${pathFilter && !darkMode && 'tw-bg-campfire-neutral-200/70 '} ${darkMode ? 'tw-bg-campfire-neutral-900/70 tw-text-campfire-neutral-300' : 'tw-bg-light'
       } tw-font-space_mono tw-flex tw-flex-col tw-w-full tw-place-items-center tw-px-5 tw-relative`}>
       <header
         className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}

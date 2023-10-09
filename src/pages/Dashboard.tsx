@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
-  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user) || DEFAULT_USER;
 
   /**Detect User Browser Path */
   const location = useLocation();
@@ -163,12 +163,16 @@ const Dashboard = () => {
           setTimeout(() => {
             navigate("/");
           }, '1000');
+          return DEFAULT_USER
         };
       }).then(function(data) {
         if(data.user !== undefined && Object.keys(data.user).length > 0 ) {
           dispatch(menuUser(data.user));
-        };
-        return data
+          return data.user
+        } else {
+          dispatch(menuUser(data));
+          return data
+        }
       }).then(function() {
         /**Only redirect if not '/learn' path */
         const result = () => {
