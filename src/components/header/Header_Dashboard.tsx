@@ -69,7 +69,7 @@ const Header_Dashboard = () => {
   };
 
   /** UserName */
-  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user) || DEFAULT_USER;
   const [userName, setUserName] = useState('');
   const createUserName = () => {
     if(getUser._EMAIL === undefined || getUser._EMAIL.toLowerCase() === 'john@doe.com' || getUser._EMAIL.length === 0) {
