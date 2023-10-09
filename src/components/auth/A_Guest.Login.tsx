@@ -20,7 +20,9 @@ import {
 //import { DEFAULT_USER } from '../../utils/constants';
 import { storeTokenInLocalStorage, detectTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 
-//const prodURL = import.meta.env.PROD;
+/** API url | Custom env mandatory to begin with VITE  
+ * https://vitejs.dev/guide/env-and-mode.html#env-files */
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 interface FormInputs {
   multipleErrorInput: string
