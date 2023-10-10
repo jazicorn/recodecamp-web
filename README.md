@@ -18,7 +18,7 @@
 </p>
 
 <p id="about">
-I additionally created the API for Recodecamp. The repository for can be found <a href="https://github.com/jazicorn/recodecamp-api" class="title">here</a>. 
+API for Recodecamp can be found <a href="https://github.com/jazicorn/recodecamp-api" class="title">here</a>. 
 </p>
 
 ## Features
