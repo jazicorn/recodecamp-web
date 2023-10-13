@@ -5,6 +5,8 @@ import { ThemeContext } from '../../../context/ThemeContext'
 import Transition from '../../../hooks/useTransition';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { LoadingDashboardMD } from '../loading';
+/*Constants*/
+import { _LANGUAGES_SHORTHAND } from '../../../utils/constants';
 // components
 import D_Category_Menu_Items from '../../../components/dashboard/dashboard-categories/D_Category_Menu_Items';
 // import D_Languages from '../../../components/dashboard/dashboard-categories/D_Languages';
@@ -144,13 +146,15 @@ const D_Category_Menu = ({menuData}) => {
         }
     },[getMenuLanguages]);
 
+    const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
+
     const getCategories = async () => {
         try {
             let url;
             if(import.meta.env.PROD) {
-                url = `${baseURL}/categories/${getMenuLanguage}`;
+                url = `${baseURL}/categories/${currentLanguage}`;
             } else {
-                url = `/api/categories/${getMenuLanguage}`;
+                url = `/api/categories/${currentLanguage}`;
             }
             const res = await fetch(url, {
                 method: 'GET',
@@ -217,17 +221,17 @@ const D_Category_Menu = ({menuData}) => {
         <Transition>
             <div className={`${darkMode ? "" : ""} tw-py-2 tw-h-full tw-mb-2 tw-z-50 tw-relative`}>
                 <h4 className={`${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'} tw-border-campfire-purple-light tw-border-b tw-text-xl tw-h-[36px] tw-w-full tw-pl-2 
-                tw-font-space_mono tw-justify-items-start tw-flex tw-flex-row `}>
+                tw-font-space_mono tw-justify-items-start tw-flex tw-flex-row tw-shrink-0`}>
                     Language:
                 <div className="tw-flex tw-flex-row tw-items-end tw-text-xl">
                     <button onClick={(e) =>  toggleMenuDropdown(e)}
-                    className={`${darkMode ? 'tw-border-campfire-neutral-500' : ''} [&>div]:tw-text-campfire-blue tw-px-2 tw-w-fit tw-flex tw-flex-row tw-font-space_mono_bold tw-bg-transparent hover:[&>div]:tw-text-campfire-purple-light tw-text-[18px] tw-border-b tw-mb-1
+                    className={`${darkMode ? 'tw-border-campfire-neutral-500' : ''} [&>div]:tw-text-campfire-blue tw-px-2 tw-w-fit tw-flex tw-flex-row tw-shrink-0 tw-font-space_mono_bold tw-bg-transparent hover:[&>div]:tw-text-campfire-purple-light tw-text-[18px] tw-border-b tw-mb-1
                     `}>
-                        <div className="tw-flex tw-flex-row tw-bg-transparent"> 
+                        <div className="tw-flex tw-flex-row tw-shrink-0 tw-bg-transparent"> 
                             <img src={picture} alt={transformLanguage} style={{ height: 20, width: 20 }}/>
                             &nbsp;{transformLanguage}
                         </div>
-                        <span className='tw-flex tw-flex-row tw-items-center tw-px-1'>
+                        <span className='tw-flex tw-flex-row tw-shrink-0 tw-items-center tw-px-1'>
                         { darkMode ? <IconArrowBadgeDown size={24} color="#a3a3a3" /> 
                             : <IconArrowBadgeDown size={24} color="#000" />
                         }

@@ -5,6 +5,8 @@ import { ThemeContext } from '../../context/ThemeContext'
 /*Custom Hooks*/
 import Transition from '../../hooks/useTransition';
 import useWindowSize from '../../hooks/useWindowSize';
+/*Constants*/
+import { _LANGUAGES_SHORTHAND } from '../../utils/constants';
 /**Custom Components */
 import ErrorDashboard from '../../components/dashboard/error';
 import { LoadingDashboardXL } from '../../components/dashboard/loading';
@@ -26,7 +28,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Categories = () => {
   /** Custom Hooks */
-  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
+  const { isDesktopLGXL, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
@@ -39,12 +41,15 @@ const Layout_D_Categories = () => {
   const getMenuCategoryInfo = useAppSelector((state:RootState) => state?.dashboard?.categoryInfo);
   const getMenuUser = useAppSelector((state:RootState) => state?.dashboard?.user);
 
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
+
   /**Get question url */
   let url;
   if(import.meta.env.PROD) {
-    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
   } else {
-    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`
+    //console.log(url)
   }
 
   /** Retrieve Category Based Question */
@@ -94,9 +99,9 @@ const Layout_D_Categories = () => {
       await setLanguage();
       let res;
       if(import.meta.env.PROD) {
-        res = await fetch(`${baseURL}/categories/${getMenuLanguage}`);
+        res = await fetch(`${baseURL}/categories/${currentLanguage}`);
       } else {
-        res = await fetch(`api/categories/${getMenuLanguage}`);
+        res = await fetch(`api/categories/${currentLanguage}`);
       }
       const resJSON = res.json();
       return resJSON;
@@ -157,7 +162,7 @@ const Layout_D_Categories = () => {
     return (
       <>
         {/**Page Content | Position: Relative */}
-          {isDesktopMDXL || isDesktopXL ? 
+          {isDesktopLGXL || isDesktopXL ? 
           <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
             [&>*]:tw-backdrop-blur-sm [&>*]:tw-rounded tw-border tw-border-transparent tw-w-full tw-h-full tw-p-2
             tw-grid tw-grid-rows-layout-dashboard-categories-container tw-gap-1`}>

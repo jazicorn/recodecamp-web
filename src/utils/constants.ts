@@ -31,6 +31,12 @@ export const DEFAULT_USER = {
     _COURSES: '',
 }
 
+export const _LANGUAGES_SHORTHAND = {
+    "javascript": "js",
+    "java": "java",
+    "python": "py",
+}
+
 export const _LANGUAGES_ALL = {
     javascript: JS_Icon,
     java: JAVA_Icon,

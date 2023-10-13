@@ -4,7 +4,8 @@ import { useContext, useState, useEffect, useCallback } from 'react';
 /** React Redux */
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
 import type { RootState } from '../../../redux/store.ts';
-import { menuQuestion, menuPoints, menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts';
+import { 
+  menuQuestion, menuPoints, menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from "@tanstack/react-query";
 /** Custom Hooks */
@@ -13,14 +14,13 @@ import { Transition2 } from '../../../hooks/useTransition';
 import useWindowSize from '../../../hooks/useWindowSize';
 /** Custom State Components*/
 //import ErrorDashboard from '../../dashboard/error';
-//import {LoadingDashboardMD} from '../../dashboard/loading';
+import { LoadingDashboardMD } from '../../dashboard/loading';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 /** Codemirror */
 import CodeMirror from '@uiw/react-codemirror';
 import { EditorView } from 'codemirror';
-
 /**CodeMirror Languages */
 //import lightTheme from '../../../styles/style.codemirror.light';
 //import darkTheme from '../../../styles/style.codemirror.dark';
@@ -201,9 +201,37 @@ const D_Editor = () => {
       } else if (jsonGetSolution.stderr) {
         const error = atob(jsonGetSolution.stderr);
         setConsoleMessage(`\n Error :${error}`);
+        // Failure Notification
+        notifications.show({
+          id: 'incorrect',
+          withCloseButton: true,
+          autoClose: 2000,
+          title: "Answer Incorrect",
+          message: '',
+          color: 'red',
+          icon: <IconX />,
+          className: 'my-notification-class',
+          style: { backgroundColor: 'white' },
+          sx: { backgroundColor: 'red' },
+          loading: false,
+        });
       } else {
         const compilation_error = atob(jsonGetSolution.compile_output);
         setConsoleMessage(`\n Error :${compilation_error}`);
+         // Failure Notification
+        notifications.show({
+          id: 'incorrect',
+          withCloseButton: true,
+          autoClose: 2000,
+          title: "Answer Incorrect",
+          message: '',
+          color: 'red',
+          icon: <IconX />,
+          className: 'my-notification-class',
+          style: { backgroundColor: 'white' },
+          sx: { backgroundColor: 'red' },
+          loading: false,
+        });
       }
     } catch (e) {
       console.log(e)
@@ -221,22 +249,25 @@ const D_Editor = () => {
         const languageId = _LANGUAGES_RAPID_API[getMenuLanguage.toLowerCase()];
         consoleTest(languageId, editor, '');
         setPoints(getMenuPoints + getMenuQuestion._QUESTION_POINTS);
+      } else {
+        // Failure Notification
+        notifications.show({
+          id: 'incorrect',
+          withCloseButton: true,
+          autoClose: 2000,
+          title: "Answer Incorrect",
+          message: '',
+          color: 'red',
+          icon: <IconX />,
+          className: 'my-notification-class',
+          style: { backgroundColor: 'white' },
+          sx: { backgroundColor: 'red' },
+          loading: false,
+        });
       }
     } catch (e) {
       // Failure Notification
-      notifications.show({
-        id: 'incorrect',
-        withCloseButton: true,
-        autoClose: 2000,
-        title: "Answer Incorrect",
-        message: '',
-        color: 'red',
-        icon: <IconX />,
-        className: 'my-notification-class',
-        style: { backgroundColor: 'white' },
-        sx: { backgroundColor: 'red' },
-        loading: false,
-      });
+      console.log(e);
     }
   }, [editor, getMenuQuestion._QUESTION_RESULT, getMenuQuestion._QUESTION_POINTS, getMenuLanguage, consoleTest, setPoints, getMenuPoints]);
 
