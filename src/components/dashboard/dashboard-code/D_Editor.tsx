@@ -25,7 +25,7 @@ import { EditorView } from 'codemirror';
 //import lightTheme from '../../../styles/style.codemirror.light';
 //import darkTheme from '../../../styles/style.codemirror.dark';
 //const extensions = [ javascript({ jsx: true })];
-import { _LANGUAGES_CODE_MIRROR,  _LANGUAGES_RAPID_API } from '../../../utils/constants';
+import { _LANGUAGES_CODE_MIRROR,  _LANGUAGES_RAPID_API, _LANGUAGES_SHORTHAND } from '../../../utils/constants';
 //import { dracula } from '@uiw/codemirror-theme-dracula';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { githubLight } from '@uiw/codemirror-theme-github'
