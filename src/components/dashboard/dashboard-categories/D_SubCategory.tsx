@@ -21,9 +21,9 @@ const D_SubCategory = (subCategory) => {
   }
 
   return (
-    <div className={`tw-w-full tw-h-full tw-flex tw-flex-row tw-p-2`}>
+    <div className={`tw-w-full tw-h-full tw-flex tw-flex-col tw-flex-wrap tw-grow tw-p-2`}>
       <ul className={`${darkMode ? 'tw-bg-campfire-neutral-600/70' : 
-      'tw-bg-campfire-neutral-200/70'} tw-h-full tw-flex tw-flex-row`}>
+      'tw-bg-campfire-neutral-200/70'} tw-h-full tw-flex tw-flex-wrap`}>
         {routes === undefined ?
           <div/>
           :
@@ -31,7 +31,7 @@ const D_SubCategory = (subCategory) => {
             <Transition>
               <h6 className={`${darkMode ? "tw-bg-campfire-neutral-500/70" :"tw-border-campfire-neutral-500 tw-bg-campfire-neutral-100/70" } tw-mb-1 tw-min-w-[8em] tw-mr-1 tw-px-1 tw-pb-1 tw-text-base tw-border-b`}>{sub[0]}:</h6>
             </Transition>
-            <div className="tw-flex tw-flex-row tw-gap-1 tw-place-content-left">
+            <div className="tw-flex tw-flex-wrap tw-gap-1 tw-place-content-left">
             {
               routes.map((route, i) => {
                 const strRoute = route.split('/').slice(-1);
