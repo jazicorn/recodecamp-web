@@ -27,12 +27,14 @@ const D_Problem = () => {
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
+
   /**Get question url */
   let url;
   if(import.meta.env.PROD) {
-    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
   } else {
-    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`
   }
 
   /** Retrieve Category Based Question */
