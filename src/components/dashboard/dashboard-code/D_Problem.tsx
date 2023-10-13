@@ -6,6 +6,8 @@ import { useContext, useCallback, useEffect } from 'react';
 /** Custom Hooks */
 import { ThemeContext } from '../../../context/ThemeContext';
 import { Transition2 } from '../../../hooks/useTransition';
+/*Constants*/
+import { _LANGUAGES_SHORTHAND } from '../../../utils/constants';
 /** React Redux Hooks */
 import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
 import { 
@@ -27,12 +29,14 @@ const D_Problem = () => {
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
+
   /**Get question url */
   let url;
   if(import.meta.env.PROD) {
-    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
   } else {
-    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`
   }
 
   /** Retrieve Category Based Question */

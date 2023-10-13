@@ -25,7 +25,7 @@ import { EditorView } from 'codemirror';
 //import lightTheme from '../../../styles/style.codemirror.light';
 //import darkTheme from '../../../styles/style.codemirror.dark';
 //const extensions = [ javascript({ jsx: true })];
-import { _LANGUAGES_CODE_MIRROR,  _LANGUAGES_RAPID_API } from '../../../utils/constants';
+import { _LANGUAGES_CODE_MIRROR,  _LANGUAGES_RAPID_API, _LANGUAGES_SHORTHAND } from '../../../utils/constants';
 //import { dracula } from '@uiw/codemirror-theme-dracula';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { githubLight } from '@uiw/codemirror-theme-github'
@@ -58,12 +58,14 @@ const D_Editor = () => {
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
+
   /**Get question url */
   let url;
   if(import.meta.env.PROD) {
-    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
   } else {
-    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`
   }
 
   /** Retrieve Category Based Question */

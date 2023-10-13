@@ -1,6 +1,8 @@
 /**Custom Hooks */
 import { ThemeContext } from '../../context/ThemeContext'
 import useWindowSize from '../../hooks/useWindowSize';
+/*Constants*/
+import { _LANGUAGES_SHORTHAND } from '../../utils/constants';
 /**Custom Components */
 import D_Editor from '../../components/dashboard/dashboard-code/D_Editor';
 import D_Problem from '../../components/dashboard/dashboard-code/D_Problem';
@@ -35,12 +37,14 @@ const Layout_D_Code = () => {
   const getMenuRoute = useAppSelector((state:RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state:RootState) => state?.dashboard?.language);
 
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
+
   /**Get question url */
   let url;
   if(import.meta.env.PROD) {
-    url = `${baseURL}/${getMenuLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
   } else {
-    url = `/api/${getMenuLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`
   }
 
   /** Retrieve Category Based Question */
