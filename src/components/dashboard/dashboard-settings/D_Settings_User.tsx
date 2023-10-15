@@ -24,12 +24,10 @@ import type { RootState } from '../../../redux/store.ts';
 import { 
   menuUser,
 } from '../../../redux/slices/dashboardSlice.ts';
+/**Constants */
 import { DEFAULT_USER } from '../../../utils/constants';
-/**Custom Helpers */
-import { 
-  detectTokenFromLocalStorage,
-  removeTokenFromLocalStorage 
-} from '../../../utils/common';
+/** Custom State Components*/
+import {LoadingDashboardXL} from '../loading';
 /** API url | Custom env mandatory to begin with VITE 
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -39,8 +37,6 @@ interface FormInputs {
 }
 
 const D_Settings_User = () => {
-  /**Detect Auth */
-  const detectUser = detectTokenFromLocalStorage();
   /**Custom Hooks */
   const { isMobile, isMobileMD } = useWindowSize();
   const { state } = useContext(ThemeContext);
@@ -53,12 +49,21 @@ const D_Settings_User = () => {
   const dispatch = useAppDispatch();
 
   /** Redux | User from redux store */
-  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user) || DEFAULT_USER;
   //console.log("getUser:", getUser);
 
+  /**Detect Auth */
+  const [ auth, setAuth ] = useState(false);
+  
   useEffect(() => {
-    getUser
-  })
+    if(getUser !== undefined || Object.keys(getUser).length > 0) {
+      if(getUser._ID.trim() === '123-456-789') {
+        setAuth(false);
+      } else {
+        setAuth(true);
+      }
+    }
+  },[getUser]);
 
   /**User Id */
   const id = getUser._ID;
@@ -87,7 +92,7 @@ const D_Settings_User = () => {
   const userEmail = getUser._EMAIL;
   const userRevealButton = (e) => {
     e.preventDefault();
-    console.log("Password Reset");
+    console.log("Reveal User");
   };
   
   /**Modal: Delete Account */
@@ -133,7 +138,6 @@ const D_Settings_User = () => {
       }).then(function(response) {
           //console.log(response)
           if(response.ok) {
-            removeTokenFromLocalStorage();
             console.log("😿 Guest | Deleted Account");
             // Success Notification
             notifications.show({
@@ -220,20 +224,12 @@ const D_Settings_User = () => {
               User Settings
             </h3>
           </Transition>
-          {!detectUser ?
-            <Transition> 
-            <main className={`${darkMode ? "" : ""} tw-pl-2.5`}>
-              <p>Want to save your progress? 
-                <span id="dashboard-template-call-to-action" className={`${darkMode ? "" : ""}`}>
-                  <Link to="/auth/guest/login">Login</Link>
-                </span>
-                  or
-                <span id="dashboard-template-call-to-action" className={`${darkMode ? "" : ""}`}>
-                  <Link to="/auth/guest/signup">Register</Link>
-                </span>
-              </p>
-            </main>
-          </Transition> 
+          {!auth ?
+            <Transition>
+              <div className={`${darkMode ? '[&>*]:tw-bg-neutral-900/80' : '[&>*]:tw-bg-neutral-300/80'} tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+                <LoadingDashboardXL />
+              </div>
+            </Transition> 
           :
           <main className={`${isMobile ? '' : ''}  ${darkMode ? 'tw-text-campfire-neutral-300' : 'tw-text-campfire-neutral-700'}
           d-settings-user-container `}>

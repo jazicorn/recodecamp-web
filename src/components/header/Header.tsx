@@ -15,18 +15,27 @@ import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../uti
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 /** */
-import { useAppDispatch } from '../../redux/reduxHooks.ts';
-//import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-//import type { RootState } from '../../redux/store.ts';
+//import { useAppDispatch } from '../../redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import { 
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
 import { DEFAULT_USER } from '../../utils/constants.ts';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
 //import { IconX, IconCheck } from '@tabler/icons-react';
 import Emoji from 'react-emojis';
+/** Custom State Components*/
+import { LoadingDashboardSM } from '../dashboard/loading';
+import { Loader } from '@mantine/core';
 
+/** API url | Custom env mandatory to begin with VITE  
+ * https://vitejs.dev/guide/env-and-mode.html#env-files */
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+/** Get Browser Route */
 const getRoutePath = (location: Location, params: Params): string => {
   const { pathname } = location;
   if (!Object.keys(params).length) {
@@ -41,6 +50,12 @@ const getRoutePath = (location: Location, params: Params): string => {
   return path;
 };
 
+/** Refresh Page */
+const refreshPage = () => {
+  window.location.reload(false);
+}
+
+/** Component | Header */
 const Header = () => {
   const { isMobile } = useWindowSize();
 
@@ -58,34 +73,6 @@ const Header = () => {
     }
   };
 
-  /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch();
-
-  /** User Logout */
-  const navigate = useNavigate();
-  const logout = (e) => {
-    e.preventDefault();
-    removeTokenFromLocalStorage();
-    dispatch(menuUser(DEFAULT_USER));
-    console.log("👋 Goodbye | User Logged Out");
-    setTimeout(() => {
-      console.log("⏳ Delay | Page Redirect In 1 Second.");
-      navigate("/");
-    }, '1000');
-  };
-
-  /** Get User Access Token From Storage */
-  const accessToken = getTokenFromLocalStorage();
-
-  const [ token, setToken] = useState('');
-  useEffect(() => {
-    if(accessToken === undefined || accessToken === null) {
-      setToken('');
-    } else {
-      setToken(accessToken);
-    }
-  },[accessToken]);
-
   /** Get Route Parameters */
   const location = useLocation();
   const params = useParams();
@@ -98,6 +85,14 @@ const Header = () => {
 
   const pagesPath = () => {
     if( path !== '/') {
+      return true
+    } else {
+      return false
+    }
+  };
+
+  const homePath = () => {
+    if( path === '/') {
       return true
     } else {
       return false
@@ -118,9 +113,218 @@ const Header = () => {
     menu
   },[menu]);
 
+  /** Loading Screen */
+  const [loading, setLoading] = useState(false);
+
+  /** Initialize Navigation */
+  const navigate = useNavigate();
+
+  /** Redux Dispatch Instance */
+  const dispatch = useAppDispatch();
+
+  /** Redux Store: User */
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user) || DEFAULT_USER;
+
+  /** Guest Verify */
+  const guestVerify = useCallback(async () => {
+    setLoading(true);
+    try {
+      let url;
+      if(import.meta.env.PROD) {
+        url = `${baseURL}/guest/verify`;
+      } else {
+        url = `/api/guest/verify`;
+      }
+      await fetch(url, { 
+        method: 'GET',
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }).then(function(res) {
+          if(res.ok) {
+            console.log("🏠 Guest | Logged In");
+            // Success Notification
+            notifications.show({
+              id: 'success',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Verifying...",
+              message: '',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: true,
+            });
+            return res
+          } else {
+            // Failure Notification
+            notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "Verification Error",
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+            });
+              setTimeout(() => {
+              navigate("/");
+            }, '1000');
+          }
+      }).then(function(response) {
+        //console.log("response", response);
+        return response.json()
+      }).then(function(response) {
+        const auth = response;
+        //console.log("data auth:", data.authenticated)
+        if(auth.authenticated) {
+          console.log("✅ Guest | Verified");
+          //console.log("data,user:", data.user)
+          return auth.data
+        } else {
+          console.log("🚫 Guest | Not Verified | Please Login");
+          notifications.show({
+              id: 'invalidUser',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: "",
+              message: '',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: true,
+            });
+          setTimeout(() => {
+            navigate("/");
+          }, '1000');
+          return DEFAULT_USER
+        };
+      }).then(function(data) {
+        if(data.user !== undefined && Object.keys(data.user).length > 0 ) {
+          dispatch(menuUser(data.user));
+          return data.user
+        } else {
+          dispatch(menuUser(data));
+          return data
+        }
+      });
+      setLoading(false);
+    } catch(error) {
+      console.log("🚫 Guest | Failed to Verify | Please Login")
+      console.log(error);
+    }
+  },[dispatch, navigate, path]);
+
+  /**Detect Auth */
+  const [ auth, setAuth ] = useState(false);
+  
+  useEffect( () => {
+    if(getUser !== undefined || Object.keys(getUser).length > 0) {
+      if(getUser._ID.trim() === '123-456-789') {
+        setAuth(false);
+        guestVerify();
+      } else {
+        setAuth(true);
+      }
+    }
+  },[getUser, guestVerify]);
+
+  /** Logout url */
+  let url;
+  if(import.meta.env.PROD) {
+    url = `${baseURL}/guest/logout`
+  } else {
+    url = `/api/guest/logout`
+  }
+
+  /** Lougout User by Removing User Cookie */
+  const logoutUser = useCallback(async (url) => {
+   try {
+      const result = await fetch(url, {
+          method: 'DELETE',
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if(result.status === "200") {
+        return true
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  },[]);
+
+  /** User Logout */
+  const logout = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    //console.log("goodbye");
+    const removeUser = logoutUser(url);
+    if(removeUser) {
+      dispatch(menuUser(DEFAULT_USER));
+      console.log("👋 Goodbye | User Logged Out");
+      // Success Notification
+      notifications.show({
+        id: 'success',
+        withCloseButton: true,
+        autoClose: 3000,
+        title: "User Logged Out",
+        message: 'See you next time.',
+        color: 'cyan',
+        icon: <Emoji emoji="waving-hand"/> ,
+        className: 'my-notification-class',
+        style: { backgroundColor: 'white' },
+        sx: { backgroundColor: 'teal' },
+        loading: false,
+      });
+      if( homePath ) {
+        setloading(false);
+        refreshPage();
+      } else {
+        setTimeout(() => {
+          console.log("⏳ Delay | Page Redirect In 1 Second.");
+          navigate("/");
+        }, '1000');
+      }
+    } else {
+      console.log("🚫 Guest | Account Deletion Failed");
+      // Failure Notification
+      notifications.show({
+        id: 'failure',
+        withCloseButton: true,
+        autoClose: 2000,
+        title: "Failed to Logout",
+        message: 'Please try again.',
+        color: 'red',
+        icon: <Emoji emoji="face-with-monocle"/>,
+        className: 'my-notification-class',
+        style: { backgroundColor: 'white' },
+        sx: { backgroundColor: 'red' },
+        loading: false,
+      });
+    }
+  };
+
+  // if(loading) {
+  //   return (
+  //     <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
+  //     tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
+  //       <LoadingDashboardSM />
+  //     </div>
+  //   )
+  // }
+
   if(isMobile) {
     return (
-      <div className={`${darkMode ? 'tw-bg-campfire-neutral-900/70 tw-text-campfire-blue' : 'tw-bg-light '
+      <div className={`${darkMode ? 'tw-bg-campfire-neutral-900/70 tw-text-campfire-blue' : 'tw-bg-neutral-300/70'
         } ${menu ? "tw-h-fit " : "tw-px-5"} tw-font-space_mono tw-text-sm tw-flex tw-flex-col tw-w-full tw-relative tw-z-20 tw-place-items-center tw-grow-0`}>
         <header
           className={`tw-grow-0 tw-h-[48px] tw-px-2 tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded`}
@@ -172,26 +376,36 @@ const Header = () => {
             <li className={`${darkMode ? "" : ""} tw-underline tw-decoration-dashed tw-decoration-2 hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}>Dashboard</Link>
             </li>
-            {token === undefined || token.length === 0 || token === null ?
-            <>
+            {loading ? 
               <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
-              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
-                <Link to={'/auth/guest/login'} className="tw-w-full">
-                  <button className="tw-font-space_mono tw-text-lg">
-                    Login
-                  </button>
-                </Link>
+              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} 
+              tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row tw-place-content-center`}>
+                <Loader color="gray" size="xs" className="tw-place-self-center"/>
               </li>
-            </>
-            :
-            <>
-              <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300"
-              : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-pl-1 tw-mt-1 tw-ml-1 tw-flex tw-flex-row`}>
-                  <button onClick={(e) => logout(e)} className="tw-font-space_mono tw-text-lg">
-                    Logout
-                  </button>
-              </li>
-            </>
+              :
+              <>
+                {!auth ?
+                <>
+                  <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
+                  : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+                    <Link to={'/auth/guest/login'} className="tw-w-full">
+                      <button className="tw-font-space_mono tw-text-lg">
+                        Login
+                      </button>
+                    </Link>
+                  </li>
+                </>
+                :
+                <>
+                  <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300"
+                  : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-pl-1 tw-mt-1 tw-ml-1 tw-flex tw-flex-row`}>
+                      <button onClick={(e) => logout(e)} className="tw-font-space_mono tw-text-lg">
+                        Logout
+                      </button>
+                  </li>
+                </>
+                }
+              </>
             }
           </ul>
           </Transition>
@@ -230,18 +444,28 @@ const Header = () => {
                 </Transition>
               </Link>
             </li>
-            {token === undefined || token.length === 0 || token === null ?
-            <li>
-              <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px]`}>
-                <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
-              </button>
-            </li>
-            :
-            <li>
-              <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px]`}>
-                <Transition>Logout</Transition>
-              </button>
-            </li>
+            {loading ? 
+              <li>
+                <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[2.1em] tw-flex tw-place-content-center`}>
+                  <Loader color="gray" size="xs" className="tw-place-self-center"/>
+                </button>
+              </li>
+              :
+              <>
+              {!auth ?
+              <li>
+                <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em]`}>
+                  <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
+                </button>
+              </li>
+              :
+              <li>
+                <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em]`}>
+                  <Transition>Logout</Transition>
+                </button>
+              </li>
+              }
+             </>
           }
           </ul>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-4">

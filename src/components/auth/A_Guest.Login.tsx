@@ -18,7 +18,6 @@ import {
   menuUser,
 } from '../../redux/slices/dashboardSlice.ts';
 //import { DEFAULT_USER } from '../../utils/constants';
-import { storeTokenInLocalStorage, detectTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 
 /** API url | Custom env mandatory to begin with VITE  
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
@@ -109,8 +108,6 @@ const SignIn = () => {
         //console.log("userJson: ", userJson);
         setGuestData(userJson);
         return userJson
-      }).then(function(data) {
-        storeTokenInLocalStorage(data._ACCESS_TOKEN);
       }).then(function() {
         setTimeout(() => {
           console.log("⏳ Delay | Redirect in 1 second.");
@@ -127,21 +124,9 @@ const SignIn = () => {
     dispatch(menuUser(guestData));
   },[dispatch, guestData, navigate]);
 
-  
-  useEffect(() => {
-    const detectUser = detectTokenFromLocalStorage();
-    if(detectUser) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  },[]);
-
   /** Guest Verify*/
   const guestVerify = useCallback(async () => {
     try {
-      const token = getTokenFromLocalStorage();
-      //console.log("token:", token);
       let url;
       if(import.meta.env.PROD) {
         url = `${baseURL}/guest/verify`;
@@ -149,12 +134,11 @@ const SignIn = () => {
         url = `/api/guest/verify`;
       }
       await fetch(url, { 
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Accept' : 'application/json',
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({token: `${token}`}),        
+        }    
       }).then(function(res) {
           if(res.ok) {
             console.log("🏠 Guest | Logged In");
@@ -193,17 +177,16 @@ const SignIn = () => {
         //console.log("response", response);
         return response.json()
       }).then(function(response) {
-        const data = response;
+        const auth = response;
         //console.log("data auth:", data.authenticated)
-        if(data.authenticated) {
+        if(auth.authenticated) {
           console.log("✅ Guest | Verified");
           //console.log("data,user:", data.user)
-          return data
+          return auth.data
         }
         console.log("🚫 Guest | Not Verified | Please Login")
       }).then(function(data) {
         setGuestData(data.user);
-        return data
       }).then(function() {
         setTimeout(() => {
           console.log("⏳ Delay | Redirect in 1 second.");
@@ -215,20 +198,6 @@ const SignIn = () => {
       console.log(error);
     }
   },[navigate]);
-
-  useEffect(() => {
-    const result = () => {
-      console.log("⏳ Delay | Redirect in 1 second");
-      navigate("/");
-    };
-    if(auth === true && guestData === undefined) {
-      console.log("❓ Guest | Account Detected");
-      console.log("⏳ Delay | Redirect in > 1 second");
-      guestVerify();
-      //console.log("guestData", guestData);
-      setTimeout(() => {result}, "1000");
-    }
-  },[auth, guestData, guestVerify, navigate]);
 
   return (
     <>

@@ -39,7 +39,7 @@ const D_Navigation = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
-  /**Get question url */
+  /** Logout url */
   let url;
   if(import.meta.env.PROD) {
     url = `${baseURL}/guest/logout`
@@ -47,9 +47,8 @@ const D_Navigation = () => {
     url = `/api/guest/logout`
   }
 
-  /** Retrieve Category Based Question */
+  /** Lougout User by Removing User Cookie */
   const logoutUser = useCallback(async (url) => {
-    /** Retrieve Question from API */
    try {
       const result = await fetch(url, {
           method: 'DELETE',
@@ -77,7 +76,6 @@ const D_Navigation = () => {
     //console.log("goodbye");
     const removeUser = logoutUser(url);
     if(removeUser) {
-      removeTokenFromLocalStorage();
       dispatch(menuUser(DEFAULT_USER));
       console.log("👋 Goodbye | User Logged Out");
       // Success Notification

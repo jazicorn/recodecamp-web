@@ -1,6 +1,6 @@
 // Page: Dashboard Settings
-import { useContext } from 'react';
-//import { useContext, useState, useEffect } from 'react';
+//import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 // import { useContext, useState, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../../context/ThemeContext';
@@ -8,28 +8,31 @@ import { ThemeContext } from '../../../context/ThemeContext';
 //import useWindowSize from '../../../hooks/useWindowSize';
 import Transition from '../../../hooks/useTransition';
 /**Redux Hooks */
-//import { useAppSelector } from '../../../redux/reduxHooks.ts';
-//import type { RootState } from '../../../redux/store.ts';
-/**Custom Helpers */
-//import { DEFAULT_USER } from '../../../utils/constants';
-import { detectTokenFromLocalStorage } from '../../../utils/common';
+import { useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
+/**Constants */
+import { DEFAULT_USER } from '../../../utils/constants';
 
 const D_Settings = () => {
-  /**Detect Auth */
-  const detectUser = detectTokenFromLocalStorage();
   /**Custom Hooks */
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
-  /** User from redux store */
-  // const getUser = useAppSelector((state:RootState) => state?.dashboard?.user);
-  // const [ user, setUser ] = useState(DEFAULT_USER);
+  /** Redux Store: User */
+  const getUser = useAppSelector((state:RootState) => state?.dashboard?.user) || DEFAULT_USER;
+
+  /**Detect Auth */
+  const [ auth, setAuth ] = useState(false);
   
-  // useEffect(() => {
-  //   if(getUser !== undefined || Object.keys(getUser).length > 0) {
-  //     setUser(getUser);
-  //   }
-  // },[getUser]);
+  useEffect(() => {
+    if(getUser !== undefined || Object.keys(getUser).length > 0) {
+      if(getUser._ID.trim() === '123-456-789') {
+        setAuth(false);
+      } else {
+        setAuth(true);
+      }
+    }
+  },[getUser]);
   
   return (
     <div className={`${darkMode ? '' : ''} layout-template-container`}>
@@ -40,7 +43,7 @@ const D_Settings = () => {
             Dashboard Settings
           </h3>
         </Transition>
-        {!detectUser ?
+        {!auth ?
           <Transition> 
           <main className={`${darkMode ? "" : ""} tw-pl-2.5`}>
             <p>Want to save your progress? 

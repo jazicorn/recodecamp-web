@@ -24,7 +24,6 @@ import {
   menuUser,
 } from '../redux/slices/dashboardSlice.ts';
 /**Custom Helpers */
-import { detectTokenFromLocalStorage, getTokenFromLocalStorage, removeTokenFromLocalStorage } from '../utils/common';
 import { DEFAULT_USER } from '../utils/constants';
 
 const getRoutePath = (location: Location, params: Params): string => {
@@ -61,29 +60,9 @@ const Dashboard = () => {
     setPath(getRoutePath(location, params));
   }, [location, params]);
 
-  // const noLanguagePaths = () => {
-  //   if( 
-  //     path === '/learn' || 
-  //     path === '/learn/calendar' || 
-  //     path === '/learn/docs' || 
-  //     path === '/learn/notes' || 
-  //     path === '/learn/settings/dashboard' ||  
-  //     path === '/learn/settings/user' || 
-  //     path === '/learn/plans' ||
-  //     path === '/learn/search'
-  //     ) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // };
-
-  //const pathFilter = noLanguagePaths();
-  /** Guest Login */
-  const guestLogin = useCallback(async () => {
+  /** Guest Verify */
+  const guestVerify = useCallback(async () => {
     try {
-      const token = getTokenFromLocalStorage();
-      //console.log("token:", token);
       let url;
       if(import.meta.env.PROD) {
         url = `${baseURL}/guest/verify`;
@@ -91,12 +70,11 @@ const Dashboard = () => {
         url = `/api/guest/verify`;
       }
       await fetch(url, { 
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Accept' : 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({token: `${token}`}),        
       }).then(function(res) {
           if(res.ok) {
             console.log("🏠 Guest | Logged In");
@@ -130,7 +108,6 @@ const Dashboard = () => {
               sx: { backgroundColor: 'red' },
               loading: false,
             });
-            removeTokenFromLocalStorage();
               setTimeout(() => {
               navigate("/");
             }, '1000');
@@ -139,12 +116,12 @@ const Dashboard = () => {
         //console.log("response", response);
         return response.json()
       }).then(function(response) {
-        const data = response;
+        const auth = response;
         //console.log("data auth:", data.authenticated)
-        if(data.authenticated) {
+        if(auth.authenticated) {
           console.log("✅ Guest | Verified");
           //console.log("data,user:", data.user)
-          return data
+          return auth.data
         } else {
           console.log("🚫 Guest | Not Verified | Please Login");
           notifications.show({
@@ -190,17 +167,13 @@ const Dashboard = () => {
   },[dispatch, navigate, path]);
 
   useEffect(() => {
-    const auth = detectTokenFromLocalStorage();
-    if(auth && getUser === undefined) {
-      guestLogin();
+    if(getUser === undefined) {
+      guestVerify();
     }
-    if(auth && getUser._ID.trim() === '123-456-789') {
-      guestLogin();
+    if(getUser._ID.trim() === '123-456-789') {
+      guestVerify();
     }
-    if(!auth && getUser === undefined) {
-      dispatch(menuUser(DEFAULT_USER));
-    }
-  },[dispatch, getUser, guestLogin]);
+  },[dispatch, getUser, guestVerify]);
 
   return (
     <div className="tw-h-screen">
