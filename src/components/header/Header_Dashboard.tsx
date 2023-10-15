@@ -16,7 +16,6 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
 import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
-import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 /**Icons */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
@@ -83,6 +82,9 @@ const Header_Dashboard = () => {
     createUserName()
   });
 
+  /**Detect Auth */
+  const [ auth, setAuth ] = useState(false);
+
   /**Link to User Profile */
   const [profile, setProfile] = useState('');
   const getProfile = () => {
@@ -134,7 +136,6 @@ const Header_Dashboard = () => {
     //console.log("goodbye");
     const removeUser = logoutUser(url);
     if(removeUser) {
-      removeTokenFromLocalStorage();
       dispatch(menuUser(DEFAULT_USER));
       console.log("👋 Goodbye | User Logged Out");
       // Success Notification
@@ -174,17 +175,46 @@ const Header_Dashboard = () => {
     }
   };
 
-  /** Get User Access Token From Storage */
-  const accessToken = getTokenFromLocalStorage();
+  /** Guest AuthMe */
+  const guestAuthMe = useCallback(async () => {
+    try {
+      let url;
+      if(import.meta.env.PROD) {
+        url = `${baseURL}/guest/auth/me`;
+      } else {
+        url = `/api/guest/auth/me`;
+      }
+      const result = await fetch(url, { 
+        method: 'GET',
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
 
-  const [ token, setToken] = useState('');
-  useEffect(() => {
-    if(accessToken === undefined || accessToken === null) {
-      setToken('');
-    } else {
-      setToken(accessToken);
+      if(result.status === "403" || result.status === "400") {
+        setAuth(false);
+      }
+
+      if(result.ok) {
+        const resultJSON = await result.json();
+        const auth = resultJSON.authenticated;
+        if(auth == true) {
+          setAuth(true)
+        } else {
+          setAuth(false)
+        }
+      }
+    } catch(error) {
+      console.log(error);
+      setLoading(false);
     }
-  },[accessToken]);
+  },[]);
+
+  useEffect(() => {
+    guestAuthMe();
+  },[]);
+
 
   /** Get Route Parameters */
   const location = useLocation();
@@ -265,7 +295,7 @@ const Header_Dashboard = () => {
   if(isMobile) {
     return (
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-700 tw-text-campfire-blue' : 'tw-bg-light '
-        } ${mobileMenuDropdown ? "tw-h-fit" : "tw-px-5"} tw-font-space_mono tw-text-sm tw-flex tw-flex-col tw-w-full tw-place-items-center tw-grow-0 tw-z-50 `}>
+        } ${mobileMenuDropdown ? "tw-h-full" : "tw-px-5"} tw-font-space_mono tw-text-sm tw-flex tw-flex-col tw-w-full tw-place-items-center tw-grow-0 tw-z-500 `}>
         <header
           className={`${mobileMenuDropdown ? "tw-px-7" : "tw-px-2"} tw-grow-0 tw-h-[48px] tw-w-full tw-flex tw-flex-row tw-justify-between tw-rounded tw-py-2`}
         >
@@ -310,7 +340,7 @@ const Header_Dashboard = () => {
         <div ref={ref} className={`${darkMode ? 
         "tw-bg-campfire-blue-300/90 tw-border-campfire-neutral-500/50" 
         : "tw-bg-campfire-blue-200/90 tw-border-campfire-neutral-50/50"} 
-        tw-border-4 tw-rounded tw-absolute tw-place-self-end tw-w-[16em] tw-h-[26em] tw-pt-4 tw-mt-14 tw-mr-[3em] tw-p-2`}>
+        tw-border-4 tw-rounded tw-absolute tw-place-self-end tw-w-[16em] tw-h-[26em] tw-pt-4 tw-mt-14 tw-mr-[3em] tw-p-2 tw-z-1000`}>
           <Transition>
           <ul className="tw-z-300 [&>li]:tw-text-xl [&>li]:tw-flex-row [&>li]:tw-flex [&>li>span]:tw-px-1
           tw-flex tw-flex-col tw-place-items-center tw-gap-4">
@@ -353,7 +383,7 @@ const Header_Dashboard = () => {
             </li>
             <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
         tw-place-self-center tw-my-3 tw-h-[px] tw-w-[100px]`}/>
-            {token === undefined || token.length === 0 || token === null ?
+            {!auth ?
               <li>
                 <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono tw-text-lg`}>
                   <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
@@ -435,7 +465,7 @@ const Header_Dashboard = () => {
       <div ref={ref} className={`${darkMode ? 
       "tw-bg-campfire-blue-300/90 tw-border-campfire-neutral-500/50" 
       : "tw-bg-campfire-blue-200/90 tw-border-campfire-neutral-50/50"} 
-      tw-border-4 tw-rounded tw-absolute tw-place-self-end tw-w-[18em] tw-h-[26em] tw-pt-4 tw-mt-14 tw-mr-[3em] tw-p-2`}>
+      tw-border-4 tw-rounded tw-absolute tw-place-self-end tw-w-[18em] tw-h-[26em] tw-pt-4 tw-mt-14 tw-mr-[3em] tw-p-2 tw-z-200`}>
         <Transition>
         <ul className="tw-z-300 [&>li]:tw-text-lg [&>li]:tw-flex-row [&>li]:tw-flex [&>li>span]:tw-px-1
         tw-flex tw-flex-col tw-gap-4">
@@ -499,7 +529,7 @@ const Header_Dashboard = () => {
           </li>
           <hr className={`${darkMode ? 'tw-border-campfire-neutral-800' : 'tw-border-campfire-blue' } 
           tw-place-self-center tw-my-3 tw-h-[px] tw-w-[100px]`}/>
-          {token === undefined || token.length === 0 || token === null ?
+          {!auth ?
             <li className="tw-self-center">
                 <Link to={'/auth/guest/login'} target="_blank" className={`${darkMode ? 
                 "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_mono tw-text-lg tw-self-center`}><Transition>Login</Transition></Link>

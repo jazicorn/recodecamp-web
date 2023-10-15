@@ -125,6 +125,9 @@ const Header = () => {
   /** Redux Store: User */
   const getUser = useAppSelector((state:RootState) => state?.dashboard?.user) || DEFAULT_USER;
 
+  /**Detect Auth */
+  const [ auth, setAuth ] = useState(false);
+
   /** Guest Verify */
   const guestVerify = useCallback(async () => {
     setLoading(true);
@@ -160,6 +163,7 @@ const Header = () => {
             });
             return res
           } else {
+            setLoading(false);
             // Failure Notification
             notifications.show({
               id: 'failure',
@@ -179,12 +183,10 @@ const Header = () => {
             }, '1000');
           }
       }).then(function(response) {
-        //console.log("response", response);
-        return response.json()
-      }).then(function(response) {
-        const auth = response;
+        const auth = response.json();
         //console.log("data auth:", data.authenticated)
-        if(auth.authenticated) {
+        //console.log("auth", auth)
+        if(auth !== undefined && auth.authenticated) {
           console.log("✅ Guest | Verified");
           //console.log("data,user:", data.user)
           return auth.data
@@ -224,20 +226,49 @@ const Header = () => {
     }
   },[dispatch, navigate, path]);
 
-  /**Detect Auth */
-  const [ auth, setAuth ] = useState(false);
-  
-  useEffect( () => {
-    if(getUser !== undefined || Object.keys(getUser).length > 0) {
-      if(getUser._ID.trim() === '123-456-789') {
-        setAuth(false);
-        guestVerify();
+  /** Guest AuthMe */
+  const guestAuthMe = useCallback(async () => {
+    try {
+      setLoading(true);
+      let url;
+      if(import.meta.env.PROD) {
+        url = `${baseURL}/guest/auth/me`;
       } else {
-        setAuth(true);
+        url = `/api/guest/auth/me`;
       }
-    }
-  },[getUser, guestVerify]);
+      const result = await fetch(url, { 
+        method: 'GET',
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
 
+      if(result.status === "403" || result.status === "400") {
+        setAuth(false);
+      }
+
+      if(result.ok) {
+        const resultJSON = await result.json();
+        const auth = resultJSON.authenticated;
+        if(auth == true) {
+          setAuth(true)
+        } else {
+          setAuth(false)
+        }
+      }
+
+      setLoading(false);
+    } catch(error) {
+      console.log(error);
+      setLoading(false);
+    }
+  },[]);
+
+  useEffect(() => {
+    guestAuthMe();
+  },[]);
+  
   /** Logout url */
   let url;
   if(import.meta.env.PROD) {
@@ -313,15 +344,6 @@ const Header = () => {
     }
   };
 
-  // if(loading) {
-  //   return (
-  //     <div className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'}
-  //     tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}>
-  //       <LoadingDashboardSM />
-  //     </div>
-  //   )
-  // }
-
   if(isMobile) {
     return (
       <div className={`${darkMode ? 'tw-bg-campfire-neutral-900/70 tw-text-campfire-blue' : 'tw-bg-neutral-300/70'
@@ -387,7 +409,7 @@ const Header = () => {
                 {!auth ?
                 <>
                   <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
-                  : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row`}>
+                  : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row tw-place-content-center`}>
                     <Link to={'/auth/guest/login'} className="tw-w-full">
                       <button className="tw-font-space_mono tw-text-lg">
                         Login
@@ -398,7 +420,7 @@ const Header = () => {
                 :
                 <>
                   <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300"
-                  : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-pl-1 tw-mt-1 tw-ml-1 tw-flex tw-flex-row`}>
+                  : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-font-space_mono tw-rounded tw-pl-1 tw-mt-1 tw-ml-1 tw-flex tw-flex-row tw-place-content-center`}>
                       <button onClick={(e) => logout(e)} className="tw-font-space_mono tw-text-lg">
                         Logout
                       </button>
@@ -444,29 +466,21 @@ const Header = () => {
                 </Transition>
               </Link>
             </li>
-            {loading ? 
-              <li>
-                <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[2.1em] tw-flex tw-place-content-center`}>
-                  <Loader color="gray" size="xs" className="tw-place-self-center"/>
-                </button>
-              </li>
-              :
               <>
               {!auth ?
               <li>
-                <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em]`}>
-                  <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>
+                <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
+                  {loading ? <Loader color="gray" size="xs" className=""/> : <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>}
                 </button>
               </li>
               :
               <li>
-                <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em]`}>
-                  <Transition>Logout</Transition>
+                <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
+                  {loading ? <Loader color="gray" size="xs" className=""/> : <Transition>Logout</Transition>}
                 </button>
               </li>
               }
              </>
-          }
           </ul>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-4">
             {!darkMode ? (
