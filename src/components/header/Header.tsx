@@ -192,22 +192,14 @@ const Header = () => {
           return auth.data
         } else {
           console.log("🚫 Guest | Not Verified | Please Login");
-          notifications.show({
-              id: 'invalidUser',
-              withCloseButton: true,
-              autoClose: 2000,
-              title: "",
-              message: '',
-              color: 'teal',
-              icon: <IconCheck />,
-              className: 'my-notification-class',
-              style: { backgroundColor: 'white' },
-              sx: { backgroundColor: 'teal' },
-              loading: true,
-            });
-          setTimeout(() => {
-            navigate("/");
-          }, '1000');
+          if( homePath ) {
+            setloading(false);
+          } else {
+            setTimeout(() => {
+              console.log("⏳ Delay | Page Redirect In 1 Second.");
+              navigate("/");
+            }, '1000');
+          }
           return DEFAULT_USER
         };
       }).then(function(data) {
@@ -299,6 +291,7 @@ const Header = () => {
     setLoading(true);
     //console.log("goodbye");
     const removeUser = logoutUser(url);
+
     if(removeUser) {
       dispatch(menuUser(DEFAULT_USER));
       console.log("👋 Goodbye | User Logged Out");
@@ -316,15 +309,11 @@ const Header = () => {
         sx: { backgroundColor: 'teal' },
         loading: false,
       });
-      if( homePath ) {
-        setloading(false);
-        refreshPage();
-      } else {
-        setTimeout(() => {
-          console.log("⏳ Delay | Page Redirect In 1 Second.");
-          navigate("/");
-        }, '1000');
-      }
+      setAuth(false);
+      setTimeout(() => {
+        console.log("⏳ Delay | Page Redirect In 1 Second.");
+        navigate("/");
+      }, '1000');
     } else {
       console.log("🚫 Guest | Account Deletion Failed");
       // Failure Notification
@@ -342,7 +331,13 @@ const Header = () => {
         loading: false,
       });
     }
+    setloading(false);
   };
+
+  const [ loadingScreen, setLoadingScreen] = useState(true);
+  setTimeout(() => {
+    setLoadingScreen(false)
+  }, "400");
 
   if(isMobile) {
     return (
@@ -398,7 +393,7 @@ const Header = () => {
             <li className={`${darkMode ? "" : ""} tw-underline tw-decoration-dashed tw-decoration-2 hover:tw-text-campfire-blue`}>
               <Link to={`/learn`}>Dashboard</Link>
             </li>
-            {loading ? 
+            {loading || loadingScreen ? 
               <li className={`${darkMode ? "tw-bg-neutral-400 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-300" 
               : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} 
               tw-font-space_mono tw-rounded tw-py-1 tw-flex tw-flex-row tw-place-content-center`}>
@@ -466,21 +461,31 @@ const Header = () => {
                 </Transition>
               </Link>
             </li>
-              <>
-              {!auth ?
+            <>
+            {loadingScreen ? 
               <li>
-                <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
-                  {loading ? <Loader color="gray" size="xs" className=""/> : <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>}
-                </button>
-              </li>
+                  <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
+                    <Loader color="gray" size="xs" className=""/> 
+                  </button>
+                </li>
               :
-              <li>
-                <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
-                  {loading ? <Loader color="gray" size="xs" className=""/> : <Transition>Logout</Transition>}
-                </button>
-              </li>
-              }
-             </>
+                <>
+                {!auth ?
+                <li>
+                  <button className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-py-1.5 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
+                    {loading ? <Loader color="gray" size="xs" className=""/> : <Link to={'/auth/guest/login'}><Transition>Login</Transition></Link>}
+                  </button>
+                </li>
+                :
+                <li>
+                  <button onClick={(e) => logout(e)} className={`${darkMode ? "tw-bg-neutral-200 tw-text-campfire-neutral-900 hover:tw-bg-campfire-neutral-400" : "tw-bg-neutral-800 tw-text-campfire-neutral-100 hover:tw-bg-campfire-neutral-400"} tw-rounded tw-px-4 tw-flex tw-flex-row tw-font-space_grotesk_medium tw-text-[17px] tw-w-[5.5em] tw-h-[1.8em] tw-flex tw-place-content-center tw-place-items-center`}>
+                    {loading ? <Loader color="gray" size="xs" className=""/> : <Transition>Logout</Transition>}
+                  </button>
+                </li>
+                }
+              </>
+            }
+            </>
           </ul>
           <ol className="tw-flex tw-flex-row tw-items-center tw-pl-0.5 tw-ml-4">
             {!darkMode ? (
