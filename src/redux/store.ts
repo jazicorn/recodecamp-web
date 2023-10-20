@@ -1,17 +1,19 @@
-import { configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit'
 //import { createStore, applyMiddleware, combineReducers } from 'redux';
 // import monitorReducersEnhancer from './enhancers/monitorReducers'
 //import thunkMiddleware from 'redux-thunk'
+import { authSlice } from './slices/authSlice.ts'
 import { dashboardSlice } from './slices/dashboardSlice.ts'
 
 const store = configureStore({
   reducer: {
+    authentication: authSlice.reducer,
     dashboard: dashboardSlice.reducer,
     devTools: process.env.NODE_ENV !== 'production',
   },
 })
 
-export default store;
+export default store
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

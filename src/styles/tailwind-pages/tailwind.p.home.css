@@ -10,16 +10,16 @@
     @apply tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full;
   }
   .home-bg-light {
-    @apply tw-bg-[url(../../assets/bg/sw-1.jpg),_url(../../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-opacity-50;
+    @apply custom-bg-landscape tw-bg-blend-overlay tw-opacity-50;
   }
   .home-bg-dark {
-    @apply tw-bg-[url(../../assets/bg/sw-1.jpg),_url(../../assets/bg/landscape.jpg)] tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60;
+    @apply custom-bg-landscape tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60;
   }
   .home-article {
     @apply tw-relative tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between tw-min-h-[40em];
   }
   .home-outlet {
-    @apply tw-border-y-2 tw-h-full tw-flex tw-flex-row ;
+    @apply tw-border-y-2 tw-h-full tw-flex tw-flex-row;
   }
   .home-outlet-dark {
     @apply tw-border-neutral-500;

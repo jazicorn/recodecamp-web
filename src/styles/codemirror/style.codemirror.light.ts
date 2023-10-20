@@ -1,5 +1,5 @@
-import { createTheme } from '@uiw/codemirror-themes';
-import { tags as t } from '@lezer/highlight';
+import { createTheme } from '@uiw/codemirror-themes'
+import { tags as t } from '@lezer/highlight'
 
 const lightTheme = createTheme({
   theme: 'light',
@@ -29,6 +29,6 @@ const lightTheme = createTheme({
     { tag: t.tagName, color: '#5c6166' },
     { tag: t.attributeName, color: '#5c6166' },
   ],
-});
+})
 
-export default lightTheme;
+export default lightTheme

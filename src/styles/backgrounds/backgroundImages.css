@@ -1,0 +1,5 @@
+.custom-bg-landscape {
+  background-image: url('../../assets/bg/sw-1.jpg'), url('../../assets/bg/landscape.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+}

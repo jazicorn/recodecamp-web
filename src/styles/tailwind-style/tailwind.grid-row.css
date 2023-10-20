@@ -3,82 +3,82 @@
 @tailwind utilities;
 
 @layer utilities {
-    .tw-grid-row-dashboard {
-        grid-template-rows: 2.5em, minmax(28em, auto);
-    }
-    .tw-grid-row-dashboard-extended {
-        grid-template-rows: 2.5em, minmax(44.5em, auto);
-    }
-    .tw-grid-row-dashboard-mobile {
-        grid-template-rows: 3em, minmax(28em, auto);
-    }
-    .tw-grid-row-dashboard-no-language {
-        grid-template-rows: minmax(28em, auto);
-    }
-    .tw-grid-row-dashboard-no-language-extended {
-        grid-template-rows: minmax(28em, auto);
-    }
-    .tw-grid-row-dashboard-no-language-mobile {
-        grid-template-rows: 3em, 28em, auto, auto, auto;
-    }
-    .tw-grid-row-layout-dashboard-home {
-        grid-template-rows: 3.5em, auto;
-    }
-    .tw-grid-row-layout-dashboard-home-mobile {
-        grid-template-rows: 3em, 28em, auto, auto, auto;
-    }
-    .tw-grid-row-layout-dashboard-code {
-        grid-template-rows: 2.5em, 3.2em, 25.2em, minmax(15.8em, auto);
-    }
-    .tw-grid-cols-layout-dashboard-code-mobile {
-        grid-template-rows: 3.5em, auto, minmax(20em, auto);
-    }
-    .tw-grid-row-layout-dashboard-code-editor {
-        grid-template-rows: 28.3em, minmax(15.8em, auto);
-    }
-    .tw-grid-row-layout-dashboard-code-editor-mobile {
-        grid-template-rows: minmax(20em, auto), minmax(22em, auto), minmax(10em, auto);
-    }
-    .tw-grid-row-layout-dashboard-categories {
-        grid-template-rows: 2.5em, 3.2em, auto;
-    }
-    .tw-grid-row-layout-dashboard-categories-mobile {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-categories-container {
-        grid-template-rows: minmax(35.7em, auto);
-    }
-    .tw-grid-row-layout-dashboard-categories-container-mobile {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-plans {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-plans-mobile {
-        grid-template-rows: minmax(30em,auto);
-    }
-    .tw-grid-row-layout-dashboard-calendar {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-calendar-mobile {
-        grid-template-rows: minmax(30em, auto);
-    }
-    .tw-grid-row-layout-dashboard-docs {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-docs-mobile {
-        grid-template-rows: minmax(30em, auto);
-    }
-    .tw-grid-row-layout-dashboard-notes {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-notes-mobile {
-        grid-template-rows: minmax(30em, auto);
-    }
-    .tw-grid-row-layout-dashboard-settings {
-        grid-template-rows: auto;
-    }
-    .tw-grid-row-layout-dashboard-settings-mobile {
-        grid-template-rows: minmax(30em, auto);
-    }
+  .tw-grid-row-dashboard {
+    grid-template-rows: 2.5em, minmax(28em, auto);
+  }
+  .tw-grid-row-dashboard-extended {
+    grid-template-rows: 2.5em, minmax(44.5em, auto);
+  }
+  .tw-grid-row-dashboard-mobile {
+    grid-template-rows: 3em, minmax(28em, auto);
+  }
+  .tw-grid-row-dashboard-no-language {
+    grid-template-rows: minmax(28em, auto);
+  }
+  .tw-grid-row-dashboard-no-language-extended {
+    grid-template-rows: minmax(28em, auto);
+  }
+  .tw-grid-row-dashboard-no-language-mobile {
+    grid-template-rows: 3em, 28em, auto, auto, auto;
+  }
+  .tw-grid-row-layout-dashboard-home {
+    grid-template-rows: 3.5em, auto;
+  }
+  .tw-grid-row-layout-dashboard-home-mobile {
+    grid-template-rows: 3em, 28em, auto, auto, auto;
+  }
+  .tw-grid-row-layout-dashboard-code {
+    grid-template-rows: 2.5em, 3.2em, 25.2em, minmax(15.8em, auto);
+  }
+  .tw-grid-cols-layout-dashboard-code-mobile {
+    grid-template-rows: 3.5em, auto, minmax(20em, auto);
+  }
+  .tw-grid-row-layout-dashboard-code-editor {
+    grid-template-rows: 28.3em, minmax(15.8em, auto);
+  }
+  .tw-grid-row-layout-dashboard-code-editor-mobile {
+    grid-template-rows: minmax(20em, auto), minmax(22em, auto), minmax(10em, auto);
+  }
+  .tw-grid-row-layout-dashboard-categories {
+    grid-template-rows: 2.5em, 3.2em, auto;
+  }
+  .tw-grid-row-layout-dashboard-categories-mobile {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-categories-container {
+    grid-template-rows: minmax(35.7em, auto);
+  }
+  .tw-grid-row-layout-dashboard-categories-container-mobile {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-plans {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-plans-mobile {
+    grid-template-rows: minmax(30em, auto);
+  }
+  .tw-grid-row-layout-dashboard-calendar {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-calendar-mobile {
+    grid-template-rows: minmax(30em, auto);
+  }
+  .tw-grid-row-layout-dashboard-docs {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-docs-mobile {
+    grid-template-rows: minmax(30em, auto);
+  }
+  .tw-grid-row-layout-dashboard-notes {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-notes-mobile {
+    grid-template-rows: minmax(30em, auto);
+  }
+  .tw-grid-row-layout-dashboard-settings {
+    grid-template-rows: auto;
+  }
+  .tw-grid-row-layout-dashboard-settings-mobile {
+    grid-template-rows: minmax(30em, auto);
+  }
 }

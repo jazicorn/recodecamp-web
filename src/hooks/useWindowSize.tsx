@@ -41,7 +41,7 @@ export default function useWindowSize() {
     isDesktopXL: typeof windowSize?.width === 'number' && windowSize?.width >= 1280,
     isHMobile: typeof windowSize?.height === 'number' && windowSize?.height < 768,
     isHDesktop: typeof windowSize?.height === 'number' && windowSize?.height >= 768,
-    isHDesktopMDLG: typeof windowSize?.height === 'number' && windowSize?.height >= 768 && windowSize?.height< 1280,
+    isHDesktopMDLG: typeof windowSize?.height === 'number' && windowSize?.height >= 768 && windowSize?.height < 1280,
     isHDesktopXL: typeof windowSize?.height === 'number' && windowSize?.height >= 1280,
   }
 }

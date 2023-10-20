@@ -1,5 +1,5 @@
-import { createTheme } from '@uiw/codemirror-themes';
-import { tags as t } from '@lezer/highlight';
+import { createTheme } from '@uiw/codemirror-themes'
+import { tags as t } from '@lezer/highlight'
 
 const darkTheme = createTheme({
   theme: 'dark',
@@ -36,6 +36,6 @@ const darkTheme = createTheme({
     { tag: t.tagName, color: '#2ca9bc' },
     { tag: t.attributeName, color: '#2ca9bc' },
   ],
-});
+})
 
-export default darkTheme;
+export default darkTheme
