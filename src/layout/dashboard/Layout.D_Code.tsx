@@ -1,50 +1,50 @@
 /**Custom Hooks */
-import { ThemeContext } from '../../context/ThemeContext'
-import useWindowSize from '../../hooks/useWindowSize'
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
 /*Constants*/
-import { _LANGUAGES_SHORTHAND } from '../../utils/constants'
+import { _LANGUAGES_SHORTHAND } from '../../utils/constants';
 /**Custom Components */
-import D_Editor from '../../components/dashboard/dashboard-code/D_Editor'
-import D_Problem from '../../components/dashboard/dashboard-code/D_Problem'
-import D_Console from '../../components/dashboard/dashboard-code/D_Console'
-import D_Scoreboard from '../../components/dashboard/dashboard-code/D_Scoreboard'
-import D_Route from '../../components/dashboard/D_Route'
+import D_Editor from '../../components/dashboard/dashboard-code/D_Editor';
+import D_Problem from '../../components/dashboard/dashboard-code/D_Problem';
+import D_Console from '../../components/dashboard/dashboard-code/D_Console';
+import D_Scoreboard from '../../components/dashboard/dashboard-code/D_Scoreboard';
+import D_Route from '../../components/dashboard/D_Route';
 /** React Hooks */
-import { useContext, useEffect, useCallback, useState } from 'react'
+import { useContext, useEffect, useCallback, useState } from 'react';
 /** React Redux */
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
-import { menuQuestion } from '../../redux/slices/dashboardSlice.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
+import { menuQuestion } from '../../redux/slices/dashboardSlice.ts';
 /** React Query */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 /** Custom State Components*/
-import { LoadingDashboardXL } from '../../components/dashboard/loading'
-import ErrorDashboard from '../../components/dashboard/error'
+import { LoadingDashboardXL } from '../../components/dashboard/loading';
+import ErrorDashboard from '../../components/dashboard/error';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Code = () => {
-  const { isDesktopLG } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isDesktopLG } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Retrieve Category Route From Redux State */
-  const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute)
-  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language)
+  const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute);
+  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language);
 
-  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()]
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
 
   /**Get question url */
-  let url
+  let url;
   if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
   } else {
-    url = `/api/${currentLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`;
   }
 
   /** Retrieve Category Based Question */
@@ -57,14 +57,14 @@ const Layout_D_Code = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      })
-      const resJSON = await result.json()
+      });
+      const resJSON = await result.json();
       //console.log("resjson", resJSON)
-      return resJSON
+      return resJSON;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   /** Generate Question */
   const { isLoading, isFetching, isError, error, isSuccess, data } = useQuery({
@@ -74,26 +74,26 @@ const Layout_D_Code = () => {
     keepPreviousData: true,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
-  })
+  });
 
   /** Save Question to Redux Store */
   useEffect(() => {
     if (data !== undefined) {
       //console.log(data.data)
-      dispatch(menuQuestion(data.data))
+      dispatch(menuQuestion(data.data));
     }
-  }, [dispatch, data])
+  }, [dispatch, data]);
 
   /**Delay Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
-    setLoading(false)
-  }, '600')
+    setLoading(false);
+  }, '600');
 
   /** Render if Error */
   if (isError) {
-    return <ErrorDashboard error={error.message} />
+    return <ErrorDashboard error={error.message} />;
   }
 
   /** Render if Loading */
@@ -106,7 +106,7 @@ const Layout_D_Code = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   if (isSuccess && loading) {
@@ -118,7 +118,7 @@ const Layout_D_Code = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   if (isSuccess && !loading) {
@@ -163,8 +163,8 @@ const Layout_D_Code = () => {
           </main>
         )}
       </div>
-    )
+    );
   }
-}
+};
 
-export default Layout_D_Code
+export default Layout_D_Code;

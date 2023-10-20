@@ -1,20 +1,20 @@
-import { useContext, useCallback, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext, useCallback, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { ThemeContext } from '../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 // images
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
-import { IconX, IconCheck } from '@tabler/icons-react'
-import Emoji from 'react-emojis'
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
+import Emoji from 'react-emojis';
 /** React Redux Hooks */
 //import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import {
   userRegister,
   userComponentScreenLoader,
@@ -22,13 +22,13 @@ import {
   fetchUserAuth,
   fetchUserStatus,
   fetchUserComponentScreenLoader,
-} from '../../redux/slices/authSlice.ts'
+} from '../../redux/slices/authSlice.ts';
 /** Constants */
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser'
+import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
 /** Components */
-import { LoadingDashboardLG } from '../../components/dashboard/loading'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { LoadingDashboardLG } from '../../components/dashboard/loading';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 // import * as z from 'zod';
 
 const FormSchema = z.object({
@@ -43,28 +43,28 @@ const FormSchema = z.object({
     .min(8)
     .max(16)
     .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$,;%^*-]).{8,16}$/),
-})
+});
 
-type FormInput = z.infer<typeof FormSchema>
+type FormInput = z.infer<typeof FormSchema>;
 
 const Register = () => {
   /**Custom Middleware | Screen Size */
-  const { isMobile } = useWindowSize()
+  const { isMobile } = useWindowSize();
   /**Custom Middleware | Dark Mode */
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
-  const screenLoader = useAppSelector(fetchUserComponentScreenLoader)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
+  const screenLoader = useAppSelector(fetchUserComponentScreenLoader);
 
   /** React Hook Form */
   const {
@@ -80,29 +80,29 @@ const Register = () => {
       _PASSWORD: '',
       _PASSWORD_REPEAT: '',
     },
-  })
+  });
 
   const onSubmit = handleSubmit(async (data) => {
     //console.log("form data",data)
-    await dispatch(userComponentScreenLoader(true))
-    registerGuest(data)
-  })
+    await dispatch(userComponentScreenLoader(true));
+    registerGuest(data);
+  });
 
   /** Button | Request | Create Guest */
   const registerGuest = async (data) => {
     //console.log("form data",data)
     try {
-      const originalPromiseResult = await dispatch(userRegister(data)).unwrap()
+      const originalPromiseResult = await dispatch(userRegister(data)).unwrap();
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
         //console.log("status", status);
         if (status === 'loading') {
-          console.log('🔄 Guest | Loading')
+          console.log('🔄 Guest | Loading');
         } else if (status === 'failed') {
-          console.log('🚫 Guest | Registration Failed')
+          console.log('🚫 Guest | Registration Failed');
         } else if (status === 'succeeded') {
-          console.log('🚫 Guest | Request Returned Error')
+          console.log('🚫 Guest | Request Returned Error');
         } else {
-          console.log('🚫 Guest | Request Failed')
+          console.log('🚫 Guest | Request Failed');
         }
         // Failure Notification
         notifications.show({
@@ -117,12 +117,12 @@ const Register = () => {
           style: { backgroundColor: 'white' },
           sx: { backgroundColor: 'red' },
           loading: false,
-        })
+        });
         setTimeout(async () => {
-          await dispatch(userComponentScreenLoader(false))
-        }, '1000')
+          await dispatch(userComponentScreenLoader(false));
+        }, '1000');
       } else {
-        console.log('👍 Guest | Registered')
+        console.log('👍 Guest | Registered');
         // Success Notification
         notifications.show({
           id: 'success',
@@ -136,20 +136,20 @@ const Register = () => {
           style: { backgroundColor: 'white' },
           sx: { backgroundColor: 'teal' },
           loading: false,
-        })
+        });
         setTimeout(() => {
-          console.log('⏳ Delay | Redirect in 1 second.')
-          navigate('/auth/guest/login')
-        }, '1000')
+          console.log('⏳ Delay | Redirect in 1 second.');
+          navigate('/auth/guest/login');
+        }, '1000');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   setTimeout(async () => {
-    await dispatch(userComponentScreenLoader(false))
-  }, '3000')
+    await dispatch(userComponentScreenLoader(false));
+  }, '3000');
 
   if (screenLoader === true) {
     return (
@@ -160,7 +160,7 @@ const Register = () => {
       >
         <LoadingDashboardLG />
       </div>
-    )
+    );
   }
 
   return (
@@ -288,7 +288,7 @@ const Register = () => {
         </Transition>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

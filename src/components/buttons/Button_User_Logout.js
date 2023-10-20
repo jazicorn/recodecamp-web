@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var __awaiter =
   (this && this.__awaiter) ||
   function (thisArg, _arguments, P, generator) {
@@ -6,38 +6,38 @@ var __awaiter =
       return value instanceof P
         ? value
         : new P(function (resolve) {
-            resolve(value)
-          })
+            resolve(value);
+          });
     }
     return new (P || (P = Promise))(function (resolve, reject) {
       function fulfilled(value) {
         try {
-          step(generator.next(value))
+          step(generator.next(value));
         } catch (e) {
-          reject(e)
+          reject(e);
         }
       }
       function rejected(value) {
         try {
-          step(generator['throw'](value))
+          step(generator['throw'](value));
         } catch (e) {
-          reject(e)
+          reject(e);
         }
       }
       function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected)
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
       }
-      step((generator = generator.apply(thisArg, _arguments || [])).next())
-    })
-  }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  };
 var __generator =
   (this && this.__generator) ||
   function (thisArg, body) {
     var _ = {
         label: 0,
         sent: function () {
-          if (t[0] & 1) throw t[1]
-          return t[1]
+          if (t[0] & 1) throw t[1];
+          return t[1];
         },
         trys: [],
         ops: [],
@@ -45,22 +45,22 @@ var __generator =
       f,
       y,
       t,
-      g
+      g;
     return (
       (g = { next: verb(0), throw: verb(1), return: verb(2) }),
       typeof Symbol === 'function' &&
         (g[Symbol.iterator] = function () {
-          return this
+          return this;
         }),
       g
-    )
+    );
     function verb(n) {
       return function (v) {
-        return step([n, v])
-      }
+        return step([n, v]);
+      };
     }
     function step(op) {
-      if (f) throw new TypeError('Generator is already executing.')
+      if (f) throw new TypeError('Generator is already executing.');
       while ((g && ((g = 0), op[0] && (_ = 0)), _))
         try {
           if (
@@ -69,113 +69,113 @@ var __generator =
               (t = op[0] & 2 ? y['return'] : op[0] ? y['throw'] || ((t = y['return']) && t.call(y), 0) : y.next) &&
               !(t = t.call(y, op[1])).done)
           )
-            return t
-          if (((y = 0), t)) op = [op[0] & 2, t.value]
+            return t;
+          if (((y = 0), t)) op = [op[0] & 2, t.value];
           switch (op[0]) {
             case 0:
             case 1:
-              t = op
-              break
+              t = op;
+              break;
             case 4:
-              _.label++
-              return { value: op[1], done: false }
+              _.label++;
+              return { value: op[1], done: false };
             case 5:
-              _.label++
-              y = op[1]
-              op = [0]
-              continue
+              _.label++;
+              y = op[1];
+              op = [0];
+              continue;
             case 7:
-              op = _.ops.pop()
-              _.trys.pop()
-              continue
+              op = _.ops.pop();
+              _.trys.pop();
+              continue;
             default:
               if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1])) && (op[0] === 6 || op[0] === 2)) {
-                _ = 0
-                continue
+                _ = 0;
+                continue;
               }
               if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-                _.label = op[1]
-                break
+                _.label = op[1];
+                break;
               }
               if (op[0] === 6 && _.label < t[1]) {
-                _.label = t[1]
-                t = op
-                break
+                _.label = t[1];
+                t = op;
+                break;
               }
               if (t && _.label < t[2]) {
-                _.label = t[2]
-                _.ops.push(op)
-                break
+                _.label = t[2];
+                _.ops.push(op);
+                break;
               }
-              if (t[2]) _.ops.pop()
-              _.trys.pop()
-              continue
+              if (t[2]) _.ops.pop();
+              _.trys.pop();
+              continue;
           }
-          op = body.call(thisArg, _)
+          op = body.call(thisArg, _);
         } catch (e) {
-          op = [6, e]
-          y = 0
+          op = [6, e];
+          y = 0;
         } finally {
-          f = t = 0
+          f = t = 0;
         }
-      if (op[0] & 5) throw op[1]
-      return { value: op[0] ? op[1] : void 0, done: true }
+      if (op[0] & 5) throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
     }
-  }
-Object.defineProperty(exports, '__esModule', { value: true })
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
 // Button: Logout
 /** React */
-var react_1 = require('react')
-var react_router_dom_1 = require('react-router-dom')
+var react_1 = require('react');
+var react_router_dom_1 = require('react-router-dom');
 /** React Redux */
-var reduxHooks_ts_1 = require('../../redux/reduxHooks.ts')
+var reduxHooks_ts_1 = require('../../redux/reduxHooks.ts');
 //import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
 //import type { RootState } from '../../redux/store.ts';
-var authSlice_ts_1 = require('../../redux/slices/authSlice.ts')
-var ThemeContext_1 = require('../../context/ThemeContext')
+var authSlice_ts_1 = require('../../redux/slices/authSlice.ts');
+var ThemeContext_1 = require('../../context/ThemeContext');
 /** Notifications */
-var notifications_1 = require('@mantine/notifications')
+var notifications_1 = require('@mantine/notifications');
 //import { IconX, IconCheck } from '@tabler/icons-react';
-var react_emojis_1 = require('react-emojis')
+var react_emojis_1 = require('react-emojis');
 var Button_User_Logout = function () {
   /** Custom Hooks | Adjust Window Size*/
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   /** Custom Hooks | Dark Mode */
-  var state = (0, react_1.useContext)(ThemeContext_1.ThemeContext).state
-  var darkMode = state.darkMode
+  var state = (0, react_1.useContext)(ThemeContext_1.ThemeContext).state;
+  var darkMode = state.darkMode;
   /** Initialize Navigation */
-  var navigate = (0, react_router_dom_1.useNavigate)()
+  var navigate = (0, react_router_dom_1.useNavigate)();
   /** Redux Dispatch Instance */
-  var dispatch = (0, reduxHooks_ts_1.useAppDispatch)()
+  var dispatch = (0, reduxHooks_ts_1.useAppDispatch)();
   /** User Logout */
   var logout = (0, react_1.useCallback)(function () {
     return __awaiter(void 0, void 0, void 0, function () {
-      var originalPromiseResult, error_1
+      var originalPromiseResult, error_1;
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            return [4 /*yield*/, dispatch((0, authSlice_ts_1.updateAuthentication)(false))]
+            return [4 /*yield*/, dispatch((0, authSlice_ts_1.updateAuthentication)(false))];
           case 1:
-            _a.sent()
-            _a.label = 2
+            _a.sent();
+            _a.label = 2;
           case 2:
-            _a.trys.push([2, 4, , 5])
-            return [4 /*yield*/, dispatch((0, authSlice_ts_1.userLogout)()).unwrap()]
+            _a.trys.push([2, 4, , 5]);
+            return [4 /*yield*/, dispatch((0, authSlice_ts_1.userLogout)()).unwrap()];
           case 3:
-            originalPromiseResult = _a.sent()
+            originalPromiseResult = _a.sent();
             //console.log("originalPromiseResult", originalPromiseResult)
             if (originalPromiseResult === undefined || originalPromiseResult.error) {
               //console.log("login status:", status)
               if (status === 'idle') {
-                console.log('❓ Guest | Idle')
+                console.log('❓ Guest | Idle');
               } else if (status === 'loading') {
-                console.log('🔄 Guest | Loading')
+                console.log('🔄 Guest | Loading');
               } else if (status === 'failed') {
-                console.log('🚫 Guest | Account Logout Failed')
+                console.log('🚫 Guest | Account Logout Failed');
               } else if (status === 'succeeded') {
-                console.log('🚫 Guest | Request Returned Error')
+                console.log('🚫 Guest | Request Returned Error');
               } else {
-                console.log('🚫 Guest | Request Error')
+                console.log('🚫 Guest | Request Error');
               }
               // Failure Notification
               notifications_1.notifications.show({
@@ -190,9 +190,9 @@ var Button_User_Logout = function () {
                 style: { backgroundColor: 'white' },
                 sx: { backgroundColor: 'red' },
                 loading: false,
-              })
+              });
             } else {
-              console.log('👋 Goodbye | User Logged Out')
+              console.log('👋 Goodbye | User Logged Out');
               // Success Notification
               notifications_1.notifications.show({
                 id: 'success',
@@ -206,32 +206,32 @@ var Button_User_Logout = function () {
                 style: { backgroundColor: 'white' },
                 sx: { backgroundColor: 'teal' },
                 loading: false,
-              })
+              });
             }
             setTimeout(function () {
-              console.log('⏳ Delay | Page Redirect In 1 Second.')
-              navigate('/auth/guest/login')
-            }, '600')
-            return [3 /*break*/, 5]
+              console.log('⏳ Delay | Page Redirect In 1 Second.');
+              navigate('/auth/guest/login');
+            }, '600');
+            return [3 /*break*/, 5];
           case 4:
-            error_1 = _a.sent()
-            console.log(error_1)
-            return [3 /*break*/, 5]
+            error_1 = _a.sent();
+            console.log(error_1);
+            return [3 /*break*/, 5];
           case 5:
-            return [2 /*return*/]
+            return [2 /*return*/];
         }
-      })
-    })
-  }, [])
+      });
+    });
+  }, []);
   return (
     <button
       onClick={function (e) {
-        return logout(e)
+        return logout(e);
       }}
       className="tw-font-space_mono tw-text-lg tw-place-items-center tw-w-full tw-h-full"
     >
       Logout
     </button>
-  )
-}
-exports.default = Button_User_Logout
+  );
+};
+exports.default = Button_User_Logout;

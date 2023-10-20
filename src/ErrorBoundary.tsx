@@ -1,12 +1,12 @@
-import { useRouteError } from 'react-router-dom'
+import { useRouteError } from 'react-router-dom';
 
 const ErrorBoundary = () => {
   /** Custom Hooks */
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** React Error Boundary Data */
-  const error = useRouteError()
+  const error = useRouteError();
 
   return (
     <div className="tw-dark">
@@ -41,7 +41,7 @@ const ErrorBoundary = () => {
         </footer>
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default ErrorBoundary
+export default ErrorBoundary;

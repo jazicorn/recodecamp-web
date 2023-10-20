@@ -1,24 +1,24 @@
 // Category
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
 /** React Redux Hooks */
-import { useAppDispatch } from '../../../redux/reduxHooks.ts'
-import { menuCategory } from '../../../redux/slices/dashboardSlice.ts'
+import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { menuCategory } from '../../../redux/slices/dashboardSlice.ts';
 // hooks
-import Transition from '../../../hooks/useTransition'
+import Transition from '../../../hooks/useTransition';
 
 const D_Category_Menu_Items = ({ category }) => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
-  const title = category.category
+  const title = category.category;
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   //const getMenuCategoryInfo = useAppSelector((state:RootState) => state?.dashboard?.categoryInfo);
 
   const setCategoryInfo = (title) => {
-    dispatch(menuCategory(title))
-  }
+    dispatch(menuCategory(title));
+  };
 
   return (
     <>
@@ -40,7 +40,7 @@ const D_Category_Menu_Items = ({ category }) => {
         </div>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default D_Category_Menu_Items
+export default D_Category_Menu_Items;

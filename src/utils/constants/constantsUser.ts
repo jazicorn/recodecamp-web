@@ -20,4 +20,4 @@ export const _DEFAULT_USER = {
   _POINTS_JAVA: 0,
   _POINTS_PYTHON: 0,
   _COURSES: '',
-}
+};

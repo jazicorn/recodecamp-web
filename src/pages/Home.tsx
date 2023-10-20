@@ -1,22 +1,22 @@
-import { useContext, useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
-import Home_Mobile from './Home.Mobile'
+import { useContext, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
+import Home_Mobile from './Home.Mobile';
 /**Components */
-import Header from '../components/header/Header'
+import Header from '../components/header/Header';
 /**Hooks */
-import Transition from '../hooks/useTransition'
-import useWindowSize from '../hooks/useWindowSize'
+import Transition from '../hooks/useTransition';
+import useWindowSize from '../hooks/useWindowSize';
 
 function Home() {
-  const { isMobile } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  if (isMobile) return <Home_Mobile />
+  if (isMobile) return <Home_Mobile />;
 
   return (
     <div className="home-container">
@@ -40,7 +40,7 @@ function Home() {
         </footer>
       </article>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

@@ -1,12 +1,12 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
 // redux hooks
 //import { useAppSelector } from '../../../redux/reduxHooks.ts';
 //import type { RootState } from '../../../redux/store.ts';
 
 const D_User_Editor_Mode = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
   //const menuItem = useAppSelector((state:RootState) => state?.dashboard?.value);
 
@@ -34,7 +34,7 @@ const D_User_Editor_Mode = () => {
         </ul>
       </menu>
     </div>
-  )
-}
+  );
+};
 
-export default D_User_Editor_Mode
+export default D_User_Editor_Mode;

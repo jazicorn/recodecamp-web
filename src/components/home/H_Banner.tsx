@@ -1,22 +1,22 @@
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 /**Hooks */
-import { ThemeContext } from '../../context/ThemeContext'
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 /**Images */
-import { ReactComponent as Student } from '../../assets/drawings/undraw/undraw_remotely_-2-j6y.svg'
-import { ReactComponent as JS } from '../../assets/tech/javascript/javascript-original.svg'
-import { ReactComponent as Java } from '../../assets/tech/java/java-original.svg'
-import { ReactComponent as Python } from '../../assets/tech/python/python-original.svg'
+import { ReactComponent as Student } from '../../assets/drawings/undraw/undraw_remotely_-2-j6y.svg';
+import { ReactComponent as JS } from '../../assets/tech/javascript/javascript-original.svg';
+import { ReactComponent as Java } from '../../assets/tech/java/java-original.svg';
+import { ReactComponent as Python } from '../../assets/tech/python/python-original.svg';
 /**Icons */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 const HomeBanner = () => {
-  const { isMobile, isDesktopMDXL, isDesktopXL } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile, isDesktopMDXL, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <section
@@ -246,7 +246,7 @@ const HomeBanner = () => {
         </Transition>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HomeBanner
+export default HomeBanner;

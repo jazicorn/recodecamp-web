@@ -1,13 +1,13 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import JS_Icon from '../../assets/tech/javascript/javascript-original.svg'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import JS_Icon from '../../assets/tech/javascript/javascript-original.svg';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize';
 
 const D_Header_User_Editor = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
-  const { isMobile } = useWindowSize()
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
+  const { isMobile } = useWindowSize();
 
   return (
     <menu
@@ -39,7 +39,7 @@ const D_Header_User_Editor = () => {
         </ul>
       )}
     </menu>
-  )
-}
+  );
+};
 
-export default D_Header_User_Editor
+export default D_Header_User_Editor;

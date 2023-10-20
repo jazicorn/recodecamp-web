@@ -1,21 +1,21 @@
 // Component: D_Home_Navigation
 /** React */
-import { useContext, useCallback } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useCallback } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import { Link, useNavigate } from 'react-router-dom';
 /** React Redux */
-import { useAppDispatch } from '../../../redux/reduxHooks.ts'
+import { useAppDispatch } from '../../../redux/reduxHooks.ts';
 //import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
 //import type { RootState } from '../../redux/store.ts';
 /** Data */
-import { DEFAULT_USER } from '../../../utils/constants.ts'
+import { DEFAULT_USER } from '../../../utils/constants.ts';
 /** Custom Hooks */
 //import useWindowSize from '../../../hooks/useWindowSize';
-import Transition from '../../../hooks/useTransition'
+import Transition from '../../../hooks/useTransition';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /** Icons */
 import {
   IconCalendar,
@@ -28,16 +28,16 @@ import {
   IconHome,
   IconSearch,
   IconBook2,
-} from '@tabler/icons-react'
+} from '@tabler/icons-react';
 /** Images */
-import { ReactComponent as Rocket } from '../../../assets/icons/others/rocket-right-svgrepo-com.svg'
+import { ReactComponent as Rocket } from '../../../assets/icons/others/rocket-right-svgrepo-com.svg';
 /** Button: Logout */
-import Button_User_Logout from '../../buttons/Button_User_Logout'
+import Button_User_Logout from '../../buttons/Button_User_Logout';
 
 const D_Home_Navigation = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <div
@@ -219,7 +219,7 @@ const D_Home_Navigation = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_Home_Navigation
+export default D_Home_Navigation;

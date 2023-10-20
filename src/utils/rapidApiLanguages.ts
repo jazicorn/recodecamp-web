@@ -211,4 +211,4 @@ export const rapidApiLanguageIds = [
     id: 84,
     name: 'Visual Basic.Net (vbnc 0.0.0.5943)',
   },
-]
+];

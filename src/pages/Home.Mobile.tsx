@@ -1,11 +1,11 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
-import Header from '../components/header/Header'
-import HomeBanner from '../components/home/H_Banner'
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+import Header from '../components/header/Header';
+import HomeBanner from '../components/home/H_Banner';
 
 function HomeMobile() {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <div className="tw-dark">
@@ -33,7 +33,7 @@ function HomeMobile() {
         </footer>
       </article>
     </div>
-  )
+  );
 }
 
-export default HomeMobile
+export default HomeMobile;

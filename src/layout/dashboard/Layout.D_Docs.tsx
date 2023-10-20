@@ -1,26 +1,26 @@
 /**React */
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 /** Custom State Components*/
-import { LoadingDashboardXL } from '../../components/dashboard/loading'
+import { LoadingDashboardXL } from '../../components/dashboard/loading';
 //import ErrorDashboard from '../../components/dashboard/error';
 /**Custom Hooks */
-import { ThemeContext } from '../../context/ThemeContext'
-import useWindowSize from '../../hooks/useWindowSize'
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components*/
-import D_Docs from '../../components/dashboard/dashboard-docs/D_Docs'
+import D_Docs from '../../components/dashboard/dashboard-docs/D_Docs';
 
 const Layout_D_Docs = () => {
   /**Custom Hooks */
-  const { isDesktopMDXL, isDesktopXL } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /**Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
-    setLoading(false)
-  }, '600')
+    setLoading(false);
+  }, '600');
 
   if (loading) {
     return (
@@ -30,7 +30,7 @@ const Layout_D_Docs = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   if (!loading) {
@@ -59,8 +59,8 @@ const Layout_D_Docs = () => {
           </main>
         )}
       </div>
-    )
+    );
   }
-}
+};
 
-export default Layout_D_Docs
+export default Layout_D_Docs;

@@ -1,12 +1,12 @@
 // Component Title: Dashboard Editor Files
 /** React Hooks */
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import Transition from '../../../hooks/useTransition'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import Transition from '../../../hooks/useTransition';
 
 const D_User_Editor_Files = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Render files */
   return (
@@ -44,7 +44,7 @@ const D_User_Editor_Files = () => {
         </span>
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default D_User_Editor_Files
+export default D_User_Editor_Files;

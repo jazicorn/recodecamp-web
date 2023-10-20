@@ -1,26 +1,26 @@
 /**React */
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 /** Custom State Components*/
-import { LoadingDashboardXL } from '../../components/dashboard/loading'
+import { LoadingDashboardXL } from '../../components/dashboard/loading';
 //import ErrorDashboard from '../../components/dashboard/error';
 /**Custom Hooks */
-import { ThemeContext } from '../../context/ThemeContext'
-import useWindowSize from '../../hooks/useWindowSize'
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components */
-import D_Calendar from '../../components/dashboard/dashboard-calendar/D_Calendar'
+import D_Calendar from '../../components/dashboard/dashboard-calendar/D_Calendar';
 
 const Layout_D_Calender = () => {
   /**Custom Hooks */
-  const { isDesktopMDXL, isDesktopXL } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /**Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
-    setLoading(false)
-  }, '1000')
+    setLoading(false);
+  }, '1000');
 
   if (loading) {
     return (
@@ -30,7 +30,7 @@ const Layout_D_Calender = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   return (
@@ -58,7 +58,7 @@ const Layout_D_Calender = () => {
         </main>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Layout_D_Calender
+export default Layout_D_Calender;

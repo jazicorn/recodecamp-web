@@ -1,37 +1,37 @@
-import { useContext, useState } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext, useState } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize';
 // redux hooks
-import { useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
-import { IconArrowBadgeRightFilled } from '@tabler/icons-react'
+import { useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
+import { IconArrowBadgeRightFilled } from '@tabler/icons-react';
 /**Constants */
-import { _LANGUAGES_ALL } from '../../utils/constants'
+import { _LANGUAGES_ALL } from '../../utils/constants';
 /** Custom State Components*/
-import { LoadingDashboardXS } from '../../components/dashboard/loading'
+import { LoadingDashboardXS } from '../../components/dashboard/loading';
 
 const D_Header = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
-  const { isMobile } = useWindowSize()
-  const menuItem = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute)
-  const routeEmpty = menuItem.length === 0
-  const routeArr = menuItem.split('/').filter((route) => route !== 'random')
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
+  const { isMobile } = useWindowSize();
+  const menuItem = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute);
+  const routeEmpty = menuItem.length === 0;
+  const routeArr = menuItem.split('/').filter((route) => route !== 'random');
 
   /**Language Menu */
-  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language)
-  const transformLanguage = getMenuLanguage[0].toUpperCase() + getMenuLanguage.slice(1).toLowerCase()
+  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language);
+  const transformLanguage = getMenuLanguage[0].toUpperCase() + getMenuLanguage.slice(1).toLowerCase();
   //console.log("transformLanguage", transformLanguage);
-  const picture = _LANGUAGES_ALL[getMenuLanguage.toLowerCase()]
+  const picture = _LANGUAGES_ALL[getMenuLanguage.toLowerCase()];
   //console.log(picture);
 
   /**Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
-    setLoading(false)
-  }, '600')
+    setLoading(false);
+  }, '600');
 
   if (loading) {
     return (
@@ -41,7 +41,7 @@ const D_Header = () => {
       >
         <LoadingDashboardXS />
       </div>
-    )
+    );
   }
 
   return (
@@ -100,7 +100,7 @@ const D_Header = () => {
         </ul>
       )}
     </menu>
-  )
-}
+  );
+};
 
-export default D_Header
+export default D_Header;

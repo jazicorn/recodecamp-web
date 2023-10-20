@@ -1,11 +1,11 @@
 // loading screen
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import { Loader } from '@mantine/core'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { Loader } from '@mantine/core';
 
 export const LoadingDashboardXS = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <>
@@ -27,12 +27,12 @@ export const LoadingDashboardXS = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export const LoadingDashboardSM = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <>
@@ -54,12 +54,12 @@ export const LoadingDashboardSM = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export const LoadingDashboardMD = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   return (
     <>
       {darkMode ? (
@@ -80,12 +80,12 @@ export const LoadingDashboardMD = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export const LoadingDashboardLG = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   return (
     <>
       {darkMode ? (
@@ -106,12 +106,12 @@ export const LoadingDashboardLG = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export const LoadingDashboardXL = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   return (
     <>
       {darkMode ? (
@@ -131,7 +131,7 @@ export const LoadingDashboardXL = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default LoadingDashboardMD
+export default LoadingDashboardMD;

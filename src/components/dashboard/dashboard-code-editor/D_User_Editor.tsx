@@ -1,32 +1,32 @@
 // Dashboard Menu
-import React, { useContext, useState, useEffect } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
+import React, { useContext, useState, useEffect } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../../hooks/useWindowSize'
+import useWindowSize from '../../../hooks/useWindowSize';
 // codemirror
-import CodeMirror from '@uiw/react-codemirror'
-import { javascript } from '@codemirror/lang-javascript'
-import lightTheme from '../../../styles/style.codemirror.light'
-import darkTheme from '../../../styles/style.codemirror.dark'
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
+import lightTheme from '../../../styles/style.codemirror.light';
+import darkTheme from '../../../styles/style.codemirror.dark';
 
-const extensions = [javascript({ jsx: true })]
+const extensions = [javascript({ jsx: true })];
 
 const D_User_Editor = () => {
-  const { isMobile } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
-  const code = '\n\n\n\n'
+  const code = '\n\n\n\n';
 
-  const [editor, setEditor] = useState()
+  const [editor, setEditor] = useState();
 
   useEffect(() => {
-    setEditor(code)
-  }, [code])
+    setEditor(code);
+  }, [code]);
 
   const onChange = React.useCallback((value) => {
-    setEditor(value)
-  }, [])
+    setEditor(value);
+  }, []);
 
   return (
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
@@ -80,7 +80,7 @@ const D_User_Editor = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_User_Editor
+export default D_User_Editor;

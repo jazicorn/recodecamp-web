@@ -1,36 +1,36 @@
 // Category
-import { useContext, useState, useEffect } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
+import { useContext, useState, useEffect } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
 // components
-import D_SubCategory from './D_SubCategory'
+import D_SubCategory from './D_SubCategory';
 /**React Query */
 //import { useQuery } from "@tanstack/react-query";
 // redux hooks
-import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts'
-import { menuCategoryRoute } from '../../../redux/slices/dashboardSlice.ts'
+import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { menuCategoryRoute } from '../../../redux/slices/dashboardSlice.ts';
 // hooks
-import Transition from '../../../hooks/useTransition'
+import Transition from '../../../hooks/useTransition';
 // icons
-import { IconArrowBadgeRightFilled } from '@tabler/icons-react'
+import { IconArrowBadgeRightFilled } from '@tabler/icons-react';
 
 const D_Category = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
-  const dispatch = useAppDispatch()
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
+  const dispatch = useAppDispatch();
   //const getMenuCategory = useAppSelector((state:RootState) => state?.dashboard?.category);
-  const getMenuCategoryInfo = useAppSelector((state: RootState) => state?.dashboard?.categoryInfo)
+  const getMenuCategoryInfo = useAppSelector((state: RootState) => state?.dashboard?.categoryInfo);
 
-  const [categoryInfo, setCategoryInfo] = useState()
+  const [categoryInfo, setCategoryInfo] = useState();
 
   useEffect(() => {
-    setCategoryInfo(getMenuCategoryInfo)
-  }, [getMenuCategoryInfo])
+    setCategoryInfo(getMenuCategoryInfo);
+  }, [getMenuCategoryInfo]);
 
-  const title = categoryInfo?.category
-  const subs = categoryInfo?.subCategories
+  const title = categoryInfo?.category;
+  const subs = categoryInfo?.subCategories;
 
   function setCategoryRoute(route) {
-    dispatch(menuCategoryRoute(route))
+    dispatch(menuCategoryRoute(route));
   }
 
   return (
@@ -90,7 +90,7 @@ const D_Category = () => {
                 <section key={i} className="tw-px-4">
                   <D_SubCategory subCategory={sub} />
                 </section>
-              )
+              );
             })
           ) : (
             <div />
@@ -98,7 +98,7 @@ const D_Category = () => {
         </article>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default D_Category
+export default D_Category;

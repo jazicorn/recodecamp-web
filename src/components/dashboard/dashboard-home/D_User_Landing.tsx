@@ -1,14 +1,14 @@
 // Dashboard Banner
 /**React */
-import { useContext, useState, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 /**Custom Hooks */
-import { ThemeContext } from '../../../context/ThemeContext'
-import Transition from '../../../hooks/useTransition'
+import { ThemeContext } from '../../../context/ThemeContext';
+import Transition from '../../../hooks/useTransition';
 //import useWindowSize from '../../../hooks/useWindowSize';
 /**Redux Hooks */
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts'
-import type { RootState } from '../../../redux/store.ts'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
 import {
   validUser,
   userLandingScreenLoader,
@@ -16,43 +16,43 @@ import {
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
-} from '../../../redux/slices/authSlice.ts'
+} from '../../../redux/slices/authSlice.ts';
 /** Constants */
-import { _DEFAULT_USER } from '../../../utils/constants/constantsUser'
+import { _DEFAULT_USER } from '../../../utils/constants/constantsUser';
 /** Components */
-import { LoadingDashboardXL } from '../../../components/dashboard/loading'
+import { LoadingDashboardXL } from '../../../components/dashboard/loading';
 
 const D_User = () => {
   /** Custom Hooks | Screen Size*/
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
 
   /** Custom Hooks | Dark Mode */
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
-  const screenLoader = useAppSelector(fetchUserLandingScreenLoader)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
+  const screenLoader = useAppSelector(fetchUserLandingScreenLoader);
 
   /** User State */
-  const [user, setUser] = useState(getUser)
+  const [user, setUser] = useState(getUser);
 
   useEffect(() => {
-    setUser(getUser)
-  }, [getUser])
+    setUser(getUser);
+  }, [getUser]);
 
   useEffect(() => {
-    dispatch(validUser())
-  })
+    dispatch(validUser());
+  });
 
   setTimeout(async () => {
-    dispatch(userLandingScreenLoader(false))
-  }, '1000')
+    dispatch(userLandingScreenLoader(false));
+  }, '1000');
 
   if (status !== 'succeeded' || screenLoader === true) {
     return (
@@ -63,7 +63,7 @@ const D_User = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   return (
@@ -98,7 +98,7 @@ const D_User = () => {
         </article>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_User
+export default D_User;

@@ -1,103 +1,103 @@
 // Page: Dashboard Settings (User)
 /**React */
-import { useContext, useEffect, useState, useCallback } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 /**Custom Hooks */
-import { ThemeContext } from '../../../context/ThemeContext'
-import useWindowSize from '../../../hooks/useWindowSize'
-import Transition from '../../../hooks/useTransition'
+import { ThemeContext } from '../../../context/ThemeContext';
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 //import bcrypt from 'bcryptjs';
 /**User Avatars */
 // import { createAvatar } from '@dicebear/core';
 // import { pixelArt } from '@dicebear/collection';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /**Modal */
-import { useDisclosure } from '@mantine/hooks'
-import { Modal, TextInput } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks';
+import { Modal, TextInput } from '@mantine/core';
 /**Redux Hooks */
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts'
-import type { RootState } from '../../../redux/store.ts'
-import { validUser, userDelete, fetchUser, fetchUserAuth, fetchUserStatus } from '../../../redux/slices/authSlice.ts'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
+import { validUser, userDelete, fetchUser, fetchUserAuth, fetchUserStatus } from '../../../redux/slices/authSlice.ts';
 /**Constants */
-import { _DEFAULT_USER } from '../../../utils/constants/constantsUser'
+import { _DEFAULT_USER } from '../../../utils/constants/constantsUser';
 /** Components */
-import { LoadingDashboardXL } from '../loading'
+import { LoadingDashboardXL } from '../loading';
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 interface FormInputs {
-  multipleErrorInput: string
+  multipleErrorInput: string;
 }
 
 const D_Settings_User = () => {
   /**Custom Hooks */
-  const { isMobile, isMobileMD } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile, isMobileMD } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /**Browser Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux | Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
 
   useEffect(() => {
-    dispatch(validUser())
-  })
+    dispatch(validUser());
+  });
 
   /**Detect Auth */
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(false);
 
   useEffect(() => {
     if (authenticated) {
-      setAuth(false)
+      setAuth(false);
     } else {
-      setAuth(true)
+      setAuth(true);
     }
-  }, [getUser])
+  }, [getUser]);
 
   /**User Id */
-  const id = getUser._ID
-  const userIdHide = '********-****-****-****-************'
-  const [userId, setUserId] = useState(userIdHide)
-  const [userIdReveal, setUserIdReveal] = useState(false)
+  const id = getUser._ID;
+  const userIdHide = '********-****-****-****-************';
+  const [userId, setUserId] = useState(userIdHide);
+  const [userIdReveal, setUserIdReveal] = useState(false);
   const userIdRevealButton = (e) => {
-    e.preventDefault()
-    setUserIdReveal(!userIdReveal)
+    e.preventDefault();
+    setUserIdReveal(!userIdReveal);
     if (userIdReveal === true) {
-      setUserId(id)
+      setUserId(id);
     }
 
     if (userIdReveal === false) {
-      setUserId(userIdHide)
+      setUserId(userIdHide);
     }
-  }
+  };
 
   /**User Dates */
-  const userCreatedDate = new Date(getUser._CREATED_AT).toDateString()
-  const userUpdatedDate = new Date(getUser._UPDATED_AT).toDateString()
+  const userCreatedDate = new Date(getUser._CREATED_AT).toDateString();
+  const userUpdatedDate = new Date(getUser._UPDATED_AT).toDateString();
   /**User Subscription */
-  const sub = getUser._SUBSCRIPTION.split(',')[1]
-  const userSubType = sub.charAt(0).toUpperCase() + sub.slice(1)
+  const sub = getUser._SUBSCRIPTION.split(',')[1];
+  const userSubType = sub.charAt(0).toUpperCase() + sub.slice(1);
   /**User Email */
-  const userEmail = getUser._EMAIL
+  const userEmail = getUser._EMAIL;
   const userRevealButton = (e) => {
-    e.preventDefault()
-    console.log('Reveal User')
-  }
+    e.preventDefault();
+    console.log('Reveal User');
+  };
 
   /**Modal: Delete Account */
-  const [opened, { open, close }] = useDisclosure(false)
+  const [opened, { open, close }] = useDisclosure(false);
 
   /**Generate Avatar */
   // const avatar = useMemo(() => {
@@ -110,30 +110,30 @@ const D_Settings_User = () => {
   /**Delete Modal Input */
   const { register, handleSubmit } = useForm<FormInputs>({
     criteriaMode: 'all',
-  })
+  });
 
   /**Request Guest Login Info */
   const onSubmit = handleSubmit(async (data) => {
-    guestDelete(data)
-  })
+    guestDelete(data);
+  });
 
   /** Delete */
   const guestDelete = useCallback(
     async (data) => {
       try {
-        const originalPromiseResult = await dispatch(userDelete(data)).unwrap()
+        const originalPromiseResult = await dispatch(userDelete(data)).unwrap();
         if (originalPromiseResult === undefined || originalPromiseResult.error) {
           //console.log("status", status);
           if (status === 'loading') {
-            console.log('🔄 Guest Deletion | Loading')
+            console.log('🔄 Guest Deletion | Loading');
           } else if (status === 'failed') {
-            console.log('🚫 Guest Deletion | Failed')
+            console.log('🚫 Guest Deletion | Failed');
           } else if (status === 'succeeded') {
-            console.log('🚫 Guest Deletion | Request Returned Error')
+            console.log('🚫 Guest Deletion | Request Returned Error');
           } else {
-            console.log('🚫 Guest Deletion | Request Failed')
+            console.log('🚫 Guest Deletion | Request Failed');
           }
-          console.log('🚫 Guest Deletion | Failed')
+          console.log('🚫 Guest Deletion | Failed');
           // Failure Notification
           notifications.show({
             id: 'failure',
@@ -147,9 +147,9 @@ const D_Settings_User = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'red' },
             loading: false,
-          })
+          });
         } else {
-          console.log('😿 Guest | Deleted Account')
+          console.log('😿 Guest | Deleted Account');
           // Success Notification
           notifications.show({
             id: 'success',
@@ -163,19 +163,19 @@ const D_Settings_User = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'teal' },
             loading: false,
-          })
+          });
           setTimeout(() => {
-            console.log('⏳ Delay | Redirect in 1 second.')
-            navigate('/')
-          }, '1000')
+            console.log('⏳ Delay | Redirect in 1 second.');
+            navigate('/');
+          }, '1000');
         }
       } catch (error) {
-        console.log('🚫 Guest | Delete Request Failed')
-        console.log(error)
+        console.log('🚫 Guest | Delete Request Failed');
+        console.log(error);
       }
     },
     [dispatch, getUser._ID, navigate]
-  )
+  );
 
   return (
     <div
@@ -357,7 +357,7 @@ const D_Settings_User = () => {
         </article>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_Settings_User
+export default D_Settings_User;

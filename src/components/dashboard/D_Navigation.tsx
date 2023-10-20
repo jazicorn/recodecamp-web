@@ -1,7 +1,7 @@
 // Dashboard Banner
-import { useContext, useCallback } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useCallback } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { Link, useNavigate } from 'react-router-dom';
 //import useWindowSize from '../../../hooks/useWindowSize';
 //import Transition from '../../hooks/useTransition';
 //icons
@@ -16,36 +16,36 @@ import {
   IconListDetails,
   IconHome,
   IconBook2,
-} from '@tabler/icons-react'
-import { removeTokenFromLocalStorage } from '../../utils/common'
-import { useAppDispatch } from '../../redux/reduxHooks.ts'
+} from '@tabler/icons-react';
+import { removeTokenFromLocalStorage } from '../../utils/common';
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
 //import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
 //import type { RootState } from '../../redux/store.ts';
-import { menuUser } from '../../redux/slices/dashboardSlice.ts'
-import { DEFAULT_USER } from '../../utils/constants.ts'
+import { menuUser } from '../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../utils/constants.ts';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const D_Navigation = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** User Logout */
   const logout = useCallback(async () => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       dispatch(userLogout())
         .unwrap()
@@ -55,11 +55,11 @@ const D_Navigation = () => {
           if (originalPromiseResult.error) {
             //console.log("login status:", status)
             if (status === 'idle') {
-              console.log('❓ Guest | Idle')
+              console.log('❓ Guest | Idle');
             } else if (status === 'loading') {
-              console.log('🔄 Guest | Loading')
+              console.log('🔄 Guest | Loading');
             } else if (status === 'failed') {
-              console.log('🚫 Guest | Account Deletion Failed')
+              console.log('🚫 Guest | Account Deletion Failed');
               // Failure Notification
               notifications.show({
                 id: 'failure',
@@ -73,14 +73,14 @@ const D_Navigation = () => {
                 style: { backgroundColor: 'white' },
                 sx: { backgroundColor: 'red' },
                 loading: false,
-              })
+              });
             } else if (status === 'succeeded') {
-              console.log('🚫 Guest | Request Returned Error')
+              console.log('🚫 Guest | Request Returned Error');
             } else {
-              console.log('🚫 Guest | Request Error')
+              console.log('🚫 Guest | Request Error');
             }
           } else {
-            console.log('👋 Goodbye | User Logged Out')
+            console.log('👋 Goodbye | User Logged Out');
             // Success Notification
             notifications.show({
               id: 'success',
@@ -94,17 +94,17 @@ const D_Navigation = () => {
               style: { backgroundColor: 'white' },
               sx: { backgroundColor: 'teal' },
               loading: false,
-            })
+            });
             setTimeout(() => {
-              console.log('⏳ Delay | Page Redirect In 1 Second.')
-              navigate('/')
-            }, '1000')
+              console.log('⏳ Delay | Page Redirect In 1 Second.');
+              navigate('/');
+            }, '1000');
           }
-        })
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   return (
     <div
@@ -252,7 +252,7 @@ const D_Navigation = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_Navigation
+export default D_Navigation;

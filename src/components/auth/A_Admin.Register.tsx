@@ -1,17 +1,17 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 // images
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 
-const prodURL = import.meta.env.PROD
+const prodURL = import.meta.env.PROD;
 
 const Admin_Register = () => {
-  const { isMobile } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <div className="tw-dark">
@@ -79,7 +79,7 @@ const Admin_Register = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Admin_Register
+export default Admin_Register;

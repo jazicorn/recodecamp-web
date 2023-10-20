@@ -1,29 +1,29 @@
-import { useContext } from 'react'
-import { Outlet, Link } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
+import { useContext } from 'react';
+import { Outlet, Link } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 /**Hooks */
-import Transition from '../hooks/useTransition'
+import Transition from '../hooks/useTransition';
 //import useWindowSize from '../hooks/useWindowSize';
 /** Images */
-import { ReactComponent as Logo } from '../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../assets/icons/settings/sun-svgrepo-com.svg'
+import { ReactComponent as Logo } from '../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Moon } from '../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
+import { ReactComponent as Sun } from '../assets/icons/settings/sun-svgrepo-com.svg';
 
 const Auth = () => {
   //const { isMobile } = useWindowSize();
-  const { state } = useContext(ThemeContext)
-  const theme = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const theme = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   //turn darkmode on and off
   const toggleTheme = () => {
     if (darkMode) {
-      theme.dispatch({ type: 'LIGHTMODE', darkMode: false })
-      localStorage.theme = 'light'
+      theme.dispatch({ type: 'LIGHTMODE', darkMode: false });
+      localStorage.theme = 'light';
     } else {
-      theme.dispatch({ type: 'DARKMODE', darkMode: true })
-      localStorage.theme = 'dark'
+      theme.dispatch({ type: 'DARKMODE', darkMode: true });
+      localStorage.theme = 'dark';
     }
-  }
+  };
 
   return (
     <div className="tw-dark tw-font-roboto_mono tw-min-h-[40em]">
@@ -102,7 +102,7 @@ const Auth = () => {
         />
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;

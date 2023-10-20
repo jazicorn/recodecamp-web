@@ -1,17 +1,17 @@
 // Dashboard Banner
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import List from '../../../assets/icons/dashboard/list-square-svgrepo-com.svg'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import List from '../../../assets/icons/dashboard/list-square-svgrepo-com.svg';
 // hooks
 //import useWindowSize from '../../../hooks/useWindowSize';
 // languague icons
-import JS_Icon from '../../../assets/tech/javascript/javascript-original.svg'
-import JAVA_Icon from '../../../assets/tech/java/java-original.svg'
-import PY_Icon from '../../../assets/tech/python/python-original.svg'
+import JS_Icon from '../../../assets/tech/javascript/javascript-original.svg';
+import JAVA_Icon from '../../../assets/tech/java/java-original.svg';
+import PY_Icon from '../../../assets/tech/python/python-original.svg';
 
 const D_Languages = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   //const { isMobile } = useWindowSize();
 
   return (
@@ -46,7 +46,7 @@ const D_Languages = () => {
         </ul>
       </menu>
     </div>
-  )
-}
+  );
+};
 
-export default D_Languages
+export default D_Languages;

@@ -1,18 +1,18 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 /**Components */
-import HomeBanner from '../components/home/H_Banner'
+import HomeBanner from '../components/home/H_Banner';
 /**Hooks */
-import Transition from '../hooks/useTransition'
-import useWindowSize from '../hooks/useWindowSize'
+import Transition from '../hooks/useTransition';
+import useWindowSize from '../hooks/useWindowSize';
 
 const H_Banner = () => {
-  const { isMobile } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   if (isMobile) {
-    return <div />
+    return <div />;
   }
 
   return (
@@ -89,7 +89,7 @@ const H_Banner = () => {
         </li>
       </ul>
     </>
-  )
-}
+  );
+};
 
-export default H_Banner
+export default H_Banner;

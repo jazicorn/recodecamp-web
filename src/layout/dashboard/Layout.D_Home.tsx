@@ -1,25 +1,25 @@
 /**React */
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 /**Custom Hooks */
-import { ThemeContext } from '../../context/ThemeContext'
-import useWindowSize from '../../hooks/useWindowSize'
+import { ThemeContext } from '../../context/ThemeContext';
+import useWindowSize from '../../hooks/useWindowSize';
 /**Custom Components*/
-import { LoadingDashboardXL } from '../../components/dashboard/loading'
-import D_User_Landing from '../../components/dashboard/dashboard-home/D_User_Landing'
-import D_Home_Navigation from '../../components/dashboard/dashboard-home/D_Home_Navigation'
-import D_Home_Navigation_Mobile from '../../components/dashboard/dashboard-home/D_Home_Navigation_Mobile'
-import D_Home_Header from '../../components/dashboard/dashboard-home/D_Home_Header'
+import { LoadingDashboardXL } from '../../components/dashboard/loading';
+import D_User_Landing from '../../components/dashboard/dashboard-home/D_User_Landing';
+import D_Home_Navigation from '../../components/dashboard/dashboard-home/D_Home_Navigation';
+import D_Home_Navigation_Mobile from '../../components/dashboard/dashboard-home/D_Home_Navigation_Mobile';
+import D_Home_Header from '../../components/dashboard/dashboard-home/D_Home_Header';
 
 const Layout_D_Home = () => {
-  const { isDesktopMDXL, isDesktopXL } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   /**Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
-    setLoading(false)
-  }, '1400')
+    setLoading(false);
+  }, '1400');
 
   if (loading) {
     return (
@@ -30,7 +30,7 @@ const Layout_D_Home = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   return (
@@ -68,7 +68,7 @@ const Layout_D_Home = () => {
         </main>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Layout_D_Home
+export default Layout_D_Home;

@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 const animationConfiguration = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   exit: { opacity: 0 },
-}
+};
 
 export const Transitions = ({ children }) => {
   return (
@@ -16,8 +16,8 @@ export const Transitions = ({ children }) => {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 export const Transition2 = ({ children }) => {
   return (
@@ -30,8 +30,8 @@ export const Transition2 = ({ children }) => {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 export const Transition3 = ({ children }) => {
   return (
@@ -44,7 +44,7 @@ export const Transition3 = ({ children }) => {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
-export default Transitions
+export default Transitions;

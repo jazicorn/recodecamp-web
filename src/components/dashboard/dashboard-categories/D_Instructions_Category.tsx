@@ -1,15 +1,15 @@
 // Dashboard Banner
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import List from '../../../assets/icons/dashboard/list-square-svgrepo-com.svg'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import List from '../../../assets/icons/dashboard/list-square-svgrepo-com.svg';
 // hooks
-import useWindowSize from '../../../hooks/useWindowSize'
-import Transition from '../../../hooks/useTransition'
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 
 const D_Instructions_Category = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
-  const { isMobile } = useWindowSize()
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
+  const { isMobile } = useWindowSize();
 
   return (
     <div>
@@ -71,7 +71,7 @@ const D_Instructions_Category = () => {
         </menu>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default D_Instructions_Category
+export default D_Instructions_Category;

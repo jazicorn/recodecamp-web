@@ -1,21 +1,21 @@
 // Dashboard Banner
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import Trophy from '../../../assets/icons/dashboard/trophy-1st-place-svgrepo-com.svg'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import Trophy from '../../../assets/icons/dashboard/trophy-1st-place-svgrepo-com.svg';
 // redux hooks
-import { useAppSelector } from '../../../redux/reduxHooks.ts'
-import type { RootState } from '../../../redux/store.ts'
+import { useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
 // hooks
-import Transition from '../../../hooks/useTransition'
+import Transition from '../../../hooks/useTransition';
 //import { Center } from '@mantine/core';
 
 const D_Scoreboard = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
-  const getMenuPoints = useAppSelector((state: RootState) => state?.dashboard?.points)
+  const getMenuPoints = useAppSelector((state: RootState) => state?.dashboard?.points);
 
-  const points = getMenuPoints
+  const points = getMenuPoints;
 
   return (
     <div
@@ -43,7 +43,7 @@ const D_Scoreboard = () => {
         </Transition>
       </menu>
     </div>
-  )
-}
+  );
+};
 
-export default D_Scoreboard
+export default D_Scoreboard;

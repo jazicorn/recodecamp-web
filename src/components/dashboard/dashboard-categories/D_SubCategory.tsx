@@ -1,23 +1,23 @@
 // Category
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
 // redux hooks
-import { useAppDispatch } from '../../../redux/reduxHooks.ts'
-import { menuCategoryRoute } from '../../../redux/slices/dashboardSlice.ts'
+import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { menuCategoryRoute } from '../../../redux/slices/dashboardSlice.ts';
 //hooks
-import Transition from '../../../hooks/useTransition'
+import Transition from '../../../hooks/useTransition';
 
 const D_SubCategory = (subCategory) => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   // const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const sub = subCategory.subCategory
-  const routes = sub[1]
+  const sub = subCategory.subCategory;
+  const routes = sub[1];
 
   function setCategory(route) {
-    dispatch(menuCategoryRoute(route))
+    dispatch(menuCategoryRoute(route));
   }
 
   return (
@@ -44,7 +44,7 @@ const D_SubCategory = (subCategory) => {
             </Transition>
             <div className="tw-flex tw-flex-wrap tw-gap-1 tw-place-content-left">
               {routes.map((route, i) => {
-                const strRoute = route.split('/').slice(-1)
+                const strRoute = route.split('/').slice(-1);
                 return (
                   <button
                     key={i}
@@ -60,14 +60,14 @@ const D_SubCategory = (subCategory) => {
                       <Transition>{strRoute}</Transition>
                     </span>
                   </button>
-                )
+                );
               })}
             </div>
           </div>
         )}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default D_SubCategory
+export default D_SubCategory;

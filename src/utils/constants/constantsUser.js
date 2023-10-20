@@ -1,6 +1,6 @@
-'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
-exports._DEFAULT_USER = void 0
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports._DEFAULT_USER = void 0;
 exports._DEFAULT_USER = {
   _ID: '123-456-789',
   _CREATED_AT: new Date().toISOString(),
@@ -23,4 +23,4 @@ exports._DEFAULT_USER = {
   _POINTS_JAVA: 0,
   _POINTS_PYTHON: 0,
   _COURSES: '',
-}
+};

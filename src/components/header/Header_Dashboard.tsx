@@ -1,187 +1,187 @@
 // Component: Header_Dashboard
 /** React Imports */
-import { useContext, useCallback, useState, useEffect, useRef } from 'react'
-import { Link, useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useContext, useCallback, useState, useEffect, useRef } from 'react';
+import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 /** React Redux */
 //import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
-import { validUser, updateUser, fetchUser, fetchUserAuth, fetchUserStatus } from '../../redux/slices/authSlice.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
+import { validUser, updateUser, fetchUser, fetchUserAuth, fetchUserStatus } from '../../redux/slices/authSlice.ts';
 /** Custom Hooks */
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
-import { ThemeContext } from '../../context/ThemeContext'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
+import { ThemeContext } from '../../context/ThemeContext';
 /** Data */
-import { DEFAULT_USER } from '../../utils/constants.ts'
+import { DEFAULT_USER } from '../../utils/constants.ts';
 /** Icons */
-import { IconMenu2, IconUserCircle, IconUser, IconSettings, IconDeviceDesktop } from '@tabler/icons-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { IconMenu2, IconUserCircle, IconUser, IconSettings, IconDeviceDesktop } from '@tabler/icons-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 /** Images */
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg'
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
+import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
-import { IconX, IconCheck } from '@tabler/icons-react'
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /** Components */
-import Header_Dashboard_Menu from './Header_Dashboard_Menu'
+import Header_Dashboard_Menu from './Header_Dashboard_Menu';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const getRoutePath = (location: Location, params: Params): string => {
-  const { pathname } = location
+  const { pathname } = location;
   if (!Object.keys(params).length) {
-    return pathname // we don't need to replace anything
+    return pathname; // we don't need to replace anything
   }
-  let path = pathname
+  let path = pathname;
   Object.entries(params).forEach(([paramName, paramValue]) => {
     if (paramValue) {
-      path = path.replace(paramValue, `:${paramName}`)
+      path = path.replace(paramValue, `:${paramName}`);
     }
-  })
-  return path
-}
+  });
+  return path;
+};
 
 const Header_Dashboard = () => {
-  const { isMobile } = useWindowSize()
+  const { isMobile } = useWindowSize();
 
   /** Set User Preferences */
-  const theme = useContext(ThemeContext)
-  const darkMode = theme.state.darkMode
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   //turn darkmode on and off
   const toggleTheme = () => {
     if (darkMode) {
-      theme.dispatch({ type: 'LIGHTMODE', darkMode: false })
-      localStorage.theme = 'light'
+      theme.dispatch({ type: 'LIGHTMODE', darkMode: false });
+      localStorage.theme = 'light';
     } else {
-      theme.dispatch({ type: 'DARKMODE', darkMode: true })
-      localStorage.theme = 'dark'
+      theme.dispatch({ type: 'DARKMODE', darkMode: true });
+      localStorage.theme = 'dark';
     }
-  }
+  };
 
   /** Initialize Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Get Route Parameters */
-  const location = useLocation()
-  const params = useParams()
+  const location = useLocation();
+  const params = useParams();
 
-  const [path, setPath] = useState()
+  const [path, setPath] = useState();
 
   useEffect(() => {
-    setPath(getRoutePath(location, params))
-  }, [location, params])
+    setPath(getRoutePath(location, params));
+  }, [location, params]);
 
   const pagesPath = () => {
     if (path !== '/') {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
-  const pathFilter = pagesPath()
+  const pathFilter = pagesPath();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
 
   /** User Profile | Name */
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState('');
   const createUserName = () => {
     if (
       getUser._EMAIL === undefined ||
       getUser._EMAIL.toLowerCase() === 'john@doe.com' ||
       getUser._EMAIL.length === 0
     ) {
-      setUserName('Guest')
+      setUserName('Guest');
     } else {
-      const emailName = getUser._EMAIL.split('@')[0]
-      setUserName(emailName)
+      const emailName = getUser._EMAIL.split('@')[0];
+      setUserName(emailName);
     }
-  }
+  };
   useEffect(() => {
-    createUserName()
-  })
+    createUserName();
+  });
 
   /** User Profile | Status */
-  const [profile, setProfile] = useState('')
+  const [profile, setProfile] = useState('');
   const getProfile = () => {
     if (userName === undefined || userName.toLowerCase() === 'guest' || userName.length === 0) {
-      setProfile('guest')
+      setProfile('guest');
     } else {
-      setProfile(userName)
+      setProfile(userName);
     }
-  }
+  };
 
   useEffect(() => {
-    getProfile()
-  })
+    getProfile();
+  });
 
   /** Dropdown Menu | Mobile */
-  const [mobileMenuDropdown, setMobileMenuDropdown] = useState(false)
+  const [mobileMenuDropdown, setMobileMenuDropdown] = useState(false);
 
   function toggleMobileMenuDropdown(e) {
-    e.preventDefault()
-    setMobileMenuDropdown(!mobileMenuDropdown)
+    e.preventDefault();
+    setMobileMenuDropdown(!mobileMenuDropdown);
     //console.log(mobileMenuDropdown)
   }
 
-  const mobileRef = useRef()
+  const mobileRef = useRef();
 
   useEffect(() => {
     const mobileCheckIfClickedOutside = (e) => {
       // If the menu is open and the clicked target is not within the menu,
       // then close the menu
       if (mobileMenuDropdown && mobileRef.current && !mobileRef.current.contains(e.target)) {
-        setMobileMenuDropdown(!mobileMenuDropdown)
+        setMobileMenuDropdown(!mobileMenuDropdown);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', mobileCheckIfClickedOutside)
+    document.addEventListener('mousedown', mobileCheckIfClickedOutside);
 
     return () => {
       // Cleanup the event listener
-      document.removeEventListener('mousedown', mobileCheckIfClickedOutside)
-    }
-  }, [mobileMenuDropdown])
+      document.removeEventListener('mousedown', mobileCheckIfClickedOutside);
+    };
+  }, [mobileMenuDropdown]);
 
   /** Dropdown Menu | Desktop */
-  const [menuDropdown, setMenuDropdown] = useState(false)
+  const [menuDropdown, setMenuDropdown] = useState(false);
 
   function toggleMenuDropdown() {
     // e.preventDefault();
-    setMenuDropdown(!menuDropdown)
+    setMenuDropdown(!menuDropdown);
     //console.log(dropdown)
   }
 
-  const ref = useRef()
+  const ref = useRef();
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       // If the menu is open and the clicked target is not within the menu,
       // then close the menu
       if (menuDropdown && ref.current && !ref.current.contains(e.target)) {
-        setMenuDropdown(!menuDropdown)
+        setMenuDropdown(!menuDropdown);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', checkIfClickedOutside)
+    document.addEventListener('mousedown', checkIfClickedOutside);
 
     return () => {
       // Cleanup the event listener
-      document.removeEventListener('mousedown', checkIfClickedOutside)
-    }
-  }, [menuDropdown])
+      document.removeEventListener('mousedown', checkIfClickedOutside);
+    };
+  }, [menuDropdown]);
 
   if (isMobile) {
     return (
@@ -257,7 +257,7 @@ const Header_Dashboard = () => {
           <div />
         )}
       </div>
-    )
+    );
   }
 
   /**Desktop */
@@ -360,7 +360,7 @@ const Header_Dashboard = () => {
         <div />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Header_Dashboard
+export default Header_Dashboard;

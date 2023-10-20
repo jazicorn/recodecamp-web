@@ -1,19 +1,19 @@
-import { useContext, useEffect, useState, useCallback } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { ThemeContext } from '../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 // images
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
-import { IconX, IconCheck } from '@tabler/icons-react'
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
 /** React Redux Hooks */
 //import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 // import {
 //   menuUser,
 // } from '../../redux/slices/dashboardSlice.ts';
@@ -24,68 +24,68 @@ import {
   fetchUserAuth,
   fetchUserStatus,
   fetchUserComponentScreenLoader,
-} from '../../redux/slices/authSlice.ts'
+} from '../../redux/slices/authSlice.ts';
 /** Custom Hooks */
-import { LoadingDashboardLG } from '../../components/dashboard/loading'
+import { LoadingDashboardLG } from '../../components/dashboard/loading';
 /**Constants */
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser'
+import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 interface FormInputs {
-  multipleErrorInput: string
+  multipleErrorInput: string;
 }
 
 const SignIn = () => {
-  const { isMobile } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isMobile } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Initialize Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
-  const screenLoader = useAppSelector(fetchUserComponentScreenLoader)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
+  const screenLoader = useAppSelector(fetchUserComponentScreenLoader);
 
   const { register, handleSubmit } = useForm<FormInputs>({
     criteriaMode: 'all',
-  })
+  });
 
-  const [guestData, setGuestData] = useState()
-  const [auth, setAuth] = useState(false)
+  const [guestData, setGuestData] = useState();
+  const [auth, setAuth] = useState(false);
 
   /**Request Guest Login Info */
   const onSubmit = handleSubmit(async (data) => {
-    await dispatch(userComponentScreenLoader(true))
-    guestLogin(data)
-  })
+    await dispatch(userComponentScreenLoader(true));
+    guestLogin(data);
+  });
 
   /** Guest Login */
   const guestLogin = useCallback(
     async (data) => {
       //dispatch(updateStatus("idle"));
       try {
-        const originalPromiseResult = await dispatch(userLogin(data)).unwrap()
+        const originalPromiseResult = await dispatch(userLogin(data)).unwrap();
         if (originalPromiseResult === undefined || originalPromiseResult.error) {
           //console.log("login status:", status)
           if (status === 'idle') {
-            console.log('❓ Guest | Idle')
+            console.log('❓ Guest | Idle');
           } else if (status === 'loading') {
-            console.log('🔄 Guest | Loading')
+            console.log('🔄 Guest | Loading');
           } else if (status === 'failed') {
-            console.log('🚫 Guest | Login Failed')
+            console.log('🚫 Guest | Login Failed');
           } else if (status === 'succeeded') {
-            console.log('🚫 Guest | Request Returned Error')
+            console.log('🚫 Guest | Request Returned Error');
           } else {
-            console.log('🚫 Guest | Request Failed')
+            console.log('🚫 Guest | Request Failed');
           }
           // Failure Notification
           notifications.show({
@@ -100,12 +100,12 @@ const SignIn = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'red' },
             loading: false,
-          })
+          });
           setTimeout(async () => {
-            await dispatch(userComponentScreenLoader(false))
-          }, '1000')
+            await dispatch(userComponentScreenLoader(false));
+          }, '1000');
         } else {
-          console.log('👍 Guest | Logged In')
+          console.log('👍 Guest | Logged In');
           // Success Notification
           notifications.show({
             id: 'success',
@@ -119,22 +119,22 @@ const SignIn = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'teal' },
             loading: false,
-          })
+          });
           setTimeout(() => {
-            console.log('⏳ Delay | Redirect in 1 second.')
-            navigate('/learn')
-          }, '1000')
+            console.log('⏳ Delay | Redirect in 1 second.');
+            navigate('/learn');
+          }, '1000');
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
     [navigate]
-  )
+  );
 
   setTimeout(async () => {
-    await dispatch(userComponentScreenLoader(false))
-  }, '5000')
+    await dispatch(userComponentScreenLoader(false));
+  }, '5000');
 
   if (screenLoader === true) {
     return (
@@ -145,7 +145,7 @@ const SignIn = () => {
       >
         <LoadingDashboardLG />
       </div>
-    )
+    );
   }
 
   return (
@@ -233,7 +233,7 @@ const SignIn = () => {
         </Transition>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

@@ -1,48 +1,53 @@
 // Button: Logout
 /** React */
-import { useContext, useCallback, useEffect } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useCallback, useEffect } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { Link, useNavigate } from 'react-router-dom';
 /** React Redux */
-import { useAppDispatch } from '../../redux/reduxHooks.ts'
+import { useAppDispatch } from '../../redux/reduxHooks.ts';
 //import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
 //import type { RootState } from '../../redux/store.ts';
-import { userAuthMe, userLogout, userLandingScreenLoader, fetchUserScreenLoader } from '../../redux/slices/authSlice.ts'
+import {
+  userAuthMe,
+  userLogout,
+  userLandingScreenLoader,
+  fetchUserScreenLoader,
+} from '../../redux/slices/authSlice.ts';
 /** Data */
-import { DEFAULT_USER } from '../../utils/constants.ts'
+import { DEFAULT_USER } from '../../utils/constants.ts';
 /** Custom Hooks */
 //import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition'
+import Transition from '../../hooks/useTransition';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /** Images */
-import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg'
+import { ReactComponent as Rocket } from '../../assets/icons/others/rocket-right-svgrepo-com.svg';
 
 const Button_User_Login = () => {
   /** Custom Hooks | Adjust Window Size*/
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
 
   /** Custom Hooks | Dark Mode */
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Initialize Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Guest AuthMe */
   const guestAuthMe = useCallback(async (e) => {
     try {
-      const originalPromiseResult = await dispatch(userAuthMe()).unwrap()
+      const originalPromiseResult = await dispatch(userAuthMe()).unwrap();
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
-        console.log('⏳ Delay | Redirect')
-        navigate('/auth/guest/login')
+        console.log('⏳ Delay | Redirect');
+        navigate('/auth/guest/login');
       } else {
-        console.log('🧑 Guest | Detected')
+        console.log('🧑 Guest | Detected');
         // Success Notification
         notifications.show({
           id: 'success',
@@ -56,17 +61,17 @@ const Button_User_Login = () => {
           style: { backgroundColor: 'white' },
           sx: { backgroundColor: 'teal' },
           loading: false,
-        })
+        });
         setTimeout(() => {
-          console.log('⏳ Delay | Redirect in 1 second.')
-          navigate('/learn')
-        }, '800')
+          console.log('⏳ Delay | Redirect in 1 second.');
+          navigate('/learn');
+        }, '800');
       }
     } catch (error) {
       //console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
   return (
     <button
@@ -75,7 +80,7 @@ const Button_User_Login = () => {
     >
       Login
     </button>
-  )
-}
+  );
+};
 
-export default Button_User_Login
+export default Button_User_Login;

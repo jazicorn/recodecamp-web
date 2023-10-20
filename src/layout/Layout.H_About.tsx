@@ -1,18 +1,18 @@
-import { useContext, useState } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
+import { useContext, useState } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 /**Hooks */
-import Transition from '../hooks/useTransition'
+import Transition from '../hooks/useTransition';
 //import useWindowSize from '../hooks/useWindowSize';
 
 const H_About = () => {
   //const { isMobile } = useWindowSize();
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
-  const [subject, setSubject] = useState('Practice')
+  const [subject, setSubject] = useState('Practice');
 
   function getSubject(useSubject) {
-    setSubject(useSubject)
+    setSubject(useSubject);
   }
 
   return (
@@ -190,7 +190,7 @@ const H_About = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default H_About
+export default H_About;

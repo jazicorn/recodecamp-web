@@ -1,47 +1,47 @@
 // Component Title: Dashboard Console
-import { ThemeContext } from '../../../context/ThemeContext'
-import Transition from '../../../hooks/useTransition'
+import { ThemeContext } from '../../../context/ThemeContext';
+import Transition from '../../../hooks/useTransition';
 //import { Center } from '@mantine/core';
 /** React Hooks */
-import { useContext, useState, useEffect, useCallback } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react';
 /** React Redux */
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts'
-import type { RootState } from '../../../redux/store.ts'
-import { menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
+import { menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts';
 
 const D_Console = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Retrieve ConsoleMessage From Redux State */
-  const getMessage = useAppSelector((state: RootState) => state?.dashboard?.consoleMessage)
+  const getMessage = useAppSelector((state: RootState) => state?.dashboard?.consoleMessage);
 
   /** Store Message from Redux in React State */
-  const [message, setMessage] = useState()
+  const [message, setMessage] = useState();
 
   const getMessageFormatted = useCallback(() => {
     // Format String
     if (getMessage !== undefined && typeof getMessage === 'string' && getMessage.length > 1) {
-      const formatted = getMessage.split('\n')
-      return formatted
+      const formatted = getMessage.split('\n');
+      return formatted;
     }
-  }, [getMessage])
+  }, [getMessage]);
 
   useEffect(() => {
-    setMessage(getMessageFormatted)
-  }, [getMessage, getMessageFormatted])
+    setMessage(getMessageFormatted);
+  }, [getMessage, getMessageFormatted]);
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Clear Console */
   const clearConsole = useCallback(
     (e) => {
-      e.preventDefault()
-      dispatch(menuConsoleMessage(''))
+      e.preventDefault();
+      dispatch(menuConsoleMessage(''));
     },
     [dispatch]
-  )
+  );
 
   return (
     <main
@@ -76,13 +76,13 @@ const D_Console = () => {
         {message !== undefined && (
           <ul className="tw-max-h-[100px]">
             {message.map((item, i) => {
-              return <li key={i}>{item}</li>
+              return <li key={i}>{item}</li>;
             })}
           </ul>
         )}
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default D_Console
+export default D_Console;

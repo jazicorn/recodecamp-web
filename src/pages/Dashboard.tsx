@@ -1,26 +1,26 @@
 // Page: Dashboard
-import { useContext, useEffect, useState, useCallback } from 'react'
-import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom'
-import type { Location, Params } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
+import type { Location, Params } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 /** Custom Hooks */
-import useWindowSize from '../hooks/useWindowSize'
+import useWindowSize from '../hooks/useWindowSize';
 //import Transition from '../hooks/useTransition';
 /** Components */
-import Header from '../components/header/Header_Dashboard'
-import D_Header from '../components/dashboard/D_Header'
-import D_Navigation from '../components/dashboard/D_Navigation'
-import D_Navigation_Mobile from '../components/dashboard/D_Navigation_Mobile'
+import Header from '../components/header/Header_Dashboard';
+import D_Header from '../components/dashboard/D_Header';
+import D_Navigation from '../components/dashboard/D_Navigation';
+import D_Navigation_Mobile from '../components/dashboard/D_Navigation_Mobile';
 //import D_Route from '../components/dashboard/D_Route';
 //import D_Route_User_Editor from '../components/dashboard/D_Route_User_Editor';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
-import { IconX, IconCheck } from '@tabler/icons-react'
-import Emoji from 'react-emojis'
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
+import Emoji from 'react-emojis';
 /** React Redux Hooks */
 //import { useAppDispatch } from '../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../redux/reduxHooks.ts'
-import type { RootState } from '../redux/store.ts'
+import { useAppDispatch, useAppSelector } from '../redux/reduxHooks.ts';
+import type { RootState } from '../redux/store.ts';
 import {
   updateUser,
   userLogout,
@@ -31,69 +31,69 @@ import {
   fetchUserAuth,
   fetchUserStatus,
   fetchUserScreenLoader,
-} from '../redux/slices/authSlice.ts'
+} from '../redux/slices/authSlice.ts';
 /**Custom Helpers */
-import { _DEFAULT_USER } from '../utils/constants/constantsUser'
-import { LoadingDashboardXL } from '../components/dashboard/loading'
+import { _DEFAULT_USER } from '../utils/constants/constantsUser';
+import { LoadingDashboardXL } from '../components/dashboard/loading';
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const getRoutePath = (location: Location, params: Params): string => {
-  const { pathname } = location
+  const { pathname } = location;
   if (!Object.keys(params).length) {
-    return pathname // we don't need to replace anything
+    return pathname; // we don't need to replace anything
   }
-  let path = pathname
+  let path = pathname;
   Object.entries(params).forEach(([paramName, paramValue]) => {
     if (paramValue) {
-      path = path.replace(paramValue, `:${paramName}`)
+      path = path.replace(paramValue, `:${paramName}`);
     }
-  })
-  return path
-}
+  });
+  return path;
+};
 
 const Dashboard = () => {
-  const { isDesktopMDXL, isDesktopXL } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isDesktopMDXL, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /**Detect User Browser Path */
-  const location = useLocation()
-  const params = useParams()
+  const location = useLocation();
+  const params = useParams();
 
-  const [path, setPath] = useState()
+  const [path, setPath] = useState();
 
   useEffect(() => {
-    setPath(getRoutePath(location, params))
-  }, [location, params])
+    setPath(getRoutePath(location, params));
+  }, [location, params]);
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
-  const fetchScreenLoader = useAppSelector(fetchUserScreenLoader)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
+  const fetchScreenLoader = useAppSelector(fetchUserScreenLoader);
 
   /**Detect Auth */
-  const [auth, setAuth] = useState(true)
+  const [auth, setAuth] = useState(true);
 
   /** Guest AuthMe */
   const guestAuthMe = useCallback(async () => {
     try {
       /** Fetch User Request and return(unwrap) API Request Result */
-      const originalPromiseResult = await dispatch(userAuthMe()).unwrap()
+      const originalPromiseResult = await dispatch(userAuthMe()).unwrap();
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
-        console.log('🚫 Guest | Invalid User')
-        setAuth(false)
+        console.log('🚫 Guest | Invalid User');
+        setAuth(false);
         // Failure Notification
         notifications.show({
           id: 'failure',
@@ -107,19 +107,19 @@ const Dashboard = () => {
           style: { backgroundColor: 'white' },
           sx: { backgroundColor: 'red' },
           loading: false,
-        })
+        });
         setTimeout(() => {
-          navigate('/auth/guest/login')
-        }, '600')
+          navigate('/auth/guest/login');
+        }, '600');
       } else {
-        setLoading(true)
+        setLoading(true);
         /** Fetch Verification Request and return(unwrap) API Request Result */
-        const verifiedPromiseResult = await dispatch(userVerify()).unwrap()
+        const verifiedPromiseResult = await dispatch(userVerify()).unwrap();
         //console.log("verifiedPromiseResult:\n", verifiedPromiseResult)
         if (verifiedPromiseResult === undefined || verifiedPromiseResult.error) {
-          console.log('🚫 Guest | Invalid User')
+          console.log('🚫 Guest | Invalid User');
           /** Set Authentication to false if Verification Error */
-          setAuth(false)
+          setAuth(false);
           // Failure Notification
           notifications.show({
             id: 'failure',
@@ -133,18 +133,18 @@ const Dashboard = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'red' },
             loading: false,
-          })
+          });
           setTimeout(async () => {
             /** Logout If Authentication Error */
-            await dispatch(userLogout()).unwrap()
+            await dispatch(userLogout()).unwrap();
             /** Redirect to Not Found Page */
-            await navigate('/')
-          }, '400')
+            await navigate('/');
+          }, '400');
         } else if (Object.keys(verifiedPromiseResult).length === 0) {
-          setLoading(true)
-          console.log('❓ Guest | Not Found')
+          setLoading(true);
+          console.log('❓ Guest | Not Found');
           /** Set Authentication to false if Verification Error */
-          setAuth(false)
+          setAuth(false);
           // Failure Notification
           notifications.show({
             id: 'failure',
@@ -158,16 +158,16 @@ const Dashboard = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'gray' },
             loading: false,
-          })
+          });
           setTimeout(async () => {
             /** Logout If Authentication Error */
-            await dispatch(userLogout()).unwrap()
+            await dispatch(userLogout()).unwrap();
             /** Redirect to HomePage */
-            await navigate('/404')
-          }, '400')
+            await navigate('/404');
+          }, '400');
         } else {
-          console.log('👍 Guest | Verified')
-          setAuth(true)
+          console.log('👍 Guest | Verified');
+          setAuth(true);
           // Success Notification
           notifications.show({
             id: 'success',
@@ -181,25 +181,25 @@ const Dashboard = () => {
             style: { backgroundColor: 'white' },
             sx: { backgroundColor: 'teal' },
             loading: true,
-          })
+          });
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    guestAuthMe()
-  }, [])
+    guestAuthMe();
+  }, []);
 
   setTimeout(async () => {
-    setLoading(false)
-  }, '1000')
+    setLoading(false);
+  }, '1000');
 
   setTimeout(async () => {
-    dispatch(screenLoader(false))
-  }, '1000')
+    dispatch(screenLoader(false));
+  }, '1000');
 
   return (
     <div className="tw-h-screen">
@@ -266,7 +266,7 @@ const Dashboard = () => {
         )}
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

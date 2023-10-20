@@ -1,40 +1,40 @@
 // Component Title: Dashboard Problem
 /**random string generator */
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 /** React Hooks */
-import { useContext, useCallback, useEffect } from 'react'
+import { useContext, useCallback, useEffect } from 'react';
 /** Custom Hooks */
-import { ThemeContext } from '../../../context/ThemeContext'
-import { Transition2 } from '../../../hooks/useTransition'
+import { ThemeContext } from '../../../context/ThemeContext';
+import { Transition2 } from '../../../hooks/useTransition';
 /*Constants*/
-import { _LANGUAGES_SHORTHAND } from '../../../utils/constants'
+import { _LANGUAGES_SHORTHAND } from '../../../utils/constants';
 /** React Redux Hooks */
-import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts'
-import { menuQuestion } from '../../../redux/slices/dashboardSlice.ts'
+import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { menuQuestion } from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const D_Problem = () => {
   /** Custom Hooks */
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   /** Retrieve Category From Redux State */
-  const dispatch = useAppDispatch()
-  const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute)
-  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language)
+  const dispatch = useAppDispatch();
+  const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute);
+  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language);
 
-  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()]
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
 
   /**Get question url */
-  let url
+  let url;
   if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
   } else {
-    url = `/api/${currentLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`;
   }
 
   /** Retrieve Category Based Question */
@@ -47,14 +47,14 @@ const D_Problem = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      })
-      const resJSON = await result.json()
+      });
+      const resJSON = await result.json();
       //console.log("resJSON", resJSON);
-      return resJSON
+      return resJSON;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   /** Generate Question */
   const { isSuccess, data, refetch } = useQuery({
@@ -63,24 +63,24 @@ const D_Problem = () => {
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
-  })
+  });
 
   /** Save Question to Redux Store */
   useEffect(() => {
     if (data !== undefined) {
       //console.log("data", data)
-      dispatch(menuQuestion(data.data))
+      dispatch(menuQuestion(data.data));
     }
-  }, [dispatch, data])
+  }, [dispatch, data]);
 
   /** Retrive Question from Redux Store*/
-  const getMenuQuestion = useAppSelector((state: RootState) => state?.dashboard?.question)
+  const getMenuQuestion = useAppSelector((state: RootState) => state?.dashboard?.question);
 
   /** Generate New Question */
   const newQuestion = () => {
     // manually refetch
-    refetch()
-  }
+    refetch();
+  };
 
   /** Render if Successful */
   if (isSuccess)
@@ -135,8 +135,8 @@ const D_Problem = () => {
                       <h6 className="tw-p-1 tw-text-xl tw-text-campfire-blue">Task</h6>
                       <p className="tw-pl-3 tw-pt-1 tw-text-base">
                         {getMenuQuestion._QUESTION_TASK.split(' ').map((word, index) => {
-                          const regex = /[""]/g
-                          const wordStrip = word.replace(regex, '')
+                          const regex = /[""]/g;
+                          const wordStrip = word.replace(regex, '');
 
                           if (word.match(regex)) {
                             return (
@@ -151,7 +151,7 @@ const D_Problem = () => {
                                   {wordStrip}
                                 </span>
                               </span>
-                            )
+                            );
                           }
 
                           return (
@@ -159,7 +159,7 @@ const D_Problem = () => {
                               {' '}
                               {word}{' '}
                             </span>
-                          )
+                          );
                         })}
                       </p>
                     </div>
@@ -185,7 +185,7 @@ const D_Problem = () => {
                 tw-pl-3 tw-pt-1 tw-text-sm tw-flex tw-flex-col tw-list-disc`}
                   >
                     {Object.entries(getMenuQuestion._QUESTION_REFS).map((entry) => {
-                      const [key, value] = entry
+                      const [key, value] = entry;
                       return (
                         <li key={nanoid(4)} className="tw-ml-4">
                           <a
@@ -198,7 +198,7 @@ const D_Problem = () => {
                             {key}
                           </a>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 )}
@@ -207,7 +207,7 @@ const D_Problem = () => {
           </span>
         </article>
       </div>
-    )
-}
+    );
+};
 
-export default D_Problem
+export default D_Problem;

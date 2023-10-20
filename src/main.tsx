@@ -1,49 +1,49 @@
 /**CSS*/
-import './styles/tailwind.input.css'
-import { MantineProvider } from '@mantine/core'
-import { Notifications } from '@mantine/notifications'
+import './styles/tailwind.input.css';
+import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 /**Custom Day/Night Context*/
-import { ThemeProvider } from './context/ThemeContext.tsx'
+import { ThemeProvider } from './context/ThemeContext.tsx';
 /**React*/
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 /**React Redux*/
-import { Provider } from 'react-redux'
-import store from './redux/store.ts'
+import { Provider } from 'react-redux';
+import store from './redux/store.ts';
 /**React Router*/
-import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route } from 'react-router-dom'
-import ErrorBoundary from './ErrorBoundary.tsx'
+import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route } from 'react-router-dom';
+import ErrorBoundary from './ErrorBoundary.tsx';
 /**React Query */
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 /**Pages*/
-import Home from './pages/Home.tsx'
-import Auth from './pages/Auth.tsx'
-import Dashboard from './pages/Dashboard.tsx'
-import Profile from './pages/Profile.tsx'
-import NotFound from './pages/NotFound.tsx'
+import Home from './pages/Home.tsx';
+import Auth from './pages/Auth.tsx';
+import Dashboard from './pages/Dashboard.tsx';
+import Profile from './pages/Profile.tsx';
+import NotFound from './pages/NotFound.tsx';
 // import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
 /**Auth Components */
-import A_Admin_Login from './components/auth/A_Admin.Login.tsx'
-import A_Admin_Register from './components/auth/A_Admin.Register.tsx'
-import A_Guest_Register from './components/auth/A_Guest.Register.tsx'
-import A_Guest_Login from './components/auth/A_Guest.Login.tsx'
-import A_User_Register from './components/auth/A_User.Register.tsx'
-import A_User_Login from './components/auth/A_User.Login.tsx'
+import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
+import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
+import A_Guest_Register from './components/auth/A_Guest.Register.tsx';
+import A_Guest_Login from './components/auth/A_Guest.Login.tsx';
+import A_User_Register from './components/auth/A_User.Register.tsx';
+import A_User_Login from './components/auth/A_User.Login.tsx';
 /**Layouts | Home Pages*/
-import H_Home from './layout/Layout.H_Banner'
+import H_Home from './layout/Layout.H_Banner';
 //import H_About from './layout/Layout.H_About';
 /**Layouts | Dashboard Pages*/
-import D_Home from './layout/dashboard/Layout.D_Home'
-import D_Code from './layout/dashboard/Layout.D_Code'
-import D_Categories from './layout/dashboard/Layout.D_Categories'
-import D_Plans from './layout/dashboard/Layout.D_Plans'
-import D_Calendar from './layout/dashboard/Layout.D_Calendar'
-import D_Docs from './layout/dashboard/Layout.D_Docs'
-import D_Notes from './layout/dashboard/Layout.D_Notes'
-import D_Search from './layout/dashboard/Layout.D_Search'
-import D_Settings from './layout/dashboard/Layout.D_Settings'
-import D_Settings_User from './layout/dashboard/Layout.D_Settings_User'
+import D_Home from './layout/dashboard/Layout.D_Home';
+import D_Code from './layout/dashboard/Layout.D_Code';
+import D_Categories from './layout/dashboard/Layout.D_Categories';
+import D_Plans from './layout/dashboard/Layout.D_Plans';
+import D_Calendar from './layout/dashboard/Layout.D_Calendar';
+import D_Docs from './layout/dashboard/Layout.D_Docs';
+import D_Notes from './layout/dashboard/Layout.D_Notes';
+import D_Search from './layout/dashboard/Layout.D_Search';
+import D_Settings from './layout/dashboard/Layout.D_Settings';
+import D_Settings_User from './layout/dashboard/Layout.D_Settings_User';
 
 const router = Router(
   createRoutesFromElements(
@@ -86,10 +86,10 @@ const router = Router(
       <Route path="*" element={<Home />} errorElement={<ErrorBoundary />} />
     </Route>
   )
-)
+);
 
 // Create a react-query client
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -105,4 +105,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
-)
+);

@@ -1,10 +1,10 @@
 // Dashboard Banner
-import { useContext, useCallback } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import { Link, useNavigate } from 'react-router-dom'
-import { ReactComponent as Rocket } from '../../../assets/icons/others/rocket-right-svgrepo-com.svg'
+import { useContext, useCallback } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { ReactComponent as Rocket } from '../../../assets/icons/others/rocket-right-svgrepo-com.svg';
 //import useWindowSize from '../../../hooks/useWindowSize';
-import Transition from '../../../hooks/useTransition'
+import Transition from '../../../hooks/useTransition';
 //icons
 import {
   IconCalendar,
@@ -18,28 +18,28 @@ import {
   IconSearch,
   IconBook2,
   IconUser,
-} from '@tabler/icons-react'
-import { removeTokenFromLocalStorage } from '../../../utils/common'
-import { useAppDispatch } from '../../../redux/reduxHooks.ts'
+} from '@tabler/icons-react';
+import { removeTokenFromLocalStorage } from '../../../utils/common';
+import { useAppDispatch } from '../../../redux/reduxHooks.ts';
 //import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
 //import type { RootState } from '../../redux/store.ts';
-import { menuUser } from '../../../redux/slices/dashboardSlice.ts'
-import { DEFAULT_USER } from '../../../utils/constants.ts'
+import { menuUser } from '../../../redux/slices/dashboardSlice.ts';
+import { DEFAULT_USER } from '../../../utils/constants.ts';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /** Button: Logout */
-import Button_User_Logout from '../../buttons/Button_User_Logout'
+import Button_User_Logout from '../../buttons/Button_User_Logout';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const D_Banner = () => {
   //const { isMobile, isDesktopMDLG, isDesktopXL } = useWindowSize();
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <div
@@ -203,7 +203,7 @@ const D_Banner = () => {
         </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_Banner
+export default D_Banner;

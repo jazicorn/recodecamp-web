@@ -1,22 +1,22 @@
 /** React */
-import { useContext, useState, useEffect, useCallback } from 'react'
-import { Link, useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useContext, useState, useEffect, useCallback } from 'react';
+import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 /** Custom Hooks */
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
 /** Icons */
-import { IconMenu2 } from '@tabler/icons-react'
-import { ThemeContext } from '../../context/ThemeContext'
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg'
-import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common'
+import { IconMenu2 } from '@tabler/icons-react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
+import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
+import { removeTokenFromLocalStorage, getTokenFromLocalStorage } from '../../utils/common';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 /** Redux */
 //import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import {
   validUser,
   updateUser,
@@ -27,154 +27,154 @@ import {
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
-} from '../../redux/slices/authSlice.ts'
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser.ts'
+} from '../../redux/slices/authSlice.ts';
+import { _DEFAULT_USER } from '../../utils/constants/constantsUser.ts';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
-import { Loader } from '@mantine/core'
-import { IconX, IconCheck } from '@tabler/icons-react'
+import { notifications } from '@mantine/notifications';
+import { Loader } from '@mantine/core';
+import { IconX, IconCheck } from '@tabler/icons-react';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /** Buttons: Auth */
-import Button_User_Logout from '../buttons/Button_User_Logout'
-import Button_User_Login from '../buttons/Button_User_Login'
+import Button_User_Logout from '../buttons/Button_User_Logout';
+import Button_User_Login from '../buttons/Button_User_Login';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 /** Get Browser Route */
 const getRoutePath = (location: Location, params: Params): string => {
-  const { pathname } = location
+  const { pathname } = location;
   if (!Object.keys(params).length) {
-    return pathname // we don't need to replace anything
+    return pathname; // we don't need to replace anything
   }
-  let path = pathname
+  let path = pathname;
   Object.entries(params).forEach(([paramName, paramValue]) => {
     if (paramValue) {
-      path = path.replace(paramValue, `:${paramName}`)
+      path = path.replace(paramValue, `:${paramName}`);
     }
-  })
-  return path
-}
+  });
+  return path;
+};
 
 /** Refresh Page */
 const refreshPage = () => {
-  window.location.reload(false)
-}
+  window.location.reload(false);
+};
 
 /** Component | Header */
 const Header = () => {
-  const { isMobile } = useWindowSize()
+  const { isMobile } = useWindowSize();
 
   /** Set User Preferences */
-  const theme = useContext(ThemeContext)
-  const darkMode = theme.state.darkMode
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   //turn darkmode on and off
   const toggleTheme = () => {
     if (darkMode) {
-      theme.dispatch({ type: 'LIGHTMODE', darkMode: false })
-      localStorage.theme = 'light'
+      theme.dispatch({ type: 'LIGHTMODE', darkMode: false });
+      localStorage.theme = 'light';
     } else {
-      theme.dispatch({ type: 'DARKMODE', darkMode: true })
-      localStorage.theme = 'dark'
+      theme.dispatch({ type: 'DARKMODE', darkMode: true });
+      localStorage.theme = 'dark';
     }
-  }
+  };
 
   /** Get Route Parameters */
-  const location = useLocation()
-  const params = useParams()
+  const location = useLocation();
+  const params = useParams();
 
-  const [path, setPath] = useState()
+  const [path, setPath] = useState();
 
   useEffect(() => {
-    setPath(getRoutePath(location, params))
-  }, [location, params])
+    setPath(getRoutePath(location, params));
+  }, [location, params]);
 
   const pagesPath = () => {
     if (path !== '/') {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
   const homePath = () => {
     if (path === '/') {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
-  const pathFilter = pagesPath()
+  const pathFilter = pagesPath();
 
-  const [menu, setMenu] = useState(true)
+  const [menu, setMenu] = useState(true);
 
   function isMenu(e) {
-    e.preventDefault()
-    setMenu(!menu)
-    console.log(menu)
+    e.preventDefault();
+    setMenu(!menu);
+    console.log(menu);
   }
 
   useEffect(() => {
-    menu
-  }, [menu])
+    menu;
+  }, [menu]);
 
   /** Loading Screen */
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   /** Button Loader */
-  const [loadingButton, setLoadingButton] = useState(true)
+  const [loadingButton, setLoadingButton] = useState(true);
 
   setTimeout(() => {
-    setLoadingButton(false)
-  }, '1000')
+    setLoadingButton(false);
+  }, '1000');
 
   /** Initialize Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
 
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(false);
 
   /** Guest AuthMe */
   const guestAuthMe = useCallback(async () => {
-    setAuth(false)
+    setAuth(false);
     try {
-      const originalPromiseResult = await dispatch(userAuthMe()).unwrap()
+      const originalPromiseResult = await dispatch(userAuthMe()).unwrap();
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
-        setAuth(false)
+        setAuth(false);
         if (status === 'idle') {
-          console.log('❓ Guest | Idle')
+          console.log('❓ Guest | Idle');
         } else if (status === 'loading') {
-          console.log('🔄 Guest | Loading')
-          setLoadingButton(true)
+          console.log('🔄 Guest | Loading');
+          setLoadingButton(true);
         } else if (status === 'failed') {
-          console.log('🚫 Guest | Not Detected')
+          console.log('🚫 Guest | Not Detected');
         } else if (status === 'succeeded') {
-          console.log('🚫 Guest | Not Detected')
+          console.log('🚫 Guest | Not Detected');
         } else {
-          console.log('🚫 Guest | Not Detected')
+          console.log('🚫 Guest | Not Detected');
         }
       } else {
-        setAuth(true)
-        console.log('🧑 Guest | Detected')
+        setAuth(true);
+        console.log('🧑 Guest | Detected');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    guestAuthMe()
-  }, [])
+    guestAuthMe();
+  }, []);
 
   if (isMobile) {
     return (
@@ -292,7 +292,7 @@ const Header = () => {
           </div>
         )}
       </div>
-    )
+    );
   }
 
   return (
@@ -397,7 +397,7 @@ const Header = () => {
         </nav>
       </header>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

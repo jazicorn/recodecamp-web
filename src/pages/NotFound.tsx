@@ -1,16 +1,16 @@
-import { useContext } from 'react'
-import { Outlet } from 'react-router-dom'
-import { ThemeContext } from '../context/ThemeContext'
-import Home_Mobile from './Home.Mobile'
+import { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
+import Home_Mobile from './Home.Mobile';
 /**Components */
-import Header from '../components/header/Header'
+import Header from '../components/header/Header';
 /**Hooks */
-import Transition from '../hooks/useTransition'
-import useWindowSize from '../hooks/useWindowSize'
+import Transition from '../hooks/useTransition';
+import useWindowSize from '../hooks/useWindowSize';
 
 function NotFound() {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
   return (
     <div className="tw-dark">
@@ -45,7 +45,7 @@ function NotFound() {
         </footer>
       </article>
     </div>
-  )
+  );
 }
 
-export default NotFound
+export default NotFound;

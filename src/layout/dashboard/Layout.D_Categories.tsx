@@ -1,52 +1,52 @@
 // Page: Dashboard Categories
 /**React */
-import { useContext, useEffect, useState, useCallback } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 /*Custom Hooks*/
-import Transition from '../../hooks/useTransition'
-import useWindowSize from '../../hooks/useWindowSize'
+import Transition from '../../hooks/useTransition';
+import useWindowSize from '../../hooks/useWindowSize';
 /*Constants*/
-import { _LANGUAGES_SHORTHAND } from '../../utils/constants'
+import { _LANGUAGES_SHORTHAND } from '../../utils/constants';
 /**Custom Components */
-import ErrorDashboard from '../../components/dashboard/error'
-import { LoadingDashboardXL } from '../../components/dashboard/loading'
-import D_Category from '../../components/dashboard/dashboard-categories/D_Category'
-import D_Category_Menu from '../../components/dashboard/dashboard-categories/D_Category_Menu'
-import D_Route from '../../components/dashboard/D_Route'
+import ErrorDashboard from '../../components/dashboard/error';
+import { LoadingDashboardXL } from '../../components/dashboard/loading';
+import D_Category from '../../components/dashboard/dashboard-categories/D_Category';
+import D_Category_Menu from '../../components/dashboard/dashboard-categories/D_Category_Menu';
+import D_Route from '../../components/dashboard/D_Route';
 // import D_Languages from '../../components/dashboard/dashboard-categories/D_Languages';
 /**React Query */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 /** React Redux Hooks */
-import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
-import { menuLanguage, menuCategoryInfo } from '../../redux/slices/dashboardSlice.ts'
+import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
+import { menuLanguage, menuCategoryInfo } from '../../redux/slices/dashboardSlice.ts';
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Layout_D_Categories = () => {
   /** Custom Hooks */
-  const { isDesktopLGXL, isDesktopXL } = useWindowSize()
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { isDesktopLGXL, isDesktopXL } = useWindowSize();
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   /** Retrieve Category From Redux State */
-  const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute)
-  const getMenuLanguageDefault = useAppSelector((state: RootState) => state?.dashboard?.languageDefault)
-  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language)
-  const getMenuCategory = useAppSelector((state: RootState) => state?.dashboard?.category)
-  const getMenuCategoryInfo = useAppSelector((state: RootState) => state?.dashboard?.categoryInfo)
-  const getMenuUser = useAppSelector((state: RootState) => state?.dashboard?.user)
+  const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute);
+  const getMenuLanguageDefault = useAppSelector((state: RootState) => state?.dashboard?.languageDefault);
+  const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language);
+  const getMenuCategory = useAppSelector((state: RootState) => state?.dashboard?.category);
+  const getMenuCategoryInfo = useAppSelector((state: RootState) => state?.dashboard?.categoryInfo);
+  const getMenuUser = useAppSelector((state: RootState) => state?.dashboard?.user);
 
-  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()]
+  const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
 
   /**Get question url */
-  let url
+  let url;
   if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`
+    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
   } else {
-    url = `/api/${currentLanguage}/${getMenuRoute}`
+    url = `/api/${currentLanguage}/${getMenuRoute}`;
     //console.log(url)
   }
 
@@ -60,14 +60,14 @@ const Layout_D_Categories = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-      })
-      const resJSON = await result.json()
+      });
+      const resJSON = await result.json();
       //console.log("resJSON",resJSON);
-      return resJSON
+      return resJSON;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   /** Generate Question */
   const { refetch } = useQuery({
@@ -76,34 +76,34 @@ const Layout_D_Categories = () => {
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
-  })
+  });
 
   async function setLanguage() {
     if (getMenuLanguage === undefined || getMenuLanguage.length === 0) {
       if (getMenuUser._DEFAULT_LANGUAGE === undefined || getMenuUser._DEFAULT_LANGUAGE.length === 0) {
-        await dispatch(menuLanguage(getMenuLanguageDefault))
-        await refetch()
+        await dispatch(menuLanguage(getMenuLanguageDefault));
+        await refetch();
       } else {
         //console.log("getMenuUser._DEFAULT_LANGUAGE",getMenuUser._DEFAULT_LANGUAGE)
-        await dispatch(menuLanguage(getMenuUser._DEFAULT_LANGUAGE))
-        await refetch()
+        await dispatch(menuLanguage(getMenuUser._DEFAULT_LANGUAGE));
+        await refetch();
       }
     }
   }
 
   async function getCategories() {
     try {
-      await setLanguage()
-      let res
+      await setLanguage();
+      let res;
       if (import.meta.env.PROD) {
-        res = await fetch(`${baseURL}/categories/${currentLanguage}`)
+        res = await fetch(`${baseURL}/categories/${currentLanguage}`);
       } else {
-        res = await fetch(`api/categories/${currentLanguage}`)
+        res = await fetch(`api/categories/${currentLanguage}`);
       }
-      const resJSON = res.json()
-      return resJSON
+      const resJSON = res.json();
+      return resJSON;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -114,29 +114,29 @@ const Layout_D_Categories = () => {
     refetchOnWindowFocus: false,
     staleTime: 100 * (60 * 1000),
     cacheTime: 100 * (60 * 1000),
-  })
+  });
 
   const fetchCategoryInfo = useCallback(async () => {
-    let results
+    let results;
     data?.data.find((item) => {
       if (item.category[0] === getMenuCategory) {
-        results = item
+        results = item;
       }
-    })
-    await dispatch(menuCategoryInfo(results))
-    await refetch()
-  }, [data?.data, dispatch, getMenuCategory, refetch])
+    });
+    await dispatch(menuCategoryInfo(results));
+    await refetch();
+  }, [data?.data, dispatch, getMenuCategory, refetch]);
 
   useEffect(() => {
-    fetchCategoryInfo()
-  }, [data, dispatch, fetchCategoryInfo, getMenuCategory, getMenuCategoryInfo])
+    fetchCategoryInfo();
+  }, [data, dispatch, fetchCategoryInfo, getMenuCategory, getMenuCategoryInfo]);
 
   /**Delay Loading Screen */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
-    setLoading(false)
-  }, '600')
+    setLoading(false);
+  }, '600');
 
   /** Render if Loading */
   if (isFetching || isLoading)
@@ -148,9 +148,9 @@ const Layout_D_Categories = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
 
-  if (isError) return <ErrorDashboard error={error.message} />
+  if (isError) return <ErrorDashboard error={error.message} />;
 
   if (isSuccess && loading) {
     return (
@@ -161,7 +161,7 @@ const Layout_D_Categories = () => {
       >
         <LoadingDashboardXL />
       </div>
-    )
+    );
   }
 
   if (isSuccess && !loading) {
@@ -228,8 +228,8 @@ const Layout_D_Categories = () => {
           </Transition>
         )}
       </>
-    )
+    );
   }
-}
+};
 
-export default Layout_D_Categories
+export default Layout_D_Categories;

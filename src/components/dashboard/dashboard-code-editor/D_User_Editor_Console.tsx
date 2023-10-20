@@ -1,11 +1,11 @@
 // Dashboard Console
-import { useContext } from 'react'
-import { ThemeContext } from '../../../context/ThemeContext'
-import Transition from '../../../hooks/useTransition'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import Transition from '../../../hooks/useTransition';
 
 const D_User_Editor_Console = () => {
-  const { state } = useContext(ThemeContext)
-  const darkMode = state.darkMode
+  const { state } = useContext(ThemeContext);
+  const darkMode = state.darkMode;
   return (
     <div className={`${darkMode ? '' : ''} tw-text-campfire-blue tw-flex tw-flex-col tw-h-full tw-p-2`}>
       <div
@@ -40,7 +40,7 @@ const D_User_Editor_Console = () => {
         </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default D_User_Editor_Console
+export default D_User_Editor_Console;

@@ -1,24 +1,24 @@
 // Component: Header_Logout
 /** React Imports */
-import { useContext, useCallback, useState, useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useCallback, useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize'
-import Transition from '../../hooks/useTransition'
-import { useLocation, useParams } from 'react-router-dom'
+import useWindowSize from '../../hooks/useWindowSize';
+import Transition from '../../hooks/useTransition';
+import { useLocation, useParams } from 'react-router-dom';
 // icons
-import { IconMenu2, IconUserCircle, IconUser, IconSettings, IconDeviceDesktop } from '@tabler/icons-react'
-import { ThemeContext } from '../../context/ThemeContext'
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg'
-import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg'
-import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg'
+import { IconMenu2, IconUserCircle, IconUser, IconSettings, IconDeviceDesktop } from '@tabler/icons-react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Moon } from '../../assets/icons/settings/moon-cloudy-svgrepo-com.svg';
+import { ReactComponent as Sun } from '../../assets/icons/settings/sun-svgrepo-com.svg';
 /**Icons */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 /** */
 //import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts'
-import type { RootState } from '../../redux/store.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
+import type { RootState } from '../../redux/store.ts';
 import {
   validUser,
   updateUser,
@@ -26,71 +26,71 @@ import {
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
-} from '../../redux/slices/authSlice.ts'
-import { DEFAULT_USER } from '../../utils/constants.ts'
+} from '../../redux/slices/authSlice.ts';
+import { DEFAULT_USER } from '../../utils/constants.ts';
 /** Notifications */
-import { notifications } from '@mantine/notifications'
-import { IconX, IconCheck } from '@tabler/icons-react'
+import { notifications } from '@mantine/notifications';
+import { IconX, IconCheck } from '@tabler/icons-react';
 //import { IconX, IconCheck } from '@tabler/icons-react';
-import Emoji from 'react-emojis'
+import Emoji from 'react-emojis';
 /** Buttons: Auth */
-import Button_User_Logout from '../buttons/Button_User_Logout'
-import Button_User_Login from '../buttons/Button_User_Login'
+import Button_User_Logout from '../buttons/Button_User_Logout';
+import Button_User_Login from '../buttons/Button_User_Login';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Header_Logout = () => {
   /** Set User Preferences */
-  const theme = useContext(ThemeContext)
-  const darkMode = theme.state.darkMode
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
 
   /** Initialize Navigation */
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /** Redux Dispatch Instance */
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   /** Redux Store: User */
-  const getUser = useAppSelector(fetchUser)
-  const authenticated = useAppSelector(fetchUserAuth)
-  const status = useAppSelector(fetchUserStatus)
+  const getUser = useAppSelector(fetchUser);
+  const authenticated = useAppSelector(fetchUserAuth);
+  const status = useAppSelector(fetchUserStatus);
 
   /** Loading Screen */
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   /** User Profile | Name */
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState('');
   const createUserName = () => {
     if (
       getUser._EMAIL === undefined ||
       getUser._EMAIL.toLowerCase() === 'john@doe.com' ||
       getUser._EMAIL.length === 0
     ) {
-      setUserName('Guest')
+      setUserName('Guest');
     } else {
-      const emailName = getUser._EMAIL.split('@')[0]
-      setUserName(emailName)
+      const emailName = getUser._EMAIL.split('@')[0];
+      setUserName(emailName);
     }
-  }
+  };
   useEffect(() => {
-    createUserName()
-  })
+    createUserName();
+  });
 
   /** User Profile | Status */
-  const [profile, setProfile] = useState('')
+  const [profile, setProfile] = useState('');
   const getProfile = () => {
     if (userName === undefined || userName.toLowerCase() === 'guest' || userName.length === 0) {
-      setProfile('guest')
+      setProfile('guest');
     } else {
-      setProfile(userName)
+      setProfile(userName);
     }
-  }
+  };
 
   useEffect(() => {
-    getProfile()
-  })
+    getProfile();
+  });
 
   return (
     <>
@@ -170,7 +170,7 @@ const Header_Logout = () => {
         </ul>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default Header_Logout
+export default Header_Logout;
