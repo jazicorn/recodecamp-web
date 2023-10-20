@@ -48,11 +48,6 @@
       "yarn pretty-quick --staged"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
     "@codemirror/basic-setup": "^0.20.0",
