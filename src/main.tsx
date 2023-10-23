@@ -96,7 +96,23 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <MantineProvider withGlobalStyles withNormalizeCSS>
+          <MantineProvider withGlobalStyles withNormalizeCSS theme={
+            {
+              colors: { 
+                'ocean-blue': [
+                  '#7AD1DD', 
+                  '#5FCCDB', 
+                  '#44CADC', 
+                  '#2AC9DE', 
+                  '#1AC2D9', 
+                  '#11B7CD', 
+                  '#09ADC3', 
+                  '#0E99AC', 
+                  '#128797', 
+                  '#147885'
+                ],
+              }
+            }}>
             <Notifications position="top-center" />
             <RouterProvider router={router} />
             <ReactQueryDevtools initialIsOpen={false} />
