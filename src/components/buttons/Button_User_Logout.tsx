@@ -103,7 +103,7 @@ const Button_User_Logout = () => {
   return (
     <button
       onClick={(e) => logout(e)}
-      className="tw-font-space_mono tw-text-lg tw-place-items-center tw-w-full tw-h-full"
+      className="tw-font-space_mono tw-text-lg tw-flex tw-place-content-center tw-place-items-center tw-w-full tw-h-full"
     >
       Logout
     </button>

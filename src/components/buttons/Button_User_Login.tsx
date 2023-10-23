@@ -76,7 +76,7 @@ const Button_User_Login = () => {
   return (
     <button
       onClick={(e) => guestAuthMe()}
-      className="tw-font-space_mono tw-text-lg tw-flex tw-place-items-center tw-w-full tw-h-full"
+      className="tw-font-space_mono tw-text-lg tw-flex tw-place-content-center tw-place-items-center tw-w-full tw-h-full"
     >
       Login
     </button>
