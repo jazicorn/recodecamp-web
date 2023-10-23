@@ -115,7 +115,19 @@ interface AuthState {
   user: object;
   authenticated: boolean;
   status: string;
+  statusRegister: string;
+  statusLogin: string;
+  statusLogout: string;
+  statusAuth: string;
+  statusVerify: string;
+  statusDelete: string;
   error: null;
+  errorRegister: null;
+  errorLogin: null;
+  errorLogout: null;
+  errorAuth: null;
+  errorVerify: null;
+  errorDelete: null;
   screenLoader: boolean;
   userLandingScreenLoader: boolean;
   userComponentScreenLoader: boolean;
@@ -148,7 +160,19 @@ const defaultState: AuthState = {
   },
   authenticated: false,
   status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusRegister: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusLogin: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusLogout: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAuth: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusDelete: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
+  errorRegister: null,
+  errorLogin: null,
+  errorLogout: null,
+  errorAuth: null,
+  errorVerify: null,
+  errorDelete: null,
   screenLoader: false,
   userLandingScreenLoader: false,
   userComponentScreenLoader: false,
@@ -231,87 +255,140 @@ export const authSlice = createSlice({
     builder
       .addCase(userRegister.pending, (state, action) => {
         state.status = 'loading';
+        state.statusRegister = 'loading';
       })
       .addCase(userRegister.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.statusRegister = 'succeeded';
       })
       .addCase(userRegister.rejected, (state, action) => {
         state.status = 'failed';
+        state.statusRegister = 'failed';
         state.error = action.error.message;
+        state.errorRegister = action.error.message;
       })
       .addCase(userLogin.pending, (state, action) => {
         state.status = 'loading';
+        state.statusLogin = 'loading';
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.statusLogin = 'succeeded';
         state.user = action.payload;
         validUser(action.payload);
       })
       .addCase(userLogin.rejected, (state, action) => {
         state.status = 'failed';
+        state.statusLogin = 'failed';
         state.error = action.error.message;
+        state.errorLogin = action.error.message;
       })
       .addCase(userAuthMe.pending, (state, action) => {
         state.status = 'loading';
+        state.statusAuth = 'loading';
       })
       .addCase(userAuthMe.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        //console.log(action.payload)
+        state.statusAuth = 'succeeded';
         validUser(action.payload);
       })
       .addCase(userAuthMe.rejected, (state, action) => {
         state.status = 'failed';
+        state.statusAuth = 'failed';
         state.error = action.error.message;
+        state.errorAuth = action.error.message;
       })
       .addCase(userVerify.pending, (state, action) => {
         state.status = 'loading';
+        state.statusVerify = 'loading';
       })
       .addCase(userVerify.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.statusVerify = 'succeeded';
         state.user = action.payload;
         validUser(action.payload);
       })
       .addCase(userVerify.rejected, (state, action) => {
         state.status = 'failed';
+        state.statusVerify = 'failed';
         state.error = action.error.message;
+        state.errorVerify = action.error.message;
       })
       .addCase(userLogout.pending, (state, action) => {
         state.status = 'loading';
+        state.statusLogout = 'loading';
+
       })
       .addCase(userLogout.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.statusLogout = 'succeeded';
       })
       .addCase(userLogout.rejected, (state, action) => {
         state.status = 'failed';
+        state.statusLogout = 'failed';
         state.error = action.error.message;
+        state.errorLogout = action.error.message;
       })
       .addCase(userDelete.pending, (state, action) => {
         state.status = 'loading';
+        state.statusDelete = 'loading';
       })
       .addCase(userDelete.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.statusDelete = 'succeeded';
       })
       .addCase(userDelete.rejected, (state, action) => {
         state.status = 'failed';
+        state.statusDelete = 'failed';
         state.error = action.error.message;
+        state.errorDelete = action.error.message;
       });
   },
 });
 
+/** Fetch API User */
 export const fetchUser = (state) => state.authentication.user;
 
 export const fetchUserAuth = (state) => state.authentication.authenticated;
 
+/** Fetch API Status */
 export const fetchUserStatus = (state) => state.authentication.status;
 
+export const fetchUserStatusRegister = (state) => state.authentication.statusRegister;
+
+export const fetchUserStatusLogin = (state) => state.authentication.statusLogin;
+
+export const fetchUserStatusAuth = (state) => state.authentication.statusAuth;
+
+export const fetchUserStatusVerify = (state) => state.authentication.statusVerify;
+
+export const fetchUserStatusLogout = (state) => state.authentication.statusLogout;
+
+export const fetchUserStatusDelete = (state) => state.authentication.statusDelete;
+
+/** Fetch API Error */
 export const fetchUserError = (state) => state.authentication.error;
 
+export const fetchUserErrorRegister = (state) => state.authentication.errorRegister;
+
+export const fetchUserErrorLogin = (state) => state.authentication.errorLogin;
+
+export const fetchUserErrorLogout = (state) => state.authentication.errorLogout;
+
+export const fetchUserErrorAuth = (state) => state.authentication.errorAuth;
+
+export const fetchUserErrorVerify = (state) => state.authentication.errorVerify;
+
+export const fetchUserErrorDelete = (state) => state.authentication.errorDelete;
+
+/** Loaders */
 export const fetchUserScreenLoader = (state) => state.authentication.screenLoader;
 
 export const fetchUserLandingScreenLoader = (state) => state.authentication.userLandingScreenLoader;
 
 export const fetchUserComponentScreenLoader = (state) => state.authentication.userComponentScreenLoader;
 
+/** Export Reducers */
 export const {
   stateUser,
   validUser,
