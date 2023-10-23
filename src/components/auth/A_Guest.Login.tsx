@@ -23,16 +23,13 @@ import {
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
+  fetchUserStatusLogin,
   fetchUserComponentScreenLoader,
 } from '../../redux/slices/authSlice.ts';
 /** Custom Hooks */
-import { LoadingDashboardLG } from '../../components/dashboard/loading';
+import { LoadingDashboardXL } from './A_Loader.tsx';
 /**Constants */
 import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
-
-/** API url | Custom env mandatory to begin with VITE
- * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 interface FormInputs {
   multipleErrorInput: string;
@@ -48,6 +45,17 @@ const SignIn = () => {
 
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
+
+  /** Redux Login Loader */
+  const statusLogin = useAppSelector(fetchUserStatusLogin);
+
+  const [ loaderLogin, setLoaderLogin ] = useState(false);
+
+  useEffect(() => {
+    if(statusLogin === 'loading') {
+      setLoaderLogin(true);
+    }
+  },[]);
 
   /** Redux Store: User */
   const getUser = useAppSelector(fetchUser);
@@ -75,18 +83,7 @@ const SignIn = () => {
       try {
         const originalPromiseResult = await dispatch(userLogin(data)).unwrap();
         if (originalPromiseResult === undefined || originalPromiseResult.error) {
-          //console.log("login status:", status)
-          if (status === 'idle') {
-            console.log('❓ Guest | Idle');
-          } else if (status === 'loading') {
-            console.log('🔄 Guest | Loading');
-          } else if (status === 'failed') {
-            console.log('🚫 Guest | Login Failed');
-          } else if (status === 'succeeded') {
-            console.log('🚫 Guest | Request Returned Error');
-          } else {
-            console.log('🚫 Guest | Request Failed');
-          }
+          console.log('🚫 Guest | Request Failed');
           // Failure Notification
           notifications.show({
             id: 'failure',
@@ -101,10 +98,13 @@ const SignIn = () => {
             sx: { backgroundColor: 'red' },
             loading: false,
           });
-          setTimeout(async () => {
-            await dispatch(userComponentScreenLoader(false));
+          console.log('⏳ Delay | Redirect in 1 second.');
+          setLoaderLogin(true);
+          setTimeout(() => {
+            setLoaderLogin(false);
           }, '1000');
         } else {
+          setLoaderLogin(true);
           console.log('👍 Guest | Logged In');
           // Success Notification
           notifications.show({
@@ -131,22 +131,6 @@ const SignIn = () => {
     },
     [navigate]
   );
-
-  setTimeout(async () => {
-    await dispatch(userComponentScreenLoader(false));
-  }, '5000');
-
-  if (screenLoader === true) {
-    return (
-      <div
-        className={`${
-          darkMode ? '[&>*]:tw-bg-neutral-900/80' : '[&>*]:tw-bg-neutral-300/80'
-        } tw-text-transparent tw-flex tw-flex-col tw-w-full tw-place-self-center tw-place-content-center tw-place-items-center tw-h-full tw-w-full`}
-      >
-        <LoadingDashboardLG />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -200,35 +184,39 @@ const SignIn = () => {
             >
               <h4 className="tw-text-xl tw-w-fit tw-place-self-left">Guest Login</h4>
             </div>
-            <form onSubmit={onSubmit}>
-              <ul
-                className={`${
-                  darkMode ? '[&>li>label]:tw-bg-campfire-neutral-300 [&>li>input]:tw-bg-campfire-neutral-200' : ''
-                } [&>li]:tw-flex [&>li]:tw-flex-col 
-              [&>li]:tw-p-2 [&>li>input]:tw-h-[1.6em]
-              [&>li>label]:tw-px-1 [&>li>label]:tw-w-full [&>li>label]:tw-border-campfire-blue-200
-              [&>li>label]:tw-w-[10em] [&>li>label]:tw-bg-neutral-100 [&>li>label]:tw-border-y `}
-              >
-                <li className="">
-                  <label className="tw-text-campfire-blue">Email:</label>
-                  <input type="email" {...register('_EMAIL')} />
-                </li>
-                <li className="">
-                  <label>Password:</label>
-                  <input type="password" {...register('_PASSWORD')} />
-                </li>
-                <li
+            {loaderLogin ? 
+              <div className="tw-min-h-[11.2em]"><LoadingDashboardXL /></div>
+              :
+              <form onSubmit={onSubmit} className="tw-min-h-[10em]">
+                <ul
                   className={`${
-                    darkMode ? 'hover:tw-bg-campfire-neutral-400/70' : 'hover:tw-bg-campfire-neutral-300/70'
-                  } tw-w-full 
-                tw-border-y tw-border-campfire-purple-light`}
+                    darkMode ? '[&>li>label]:tw-bg-campfire-neutral-300 [&>li>input]:tw-bg-campfire-neutral-200' : ''
+                  } [&>li]:tw-flex [&>li]:tw-flex-col 
+                [&>li]:tw-p-2 [&>li>input]:tw-h-[1.6em]
+                [&>li>label]:tw-px-1 [&>li>label]:tw-w-full [&>li>label]:tw-border-campfire-blue-200
+                [&>li>label]:tw-w-[10em] [&>li>label]:tw-bg-neutral-100 [&>li>label]:tw-border-y `}
                 >
-                  <button type="submit" className={`tw-font-roboto_mono tw-text-base tw-w-full`}>
-                    Login
-                  </button>
-                </li>
-              </ul>
-            </form>
+                  <li className="">
+                    <label className="tw-text-campfire-blue">Email:</label>
+                    <input type="email" {...register('_EMAIL')} />
+                  </li>
+                  <li className="">
+                    <label>Password:</label>
+                    <input type="password" {...register('_PASSWORD')} />
+                  </li>
+                  <li
+                    className={`${
+                      darkMode ? 'hover:tw-bg-campfire-neutral-400/70' : 'hover:tw-bg-campfire-neutral-300/70'
+                    } tw-w-full 
+                  tw-border-y tw-border-campfire-purple-light`}
+                  >
+                    <button type="submit" className={`tw-font-roboto_mono tw-text-base tw-w-full`}>
+                      Login
+                    </button>
+                  </li>
+                </ul>
+              </form>
+            }
           </div>
         </Transition>
       </div>

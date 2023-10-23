@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect } from 'react';
+import { useContext, useCallback, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -21,12 +21,13 @@ import {
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
+  fetchUserStatusRegister,
   fetchUserComponentScreenLoader,
 } from '../../redux/slices/authSlice.ts';
 /** Constants */
 import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
 /** Components */
-import { LoadingDashboardLG } from '../../components/dashboard/loading';
+import { LoadingDashboardXL } from './A_Loader.tsx';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 // import * as z from 'zod';
@@ -60,6 +61,16 @@ const Register = () => {
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
 
+  /** Redux Register Loader */
+  const statusRegister = useAppSelector(fetchUserStatusRegister);
+  const [ loaderRegister, setLoaderRegister ] = useState(false);
+
+  useEffect(() => {
+    if(statusRegister === 'loading') {
+      setLoaderRegister(true);
+    }
+  },[]);
+
   /** Redux Store: User */
   const getUser = useAppSelector(fetchUser);
   const authenticated = useAppSelector(fetchUserAuth);
@@ -83,8 +94,6 @@ const Register = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    //console.log("form data",data)
-    await dispatch(userComponentScreenLoader(true));
     registerGuest(data);
   });
 
@@ -94,16 +103,7 @@ const Register = () => {
     try {
       const originalPromiseResult = await dispatch(userRegister(data)).unwrap();
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
-        //console.log("status", status);
-        if (status === 'loading') {
-          console.log('🔄 Guest | Loading');
-        } else if (status === 'failed') {
-          console.log('🚫 Guest | Registration Failed');
-        } else if (status === 'succeeded') {
-          console.log('🚫 Guest | Request Returned Error');
-        } else {
-          console.log('🚫 Guest | Request Failed');
-        }
+        console.log('🚫 Guest | Request Failed');
         // Failure Notification
         notifications.show({
           id: 'failure',
@@ -118,8 +118,10 @@ const Register = () => {
           sx: { backgroundColor: 'red' },
           loading: false,
         });
-        setTimeout(async () => {
-          await dispatch(userComponentScreenLoader(false));
+        console.log('⏳ Delay | Redirect in 1 second.');
+        setLoaderRegister(true);
+        setTimeout(() => {
+          setLoaderRegister(false);
         }, '1000');
       } else {
         console.log('👍 Guest | Registered');
@@ -137,6 +139,7 @@ const Register = () => {
           sx: { backgroundColor: 'teal' },
           loading: false,
         });
+        setLoaderRegister(true);
         setTimeout(() => {
           console.log('⏳ Delay | Redirect in 1 second.');
           navigate('/auth/guest/login');
@@ -146,22 +149,6 @@ const Register = () => {
       console.log(error);
     }
   };
-
-  setTimeout(async () => {
-    await dispatch(userComponentScreenLoader(false));
-  }, '3000');
-
-  if (screenLoader === true) {
-    return (
-      <div
-        className={`${
-          darkMode ? '[&>*]:tw-bg-neutral-900/80' : '[&>*]:tw-bg-neutral-300/80'
-        } tw-text-transparent tw-flex tw-flex-col tw-w-full tw-place-self-center tw-place-content-center tw-place-items-center tw-h-full tw-w-full`}
-      >
-        <LoadingDashboardLG />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -215,7 +202,10 @@ const Register = () => {
             >
               <h4 className="tw-text-xl tw-w-fit tw-place-self-left">Guest Register</h4>
             </div>
-            <form onSubmit={onSubmit}>
+            {loaderRegister ? 
+              <div className="tw-min-h-[20.75em]"><LoadingDashboardXL /></div>
+            :
+            <form onSubmit={onSubmit} className="tw-min-h-[19em]">
               <ul
                 className={`${
                   darkMode ? '[&>li>label]:tw-bg-campfire-neutral-300 [&>li>input]:tw-bg-campfire-neutral-200' : ''
@@ -284,6 +274,7 @@ const Register = () => {
                 </li>
               </ul>
             </form>
+            }
           </div>
         </Transition>
       </div>
