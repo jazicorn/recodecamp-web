@@ -4,7 +4,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 export const _USER_ROUTE_REGISTER = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/guest/new`;
+    return `${baseURL}/api/guest/new`;
   } else {
     return `/api/guest/new`;
   }
@@ -12,7 +12,7 @@ export const _USER_ROUTE_REGISTER = () => {
 
 export const _USER_ROUTE_LOGIN = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/guest/login`;
+    return `${baseURL}/api/guest/login`;
   } else {
     return `/api/guest/login`;
   }
@@ -20,7 +20,7 @@ export const _USER_ROUTE_LOGIN = () => {
 
 export const _USER_ROUTE_AUTH_ME = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/guest/auth/me`;
+    return `${baseURL}/api/guest/auth/me`;
   } else {
     return `/api/guest/auth/me`;
   }
@@ -28,7 +28,7 @@ export const _USER_ROUTE_AUTH_ME = () => {
 
 export const _USER_ROUTE_VERIFY = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/guest/verify`;
+    return `${baseURL}/api/guest/verify`;
   } else {
     return `/api/guest/verify`;
   }
@@ -36,7 +36,7 @@ export const _USER_ROUTE_VERIFY = () => {
 
 export const _USER_ROUTE_LOGOUT = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/guest/logout`;
+    return `${baseURL}/api/guest/logout`;
   } else {
     return `/api/guest/logout`;
   }
@@ -44,8 +44,40 @@ export const _USER_ROUTE_LOGOUT = () => {
 
 export const _USER_ROUTE_DELETE = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/guest/delete`;
+    return `${baseURL}/api/guest/delete`;
   } else {
     return `/api/guest/delete`;
+  }
+};
+
+export const _USER_ROUTE_ACCOUNT_VERIFICATION = () => {
+  if (import.meta.env.PROD) {
+    return `${baseURL}/api/guest/verify/account`;
+  } else {
+    return `/api/guest/verify/account`;
+  }
+};
+
+export const _USER_ROUTE_ACCOUNT_CONFIRMATION = () => {
+  if (import.meta.env.PROD) {
+    return `${baseURL}/api/guest/confirm/account`;
+  } else {
+    return `/api/guest/confirm/account`;
+  }
+};
+
+export const _USER_ROUTE_ACCOUNT_VALIDATION = () => {
+  if (import.meta.env.PROD) {
+    return `${baseURL}/api/guest/validate/account`;
+  } else {
+    return `/api/guest/validate/account`;
+  }
+};
+
+export const _USER_ROUTE_ACCOUNT_PASSWORD_RESET = () => {
+  if (import.meta.env.PROD) {
+    return `${baseURL}/api/guest/password/reset`;
+  } else {
+    return `/api/guest/password/reset`;
   }
 };

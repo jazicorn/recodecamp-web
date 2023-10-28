@@ -55,7 +55,7 @@ const FormSchema = z.object({
 
 type FormInput = z.infer<typeof FormSchema>;
 
-const Register = () => {
+const Password_Reset = () => {
   /**Custom Middleware | Screen Size */
   const { isMobile } = useWindowSize();
   /**Custom Middleware | Dark Mode */
@@ -315,4 +315,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Password_Reset;

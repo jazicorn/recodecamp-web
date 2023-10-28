@@ -11,6 +11,10 @@ import {
   _USER_ROUTE_VERIFY,
   _USER_ROUTE_LOGOUT,
   _USER_ROUTE_DELETE,
+  _USER_ROUTE_ACCOUNT_VERIFICATION,
+  _USER_ROUTE_ACCOUNT_CONFIRMATION,
+  _USER_ROUTE_ACCOUNT_VALIDATION,
+  _USER_ROUTE_ACCOUNT_PASSWORD_RESET,
 } from '../../utils/constants/constantsRoutes';
 
 export const userRegister = createAsyncThunk('auth/register', async (data, thunkAPI) => {
@@ -110,6 +114,79 @@ export const userDelete = createAsyncThunk('auth/delete', async (user, thunkAPI)
   }
 });
 
+export const userAccountVerification = createAsyncThunk('auth/account/verify', async (data, thunkAPI) => {
+  //console.log(user)
+  try {
+    const url = _USER_ROUTE_ACCOUNT_VERIFICATION();
+    //console.log("logouturl:", url)
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data), // data = { email : "", passcode: ""}
+    });
+
+    const resJSON = await res.json();
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', async (data, thunkAPI) => {
+  //console.log(user)
+  try {
+    const url = _USER_ROUTE_ACCOUNT_CONFIRMATION();
+    //console.log("logouturl:", url)
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data), // data = { email : "", passcode: ""}
+    });
+
+    const resJSON = await res.json();
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const userAccountValidation = createAsyncThunk('auth/account/validation', async (data, thunkAPI) => {
+  //console.log(user)
+  try {
+    const url = _USER_ROUTE_ACCOUNT_VALIDATION();
+    //console.log("logouturl:", url)
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data), // data = { email : "", passcode: ""}
+    });
+
+    const resJSON = await res.json();
+    //console.log("resJSON", resJSON);
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const userAccountPasswordReset = createAsyncThunk('auth/account/password/reset', async (user, thunkAPI) => {
+  //console.log(user)
+  try {
+    const url = _USER_ROUTE_ACCOUNT_PASSWORD_RESET();
+    //console.log("logouturl:", url)
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user), // user = { email : "", passcode: ""}
+    });
+
+    const resJSON = await res.json();
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
 // Define a type for the slice state
 interface AuthState {
   user: object;
@@ -121,6 +198,10 @@ interface AuthState {
   statusAuth: string;
   statusVerify: string;
   statusDelete: string;
+  statusAccountVerify: string;
+  statusAccountConfirm: string;
+  statusAccountValidate: string;
+  statusAccountPasswordReset: string;
   error: null;
   errorRegister: null;
   errorLogin: null;
@@ -128,6 +209,10 @@ interface AuthState {
   errorAuth: null;
   errorVerify: null;
   errorDelete: null;
+  errorAccountVerify: null;
+  errorAccountConfirm: null;
+  errorAccountValidate: null;
+  errorAccountPasswordReset: null;
   screenLoader: boolean;
   userLandingScreenLoader: boolean;
   userComponentScreenLoader: boolean;
@@ -166,6 +251,10 @@ const defaultState: AuthState = {
   statusAuth: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusDelete: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountConfirm: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountValidate: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountPasswordReset: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
   errorRegister: null,
   errorLogin: null,
@@ -173,6 +262,10 @@ const defaultState: AuthState = {
   errorAuth: null,
   errorVerify: null,
   errorDelete: null,
+  errorAccountVerify: null,
+  errorAccountConfirm: null,
+  errorAccountValidate: null,
+  errorAccountPasswordReset: null,
   screenLoader: false,
   userLandingScreenLoader: false,
   userComponentScreenLoader: false,
@@ -342,7 +435,63 @@ export const authSlice = createSlice({
         state.statusDelete = 'failed';
         state.error = action.error.message;
         state.errorDelete = action.error.message;
-      });
+      })
+      .addCase(userAccountVerification.pending, (state, action) => {
+        state.status = 'loading';
+        state.statusAccountVerify = 'loading';
+      })
+      .addCase(userAccountVerification.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.statusAccountVerify = 'succeeded';
+      })
+      .addCase(userAccountVerification.rejected, (state, action) => {
+        state.status = 'failed';
+        state.statusAccountVerify = 'failed';
+        state.error = action.error.message;
+        state.errorAccountVerify = action.error.message;
+      })
+      .addCase(userAccountConfirmation.pending, (state, action) => {
+        state.status = 'loading';
+        state.statusAccountConfirm = 'loading';
+      })
+      .addCase(userAccountConfirmation.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.statusAccountConfirm = 'succeeded';
+      })
+      .addCase(userAccountConfirmation.rejected, (state, action) => {
+        state.status = 'failed';
+        state.statusAccountConfirm = 'failed';
+        state.error = action.error.message;
+        state.errorAccountConfirm = action.error.message;
+      })
+      .addCase(userAccountValidation.pending, (state, action) => {
+        state.status = 'loading';
+        state.statusAccountValidate = 'loading';
+      })
+      .addCase(userAccountValidation.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.statusAccountValidate = 'succeeded';
+      })
+      .addCase(userAccountValidation.rejected, (state, action) => {
+        state.status = 'failed';
+        state.statusAccountValidate = 'failed';
+        state.error = action.error.message;
+        state.errorAccountValidate = action.error.message;
+      })
+      .addCase(userAccountPasswordReset.pending, (state, action) => {
+        state.status = 'loading';
+        state.statusAccountPasswordReset = 'loading';
+      })
+      .addCase(userAccountPasswordReset.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.statusAccountPasswordReset = 'succeeded';
+      })
+      .addCase(userAccountPasswordReset.rejected, (state, action) => {
+        state.status = 'failed';
+        state.statusAccountPasswordReset = 'failed';
+        state.error = action.error.message;
+        state.errorAccountPasswordReset = action.error.message;
+      })
   },
 });
 
@@ -351,7 +500,7 @@ export const fetchUser = (state) => state.authentication.user;
 
 export const fetchUserAuth = (state) => state.authentication.authenticated;
 
-/** Fetch API Status */
+/** Fetch API User Status */
 export const fetchUserStatus = (state) => state.authentication.status;
 
 export const fetchUserStatusRegister = (state) => state.authentication.statusRegister;
@@ -366,7 +515,15 @@ export const fetchUserStatusLogout = (state) => state.authentication.statusLogou
 
 export const fetchUserStatusDelete = (state) => state.authentication.statusDelete;
 
-/** Fetch API Error */
+export const fetchUserStatusAccountVerify = (state) => state.authentication.statusAccountVerify;
+
+export const fetchUserStatusAccountConfirm = (state) => state.authentication.statusAccountConfirm;
+
+export const fetchUserStatusAccountValidate = (state) => state.authentication.statusAccountValidate;
+
+export const fetchUserStatusAccountPasswordReset = (state) => state.authentication.statusAccountPasswordReset;
+
+/** Fetch API User Error */
 export const fetchUserError = (state) => state.authentication.error;
 
 export const fetchUserErrorRegister = (state) => state.authentication.errorRegister;
@@ -380,6 +537,14 @@ export const fetchUserErrorAuth = (state) => state.authentication.errorAuth;
 export const fetchUserErrorVerify = (state) => state.authentication.errorVerify;
 
 export const fetchUserErrorDelete = (state) => state.authentication.errorDelete;
+
+export const fetchUserErrorAccountVerify = (state) => state.authentication.errorAccountVerify;
+
+export const fetchUserErrorAccountConfirm = (state) => state.authentication.errorAccountConfirm;
+
+export const fetchUserErrorAccountValidate = (state) => state.authentication.errorAccountValidate;
+
+export const fetchUserErrorAccountPasswordReset = (state) => state.authentication.errorAccountPasswordReset;
 
 /** Loaders */
 export const fetchUserScreenLoader = (state) => state.authentication.screenLoader;

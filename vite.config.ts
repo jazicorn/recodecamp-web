@@ -32,7 +32,6 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_API_BASE_URL, // the address that u serve in the backend
           changeOrigin: true,
           secure: false,
-          rewrite: (path) => path.replace(/^\/api/, ''),
         },
       },
       resolve: {

@@ -11,7 +11,12 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './redux/store.ts';
 /**React Router*/
-import { RouterProvider, createHashRouter as Router, createRoutesFromElements, Route } from 'react-router-dom';
+import { 
+  RouterProvider, 
+  createBrowserRouter as Router, 
+  createRoutesFromElements, 
+  Route 
+} from 'react-router-dom';
 import ErrorBoundary from './ErrorBoundary.tsx';
 /**React Query */
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -28,6 +33,8 @@ import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
 import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
 import A_Guest_Register from './components/auth/A_Guest.Register.tsx';
 import A_Guest_Login from './components/auth/A_Guest.Login.tsx';
+import A_Guest_Account_Confirmation from './components/auth/A_Guest.Account_Confirmation.tsx';
+import A_Guest_Account_Not_Found from './components/auth/A_Guest.Account_Not_Found.tsx';
 import A_User_Register from './components/auth/A_User.Register.tsx';
 import A_User_Login from './components/auth/A_User.Login.tsx';
 /**Layouts | Home Pages*/
@@ -66,6 +73,8 @@ const router = Router(
         <Route path="*" element={<D_Home />} errorElement={<ErrorBoundary />} />
       </Route>
       <Route path="/auth" element={<Auth />}>
+        <Route path="account/confirm" element={<A_Guest_Account_Not_Found/>} errorElement={<ErrorBoundary />} />  
+        <Route path="account/confirm/:passcode" element={<A_Guest_Account_Confirmation />} errorElement={<ErrorBoundary />} />
         <Route path="admin/signup" element={<A_Admin_Register />} errorElement={<ErrorBoundary />} />
         <Route path="admin/login" element={<A_Admin_Login />} errorElement={<ErrorBoundary />} />
         <Route path="guest/signup" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
