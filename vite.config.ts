@@ -6,7 +6,7 @@ import svgr from 'vite-plugin-svgr';
 // import tsconfigPaths from 'vite-tsconfig-paths'
 // import crossOriginIsolation from "vite-plugin-cross-origin-isolation";
 
-const resolve = (path: string) => pathResolve(__dirname, path)
+const resolve = (path: string) => pathResolve(__dirname, path);
 
 const port: number = parseInt(process.env.WEB_PORT as string) || 5173;
 
@@ -14,7 +14,7 @@ const port: number = parseInt(process.env.WEB_PORT as string) || 5173;
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
-  plugins: [react(), svgr()/**, ssr({ prerender: true }*/],
+    plugins: [react(), svgr() /**, ssr({ prerender: true }*/],
     manifest: true,
     build: {
       outDir: './dist',
@@ -32,19 +32,18 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_API_BASE_URL, // the address that u serve in the backend
           changeOrigin: true,
           secure: false,
-          rewrite: (path) => path.replace(/^\/api/,'')
         },
       },
       resolve: {
         alias: {
           '~': resolve('src'),
-          'p': resolve('src/pages'),
-          'c': resolve('src/components'),
-          'd': resolve('src/components/dashboard'),
-          'a': resolve('src/assets'),
-          'h': resolve('src/hooks'),
+          p: resolve('src/pages'),
+          c: resolve('src/components'),
+          d: resolve('src/components/dashboard'),
+          a: resolve('src/assets'),
+          h: resolve('src/hooks'),
         },
       },
     },
-  }
-})
+  };
+});

@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
 // components
@@ -15,38 +15,41 @@ const Layout_D_CodeEditor = () => {
   return (
     <div className="tw-h-full">
       {/**Page Content | Position: Relative */}
-        {isDesktopMDXL || isDesktopXL ? 
-        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
+      {isDesktopMDXL || isDesktopXL ? (
+        <main
+          className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
           tw-bg-transparent tw-w-full tw-h-[85vh] [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-code-editor tw-grid-cols-layout-dashboard-code-editor tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className='tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3'>
-                <D_User_Files/>
-            </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1'>
-                <D_User_Editor/>
-            </section>
-            <section className='tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-3'>
-                <D_User_Console/>
-            </section>
+          tw-grid tw-grid-rows-layout-dashboard-code-editor tw-grid-cols-layout-dashboard-code-editor tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}
+        >
+          <section className="tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-3">
+            <D_User_Files />
+          </section>
+          <section className="tw-col-start-2 tw-col-end-3 tw-row-start-1 tw-row-end-1">
+            <D_User_Editor />
+          </section>
+          <section className="tw-col-start-2 tw-col-end-3 tw-row-start-2 tw-row-end-3">
+            <D_User_Console />
+          </section>
         </main>
-        :
-        <main className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
+      ) : (
+        <main
+          className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
           tw-bg-transparent tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
-          tw-grid tw-grid-rows-layout-dashboard-code-editor-mobile tw-grid-cols-layout-dashboard-code-editor-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}>
-            <section className='tw-row-start-1 tw-row-end-1'>
-                <D_User_Files/>
-            </section>
-             <section className='tw-row-start-2 tw-row-end-2'>
-                <D_User_Editor/>
-            </section>
-            <section className='tw-row-start-3 tw-row-end-3'>
-                <D_User_Console/>
-            </section>
+          tw-grid tw-grid-rows-layout-dashboard-code-editor-mobile tw-grid-cols-layout-dashboard-code-editor-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}
+        >
+          <section className="tw-row-start-1 tw-row-end-1">
+            <D_User_Files />
+          </section>
+          <section className="tw-row-start-2 tw-row-end-2">
+            <D_User_Editor />
+          </section>
+          <section className="tw-row-start-3 tw-row-end-3">
+            <D_User_Console />
+          </section>
         </main>
-        }
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Layout_D_CodeEditor
- 
+export default Layout_D_CodeEditor;

@@ -3,38 +3,37 @@
 @tailwind utilities;
 
 @layer components {
-    .d-settings-user-container {
-        @apply tw-overflow-auto tw-pt-2 tw-flex tw-flex-col tw-gap-y-4 tw-h-full tw-w-full;
-    }
-    .d-settings-user-table {
-        @apply tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed; 
-    }
-    .d-settings-user-table > tbody > tr > th {
-        @apply tw-px-2 tw-border-b;
-    }
-    .d-settings-user-table > tbody > tr > td {
-        @apply tw-text-sm ;
-    }
-    .d-settings-user-table-desktop > tbody > tr {
-        @apply tw-flex-row;
-    }
-    .d-settings-user-table-desktop > tbody > tr >th {
-        @apply tw-py-2 ;
-    }
-    .d-settings-user-table-desktop > tbody > tr > td {
-        @apply tw-py-2 tw-pl-2 ;
-    }
-    .d-settings-user-table-mobile {
-        @apply tw-justify-center tw-m-0;
-    }
-    .d-settings-user-table-mobile > tbody > tr {
-        @apply tw-flex tw-flex-col;
-    }
-    .d-settings-user-table-mobile > tbody > tr >th {
-        @apply tw-py-1;
-    }
-    .d-settings-user-table-mobile > tbody > tr > td {
-        @apply tw-pt-1 tw-pb-4;
-    }
-
+  .d-settings-user-container {
+    @apply tw-overflow-auto tw-pt-2 tw-flex tw-flex-col tw-gap-y-4 tw-h-full tw-w-full;
+  }
+  .d-settings-user-table {
+    @apply tw-h-fit tw-min-w-fit tw-text-base tw-text-left tw-table-fixed;
+  }
+  .d-settings-user-table > tbody > tr > th {
+    @apply tw-px-2 tw-border-b;
+  }
+  .d-settings-user-table > tbody > tr > td {
+    @apply tw-text-sm;
+  }
+  .d-settings-user-table-desktop > tbody > tr {
+    @apply tw-flex-row;
+  }
+  .d-settings-user-table-desktop > tbody > tr > th {
+    @apply tw-py-2;
+  }
+  .d-settings-user-table-desktop > tbody > tr > td {
+    @apply tw-py-2 tw-pl-2;
+  }
+  .d-settings-user-table-mobile {
+    @apply tw-justify-center tw-m-0;
+  }
+  .d-settings-user-table-mobile > tbody > tr {
+    @apply tw-flex tw-flex-col;
+  }
+  .d-settings-user-table-mobile > tbody > tr > th {
+    @apply tw-py-1;
+  }
+  .d-settings-user-table-mobile > tbody > tr > td {
+    @apply tw-pt-1 tw-pb-4;
+  }
 }

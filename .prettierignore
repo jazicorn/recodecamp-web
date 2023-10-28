@@ -12,6 +12,7 @@ coverage
 *.sln
 *.sw?
 
+.storybook/*
 .pnp.*
 .yarn/*
 !.yarn/patches

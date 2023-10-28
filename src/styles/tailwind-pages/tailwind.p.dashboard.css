@@ -25,9 +25,9 @@
     @apply tw-bg-neutral-900/50;
   }
   .dashboard-mobile-container {
-    @apply tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-border tw-border-transparent tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-pt-1 tw-px-5; 
+    @apply tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-border tw-border-transparent tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-pt-1 tw-px-5;
   }
   .dashboard-mobile-container > * {
-    @apply tw-rounded tw-backdrop-blur-sm
+    @apply tw-rounded tw-backdrop-blur-sm;
   }
 }
