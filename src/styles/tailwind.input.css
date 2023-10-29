@@ -1,28 +1,29 @@
 /* Fonts */
-@import "fontRobotoMono.css";
-@import "fontSpaceMono.css";
-@import "fontSpaceGrotesk.css";
+@import 'fontRobotoMono.css';
+@import 'fontSpaceMono.css';
+@import 'fontSpaceGrotesk.css';
 /* Backgrounds */
-@import "./backgrounds/backgroundGradients.css";
-@import "./backgrounds/backgroundPatterns.css";
-@import "./backgrounds/backgroundShapes.css";
+@import './backgrounds/backgroundImages.css';
+@import './backgrounds/backgroundGradients.css';
+@import './backgrounds/backgroundPatterns.css';
+@import './backgrounds/backgroundShapes.css';
 /* Tailwind Styles */
-@import "./tailwind-style/tailwind.colors.css";
-@import "./tailwind-style/tailwind.fonts.css";
-@import "./tailwind-style/tailwind.filters.css";
-@import "./tailwind-style/tailwind.grid-cols.css";
-@import "./tailwind-style/tailwind.grid-row.css";
+@import './tailwind-style/tailwind.colors.css';
+@import './tailwind-style/tailwind.fonts.css';
+@import './tailwind-style/tailwind.filters.css';
+@import './tailwind-style/tailwind.grid-cols.css';
+@import './tailwind-style/tailwind.grid-row.css';
 /* Tailwind Pages */
-@import "./tailwind-pages/tailwind.p.template.css";
-@import "./tailwind-pages/tailwind.p.home.css";
-@import "./tailwind-pages/tailwind.p.dashboard.css";
+@import './tailwind-pages/tailwind.p.template.css';
+@import './tailwind-pages/tailwind.p.home.css';
+@import './tailwind-pages/tailwind.p.dashboard.css';
 /* Tailwind Layouts */
-@import "./tailwind-layouts/tailwind.d.layout.template.css";
-@import "./tailwind-layouts/tailwind.d.layout.code.css";
-@import "./tailwind-layouts/tailwind.d.layout.home.css";
+@import './tailwind-layouts/tailwind.d.layout.template.css';
+@import './tailwind-layouts/tailwind.d.layout.code.css';
+@import './tailwind-layouts/tailwind.d.layout.home.css';
 /* Tailwind Components*/
-@import "./tailwind-components/tailwind.d.home.css";
-@import "./tailwind-components/tailwind.d.settings.user.css";
+@import './tailwind-components/tailwind.d.home.css';
+@import './tailwind-components/tailwind.d.settings.user.css';
 
 :root {
   line-height: 1.5;
@@ -37,7 +38,7 @@
 body {
   background-color: var(--background);
   color: var(--text-primary);
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 ul {

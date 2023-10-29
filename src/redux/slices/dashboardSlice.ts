@@ -1,20 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 // Define a type for the slice state
 interface DashboardState {
-  languages: string[],
-  languageDefault: string,
-  categoryDefault: string,
-  categoryRouteDefault: string,
-  language: string,
-  category: string,
-  categoryInfo: object,
-  categoryInfo2: object,
-  categoryRoute: string,
-  question: object,
-  points: number,
-  consoleMessage: string,
-  user: object,
+  languages: string[];
+  languageDefault: string;
+  categoryDefault: string;
+  categoryRouteDefault: string;
+  language: string;
+  category: string;
+  categoryInfo: object;
+  categoryInfo2: object;
+  categoryRoute: string;
+  question: object;
+  points: number;
+  consoleMessage: string;
+  user: object;
 }
 
 // Define the initial state using that type
@@ -37,7 +37,7 @@ const initialState: DashboardState = {
     _ACCESS_TOKEN: '',
     _FIRST_LOGIN: false,
     _ADMIN: false,
-    _SUBSCRIPTION: "1000, Unknown",
+    _SUBSCRIPTION: '1000, Unknown',
     _IP_ADDRESS: '',
     _PASSCODE: '',
     _PASSCODE_CONFIRMED: false,
@@ -49,11 +49,11 @@ const initialState: DashboardState = {
     _DEFAULT_ROUTE: '',
     _POINTS_TOTAL: 0,
     _POINTS_JAVASCRIPT: 0,
-    _POINTS_JAVA: 0 ,
+    _POINTS_JAVA: 0,
     _POINTS_PYTHON: 0,
     _COURSES: '',
   },
-}
+};
 
 export const dashboardSlice = createSlice({
   name: 'dashboard',
@@ -102,11 +102,22 @@ export const dashboardSlice = createSlice({
     },
     menuUser: (state, action) => {
       state.user = action.payload;
-    }
+    },
   },
 });
 
-export const { menu, menuUser, menuLanguages, menuLanguage, menuCategory, menuCategoryInfo, menuCategoryRoute, menuQuestion, menuPoints, menuConsoleMessage } = dashboardSlice.actions
+export const {
+  menu,
+  menuUser,
+  menuLanguages,
+  menuLanguage,
+  menuCategory,
+  menuCategoryInfo,
+  menuCategoryRoute,
+  menuQuestion,
+  menuPoints,
+  menuConsoleMessage,
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;
 

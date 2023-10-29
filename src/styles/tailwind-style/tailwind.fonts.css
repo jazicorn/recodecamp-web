@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 @layer utilities {
-    .tw-font-roboto_mono {
-        font-family: 'Roboto-Mono';
-    }
-    .tw-font-space_mono {
-        font-family: 'Space-Mono';
-    }
-   
+  .tw-font-roboto_mono {
+    font-family: 'Roboto-Mono';
+  }
+  .tw-font-space_mono {
+    font-family: 'Space-Mono';
+  }
 }

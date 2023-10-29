@@ -13,10 +13,10 @@ export function removeTokenFromLocalStorage() {
 
 export function detectTokenFromLocalStorage() {
   const token = getTokenFromLocalStorage();
-  if(token === null || token.length === 0) {
-    return false
+  if (token === null || token.length === 0) {
+    return false;
   } else {
-    return true
+    return true;
   }
 }
 

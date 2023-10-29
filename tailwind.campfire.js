@@ -24,56 +24,56 @@ export default {
     extend: {
       colors: {
         'no-border': 'rgba(0, 0, 0, 0.3)',
-        'campfire-blue': { 
+        'campfire-blue': {
           DEFAULT: '#2ca9bc',
-          '50': '#eff6ff',
-          '100': '#d7ecf0',
-          '200': '#afd9e1',
-          '300': '#6cbccb',
-          '400': '#2ca9bc',
-          '500': '#008396',
-          '600': '#006072',
-          '700': '#004e60',
-          '800': '#003e4f',
-          '900': '#00212f',
-          '950': '#082f49',
+          50: '#eff6ff',
+          100: '#d7ecf0',
+          200: '#afd9e1',
+          300: '#6cbccb',
+          400: '#2ca9bc',
+          500: '#008396',
+          600: '#006072',
+          700: '#004e60',
+          800: '#003e4f',
+          900: '#00212f',
+          950: '#082f49',
         },
         'campfire-neutral': {
           DEFAULT: '#a3a3a3',
-          '50': '#fafafa',
-          '100': '#f5f5f5',
-          '200': '#e5e5e5',
-          '300': '#d4d4d4',
-          '400': '#a3a3a3',
-          '500': '#737373',
-          '600': '#525252',
-          '700': '#404040',
-          '800': '#262626',
-          '900': '#171717',
+          50: '#fafafa',
+          100: '#f5f5f5',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
         },
         'campfire-purple': {
           DEFAULT: '#8b5cf6',
-          'light': '#c4b5fd',
-          'dark': "#6d28d9",
-          'darker': "#581c87",
-          'darkest': "#2e1065",
-          '200': '#ddd6fe',
-          '300': '#c4b5fd',
-          '400': '#a78bfa',
-          '500': "#8b5cf6",
-          '700': "#6d28d9",
-          '900': "#4c1d95",
-          '950': "#2e1065",
+          light: '#c4b5fd',
+          dark: '#6d28d9',
+          darker: '#581c87',
+          darkest: '#2e1065',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          700: '#6d28d9',
+          900: '#4c1d95',
+          950: '#2e1065',
         },
         'campfire-green': {
           DEFAULT: '#22c55e',
-        }
+        },
       },
-       backgroundImage: {
-         'sw-1': "url('./src/assets/bg/sw-1.jpg')",
-         'sw-2': "url('./src/assets/bg/sw-2.jpg')",
-         'sw-3': "url('./src/assets/bg/sw-3.jpg')",
-         'nature': "url('./src/assets/bg/nature.jpg')",
+      backgroundImage: {
+        'sw-1': "url('./src/assets/bg/sw-1.jpg')",
+        'sw-2': "url('./src/assets/bg/sw-2.jpg')",
+        'sw-3': "url('./src/assets/bg/sw-3.jpg')",
+        nature: "url('./src/assets/bg/nature.jpg')",
       },
       brightness: {
         15: '.15',
@@ -112,7 +112,7 @@ export default {
         25: '.25',
       },
       gridTemplateColumns: {
-        'dashboard': '5em, auto',
+        dashboard: '5em, auto',
         'dashboard-mobile': 'auto',
         'layout-dashboard-home': 'minmax(16em, 20em), minmax(32em, auto)',
         'layout-dashboard-home-mobile': 'auto',
@@ -134,7 +134,7 @@ export default {
         'layout-dashboard-settings-mobile': 'auto',
       },
       gridTemplateRows: {
-        'dashboard': '2.5em, minmax(28em, auto)',
+        dashboard: '2.5em, minmax(28em, auto)',
         'dashboard-extended': '2.5em, minmax(44.5em, auto)',
         'dashboard-mobile': '3em, minmax(28em, auto)',
         'dashboard-no-language': 'minmax(28em, auto)',
@@ -158,21 +158,21 @@ export default {
         'layout-dashboard-notes-mobile': 'auto',
         'layout-dashboard-settings': 'auto',
         'layout-dashboard-settings-mobile': 'auto',
-      }
+      },
     },
   },
   plugins: [
     function ({ addVariant }) {
-      addVariant('child', '& > *')
-      addVariant('child-hover', '& > *:hover')
-      addVariant('h1', '& h1')
-      addVariant('h2', '& h2')
-      addVariant('h3', '& h3')
-      addVariant('h4', '& h4')
-      addVariant('h5', '& h5')
-      addVariant('h6', '& h6')
-      addVariant('p', '& p')
-      addVariant('svg', '& svg')
+      addVariant('child', '& > *');
+      addVariant('child-hover', '& > *:hover');
+      addVariant('h1', '& h1');
+      addVariant('h2', '& h2');
+      addVariant('h3', '& h3');
+      addVariant('h4', '& h4');
+      addVariant('h5', '& h5');
+      addVariant('h6', '& h6');
+      addVariant('p', '& p');
+      addVariant('svg', '& svg');
     },
   ],
-}
+};
