@@ -3,7 +3,7 @@ import axios from 'axios';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
+import { _DEFAULT_USER } from '../../utils/constants/constUser';
 import {
   _USER_ROUTE_REGISTER,
   _USER_ROUTE_LOGIN,
@@ -15,7 +15,7 @@ import {
   _USER_ROUTE_ACCOUNT_CONFIRMATION,
   _USER_ROUTE_ACCOUNT_VALIDATION,
   _USER_ROUTE_ACCOUNT_PASSWORD_RESET,
-} from '../../utils/constants/constantsRoutes';
+} from '../../utils/constants/constUserRoutes';
 
 export const userRegister = createAsyncThunk('auth/register', async (data, thunkAPI) => {
   try {
