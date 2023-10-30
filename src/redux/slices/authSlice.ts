@@ -125,6 +125,7 @@ export const userDelete = createAsyncThunk('auth/delete', async (user, thunkAPI)
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
+      mode: "cors",
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -147,6 +148,7 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: "cors",
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -169,6 +171,7 @@ export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', 
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: "cors",
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -191,6 +194,7 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: "cors",
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -214,6 +218,7 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: "cors",
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
