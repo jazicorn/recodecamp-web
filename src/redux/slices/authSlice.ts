@@ -22,8 +22,13 @@ export const userRegister = createAsyncThunk('auth/register', async (data, thunk
     const url = _USER_ROUTE_REGISTER();
     const res = await fetch(url, {
       method: 'POST',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(data),
     });
 
@@ -40,8 +45,13 @@ export const userLogin = createAsyncThunk('auth/login', async (user, thunkAPI) =
     //console.log(url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(user),
     });
 
@@ -74,8 +84,13 @@ export const userVerify = createAsyncThunk('auth/verify', async (_, thunkAPI) =>
     const url = await _USER_ROUTE_VERIFY();
     const res = await fetch(url, {
       method: 'GET',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
     });
 
     const resJSON = await res.json();
@@ -91,6 +106,7 @@ export const userLogout = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
+      mode: 'same-origin',
       credentials: 'include',
     });
 
@@ -108,8 +124,13 @@ export const userDelete = createAsyncThunk('auth/delete', async (user, thunkAPI)
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(user),
     });
 
@@ -127,8 +148,13 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
 
@@ -146,8 +172,13 @@ export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', 
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
 
@@ -165,8 +196,13 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
 
@@ -185,8 +221,13 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept', 'application/json', 
+      },
       body: JSON.stringify(user), // user = { email : "", passcode: ""}
     });
 
