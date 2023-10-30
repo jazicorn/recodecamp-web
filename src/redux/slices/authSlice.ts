@@ -27,7 +27,7 @@ export const userRegister = createAsyncThunk('auth/register', async (data, thunk
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json', 
       },
       body: JSON.stringify(data),
     });
@@ -50,7 +50,7 @@ export const userLogin = createAsyncThunk('auth/login', async (user, thunkAPI) =
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json', 
       },
       body: JSON.stringify(user),
     });
@@ -89,7 +89,7 @@ export const userVerify = createAsyncThunk('auth/verify', async (_, thunkAPI) =>
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json', 
       },
     });
 
@@ -129,7 +129,7 @@ export const userDelete = createAsyncThunk('auth/delete', async (user, thunkAPI)
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json',  
       },
       body: JSON.stringify(user),
     });
@@ -153,7 +153,7 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json', 
       },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
@@ -177,7 +177,7 @@ export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', 
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json', 
       },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
@@ -201,7 +201,7 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json',  
       },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
@@ -226,7 +226,7 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
-        'Accept', 'application/json', 
+        'Accept': 'application/json', 
       },
       body: JSON.stringify(user), // user = { email : "", passcode: ""}
     });
