@@ -67,8 +67,13 @@ export const userAuthMe = createAsyncThunk('auth/me', async (_, thunkAPI) => {
     const url = _USER_ROUTE_AUTH_ME();
     const res = await fetch(url, {
       method: 'GET',
+      mode: 'same-origin',
+      redirect: 'follow',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
     });
 
     const resJSON = await res.json();
