@@ -133,8 +133,9 @@ const Register = () => {
       } else {
         console.log('👍 Guest | Registered');
         //console.log("originalPromiseResult:\n", originalPromiseResult);
-        const accountConfirmation = await dispatch(userAccountConfirmation(originalPromiseResult)).unwrap();
-        if (accountConfirmation === undefined || accountConfirmation.error) {
+        //const accountConfirmation = await dispatch(userAccountConfirmation(originalPromiseResult)).unwrap();
+        //if (accountConfirmation === undefined || accountConfirmation.error) {
+        if (originalPromiseResult === undefined || originalPromiseResult.error) {
           console.log('🚫 Guest | Request Failed');
           // Failure Notification
           notifications.show({
@@ -156,7 +157,7 @@ const Register = () => {
             setLoaderRegister(false);
           }, '1000');
         } else {
-          console.log('👍 Guest | Emailed Account Confirmation');
+          //console.log('👍 Guest | Emailed Account Confirmation');
           // Success Notification
           notifications.show({
             id: 'success',
