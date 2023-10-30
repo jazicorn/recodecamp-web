@@ -22,8 +22,6 @@ export const userRegister = createAsyncThunk('auth/register', async (data, thunk
     const url = _USER_ROUTE_REGISTER();
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -45,8 +43,6 @@ export const userLogin = createAsyncThunk('auth/login', async (user, thunkAPI) =
     //console.log(url)
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -67,8 +63,6 @@ export const userAuthMe = createAsyncThunk('auth/me', async (_, thunkAPI) => {
     const url = _USER_ROUTE_AUTH_ME();
     const res = await fetch(url, {
       method: 'GET',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -89,8 +83,6 @@ export const userVerify = createAsyncThunk('auth/verify', async (_, thunkAPI) =>
     const url = await _USER_ROUTE_VERIFY();
     const res = await fetch(url, {
       method: 'GET',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -111,7 +103,6 @@ export const userLogout = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
-      mode: 'same-origin',
       credentials: 'include',
     });
 
@@ -129,8 +120,6 @@ export const userDelete = createAsyncThunk('auth/delete', async (user, thunkAPI)
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -153,8 +142,6 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -177,8 +164,6 @@ export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', 
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -201,8 +186,6 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
@@ -226,8 +209,6 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'same-origin',
-      redirect: 'follow',
       credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
