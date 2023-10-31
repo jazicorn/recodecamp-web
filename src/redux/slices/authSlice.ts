@@ -170,8 +170,6 @@ export const userAccountConfirmationEmail = createAsyncThunk('auth/account/confi
     const url = _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL();
     const res = await fetch(url, {
       method: 'POST',
-      mode: "cors",
-      credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
         'Accept': 'application/json', 
@@ -193,8 +191,6 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      mode: "cors",
-      credentials: 'include',
       headers: { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',  

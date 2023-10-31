@@ -73,10 +73,10 @@ const Guest_Account_Confirmation = () => {
     const data = {
       _PASSCODE: passcode
     }
-    //console.log("form data",data)
+    console.log("form data:",data)
     try {
       const originalPromiseResult = await dispatch(userAccountValidation(data)).unwrap();
-      //console.log("originalPromiseResult:", originalPromiseResult)
+      console.log("originalPromiseResult:", originalPromiseResult)
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
         console.log('🚫 Guest | Account Confirmation Failed');
         // Failure Notification
