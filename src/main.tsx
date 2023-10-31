@@ -99,6 +99,7 @@ const router = Router(
 
 // Create a react-query client
 const queryClient = new QueryClient();
+queryClient.clear();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

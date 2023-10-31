@@ -42,7 +42,7 @@ const Layout_D_Code = () => {
   /**Get question url */
   let url;
   if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
+    url = `${baseURL}/api/${currentLanguage}/${getMenuRoute}`;
   } else {
     url = `/api/${currentLanguage}/${getMenuRoute}`;
   }

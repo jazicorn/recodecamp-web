@@ -97,7 +97,7 @@ const D_Category_Menu = ({ menuData }) => {
     try {
       let url;
       if (import.meta.env.PROD) {
-        url = `${baseURL}/languages`;
+        url = `${baseURL}/api/languages`;
       } else {
         url = `/api/languages`;
       }
@@ -147,8 +147,9 @@ const D_Category_Menu = ({ menuData }) => {
   const getCategories = async () => {
     try {
       let url;
+      //console.log("baseURLmenu:", baseURL)
       if (import.meta.env.PROD) {
-        url = `${baseURL}/categories/${currentLanguage}`;
+        url = `${baseURL}/api/categories/${currentLanguage}`;
       } else {
         url = `/api/categories/${currentLanguage}`;
       }

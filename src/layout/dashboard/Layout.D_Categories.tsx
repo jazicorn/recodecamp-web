@@ -44,7 +44,7 @@ const Layout_D_Categories = () => {
   /**Get question url */
   let url;
   if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
+    url = `${baseURL}/api/${currentLanguage}/${getMenuRoute}`;
   } else {
     url = `/api/${currentLanguage}/${getMenuRoute}`;
     //console.log(url)
@@ -96,9 +96,9 @@ const Layout_D_Categories = () => {
       await setLanguage();
       let res;
       if (import.meta.env.PROD) {
-        res = await fetch(`${baseURL}/categories/${currentLanguage}`);
+        res = await fetch(`${baseURL}/api/categories/${currentLanguage}`);
       } else {
-        res = await fetch(`api/categories/${currentLanguage}`);
+        res = await fetch(`/api/categories/${currentLanguage}`);
       }
       const resJSON = res.json();
       return resJSON;
