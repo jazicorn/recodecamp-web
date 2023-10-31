@@ -12,7 +12,7 @@ import {
   _USER_ROUTE_LOGOUT,
   _USER_ROUTE_DELETE,
   _USER_ROUTE_ACCOUNT_VERIFICATION,
-  _USER_ROUTE_ACCOUNT_CONFIRMATION,
+  _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL,
   _USER_ROUTE_ACCOUNT_VALIDATION,
   _USER_ROUTE_ACCOUNT_PASSWORD_RESET,
 } from '../../utils/constants/constUserRoutes';
@@ -164,11 +164,10 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
   }
 });
 
-export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', async (data, thunkAPI) => {
+export const userAccountConfirmationEmail = createAsyncThunk('auth/account/confirm', async (data, thunkAPI) => {
   //console.log(user)
   try {
-    const url = _USER_ROUTE_ACCOUNT_CONFIRMATION();
-    //console.log("logouturl:", url)
+    const url = _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL();
     const res = await fetch(url, {
       method: 'POST',
       mode: "cors",
@@ -246,7 +245,7 @@ interface AuthState {
   statusVerify: string;
   statusDelete: string;
   statusAccountVerify: string;
-  statusAccountConfirm: string;
+  statusAccountConfirmEmail: string;
   statusAccountValidate: string;
   statusAccountPasswordReset: string;
   error: null;
@@ -257,7 +256,7 @@ interface AuthState {
   errorVerify: null;
   errorDelete: null;
   errorAccountVerify: null;
-  errorAccountConfirm: null;
+  errorAccountConfirmEmail: null;
   errorAccountValidate: null;
   errorAccountPasswordReset: null;
   screenLoader: boolean;
@@ -299,7 +298,7 @@ const defaultState: AuthState = {
   statusVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusDelete: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
-  statusAccountConfirm: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountConfirmEmail: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountValidate: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountPasswordReset: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
@@ -310,7 +309,7 @@ const defaultState: AuthState = {
   errorVerify: null,
   errorDelete: null,
   errorAccountVerify: null,
-  errorAccountConfirm: null,
+  errorAccountConfirmEmail: null,
   errorAccountValidate: null,
   errorAccountPasswordReset: null,
   screenLoader: false,
@@ -497,15 +496,15 @@ export const authSlice = createSlice({
         state.error = action.error.message;
         state.errorAccountVerify = action.error.message;
       })
-      .addCase(userAccountConfirmation.pending, (state, action) => {
+      .addCase(userAccountConfirmationEmail.pending, (state, action) => {
         state.status = 'loading';
         state.statusAccountConfirm = 'loading';
       })
-      .addCase(userAccountConfirmation.fulfilled, (state, action) => {
+      .addCase(userAccountConfirmationEmail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.statusAccountConfirm = 'succeeded';
       })
-      .addCase(userAccountConfirmation.rejected, (state, action) => {
+      .addCase(userAccountConfirmationEmail.rejected, (state, action) => {
         state.status = 'failed';
         state.statusAccountConfirm = 'failed';
         state.error = action.error.message;

@@ -1,6 +1,7 @@
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
+const emailURL = import.meta.env.VITE_API_EMAIL_URL;
 
 export const _USER_ROUTE_REGISTER = () => {
   if (import.meta.env.PROD) {
@@ -58,14 +59,16 @@ export const _USER_ROUTE_ACCOUNT_VERIFICATION = () => {
   }
 };
 
-export const _USER_ROUTE_ACCOUNT_CONFIRMATION = () => {
+/** Send Email To User for Account Creation Confirmation */
+export const _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL = () => {
   if (import.meta.env.PROD) {
-    return `${baseURL}/api/guest/confirm/account`;
+    return `${emailURL}/api/confirm/account`;
   } else {
-    return `/api/guest/confirm/account`;
+    return `/api/confirm/account`;
   }
 };
 
+/**Validate User Confirmation Email URL */
 export const _USER_ROUTE_ACCOUNT_VALIDATION = () => {
   if (import.meta.env.PROD) {
     return `${baseURL}/api/guest/validate/account`;
@@ -79,5 +82,13 @@ export const _USER_ROUTE_ACCOUNT_PASSWORD_RESET = () => {
     return `${baseURL}/api/guest/password/reset`;
   } else {
     return `/api/guest/password/reset`;
+  }
+};
+
+export const _USER_ROUTE_ACCOUNT_PASSWORD_EMAIL_RESET = () => {
+  if (import.meta.env.PROD) {
+    return `${emailURL}/api/password/reset`;
+  } else {
+    return `/api/password/reset`;
   }
 };

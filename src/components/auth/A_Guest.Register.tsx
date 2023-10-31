@@ -23,7 +23,7 @@ import type { RootState } from '../../redux/store.ts';
 import {
   userRegister,
   userComponentScreenLoader,
-  userAccountConfirmation,
+  userAccountConfirmationEmail,
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
@@ -101,6 +101,7 @@ const Register = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    setLoaderRegister(true);
     registerGuest(data);
   });
 
@@ -126,16 +127,16 @@ const Register = () => {
           loading: false,
         });
         console.log('⏳ Delay | Redirect in 1 second.');
-        setLoaderRegister(true);
+        //setLoaderRegister(true);
         setTimeout(() => {
           setLoaderRegister(false);
         }, '1000');
       } else {
         console.log('👍 Guest | Registered');
         //console.log("originalPromiseResult:\n", originalPromiseResult);
-        //const accountConfirmation = await dispatch(userAccountConfirmation(originalPromiseResult)).unwrap();
-        //if (accountConfirmation === undefined || accountConfirmation.error) {
-        if (originalPromiseResult === undefined || originalPromiseResult.error) {
+        const accountConfirmation = await dispatch(userAccountConfirmationEmail(originalPromiseResult)).unwrap();
+        if (accountConfirmation === undefined || accountConfirmation.error) {
+        //if (originalPromiseResult === undefined || originalPromiseResult.error) {
           console.log('🚫 Guest | Request Failed');
           // Failure Notification
           notifications.show({
@@ -152,7 +153,7 @@ const Register = () => {
             loading: false,
           });
           console.log('⏳ Delay | Redirect in 1 second.');
-          setLoaderRegister(true);
+          //setLoaderRegister(true);
           setTimeout(() => {
             setLoaderRegister(false);
           }, '1000');
@@ -172,7 +173,7 @@ const Register = () => {
             sx: { backgroundColor: 'teal' },
             loading: false,
           });
-          setLoaderRegister(true);
+          //setLoaderRegister(true);
           setTimeout(() => {
             console.log('⏳ Delay | Redirect in 1 second.');
             navigate('/auth/guest/login');
