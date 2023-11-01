@@ -55,15 +55,19 @@ const Guest_Account_Confirmation = () => {
   const dispatch = useAppDispatch();
 
   /** Redux Fetch Account Confirm Loader */
-  const statusFetchAccountConfirm = useAppSelector(fetchUserStatusAccountValidate);
-  const [ loaderAccountConfirm, setLoaderAccountConfirm ] = useState(false);
+  const statusFetchAccountValidate = useAppSelector(fetchUserStatusAccountValidate);
+  const [ loaderAccountConfirm, setLoaderAccountConfirm ] = useState(true);
   const [ pageStatus, setPageStatus ] = useState("idle");
 
   useEffect(() => {
-    if(statusFetchAccountConfirm === 'loading') {
+    if(statusFetchAccountValidate === 'loading') {
       setLoaderAccountConfirm(true);
     }
   },[]);
+
+  setTimeout(() => {
+    setLoaderAccountConfirm(false);
+  }, '2000');
 
   /** React Router Retrive Params */
   let { passcode } = useParams();
@@ -73,10 +77,10 @@ const Guest_Account_Confirmation = () => {
     const data = {
       _PASSCODE: passcode
     }
-    //console.log("form data:",data)
+    //console.log("passcode data:",data)
     try {
       const originalPromiseResult = await dispatch(userAccountValidation(data)).unwrap();
-      console.log("originalPromiseResult:", originalPromiseResult)
+      //console.log("originalPromiseResultData:\n", originalPromiseResult.data)
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
         console.log('🚫 Guest | Account Confirmation Failed');
         // Failure Notification
@@ -186,7 +190,7 @@ const Guest_Account_Confirmation = () => {
               <h4 className="tw-text-xl tw-w-fit tw-place-self-left">Account Confirmation</h4>
             </div> */}
             {
-            loaderAccountConfirm ? 
+            loaderAccountConfirm || pageStatus === "loading" ? 
               <div className="tw-min-h-[20.75em]"><LoadingDashboardXL /></div>
             :
                <div className="tw-min-h-[16.75em] tw-h-full tw-w-full tw-grow-0 tw-flex tw-flex-col tw-place-content-center tw-place-items-center tw-text-xl [&>span]:tw-text-3xl [&>span]:tw-text-campfire-blue">
@@ -200,9 +204,9 @@ const Guest_Account_Confirmation = () => {
                       Account Confirmation Status: <span>Success</span>
                     </>
                   }
-                  {pageStatus === "error" &&
+                  {pageStatus === "error" || statusFetchAccountValidate === "error" &&
                     <>
-                      Account Confirmation Status: <span>Error</span>
+                      Account Confirmation Status: <span>Account Not Found</span>
                     </>
                   }
               </div>

@@ -188,7 +188,7 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
   //console.log(user)
   try {
     const url = _USER_ROUTE_ACCOUNT_VALIDATION();
-    //console.log("logouturl:", url)
+    //console.log("accountValidation:", url)
     const res = await fetch(url, {
       method: 'POST',
       headers: { 
@@ -197,12 +197,18 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
       },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
+    console.log("res", res)
+
+    if(!res.ok) {
+      throw new Error("User Not Found")
+    }
 
     const resJSON = await res.json();
+
     //console.log("resJSON", resJSON);
     return resJSON;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data);
+    return thunkAPI.rejectWithValue("Redux Error:\n" + err.response.data.message);
   }
 });
 
@@ -559,7 +565,7 @@ export const fetchUserStatusDelete = (state) => state.authentication.statusDelet
 
 export const fetchUserStatusAccountVerify = (state) => state.authentication.statusAccountVerify;
 
-export const fetchUserStatusAccountConfirm = (state) => state.authentication.statusAccountConfirm;
+export const fetchUserStatusAccountConfirm = (state) => state.authentication.statusAccountConfirmEmail;
 
 export const fetchUserStatusAccountValidate = (state) => state.authentication.statusAccountValidate;
 
@@ -582,7 +588,7 @@ export const fetchUserErrorDelete = (state) => state.authentication.errorDelete;
 
 export const fetchUserErrorAccountVerify = (state) => state.authentication.errorAccountVerify;
 
-export const fetchUserErrorAccountConfirm = (state) => state.authentication.errorAccountConfirm;
+export const fetchUserErrorAccountConfirm = (state) => state.authentication.errorAccountConfirmEmail;
 
 export const fetchUserErrorAccountValidate = (state) => state.authentication.errorAccountValidate;
 

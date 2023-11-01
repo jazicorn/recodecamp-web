@@ -66,7 +66,9 @@ export const _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL = () => {
 
 /**Validate User Confirmation Email URL */
 export const _USER_ROUTE_ACCOUNT_VALIDATION = () => {
-  return `${emailURL}/api/validate/account`
+
+    return `${baseURL}/api/guest/validate/account`;
+  
 };
 
 export const _USER_ROUTE_ACCOUNT_PASSWORD_RESET = () => {
