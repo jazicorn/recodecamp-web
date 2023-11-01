@@ -23,7 +23,7 @@ import type { RootState } from '../../redux/store.ts';
 import {
   userRegister,
   userComponentScreenLoader,
-  userAccountConfirmation,
+  userAccountConfirmationEmail,
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
@@ -101,6 +101,7 @@ const Register = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    setLoaderRegister(true);
     registerGuest(data);
   });
 
@@ -126,45 +127,26 @@ const Register = () => {
           loading: false,
         });
         console.log('⏳ Delay | Redirect in 1 second.');
-        setLoaderRegister(true);
+        //setLoaderRegister(true);
         setTimeout(() => {
           setLoaderRegister(false);
         }, '1000');
       } else {
         console.log('👍 Guest | Registered');
         //console.log("originalPromiseResult:\n", originalPromiseResult);
-        //const accountConfirmation = await dispatch(userAccountConfirmation(originalPromiseResult)).unwrap();
-        //if (accountConfirmation === undefined || accountConfirmation.error) {
-        if (originalPromiseResult === undefined || originalPromiseResult.error) {
+        const accountConfirmation = await dispatch(userAccountConfirmationEmail(originalPromiseResult.data)).unwrap();
+        if (accountConfirmation === undefined || accountConfirmation.error) {
+        //if (originalPromiseResult === undefined || originalPromiseResult.error) {
           console.log('🚫 Guest | Request Failed');
-          // Failure Notification
-          notifications.show({
-            id: 'failure',
-            withCloseButton: true,
-            autoClose: 2000,
-            title: 'Failed Registration Attempt',
-            message: '',
-            color: 'red',
-            icon: <IconX />,
-            className: 'my-notification-class',
-            style: { backgroundColor: 'white' },
-            sx: { backgroundColor: 'red' },
-            loading: false,
-          });
-          console.log('⏳ Delay | Redirect in 1 second.');
-          setLoaderRegister(true);
-          setTimeout(() => {
-            setLoaderRegister(false);
-          }, '1000');
         } else {
-          //console.log('👍 Guest | Emailed Account Confirmation');
+          console.log('👍 Guest | Emailed Account Confirmation');
           // Success Notification
           notifications.show({
             id: 'success',
             withCloseButton: true,
-            autoClose: 2000,
+            autoClose: 3000,
             title: '🥳 Registration Successful',
-            message: 'Have Run ReCoding',
+            message: 'Please check your email inbox to confirm your new account',
             color: 'teal',
             icon: <IconCheck />,
             className: 'my-notification-class',
@@ -172,12 +154,16 @@ const Register = () => {
             sx: { backgroundColor: 'teal' },
             loading: false,
           });
-          setLoaderRegister(true);
-          setTimeout(() => {
-            console.log('⏳ Delay | Redirect in 1 second.');
-            navigate('/auth/guest/login');
-          }, '1000');
+          //setLoaderRegister(true);
+          // setTimeout(() => {
+          //   console.log('⏳ Delay | Redirect in 1 second.');
+          //   navigate('/');
+          // }, '1000');
         }
+        setTimeout(() => {
+          console.log('⏳ Delay | Redirect in 1 second.');
+          navigate('/');
+        }, '1000');
       }
     } catch (error) {
       console.log(error);
