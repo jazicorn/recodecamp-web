@@ -51,6 +51,14 @@ export const _USER_ROUTE_DELETE = () => {
   }
 };
 
+export const _USER_ROUTE_ACCOUNT_VALIDATE_PASSCODE = () => {
+  if (import.meta.env.PROD) {
+    return `${baseURL}/api/guest/validate/passcode`;
+  } else {
+    return `/api/guest/validate/passcode`;
+  }
+};
+
 export const _USER_ROUTE_ACCOUNT_VERIFICATION = () => {
   if (import.meta.env.PROD) {
     return `${baseURL}/api/guest/verify/account`;
@@ -66,19 +74,17 @@ export const _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL = () => {
 
 /**Validate User Confirmation Email URL */
 export const _USER_ROUTE_ACCOUNT_VALIDATION = () => {
-
     return `${baseURL}/api/guest/validate/account`;
-  
 };
 
 export const _USER_ROUTE_ACCOUNT_PASSWORD_RESET = () => {
   if (import.meta.env.PROD) {
     return `${baseURL}/api/guest/password/reset`;
   } else {
-    return `/api/guest/password/reset`;
+    return `${baseURL}/api/guest/password/reset`;
   }
 };
 
-export const _USER_ROUTE_ACCOUNT_PASSWORD_EMAIL_RESET = () => {
-    return `${emailURL}/api/password/reset`
+export const _USER_ROUTE_ACCOUNT_PASSWORD_RESET_EMAIL = () => {
+    return `${emailURL}/api/password/reset`;
 };
