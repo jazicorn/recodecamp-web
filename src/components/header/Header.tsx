@@ -35,9 +35,10 @@ import { Loader } from '@mantine/core';
 import { IconX, IconCheck } from '@tabler/icons-react';
 //import { IconX, IconCheck } from '@tabler/icons-react';
 import Emoji from 'react-emojis';
-/** Buttons: Auth */
+/** Button Components */
 import Button_User_Logout from '../buttons/Button_User_Logout';
 import Button_User_Login from '../buttons/Button_User_Login';
+import Button_Dashboard from '../buttons/Button_Dashboard';
 
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
@@ -245,7 +246,8 @@ const Header = () => {
                     darkMode ? '' : ''
                   } tw-underline tw-decoration-dashed tw-decoration-2 hover:tw-text-campfire-blue`}
                 >
-                  <Link to={`/learn`}>Dashboard</Link>
+                  <Button_Dashboard/>
+                  {/* <Link to={`/learn`}>Dashboard</Link> */}
                 </li>
                 {loadingButton ? (
                   <li
@@ -323,13 +325,9 @@ const Header = () => {
             <li
               className={`${
                 darkMode ? '' : ''
-              } hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center tw-underline tw-decoration-dashed tw-decoration-2`}
+              } hover:tw-text-campfire-blue tw-flex tw-flex-row tw-content-center tw-place-self-center tw-underline tw-decoration-dashed tw-decoration-2`}
             >
-              <Link to={`/learn`} className="tw-place-self-center">
-                <Transition>
-                  <span>Dashboard</span>
-                </Transition>
-              </Link>
+              <Button_Dashboard/>
             </li>
             <>
               {loadingButton ? (

@@ -13,7 +13,10 @@ import {
   _USER_ROUTE_DELETE,
   _USER_ROUTE_ACCOUNT_VERIFICATION,
   _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL,
+  _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL_RESEND,
   _USER_ROUTE_ACCOUNT_VALIDATION,
+  _USER_ROUTE_ACCOUNT_VALIDATE_PASSCODE,
+  _USER_ROUTE_ACCOUNT_PASSCODE,
   _USER_ROUTE_ACCOUNT_PASSWORD_RESET,
 } from '../../utils/constants/constUserRoutes';
 
@@ -165,7 +168,7 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
 });
 
 export const userAccountConfirmationEmail = createAsyncThunk('auth/account/confirm', async (data, thunkAPI) => {
-  //console.log(user)
+  //console.log("fromregtoemail:", data)
   try {
     const url = _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL();
     const res = await fetch(url, {
@@ -184,6 +187,50 @@ export const userAccountConfirmationEmail = createAsyncThunk('auth/account/confi
   }
 });
 
+export const userAccountConfirmationEmailResend = createAsyncThunk('auth/account/confirm/resend', async (user, thunkAPI) => {
+  //console.log(user)
+  try {
+    // Get Passcode & Email from DB
+    //console.log("user:", user)
+    const urlPasscode = await _USER_ROUTE_ACCOUNT_VALIDATE_PASSCODE(user);
+    //console.log("urlPasscode:", urlPasscode);
+    const resPasscode = await fetch(urlPasscode, {
+      method: 'POST',
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
+      body: JSON.stringify(user), // { email : "", passcode: ""}
+    });
+    //console.log("resPasscode:", resPasscode);
+    const resPasscodeJSON = await resPasscode.json();
+    //console.log("resPasscodeJSONconfirm:", resPasscodeJSON);
+    //return resPasscodeJSON
+    if(resPasscodeJSON._passcode_confirmed === false) {
+      // Fetch Email Confirmation
+      const urlPasscodeEmail = await _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL();
+      //console.log("urlPasscodeEmail:", urlPasscodeEmail)
+      const res = await fetch(urlPasscodeEmail, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json', 
+        },
+        body: JSON.stringify(resPasscodeJSON), // { email : "", passcode: "", passcode_confirmed: boolean}
+      });
+      const resJSON = await res.json();
+      //console.log("resJSONemail", resJSON);
+      return { data : false }
+    } else {
+      return { data : true }
+    }
+  } catch (err) {
+    // return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
 export const userAccountValidation = createAsyncThunk('auth/account/validation', async (data, thunkAPI) => {
   //console.log(user)
   try {
@@ -195,9 +242,9 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
         'Content-Type': 'application/json',
         'Accept': 'application/json',  
       },
-      body: JSON.stringify(data), // data = { email : "", passcode: ""}
+      body: JSON.stringify(data), // { email : "", passcode: ""}
     });
-    console.log("res", res)
+    //console.log("res", res)
 
     if(!res.ok) {
       throw new Error("User Not Found")
@@ -205,7 +252,7 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
 
     const resJSON = await res.json();
 
-    //console.log("resJSON", resJSON);
+    //console.log("resJSONValidate", resJSON);
     return resJSON;
   } catch (err) {
     return thunkAPI.rejectWithValue("Redux Error:\n" + err.response.data.message);
@@ -237,6 +284,7 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
 
 // Define a type for the slice state
 interface AuthState {
+  userConfirmEmail: object;
   user: object;
   authenticated: boolean;
   status: string;
@@ -250,6 +298,8 @@ interface AuthState {
   statusAccountConfirmEmail: string;
   statusAccountValidate: string;
   statusAccountPasswordReset: string;
+  statusAccountEmailConfirmed: boolean;
+  statusAccountEmailConfirmedResend: boolean;
   error: null;
   errorRegister: null;
   errorLogin: null;
@@ -268,6 +318,10 @@ interface AuthState {
 
 // Define the initial state using that type
 const defaultState: AuthState = {
+  userConfirmEmail: {
+    email: "",
+    passcode: ""
+  },
   user: {
     _ID: '123-456-789',
     _CREATED_AT: new Date().toISOString(),
@@ -303,6 +357,8 @@ const defaultState: AuthState = {
   statusAccountConfirmEmail: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountValidate: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountPasswordReset: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountEmailConfirmed: false, // true | false
+  statusAccountEmailConfirmedResend: false, // true | false
   error: null,
   errorRegister: null,
   errorLogin: null,
@@ -400,6 +456,7 @@ export const authSlice = createSlice({
       })
       .addCase(userRegister.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.userConfirmEmail = action.payload.data;
         state.statusRegister = 'succeeded';
       })
       .addCase(userRegister.rejected, (state, action) => {
@@ -505,12 +562,22 @@ export const authSlice = createSlice({
       .addCase(userAccountConfirmationEmail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.statusAccountConfirm = 'succeeded';
+        state.statusAccountEmailConfirmed =  action.payload.data;
       })
       .addCase(userAccountConfirmationEmail.rejected, (state, action) => {
         state.status = 'failed';
         state.statusAccountConfirm = 'failed';
         state.error = action.error.message;
         state.errorAccountConfirm = action.error.message;
+      })
+      .addCase(userAccountConfirmationEmailResend.fulfilled, (state, action) => {
+        //console.log("action.payload.message", action.payload.message)
+        if(action.payload === undefined) {
+          state.statusAccountEmailConfirmedResend = true;
+        } else {
+          state.statusAccountEmailConfirmedResend =  action.payload.data;
+        }
+        
       })
       .addCase(userAccountValidation.pending, (state, action) => {
         state.status = 'loading';
@@ -546,6 +613,8 @@ export const authSlice = createSlice({
 /** Fetch API User */
 export const fetchUser = (state) => state.authentication.user;
 
+export const fetchUserConfirmEmail = (state) => state.authentication.userConfirmEmail;
+
 export const fetchUserAuth = (state) => state.authentication.authenticated;
 
 /** Fetch API User Status */
@@ -565,11 +634,15 @@ export const fetchUserStatusDelete = (state) => state.authentication.statusDelet
 
 export const fetchUserStatusAccountVerify = (state) => state.authentication.statusAccountVerify;
 
-export const fetchUserStatusAccountConfirm = (state) => state.authentication.statusAccountConfirmEmail;
+export const fetchUserStatusAccountConfirmEmail = (state) => state.authentication.statusAccountConfirmEmail;
 
 export const fetchUserStatusAccountValidate = (state) => state.authentication.statusAccountValidate;
 
 export const fetchUserStatusAccountPasswordReset = (state) => state.authentication.statusAccountPasswordReset;
+
+export const fetchUserStatusAccountEmailConfirmed = (state) => state.authentication.statusAccountEmailConfirmed;
+
+export const fetchUserStatusAccountEmailConfirmedResend = (state) => state.authentication.statusAccountEmailConfirmedResend;
 
 /** Fetch API User Error */
 export const fetchUserError = (state) => state.authentication.error;
@@ -588,7 +661,7 @@ export const fetchUserErrorDelete = (state) => state.authentication.errorDelete;
 
 export const fetchUserErrorAccountVerify = (state) => state.authentication.errorAccountVerify;
 
-export const fetchUserErrorAccountConfirm = (state) => state.authentication.errorAccountConfirmEmail;
+export const fetchUserErrorAccountConfirmEmail = (state) => state.authentication.errorAccountConfirmEmail;
 
 export const fetchUserErrorAccountValidate = (state) => state.authentication.errorAccountValidate;
 
