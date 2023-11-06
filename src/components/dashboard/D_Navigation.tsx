@@ -97,7 +97,7 @@ const D_Navigation = () => {
             });
             setTimeout(() => {
               console.log('⏳ Delay | Page Redirect In 1 Second.');
-              navigate('/');
+              navigate('/auth/guest/login');
             }, '1000');
           }
         });
