@@ -30,6 +30,10 @@ import {
 import { LoadingDashboardXL } from './A_Loader.tsx';
 /**Constants */
 import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
+/** Font Awesome */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faHandPointRight, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane as faPaperPlaneReg } from '@fortawesome/free-regular-svg-icons';
 
 interface FormInputs {
   multipleErrorInput: string;
@@ -82,6 +86,7 @@ const SignIn = () => {
       //dispatch(updateStatus("idle"));
       try {
         const originalPromiseResult = await dispatch(userLogin(data)).unwrap();
+        //console.log("originalPromiseResult:\n", originalPromiseResult);
         if (originalPromiseResult === undefined || originalPromiseResult.error) {
           console.log('🚫 Guest | Request Failed');
           // Failure Notification
@@ -103,7 +108,25 @@ const SignIn = () => {
           setTimeout(() => {
             setLoaderLogin(false);
           }, '1000');
-        } else {
+        } else if (originalPromiseResult._PASSCODE_CONFIRMED === false) {
+          console.log('❗Guest | Not Authorized | Please Confirm Account');
+          notifications.show({
+              id: 'failure',
+              withCloseButton: true,
+              autoClose: 2000,
+              title: 'Account Not Confirmed',
+              message: '',
+              color: 'red',
+              icon: <IconX />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'red' },
+              loading: false,
+          });
+          setTimeout(() => {
+            setLoaderLogin(false);
+          }, '1000');
+      } else {
           setLoaderLogin(true);
           console.log('👍 Guest | Logged In');
           // Success Notification
@@ -144,7 +167,7 @@ const SignIn = () => {
               darkMode
                 ? 'tw-bg-gray-400/70 tw-border-campfire-blue-600'
                 : 'tw-bg-gray-200/80 tw-border-campfire-blue-200'
-            } ${isMobile ? 'tw-w-[24em]' : 'tw-w-[30em]'} tw-pt-2 tw-pb-6
+            } ${isMobile ? 'tw-w-[24em]' : 'tw-w-[30em]'} tw-pt-2 tw-pb-2
           [&>div]:tw-h-[3em] [&>div]:tw-flex tw-h-full
           tw-border-2 `}
           >
@@ -207,7 +230,7 @@ const SignIn = () => {
                   <li
                     className={`${
                       darkMode ? 'hover:tw-bg-campfire-neutral-400/70' : 'hover:tw-bg-campfire-neutral-300/70'
-                    } tw-w-full 
+                    } tw-w-full tw-mt-8
                   tw-border-y tw-border-campfire-purple-light`}
                   >
                     <button type="submit" className={`tw-font-roboto_mono tw-text-base tw-w-full`}>
@@ -217,6 +240,23 @@ const SignIn = () => {
                 </ul>
               </form>
             }
+             <footer
+              className={`${
+                darkMode ? '' : ''
+              } tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-w-full tw-pt-6 `}
+            >
+              <p className="tw-w-fit tw-text-xs tw-px-2">
+                Missing Confirmation Email?&nbsp;<FontAwesomeIcon icon={faTriangleExclamation} size="sm"/>&nbsp;
+                <Link
+                  to="/auth/account/confirm/resend"
+                  className={`${
+                    darkMode ? 'hover:tw-text-campfire-neutral-200' : 'hover:tw-text-campfire-neutral-700'
+                  } tw-text-campfire-blue-300 tw-font-space_mono_bold`}
+                >
+                  Request Email Confirmation
+                </Link>
+              </p>
+            </footer>
           </div>
         </Transition>
       </div>

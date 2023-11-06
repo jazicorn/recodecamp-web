@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../redux/reduxHooks.ts';
 //import type { RootState } from '../../redux/store.ts';
 import {
   userAuthMe,
+  userVerify,
   userLogout,
   userLandingScreenLoader,
   fetchUserScreenLoader,
@@ -42,10 +43,25 @@ const Button_User_Login = () => {
   /** Guest AuthMe */
   const guestAuthMe = useCallback(async (e) => {
     try {
-      const originalPromiseResult = await dispatch(userAuthMe()).unwrap();
+      const originalPromiseResult = await dispatch(userVerify()).unwrap();
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
         console.log('⏳ Delay | Redirect');
         navigate('/auth/guest/login');
+      } else if (verifyPromiseResult.PASSCODE_CONFIRMED === false) {
+        console.log('❗Guest | Not Authorized | Please Confirm Account');
+        notifications.show({
+            id: 'failure',
+            withCloseButton: true,
+            autoClose: 2000,
+            title: '🚫 Please Confim Account To Access Dashboard',
+            message: 'Please check your email inbox for link to confirm account or request another verification link',
+            color: 'red',
+            icon: <IconX />,
+            className: 'my-notification-class',
+            style: { backgroundColor: 'white' },
+            sx: { backgroundColor: 'red' },
+            loading: false,
+        });
       } else {
         console.log('🧑 Guest | Detected');
         // Success Notification

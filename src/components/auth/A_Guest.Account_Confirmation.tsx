@@ -14,6 +14,9 @@ import { ThemeContext } from '../../context/ThemeContext';
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
+// utils
+import { getDate } from '../../utils/date';
+import { confirmation, confirmationDate, confirmationCount, setEmailConfirmationLocalData } from '../../utils/userConfirmation';
 // images
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
@@ -28,7 +31,9 @@ import {
   userRegister,
   userComponentScreenLoader,
   userAccountValidation,
+  userAccountConfirmationEmail,
   fetchUser,
+  fetchUserConfirmEmail,
   fetchUserAuth,
   fetchUserStatus,
   fetchUserStatusRegister,
@@ -40,6 +45,10 @@ import { LoadingDashboardXL } from './A_Loader.tsx';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 // import * as z from 'zod';
+/** Font Awesome */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faHandPointRight, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane as faPaperPlaneReg } from '@fortawesome/free-regular-svg-icons';
 
 const Guest_Account_Confirmation = () => {
   /**Custom Middleware | Screen Size */
@@ -51,87 +60,63 @@ const Guest_Account_Confirmation = () => {
   /** Navigation */
   const navigate = useNavigate();
 
+  /** User Email Confirm */
+  const userData = useAppSelector(fetchUserConfirmEmail);
+
   /** Redux Dispatch Instance */
   const dispatch = useAppDispatch();
 
   /** Redux Fetch Account Confirm Loader */
-  const statusFetchAccountConfirm = useAppSelector(fetchUserStatusAccountValidate);
-  const [ loaderAccountConfirm, setLoaderAccountConfirm ] = useState(false);
-  const [ pageStatus, setPageStatus ] = useState("idle");
+  const [ loader, setLoader ] = useState(true);
 
-  useEffect(() => {
-    if(statusFetchAccountConfirm === 'loading') {
-      setLoaderAccountConfirm(true);
-    }
-  },[]);
+  setTimeout(() => {
+    setLoader(false);
+  }, '3000');
 
-  /** React Router Retrive Params */
-  let { passcode } = useParams();
+  const checkUserStatus = () => {
+    console.log()
+  };
 
-  /** Fetch Account Confirmation */
-  const retrieveAccountConfirmation = async (passcode) => {
-    const data = {
-      _PASSCODE: passcode
-    }
+  /** Email Account Confirmation */
+  const emailConfirmation = async (data) => {
     //console.log("form data",data)
-    try {
-      const originalPromiseResult = await dispatch(userAccountValidation(data)).unwrap();
-      //console.log("originalPromiseResult:", originalPromiseResult)
-      if (originalPromiseResult === undefined || originalPromiseResult.error) {
-        console.log('🚫 Guest | Account Confirmation Failed');
-        // Failure Notification
-        notifications.show({
-          id: 'failure',
-          withCloseButton: true,
-          autoClose: 2000,
-          title: 'Failed Account Confirmation',
-          message: '',
-          color: 'red',
-          icon: <IconX />,
-          className: 'my-notification-class',
-          style: { backgroundColor: 'white' },
-          sx: { backgroundColor: 'red' },
-          loading: false,
-        });
-        setLoaderAccountConfirm(true);
-        setTimeout(() => {
-          setLoaderAccountConfirm(false);
-          setPageStatus("error");
-        }, '1000');
-      } else {
-        console.log('👍 Guest | Account Confirmed');
-        // Success Notification
-        notifications.show({
-          id: 'success',
-          withCloseButton: true,
-          autoClose: 2000,
-          title: '🥳 Account Confirmation Successful',
-          message: 'Login to start Recoding',
-          color: 'teal',
-          icon: <IconCheck />,
-          className: 'my-notification-class',
-          style: { backgroundColor: 'white' },
-          sx: { backgroundColor: 'teal' },
-          loading: false,
-        });
-        setLoaderAccountConfirm(true);
-        setTimeout(() => {
-          setPageStatus("success");
-          setLoaderAccountConfirm(false);
-          //console.log('⏳ Delay | Redirect in 1 second.');
-          //navigate('/auth/guest/login');
-        }, '1000');
+    if ( confirmation == true ) {
+      console.log(`📬 | Email Confirmation Already Sent | Please Check Email Inbox`);
+      console.log(`✉️ | Re-Send Email Confirmation 👉 ${import.meta.env.VITE_WEB_BASE_URL}/auth/account/confirm/status/check`);
+      return
+    } else {
+      localStorage.setItem('email-confirmation-sent', true);
+      try {
+          const accountConfirmation = await dispatch(userAccountConfirmationEmail(data)).unwrap();
+          if (accountConfirmation === undefined || accountConfirmation.error) {
+            console.log('🚫 Guest | Request Failed');
+          } else {
+
+            console.log('👍 Guest | Emailed Account Confirmation');
+            // Success Notification
+            notifications.show({
+              id: 'success',
+              withCloseButton: true,
+              autoClose: 3000,
+              title: '🥳 Registration Successful',
+              message: 'Please check your email inbox to confirm your new account',
+              color: 'teal',
+              icon: <IconCheck />,
+              className: 'my-notification-class',
+              style: { backgroundColor: 'white' },
+              sx: { backgroundColor: 'teal' },
+              loading: false,
+            });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
   useEffect(() => {
-    retrieveAccountConfirmation(passcode);
+    emailConfirmation(userData)
   },[]);
-
-  //console.log("statusFetchAccountConfirm", statusFetchAccountConfirm);
 
   return (
     <>
@@ -145,17 +130,17 @@ const Guest_Account_Confirmation = () => {
               darkMode
                 ? 'tw-bg-gray-400/70 tw-border-campfire-blue-600'
                 : 'tw-bg-gray-200/80 tw-border-campfire-blue-200'
-            } ${isMobile ? 'tw-w-[24em]' : 'tw-w-[30em]'} tw-pt-2 tw-pb-6
-          [&>div]:tw-h-[3em] [&>div]:tw-flex tw-h-full
+            } ${isMobile ? 'tw-w-[24em]' : 'tw-w-[30em]'} tw-pt-2 tw-pb-2
           tw-border-2 `}
           >
+            <>
             <div
               className={`${
                 darkMode ? '' : ''
-              } tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-w-full tw-pb-4 tw-px-2 tw-mb-4 `}
+              } tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-min-h-[40px] tw-w-full tw-pb-4 tw-px-2 tw-mb-4 `}
             >
-              <p className="tw-w-fit tw-text-sm">
-                Already Registered?:&nbsp;
+              <p className="tw-w-fit tw-text-xs">
+                Account Confirmed?&nbsp;<FontAwesomeIcon icon={faHandPointRight} size="sm"/>&nbsp;
                 <Link
                   to={'/auth/guest/login'}
                   className={`${
@@ -166,7 +151,7 @@ const Guest_Account_Confirmation = () => {
                 </Link>
               </p>
             </div>
-            <Link to={`/`} className="tw-flex tw-flex-row tw-place-content-center tw-font-space_mono">
+            <Link to={`/`} target="_blank" className="tw-flex tw-flex-row tw-place-content-center tw-font-space_mono">
               <span className="tw-pt-1 ">
                 <Logo style={{ height: 28, width: 28 }} />
               </span>
@@ -178,35 +163,45 @@ const Guest_Account_Confirmation = () => {
                 ReCodeCamp
               </h5>
             </Link>
-            {/* <div
+            </>
+            <section className="tw-min-h-[320px] tw-h-full tw-w-full tw-grow-0 tw-flex tw-flex-col tw-place-content-center tw-place-items-center tw-text-xl [&>span]:tw-text-6xl [&>span]:tw-text-campfire-blue">
+              {loader ? 
+                <div className="tw-h-[20.75em] tw-text-base tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
+                  <h4>Emailing Account Confirmation...</h4>
+                  <LoadingDashboardXL />
+                </div>
+                : 
+                <div className="tw-h-[20.75em] tw-text-base tw-flex tw-flex-col tw-place-content-center tw-place-items-center tw-font-roboto_mono [&>div]:tw-p-4 [&>div]:tw-text-center [&>h5]:tw-font-roboto_mono_bold
+                [&>h5]:tw-text-xl [&>h5]:tw-text-campfire-blue [&>div]:tw-text-sm [&>div>p]:tw-p-1 [&>button]:tw-text-campfire-blue [&>button]:tw-text-base [&>button]:tw-border [&>button]:tw-border-campfire-blue [&>button]:tw-px-2 [&>button]:tw-py-1">
+                  <div className="tw-w-full tw-h-full tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
+                    <FontAwesomeIcon icon={faPaperPlane} size="5x" />
+                  </div>
+                  <h5>Email Sent To Confirm Account</h5>
+                  <div>
+                    <p>Confirmation Email can take up to <span className="tw-underline tw-decoration-1 tw-decoration-campfire-neutral"><span className="tw-font-roboto_mono_bold tw-text-campfire-purple">15</span> minutes</span> to be received.</p>
+                    <p>Didn't receive your confirmation email? Click on the link below to request new email confirmation:</p>
+                  </div>
+                  <button><Link to="/auth/account/confirm/resend">Re-Send</Link></button>
+                </div>
+              }
+            </section>
+            <footer
               className={`${
                 darkMode ? '' : ''
-              } tw-flex tw-flex-row tw-place-items-baseline tw-place-content-between tw-border-campfire-purple-light tw-border-b tw-h-[52px] tw-w-full tw-pt-4 tw-px-2 tw-my-4 `}
+              } tw-flex tw-flex-row tw-place-items-baseline tw-place-content-end tw-w-full tw-pt-12 tw-px-2 `}
             >
-              <h4 className="tw-text-xl tw-w-fit tw-place-self-left">Account Confirmation</h4>
-            </div> */}
-            {
-            loaderAccountConfirm ? 
-              <div className="tw-min-h-[20.75em]"><LoadingDashboardXL /></div>
-            :
-               <div className="tw-min-h-[16.75em] tw-h-full tw-w-full tw-grow-0 tw-flex tw-flex-col tw-place-content-center tw-place-items-center tw-text-xl [&>span]:tw-text-3xl [&>span]:tw-text-campfire-blue">
-                  {pageStatus === "idle" &&
-                    <>
-                      Account Confirmation Status: <span>...</span>
-                    </>
-                  }
-                  {pageStatus === "success" &&
-                    <>
-                      Account Confirmation Status: <span>Success</span>
-                    </>
-                  }
-                  {pageStatus === "error" &&
-                    <>
-                      Account Confirmation Status: <span>Error</span>
-                    </>
-                  }
-              </div>
-            }
+              <p className="tw-w-fit tw-text-xs">
+                No Confirmation Email?&nbsp;<FontAwesomeIcon icon={faTriangleExclamation} size="sm"/>&nbsp;
+                <Link
+                  to={'/support/:email-confirmation'}
+                  className={`${
+                    darkMode ? 'hover:tw-text-campfire-neutral-200' : 'hover:tw-text-campfire-neutral-700'
+                  } tw-text-campfire-blue-300 tw-font-space_mono_bold`}
+                >
+                  Contact Support
+                </Link>
+              </p>
+            </footer>
           </div>
         </Transition>
       </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
+import { _DEFAULT_USER } from '../../utils/constants/constUser';
 import {
   _USER_ROUTE_REGISTER,
   _USER_ROUTE_LOGIN,
@@ -12,17 +12,25 @@ import {
   _USER_ROUTE_LOGOUT,
   _USER_ROUTE_DELETE,
   _USER_ROUTE_ACCOUNT_VERIFICATION,
-  _USER_ROUTE_ACCOUNT_CONFIRMATION,
+  _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL,
+  _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL_RESEND,
   _USER_ROUTE_ACCOUNT_VALIDATION,
+  _USER_ROUTE_ACCOUNT_VALIDATE_PASSCODE,
+  _USER_ROUTE_ACCOUNT_PASSCODE,
   _USER_ROUTE_ACCOUNT_PASSWORD_RESET,
-} from '../../utils/constants/constantsRoutes';
+} from '../../utils/constants/constUserRoutes';
 
 export const userRegister = createAsyncThunk('auth/register', async (data, thunkAPI) => {
   try {
     const url = _USER_ROUTE_REGISTER();
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
       body: JSON.stringify(data),
     });
 
@@ -39,7 +47,12 @@ export const userLogin = createAsyncThunk('auth/login', async (user, thunkAPI) =
     //console.log(url)
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
       body: JSON.stringify(user),
     });
 
@@ -55,7 +68,12 @@ export const userAuthMe = createAsyncThunk('auth/me', async (_, thunkAPI) => {
     const url = _USER_ROUTE_AUTH_ME();
     const res = await fetch(url, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
     });
 
     const resJSON = await res.json();
@@ -71,7 +89,12 @@ export const userVerify = createAsyncThunk('auth/verify', async (_, thunkAPI) =>
     const url = await _USER_ROUTE_VERIFY();
     const res = await fetch(url, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
     });
 
     const resJSON = await res.json();
@@ -87,6 +110,8 @@ export const userLogout = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
+      mode: "cors",
+      credentials: 'include',
     });
 
     const resJSON = await res.json();
@@ -103,7 +128,12 @@ export const userDelete = createAsyncThunk('auth/delete', async (user, thunkAPI)
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',  
+      },
       body: JSON.stringify(user),
     });
 
@@ -121,7 +151,12 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
 
@@ -132,14 +167,16 @@ export const userAccountVerification = createAsyncThunk('auth/account/verify', a
   }
 });
 
-export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', async (data, thunkAPI) => {
-  //console.log(user)
+export const userAccountConfirmationEmail = createAsyncThunk('auth/account/confirm', async (data, thunkAPI) => {
+  //console.log("fromregtoemail:", data)
   try {
-    const url = _USER_ROUTE_ACCOUNT_CONFIRMATION();
-    //console.log("logouturl:", url)
+    const url = _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL();
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
       body: JSON.stringify(data), // data = { email : "", passcode: ""}
     });
 
@@ -147,6 +184,50 @@ export const userAccountConfirmation = createAsyncThunk('auth/account/confirm', 
     return resJSON;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const userAccountConfirmationEmailResend = createAsyncThunk('auth/account/confirm/resend', async (user, thunkAPI) => {
+  //console.log(user)
+  try {
+    // Get Passcode & Email from DB
+    //console.log("user:", user)
+    const urlPasscode = await _USER_ROUTE_ACCOUNT_VALIDATE_PASSCODE(user);
+    //console.log("urlPasscode:", urlPasscode);
+    const resPasscode = await fetch(urlPasscode, {
+      method: 'POST',
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
+      body: JSON.stringify(user), // { email : "", passcode: ""}
+    });
+    //console.log("resPasscode:", resPasscode);
+    const resPasscodeJSON = await resPasscode.json();
+    //console.log("resPasscodeJSONconfirm:", resPasscodeJSON);
+    //return resPasscodeJSON
+    if(resPasscodeJSON._passcode_confirmed === false) {
+      // Fetch Email Confirmation
+      const urlPasscodeEmail = await _USER_ROUTE_ACCOUNT_CONFIRMATION_EMAIL();
+      //console.log("urlPasscodeEmail:", urlPasscodeEmail)
+      const res = await fetch(urlPasscodeEmail, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json', 
+        },
+        body: JSON.stringify(resPasscodeJSON), // { email : "", passcode: "", passcode_confirmed: boolean}
+      });
+      const resJSON = await res.json();
+      //console.log("resJSONemail", resJSON);
+      return { data : false }
+    } else {
+      return { data : true }
+    }
+  } catch (err) {
+    // return thunkAPI.rejectWithValue(err.response.data);
   }
 });
 
@@ -154,18 +235,27 @@ export const userAccountValidation = createAsyncThunk('auth/account/validation',
   //console.log(user)
   try {
     const url = _USER_ROUTE_ACCOUNT_VALIDATION();
-    //console.log("logouturl:", url)
+    //console.log("accountValidation:", url)
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data), // data = { email : "", passcode: ""}
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',  
+      },
+      body: JSON.stringify(data), // { email : "", passcode: ""}
     });
+    //console.log("res", res)
+
+    if(!res.ok) {
+      throw new Error("User Not Found")
+    }
 
     const resJSON = await res.json();
-    //console.log("resJSON", resJSON);
+
+    //console.log("resJSONValidate", resJSON);
     return resJSON;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data);
+    return thunkAPI.rejectWithValue("Redux Error:\n" + err.response.data.message);
   }
 });
 
@@ -176,7 +266,12 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
     //console.log("logouturl:", url)
     const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: "cors",
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
       body: JSON.stringify(user), // user = { email : "", passcode: ""}
     });
 
@@ -189,6 +284,7 @@ export const userAccountPasswordReset = createAsyncThunk('auth/account/password/
 
 // Define a type for the slice state
 interface AuthState {
+  userConfirmEmail: object;
   user: object;
   authenticated: boolean;
   status: string;
@@ -199,9 +295,11 @@ interface AuthState {
   statusVerify: string;
   statusDelete: string;
   statusAccountVerify: string;
-  statusAccountConfirm: string;
+  statusAccountConfirmEmail: string;
   statusAccountValidate: string;
   statusAccountPasswordReset: string;
+  statusAccountEmailConfirmed: boolean;
+  statusAccountEmailConfirmedResend: boolean;
   error: null;
   errorRegister: null;
   errorLogin: null;
@@ -210,7 +308,7 @@ interface AuthState {
   errorVerify: null;
   errorDelete: null;
   errorAccountVerify: null;
-  errorAccountConfirm: null;
+  errorAccountConfirmEmail: null;
   errorAccountValidate: null;
   errorAccountPasswordReset: null;
   screenLoader: boolean;
@@ -220,6 +318,10 @@ interface AuthState {
 
 // Define the initial state using that type
 const defaultState: AuthState = {
+  userConfirmEmail: {
+    email: "",
+    passcode: ""
+  },
   user: {
     _ID: '123-456-789',
     _CREATED_AT: new Date().toISOString(),
@@ -252,9 +354,11 @@ const defaultState: AuthState = {
   statusVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusDelete: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountVerify: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
-  statusAccountConfirm: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountConfirmEmail: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountValidate: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountPasswordReset: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusAccountEmailConfirmed: false, // true | false
+  statusAccountEmailConfirmedResend: false, // true | false
   error: null,
   errorRegister: null,
   errorLogin: null,
@@ -263,7 +367,7 @@ const defaultState: AuthState = {
   errorVerify: null,
   errorDelete: null,
   errorAccountVerify: null,
-  errorAccountConfirm: null,
+  errorAccountConfirmEmail: null,
   errorAccountValidate: null,
   errorAccountPasswordReset: null,
   screenLoader: false,
@@ -352,6 +456,7 @@ export const authSlice = createSlice({
       })
       .addCase(userRegister.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.userConfirmEmail = action.payload.data;
         state.statusRegister = 'succeeded';
       })
       .addCase(userRegister.rejected, (state, action) => {
@@ -450,19 +555,29 @@ export const authSlice = createSlice({
         state.error = action.error.message;
         state.errorAccountVerify = action.error.message;
       })
-      .addCase(userAccountConfirmation.pending, (state, action) => {
+      .addCase(userAccountConfirmationEmail.pending, (state, action) => {
         state.status = 'loading';
         state.statusAccountConfirm = 'loading';
       })
-      .addCase(userAccountConfirmation.fulfilled, (state, action) => {
+      .addCase(userAccountConfirmationEmail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.statusAccountConfirm = 'succeeded';
+        state.statusAccountEmailConfirmed =  action.payload.data;
       })
-      .addCase(userAccountConfirmation.rejected, (state, action) => {
+      .addCase(userAccountConfirmationEmail.rejected, (state, action) => {
         state.status = 'failed';
         state.statusAccountConfirm = 'failed';
         state.error = action.error.message;
         state.errorAccountConfirm = action.error.message;
+      })
+      .addCase(userAccountConfirmationEmailResend.fulfilled, (state, action) => {
+        //console.log("action.payload.message", action.payload.message)
+        if(action.payload === undefined) {
+          state.statusAccountEmailConfirmedResend = true;
+        } else {
+          state.statusAccountEmailConfirmedResend =  action.payload.data;
+        }
+        
       })
       .addCase(userAccountValidation.pending, (state, action) => {
         state.status = 'loading';
@@ -498,6 +613,8 @@ export const authSlice = createSlice({
 /** Fetch API User */
 export const fetchUser = (state) => state.authentication.user;
 
+export const fetchUserConfirmEmail = (state) => state.authentication.userConfirmEmail;
+
 export const fetchUserAuth = (state) => state.authentication.authenticated;
 
 /** Fetch API User Status */
@@ -517,11 +634,15 @@ export const fetchUserStatusDelete = (state) => state.authentication.statusDelet
 
 export const fetchUserStatusAccountVerify = (state) => state.authentication.statusAccountVerify;
 
-export const fetchUserStatusAccountConfirm = (state) => state.authentication.statusAccountConfirm;
+export const fetchUserStatusAccountConfirmEmail = (state) => state.authentication.statusAccountConfirmEmail;
 
 export const fetchUserStatusAccountValidate = (state) => state.authentication.statusAccountValidate;
 
 export const fetchUserStatusAccountPasswordReset = (state) => state.authentication.statusAccountPasswordReset;
+
+export const fetchUserStatusAccountEmailConfirmed = (state) => state.authentication.statusAccountEmailConfirmed;
+
+export const fetchUserStatusAccountEmailConfirmedResend = (state) => state.authentication.statusAccountEmailConfirmedResend;
 
 /** Fetch API User Error */
 export const fetchUserError = (state) => state.authentication.error;
@@ -540,7 +661,7 @@ export const fetchUserErrorDelete = (state) => state.authentication.errorDelete;
 
 export const fetchUserErrorAccountVerify = (state) => state.authentication.errorAccountVerify;
 
-export const fetchUserErrorAccountConfirm = (state) => state.authentication.errorAccountConfirm;
+export const fetchUserErrorAccountConfirmEmail = (state) => state.authentication.errorAccountConfirmEmail;
 
 export const fetchUserErrorAccountValidate = (state) => state.authentication.errorAccountValidate;
 

@@ -10,6 +10,9 @@ import { ThemeContext } from '../../context/ThemeContext';
 // hooks
 import useWindowSize from '../../hooks/useWindowSize';
 import Transition from '../../hooks/useTransition';
+// utils
+import { getDate } from '../../utils/date';
+import { confirmation, confirmationDate, confirmationCount, setEmailConfirmationLocalData } from '../../utils/userConfirmation';
 // images
 import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
@@ -23,12 +26,13 @@ import type { RootState } from '../../redux/store.ts';
 import {
   userRegister,
   userComponentScreenLoader,
-  userAccountConfirmation,
+  userAccountConfirmationEmail,
   fetchUser,
   fetchUserAuth,
   fetchUserStatus,
   fetchUserStatusRegister,
   fetchUserComponentScreenLoader,
+  fetchUserStatusAccountConfirmEmail,
 } from '../../redux/slices/authSlice.ts';
 /** Constants */
 import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
@@ -83,6 +87,8 @@ const Register = () => {
   const authenticated = useAppSelector(fetchUserAuth);
   const status = useAppSelector(fetchUserStatus);
   const screenLoader = useAppSelector(fetchUserComponentScreenLoader);
+  const emailConfirm = useAppSelector(fetchUserStatusAccountConfirmEmail);
+  const [ confirmationMessage, setConfirmationMessage ] = useState(false);
 
   /** React Hook Form */
   const {
@@ -101,14 +107,16 @@ const Register = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    setLoaderRegister(true);
     registerGuest(data);
   });
 
   /** Button | Request | Create Guest */
   const registerGuest = async (data) => {
-    //console.log("form data",data)
+    //console.log("form register data",data)
     try {
       const originalPromiseResult = await dispatch(userRegister(data)).unwrap();
+      //console.log("originalPromiseResult:\n", originalPromiseResult);
       if (originalPromiseResult === undefined || originalPromiseResult.error) {
         console.log('🚫 Guest | Request Failed');
         // Failure Notification
@@ -126,57 +134,18 @@ const Register = () => {
           loading: false,
         });
         console.log('⏳ Delay | Redirect in 1 second.');
-        setLoaderRegister(true);
+        //setLoaderRegister(true);
         setTimeout(() => {
           setLoaderRegister(false);
         }, '1000');
       } else {
         console.log('👍 Guest | Registered');
-        //console.log("originalPromiseResult:\n", originalPromiseResult);
-        const accountConfirmation = await dispatch(userAccountConfirmation(originalPromiseResult)).unwrap();
-        if (accountConfirmation === undefined || accountConfirmation.error) {
-          console.log('🚫 Guest | Request Failed');
-          // Failure Notification
-          notifications.show({
-            id: 'failure',
-            withCloseButton: true,
-            autoClose: 2000,
-            title: 'Failed Registration Attempt',
-            message: '',
-            color: 'red',
-            icon: <IconX />,
-            className: 'my-notification-class',
-            style: { backgroundColor: 'white' },
-            sx: { backgroundColor: 'red' },
-            loading: false,
-          });
-          console.log('⏳ Delay | Redirect in 1 second.');
-          setLoaderRegister(true);
-          setTimeout(() => {
-            setLoaderRegister(false);
-          }, '1000');
-        } else {
-          console.log('👍 Guest | Emailed Account Confirmation');
-          // Success Notification
-          notifications.show({
-            id: 'success',
-            withCloseButton: true,
-            autoClose: 2000,
-            title: '🥳 Registration Successful',
-            message: 'Have Run ReCoding',
-            color: 'teal',
-            icon: <IconCheck />,
-            className: 'my-notification-class',
-            style: { backgroundColor: 'white' },
-            sx: { backgroundColor: 'teal' },
-            loading: false,
-          });
-          setLoaderRegister(true);
-          setTimeout(() => {
-            console.log('⏳ Delay | Redirect in 1 second.');
-            navigate('/auth/guest/login');
-          }, '1000');
-        }
+        setConfirmationMessage(true);
+        console.log('⏳ Delay | Redirect in 5 second.');
+        await setEmailConfirmationLocalData();
+        setTimeout(() => {
+          navigate('/auth/account/confirm');
+        }, '3000');
       }
     } catch (error) {
       console.log(error);
@@ -236,7 +205,10 @@ const Register = () => {
               <h4 className="tw-text-xl tw-w-fit tw-place-self-left">Guest Register</h4>
             </div>
             {loaderRegister ? 
-              <div className="tw-min-h-[20.75em]"><LoadingDashboardXL /></div>
+              <div className="tw-min-h-[20.75em] tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
+                { confirmationMessage && <h4>Registering Account...</h4> }
+                <LoadingDashboardXL />
+              </div>
             :
             <form onSubmit={onSubmit} className="tw-min-h-[19em]">
               <ul
@@ -298,7 +270,7 @@ const Register = () => {
                   </div>
                 </li>
                 <li
-                  className={`{darkMode ? 'hover:tw-bg-campfire-neutral-400' : 'hover:tw-bg-campfire-neutral-700'} tw-w-full 
+                  className={`{darkMode ? 'hover:tw-bg-campfire-neutral-400' : 'hover:tw-bg-campfire-neutral-700'} tw-w-full tw-mt-8
                 tw-border-y tw-border-campfire-purple-light`}
                 >
                   <button type="submit" className={`tw-font-roboto_mono tw-text-base tw-w-full`}>

@@ -41,7 +41,7 @@ import Button_User_Login from '../buttons/Button_User_Login';
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-const Header_Logout = () => {
+const Header_Dashboard_Menu = () => {
   /** Set User Preferences */
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
@@ -173,4 +173,4 @@ const Header_Logout = () => {
   );
 };
 
-export default Header_Logout;
+export default Header_Dashboard_Menu;

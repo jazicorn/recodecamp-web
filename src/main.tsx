@@ -34,6 +34,9 @@ import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
 import A_Guest_Register from './components/auth/A_Guest.Register.tsx';
 import A_Guest_Login from './components/auth/A_Guest.Login.tsx';
 import A_Guest_Account_Confirmation from './components/auth/A_Guest.Account_Confirmation.tsx';
+import A_Guest_Account_Confirmation_Error from './components/auth/A_Guest.Account_Confirmation_Error.tsx';
+import A_Guest_Account_Confirmation_Status from './components/auth/A_Guest.Account_Confirmation_Status.tsx';
+import A_Guest_Account_Confirmation_ReSend from './components/auth/A_Guest.Account_Confirmation_ReSend.tsx';
 import A_Guest_Account_Not_Found from './components/auth/A_Guest.Account_Not_Found.tsx';
 import A_User_Register from './components/auth/A_User.Register.tsx';
 import A_User_Login from './components/auth/A_User.Login.tsx';
@@ -72,9 +75,7 @@ const router = Router(
         <Route path="settings/dashboard" element={<D_Settings />} errorElement={<ErrorBoundary />} />
         <Route path="*" element={<D_Home />} errorElement={<ErrorBoundary />} />
       </Route>
-      <Route path="/auth" element={<Auth />}>
-        <Route path="account/confirm" element={<A_Guest_Account_Not_Found/>} errorElement={<ErrorBoundary />} />  
-        <Route path="account/confirm/:passcode" element={<A_Guest_Account_Confirmation />} errorElement={<ErrorBoundary />} />
+       <Route path="/auth" element={<Auth />}>
         <Route path="admin/signup" element={<A_Admin_Register />} errorElement={<ErrorBoundary />} />
         <Route path="admin/login" element={<A_Admin_Login />} errorElement={<ErrorBoundary />} />
         <Route path="guest/signup" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
@@ -82,6 +83,13 @@ const router = Router(
         <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
         <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
         <Route path="*" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
+      </Route>
+      <Route path="/auth/account/" element={<Auth />}>
+        <Route path="confirm" element={<A_Guest_Account_Confirmation/>} errorElement={<ErrorBoundary />} />
+        <Route path="confirm/error" element={<A_Guest_Account_Confirmation_Error/>} errorElement={<ErrorBoundary />} />
+        <Route path="confirm/resend" element={<A_Guest_Account_Confirmation_ReSend />} errorElement={<ErrorBoundary />} />
+        <Route path="confirm/status/:passcode" element={<A_Guest_Account_Confirmation_Status />} errorElement={<ErrorBoundary />} />
+        <Route path="*" element={<A_Guest_Account_Not_Found/>} errorElement={<ErrorBoundary />} />
       </Route>
       <Route path="/profile/:id" element={<Profile />} errorElement={<ErrorBoundary />} />
       <Route path="/profile/settings" element={<Profile />} errorElement={<ErrorBoundary />} />
@@ -91,6 +99,9 @@ const router = Router(
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route> */}
+      <Route path="/support/:tag" element={<Home />} errorElement={<ErrorBoundary />}>
+        <Route path="*" element={<H_Home />} errorElement={<ErrorBoundary />} />
+      </Route>
       <Route path="404" element={<NotFound />} errorElement={<ErrorBoundary />} />
       <Route path="*" element={<Home />} errorElement={<ErrorBoundary />} />
     </Route>
@@ -99,6 +110,7 @@ const router = Router(
 
 // Create a react-query client
 const queryClient = new QueryClient();
+queryClient.clear();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
