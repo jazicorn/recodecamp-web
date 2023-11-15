@@ -1,58 +1,110 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { _DEFAULT_USER } from '../../utils/constants/constUser';
+import { _QUESTION_ROUTE, _CATEGORIES_ROUTE, _LANGUAGES_ROUTE } from '../../utils/constants/constDashboardRoutes';
+
+export const dashboardLanguages = createAsyncThunk('dashboard/languages', async (data, thunkAPI) => {
+  try {
+    const url = _LANGUAGES_ROUTE();
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
+      body: JSON.stringify(data),
+    });
+
+    const resJSON = await res.json();
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const dashboardCategories = createAsyncThunk('dashboard/categories', async (data, thunkAPI) => {
+  try {
+    const url = _CATEGORIES_ROUTE();
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
+      body: JSON.stringify(data),
+    });
+
+    const resJSON = await res.json();
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const dashboardQuestion = createAsyncThunk('dashboard/question', async (data, thunkAPI) => {
+  try {
+    const url = _QUESTION_ROUTE();
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
+      body: JSON.stringify(data),
+    });
+
+    const resJSON = await res.json();
+    return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
 
 // Define a type for the slice state
 interface DashboardState {
-  languages: string[];
+  user: object;
+  points: number;
+  language: string;
   languageDefault: string;
+  languages: string[];
   categoryDefault: string;
   categoryRouteDefault: string;
-  language: string;
   category: string;
   categoryInfo: object;
   categoryInfo2: object;
   categoryRoute: string;
+  categories: string[];
   question: object;
-  points: number;
   consoleMessage: string;
-  user: object;
+  statusDashboardQuestion: string;
+  statusDashboardCategories: string;
+  statusDashboardLanguages: string;
+  errorDashboardQuestion: null | string;
+  errorDashboardCategories: null | string;
+  errorDashboardLanguages: null | string;
 }
 
 // Define the initial state using that type
 const initialState: DashboardState = {
-  languages: ['javascript'],
-  languageDefault: import.meta.env.VITE_DEFAULT_LANGUAGE,
-  categoryDefault: import.meta.env.VITE_DEFAULT_CATEGORY,
-  categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
-  category: import.meta.env.VITE_DEFAULT_CATEGORY,
-  language: import.meta.env.VITE_DEFAULT_LANGUAGE,
-  categoryInfo: {},
-  categoryRoute: import.meta.env.VITE_DEFAULT_ROUTE,
-  question: {},
+  user: _DEFAULT_USER,
   points: 0,
+  language: import.meta.env.VITE_DEFAULT_LANGUAGE,
+  languageDefault: import.meta.env.VITE_DEFAULT_LANGUAGE,
+  languages: ['javascript'],
+  category: import.meta.env.VITE_DEFAULT_CATEGORY,
+  categoryDefault: import.meta.env.VITE_DEFAULT_CATEGORY,
+  categoryRoute: import.meta.env.VITE_DEFAULT_ROUTE,
+  categoryRouteDefault: import.meta.env.VITE_DEFAULT_ROUTE,
+  categoryInfo: {},
+  categories:[''],
+  question: {},
   consoleMessage: '',
-  user: {
-    _ID: '123-456-789',
-    _CREATED_AT: new Date().toISOString(),
-    _UPDATED_AT: new Date().toISOString(),
-    _ACCESS_TOKEN: '',
-    _FIRST_LOGIN: false,
-    _ADMIN: false,
-    _SUBSCRIPTION: '1000, Unknown',
-    _IP_ADDRESS: '',
-    _PASSCODE: '',
-    _PASSCODE_CONFIRMED: false,
-    _EMAIL: 'john@doe.com',
-    _EMAIL_CONFIRMED: false,
-    _EMAIL_PASSCODE: '',
-    _PASSWORD: '',
-    _DEFAULT_LANGUAGE: 'javascript',
-    _DEFAULT_ROUTE: '',
-    _POINTS_TOTAL: 0,
-    _POINTS_JAVASCRIPT: 0,
-    _POINTS_JAVA: 0,
-    _POINTS_PYTHON: 0,
-    _COURSES: '',
-  },
+  statusDashboardQuestion: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusDashboardCategories: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusDashboardLanguages: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  errorDashboardQuestion: null,
+  errorDashboardCategories: null,
+  errorDashboardLanguages: null,
 };
 
 export const dashboardSlice = createSlice({
@@ -60,20 +112,6 @@ export const dashboardSlice = createSlice({
   initialState: initialState,
   // `createSlice` will infer the state type from the `initialState` argument
   reducers: {
-    menu: (state) => {
-      state.languages;
-      state.language;
-      state.languageDefault;
-      state.category;
-      state.categoryDefault;
-      state.categoryInfo;
-      state.categoryRoute;
-      state.categoryRouteDefault;
-      state.question;
-      state.points;
-      state.consoleMessage;
-      state.user;
-    },
     menuLanguages: (state, action) => {
       state.languages = action.payload;
     },
@@ -104,7 +142,57 @@ export const dashboardSlice = createSlice({
       state.user = action.payload;
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(dashboardQuestion.pending, (state, action) => {
+        state.statusDashboardQuestion = 'loading';
+      })
+      .addCase(dashboardQuestion.fulfilled, (state, action) => {
+        state.question = action.payload.data;
+        state.statusDashboardQuestion = 'succeeded';
+      })
+      .addCase(dashboardQuestion.rejected, (state, action) => {
+        state.statusDashboardQuestion = 'failed';
+        state.errorDashboardQuestion = action.error.message;
+      })
+      .addCase(dashboardCategories.pending, (state, action) => {
+        state.statusDashboardCategories = 'loading';
+      })
+      .addCase(dashboardCategories.fulfilled, (state, action) => {
+        state.categories = action.payload.data;
+        state.statusDashboardCategories = 'succeeded';
+      })
+      .addCase(dashboardCategories.rejected, (state, action) => {
+        state.statusDashboardCategories = 'failed';
+        state.errorDashboardCategories = action.error.message;
+      })
+      .addCase(dashboardLanguages.pending, (state, action) => {
+        state.statusDashboardLanguages = 'loading';
+      })
+      .addCase(dashboardLanguages.fulfilled, (state, action) => {
+        state.languages = action.payload.data;
+        state.statusDashboardLanguages = 'succeeded';
+      })
+      .addCase(dashboardLanguages.rejected, (state, action) => {
+        state.statusDashboardLanguages = 'failed';
+        state.errorDashboardLanguages = action.error.message;
+      })
+    },
 });
+
+/** Fetch API's */
+export const fetchQuestion = (state) => state.dashboard.question;
+
+export const fetchCategories = (state) => state.dashboard.categories;
+
+export const fetchLanguages = (state) => state.dashboard.languages;
+
+/** Fetch API's Status */
+export const fetchQuestionStatus = (state) => state.dashboard.statusDashboardQuestion;
+
+export const fetchCategoriesStatus = (state) => state.dashboard.statusDashboardCategories;
+
+export const fetchLanguagesStatus = (state) => state.dashboard.statusDashboardLanguages;
 
 export const {
   menu,
