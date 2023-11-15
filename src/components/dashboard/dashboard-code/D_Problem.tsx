@@ -8,6 +8,7 @@ import { ThemeContext } from '../../../context/ThemeContext';
 import { Transition2 } from '../../../hooks/useTransition';
 /*Constants*/
 import { _LANGUAGES_SHORTHAND } from '../../../utils/constants';
+import { _QUESTION_ROUTE, _CATEGORIES_ROUTE, _LANGUAGES_ROUTE } from '../../../utils/constants/constDashboardRoutes';
 /** React Redux Hooks */
 import { useAppSelector, useAppDispatch } from '../../../redux/reduxHooks.ts';
 import { menuQuestion } from '../../../redux/slices/dashboardSlice.ts';
@@ -30,16 +31,13 @@ const D_Problem = () => {
   const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
 
   /**Get question url */
-  let url;
-  if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
-  } else {
-    url = `/api/${currentLanguage}/${getMenuRoute}`;
-  }
+  const url = _QUESTION_ROUTE(currentLanguage, getMenuRoute);
 
   /** Retrieve Category Based Question */
   const getQuestion = useCallback(async (url) => {
     /** Retrieve Question from API */
+
+    
     try {
       const result = await fetch(url, {
         method: 'GET',

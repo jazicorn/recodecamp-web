@@ -3,6 +3,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import useWindowSize from '../../hooks/useWindowSize';
 /*Constants*/
 import { _LANGUAGES_SHORTHAND } from '../../utils/constants';
+import { _QUESTION_ROUTE, _CATEGORIES_ROUTE, _LANGUAGES_ROUTE } from '../../utils/constants/constDashboardRoutes';
 /**Custom Components */
 import D_Editor from '../../components/dashboard/dashboard-code/D_Editor';
 import D_Problem from '../../components/dashboard/dashboard-code/D_Problem';
@@ -21,10 +22,6 @@ import { useQuery } from '@tanstack/react-query';
 import { LoadingDashboardXL } from '../../components/dashboard/loading';
 import ErrorDashboard from '../../components/dashboard/error';
 
-/** API url | Custom env mandatory to begin with VITE
- * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL;
-
 const Layout_D_Code = () => {
   const { isDesktopLG } = useWindowSize();
   const { state } = useContext(ThemeContext);
@@ -36,16 +33,12 @@ const Layout_D_Code = () => {
   /** Retrieve Category Route From Redux State */
   const getMenuRoute = useAppSelector((state: RootState) => state?.dashboard?.categoryRoute);
   const getMenuLanguage = useAppSelector((state: RootState) => state?.dashboard?.language);
+  const getDashQuestion = useAppSelector((state: RootState) => state?.dashboard?.question);
 
   const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
 
   /**Get question url */
-  let url;
-  if (import.meta.env.PROD) {
-    url = `${baseURL}/api/${currentLanguage}/${getMenuRoute}`;
-  } else {
-    url = `/api/${currentLanguage}/${getMenuRoute}`;
-  }
+  const url = _QUESTION_ROUTE(currentLanguage, getMenuRoute);
 
   /** Retrieve Category Based Question */
   const getQuestion = useCallback(async (url) => {

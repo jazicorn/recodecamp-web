@@ -4,7 +4,7 @@ import { useContext, useState, useEffect, useCallback } from 'react';
 /** React Redux */
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks.ts';
 import type { RootState } from '../../../redux/store.ts';
-import { menuQuestion, menuPoints, menuConsoleMessage } from '../../../redux/slices/dashboardSlice.ts';
+import { menuQuestion, menuPoints, menuConsoleMessage, dashboardQuestion } from '../../../redux/slices/dashboardSlice.ts';
 /** React Query */
 import { useQuery } from '@tanstack/react-query';
 /** Custom Hooks */
@@ -25,16 +25,12 @@ import { EditorView } from 'codemirror';
 //import darkTheme from '../../../styles/style.codemirror.dark';
 //const extensions = [ javascript({ jsx: true })];
 import { _LANGUAGES_CODE_MIRROR, _LANGUAGES_RAPID_API, _LANGUAGES_SHORTHAND } from '../../../utils/constants';
+import { _QUESTION_ROUTE, _CATEGORIES_ROUTE, _LANGUAGES_ROUTE } from '../../../utils/constants/constDashboardRoutes';
 //import { dracula } from '@uiw/codemirror-theme-dracula';
 import { materialDark } from '@uiw/codemirror-theme-material';
 import { githubLight } from '@uiw/codemirror-theme-github';
 //import { quietlight } from '@uiw/codemirror-theme-quietlight';
 //import { xcodeLight, xcodeLightInit, xcodeDark, xcodeDarkInit  } from '@uiw/codemirror-theme-xcode';
-
-/** API url | Custom env mandatory to begin with VITE
- * https://vitejs.dev/guide/env-and-mode.html#env-files */
-const baseURL = import.meta.env.VITE_API_BASE_URL;
-const consoleURL = import.meta.env.VITE_RAPIDAPI_KEY;
 
 const D_Editor = () => {
   /** Custom Hooks */
@@ -62,12 +58,7 @@ const D_Editor = () => {
   const currentLanguage = _LANGUAGES_SHORTHAND[getMenuLanguage.toLowerCase()];
 
   /**Get question url */
-  let url;
-  if (import.meta.env.PROD) {
-    url = `${baseURL}/${currentLanguage}/${getMenuRoute}`;
-  } else {
-    url = `/api/${currentLanguage}/${getMenuRoute}`;
-  }
+  const url = _QUESTION_ROUTE(currentLanguage, getMenuRoute);
 
   /** Retrieve Category Based Question */
   const getQuestion = useCallback(async (url) => {
