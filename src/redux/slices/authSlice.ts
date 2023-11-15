@@ -1,8 +1,5 @@
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-/** Notifications */
-import { notifications } from '@mantine/notifications';
-import { IconX, IconCheck } from '@tabler/icons-react';
 import { _DEFAULT_USER } from '../../utils/constants/constUser';
 import {
   _USER_ROUTE_REGISTER,
@@ -300,17 +297,17 @@ interface AuthState {
   statusAccountPasswordReset: string;
   statusAccountEmailConfirmed: boolean;
   statusAccountEmailConfirmedResend: boolean;
-  error: null;
-  errorRegister: null;
-  errorLogin: null;
-  errorLogout: null;
-  errorAuth: null;
-  errorVerify: null;
-  errorDelete: null;
-  errorAccountVerify: null;
-  errorAccountConfirmEmail: null;
-  errorAccountValidate: null;
-  errorAccountPasswordReset: null;
+  error: null | string;
+  errorRegister: null | string;
+  errorLogin: null | string;
+  errorLogout: null | string;
+  errorAuth: null | string;
+  errorVerify: null | string;
+  errorDelete: null | string;
+  errorAccountVerify: null | string;
+  errorAccountConfirmEmail: null | string;
+  errorAccountValidate: null | string;
+  errorAccountPasswordReset: null | string;
   screenLoader: boolean;
   userLandingScreenLoader: boolean;
   userComponentScreenLoader: boolean;
