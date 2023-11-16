@@ -1,14 +1,9 @@
 import { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
-import Home_Mobile from './Home.Mobile';
-/**Components */
 import Header from '../components/dashboard/D_Header';
-/**Hooks */
-import Transition from '../hooks/useTransition';
-import useWindowSize from '../hooks/useWindowSize';
+import Dashboard_Banner from '../components/dashboard/D_Banner';
 
-function NotFound() {
+const Dashboard_Mobile = () => {
   const { state } = useContext(ThemeContext);
   const darkMode = state.darkMode;
 
@@ -22,16 +17,9 @@ function NotFound() {
       >
         {/** Navigation */}
         <Header />
-        <div
-          className={`${
-            darkMode
-              ? 'tw-border-neutral-500 tw-text-campfire-neutral-100'
-              : 'tw-border-neutral-800 tw-text-campfire-neutral-900'
-          } tw-border-y-2 tw-h-full tw-w-full tw-flex tw-place-content-center tw-flex-col`}
-        >
+        <div className={`${darkMode ? 'tw-border-neutral-500' : 'tw-border-neutral-800'} tw-border-y-2 tw-h-full`}>
           {/** Banner */}
-          <p className="tw-place-self-center tw-font-space_mono tw-text-6xl">404 Error</p>
-          <p className="tw-place-self-center tw-font-space_mono tw-text-2xl">~Data Not Found~</p>
+          <Dashboard_Banner />
         </div>
         {/**Footer */}
         <footer
@@ -48,4 +36,4 @@ function NotFound() {
   );
 }
 
-export default NotFound;
+export default Dashboard_Mobile;

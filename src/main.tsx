@@ -20,17 +20,20 @@ import {
 import ErrorBoundary from './ErrorBoundary.tsx';
 /**React Query */
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { 
+  QueryClient, 
+  QueryClientProvider 
+} from '@tanstack/react-query';
 /**Pages*/
-import Home from './pages/Home.tsx';
-import Auth from './pages/Auth.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import Auth from './pages/Auth.tsx';
+import Learn from './pages/Learn.tsx';
 import Profile from './pages/Profile.tsx';
 import NotFound from './pages/NotFound.tsx';
 // import Dashboard_Admin from './pages/Admin.Dashboard.tsx';
 /**Auth Components */
-import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
-import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
+//import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
+//import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
 import A_Guest_Register from './components/auth/guest/A_Guest.Register.tsx';
 import A_Guest_Login from './components/auth/guest/A_Guest.Login.tsx';
 import A_Guest_Account_Confirmation from './components/auth/guest/A_Guest.Account_Confirmation.tsx';
@@ -38,45 +41,44 @@ import A_Guest_Account_Confirmation_Error from './components/auth/guest/A_Guest.
 import A_Guest_Account_Confirmation_Status from './components/auth/guest/A_Guest.Account_Confirmation_Status.tsx';
 import A_Guest_Account_Confirmation_ReSend from './components/auth/guest/A_Guest.Account_Confirmation_ReSend.tsx';
 import A_Guest_Account_Not_Found from './components/auth/guest/A_Guest.Account_Not_Found.tsx';
-import A_User_Register from './components/auth/A_User.Register.tsx';
-import A_User_Login from './components/auth/A_User.Login.tsx';
-//import H_About from './layout/Layout.H_About';
-/**Layouts | Dashboard Pages*/
-import D_Home from './layout/dashboard/Layout.D_Home';
-import D_Code from './layout/dashboard/Layout.D_Code';
-import D_Categories from './layout/dashboard/Layout.D_Categories';
-import D_Plans from './layout/dashboard/Layout.D_Plans';
-import D_Calendar from './layout/dashboard/Layout.D_Calendar';
-import D_Docs from './layout/dashboard/Layout.D_Docs';
-import D_Notes from './layout/dashboard/Layout.D_Notes';
-import D_Search from './layout/dashboard/Layout.D_Search';
-import D_Settings from './layout/dashboard/Layout.D_Settings';
-import D_Settings_User from './layout/dashboard/Layout.D_Settings_User';
+//import A_User_Register from './components/auth/A_User.Register.tsx';
+//import A_User_Login from './components/auth/A_User.Login.tsx';
+/**Layouts | Learn Pages*/
+import L_Home from './layout/dashboard/learn/Layout.L_Home';
+import L_Code from './layout/dashboard/learn/Layout.L_Code';
+import L_Categories from './layout/dashboard/learn/Layout.L_Categories';
+import L_Plans from './layout/dashboard/learn/Layout.L_Plans';
+import L_Calendar from './layout/dashboard/learn/Layout.L_Calendar';
+import L_Docs from './layout/dashboard/learn/Layout.L_Docs';
+import L_Notes from './layout/dashboard/learn/Layout.L_Notes';
+import L_Search from './layout/dashboard/learn/Layout.L_Search';
+import L_Settings from './layout/dashboard/learn/Layout.L_Settings';
+import L_Settings_User from './layout/dashboard/learn/Layout.L_Settings_User';
 
 const router = Router(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Home />} errorElement={<ErrorBoundary />}/>
-      <Route path="/learn" element={<Dashboard />}>
-        <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />} />
-        <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />} />
-        <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />} />
-        <Route path="plans" element={<D_Plans />} errorElement={<ErrorBoundary />} />
-        <Route path="calendar" element={<D_Calendar />} errorElement={<ErrorBoundary />} />
-        <Route path="docs" element={<D_Docs />} errorElement={<ErrorBoundary />} />
-        <Route path="notes" element={<D_Notes />} errorElement={<ErrorBoundary />} />
-        <Route path="search" element={<D_Search />} errorElement={<ErrorBoundary />} />
-        <Route path="settings/user" element={<D_Settings_User />} errorElement={<ErrorBoundary />} />
-        <Route path="settings/dashboard" element={<D_Settings />} errorElement={<ErrorBoundary />} />
-        <Route path="*" element={<D_Home />} errorElement={<ErrorBoundary />} />
+      <Route path="/" element={<Dashboard />} errorElement={<ErrorBoundary />}/>
+      <Route path="/learn" element={<Learn />}>
+        <Route path="" element={<L_Home />} errorElement={<ErrorBoundary />} />
+        <Route path="code" element={<L_Code />} errorElement={<ErrorBoundary />} />
+        <Route path="categories" element={<L_Categories />} errorElement={<ErrorBoundary />} />
+        <Route path="plans" element={<L_Plans />} errorElement={<ErrorBoundary />} />
+        <Route path="calendar" element={<L_Calendar />} errorElement={<ErrorBoundary />} />
+        <Route path="docs" element={<L_Docs />} errorElement={<ErrorBoundary />} />
+        <Route path="notes" element={<L_Notes />} errorElement={<ErrorBoundary />} />
+        <Route path="search" element={<L_Search />} errorElement={<ErrorBoundary />} />
+        <Route path="settings/user" element={<L_Settings_User />} errorElement={<ErrorBoundary />} />
+        <Route path="settings/dashboard" element={<L_Settings />} errorElement={<ErrorBoundary />} />
+        <Route path="*" element={<L_Home />} errorElement={<ErrorBoundary />} />
       </Route>
        <Route path="/auth" element={<Auth />}>
-        <Route path="admin/signup" element={<A_Admin_Register />} errorElement={<ErrorBoundary />} />
-        <Route path="admin/login" element={<A_Admin_Login />} errorElement={<ErrorBoundary />} />
+        {/* <Route path="admin/signup" element={<A_Admin_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="admin/login" element={<A_Admin_Login />} errorElement={<ErrorBoundary />} /> */}
         <Route path="guest/signup" element={<A_Guest_Register />} errorElement={<ErrorBoundary />} />
         <Route path="guest/login" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
-        <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
-        <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} />
+        {/* <Route path="user/signup" element={<A_User_Register />} errorElement={<ErrorBoundary />} />
+        <Route path="user/login" element={<A_User_Login />} errorElement={<ErrorBoundary />} /> */}
         <Route path="*" element={<A_Guest_Login />} errorElement={<ErrorBoundary />} />
       </Route>
       <Route path="/auth/account/" element={<Auth />}>
@@ -95,7 +97,7 @@ const router = Router(
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route> */}
       <Route path="404" element={<NotFound />} errorElement={<ErrorBoundary />} />
-      <Route path="*" element={<Home />} errorElement={<ErrorBoundary />} />
+      <Route path="*" element={<Dashboard />} errorElement={<ErrorBoundary />} />
     </Route>
   )
 );
