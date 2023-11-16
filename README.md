@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1 align="center" >
-    <img src="src/assets/campfire-svgrepo-com.svg" alt="logo" height='30' width='30' >
+    <img src="src/assets/logo/campfire-svgrepo-com.svg" alt="logo" height='30' width='30' >
     <a href="https://recodecamp-web.vercel.app/" class="title">
     ReCodeCamp
     </a>
