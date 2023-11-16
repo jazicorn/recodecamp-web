@@ -4,6 +4,8 @@ import { ThemeContext } from '../context/ThemeContext';
 import Home_Mobile from './Home.Mobile';
 /**Components */
 import Header from '../components/header/Header';
+/**Layouts | Home Pages*/
+import Layout_Home from '../layout/Layout.H_Banner';
 /**Hooks */
 import Transition from '../hooks/useTransition';
 import useWindowSize from '../hooks/useWindowSize';
@@ -26,7 +28,7 @@ function Home() {
         <Header />
         <div className={`${darkMode ? 'home-outlet-dark' : 'home-outlet-light'} home-outlet`}>
           <div className={`${darkMode ? '' : ''} `}>
-            <Outlet />
+            <Layout_Home/>
           </div>
           <aside className={`${darkMode ? '' : ''} `}>{''}</aside>
         </div>

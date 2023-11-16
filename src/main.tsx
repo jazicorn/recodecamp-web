@@ -40,8 +40,6 @@ import A_Guest_Account_Confirmation_ReSend from './components/auth/guest/A_Guest
 import A_Guest_Account_Not_Found from './components/auth/guest/A_Guest.Account_Not_Found.tsx';
 import A_User_Register from './components/auth/A_User.Register.tsx';
 import A_User_Login from './components/auth/A_User.Login.tsx';
-/**Layouts | Home Pages*/
-import H_Home from './layout/Layout.H_Banner';
 //import H_About from './layout/Layout.H_About';
 /**Layouts | Dashboard Pages*/
 import D_Home from './layout/dashboard/Layout.D_Home';
@@ -58,10 +56,7 @@ import D_Settings_User from './layout/dashboard/Layout.D_Settings_User';
 const router = Router(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Home />} errorElement={<ErrorBoundary />}>
-        <Route path="" element={<H_Home />} errorElement={<ErrorBoundary />} />
-        <Route path="*" element={<H_Home />} errorElement={<ErrorBoundary />} />
-      </Route>
+      <Route path="/" element={<Home />} errorElement={<ErrorBoundary />}/>
       <Route path="/learn" element={<Dashboard />}>
         <Route path="" element={<D_Home />} errorElement={<ErrorBoundary />} />
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />} />
@@ -99,9 +94,6 @@ const router = Router(
         <Route path="code" element={<D_Code />} errorElement={<ErrorBoundary />}/>
         <Route path="categories" element={<D_Categories />} errorElement={<ErrorBoundary />}/>
       </Route> */}
-      <Route path="/support/:tag" element={<Home />} errorElement={<ErrorBoundary />}>
-        <Route path="*" element={<H_Home />} errorElement={<ErrorBoundary />} />
-      </Route>
       <Route path="404" element={<NotFound />} errorElement={<ErrorBoundary />} />
       <Route path="*" element={<Home />} errorElement={<ErrorBoundary />} />
     </Route>
