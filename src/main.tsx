@@ -31,13 +31,13 @@ import NotFound from './pages/NotFound.tsx';
 /**Auth Components */
 import A_Admin_Login from './components/auth/A_Admin.Login.tsx';
 import A_Admin_Register from './components/auth/A_Admin.Register.tsx';
-import A_Guest_Register from './components/auth/A_Guest.Register.tsx';
-import A_Guest_Login from './components/auth/A_Guest.Login.tsx';
-import A_Guest_Account_Confirmation from './components/auth/A_Guest.Account_Confirmation.tsx';
-import A_Guest_Account_Confirmation_Error from './components/auth/A_Guest.Account_Confirmation_Error.tsx';
-import A_Guest_Account_Confirmation_Status from './components/auth/A_Guest.Account_Confirmation_Status.tsx';
-import A_Guest_Account_Confirmation_ReSend from './components/auth/A_Guest.Account_Confirmation_ReSend.tsx';
-import A_Guest_Account_Not_Found from './components/auth/A_Guest.Account_Not_Found.tsx';
+import A_Guest_Register from './components/auth/guest/A_Guest.Register.tsx';
+import A_Guest_Login from './components/auth/guest/A_Guest.Login.tsx';
+import A_Guest_Account_Confirmation from './components/auth/guest/A_Guest.Account_Confirmation.tsx';
+import A_Guest_Account_Confirmation_Error from './components/auth/guest/A_Guest.Account_Confirmation_Error.tsx';
+import A_Guest_Account_Confirmation_Status from './components/auth/guest/A_Guest.Account_Confirmation_Status.tsx';
+import A_Guest_Account_Confirmation_ReSend from './components/auth/guest/A_Guest.Account_Confirmation_ReSend.tsx';
+import A_Guest_Account_Not_Found from './components/auth/guest/A_Guest.Account_Not_Found.tsx';
 import A_User_Register from './components/auth/A_User.Register.tsx';
 import A_User_Login from './components/auth/A_User.Login.tsx';
 /**Layouts | Home Pages*/

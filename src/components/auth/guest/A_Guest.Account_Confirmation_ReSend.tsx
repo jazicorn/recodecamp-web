@@ -4,29 +4,38 @@ import {
   useState, 
   useCallback 
 } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { 
+  Link, 
+  useNavigate 
+} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 // utils
-import { getDate } from '../../utils/date';
+import { getDate } from '../../../utils/date';
 import { 
   setEmailConfirmationLocalDataResend 
-} from '../../utils/userConfirmation';
+} from '../../../utils/userConfirmation';
 // images
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Logo } from '../../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
-import { IconX, IconCheck } from '@tabler/icons-react';
+import {
+  IconX, 
+  IconCheck 
+} from '@tabler/icons-react';
 /** React Redux Hooks */
-//import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
+//import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { 
+  useAppDispatch, 
+  useAppSelector 
+} from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
 // import {
 //   menuUser,
-// } from '../../redux/slices/dashboardSlice.ts';
+// } from '../../../redux/slices/dashboardSlice.ts';
 import {
   userLogin,
   userComponentScreenLoader,
@@ -37,11 +46,11 @@ import {
   fetchUserStatusLogin,
   fetchUserComponentScreenLoader,
   fetchUserStatusAccountEmailConfirmedResend
-} from '../../redux/slices/authSlice.ts';
+} from '../../../redux/slices/authSlice.ts';
 /** Custom Hooks */
-import { LoadingDashboardXL } from './A_Loader.tsx';
+import { LoadingDashboardXL } from '../A_Loader.tsx';
 /**Constants */
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
+import { _DEFAULT_USER } from '../../../utils/constants/constantsUser';
 /** Font Awesome */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faHandPointRight, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';

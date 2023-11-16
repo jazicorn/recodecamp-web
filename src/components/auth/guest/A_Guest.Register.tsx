@@ -4,25 +4,36 @@ import {
   useState, 
   useEffect 
 } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { 
+  Link, 
+  useNavigate 
+} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 // utils
-import { getDate } from '../../utils/date';
-import { confirmation, confirmationDate, confirmationCount, setEmailConfirmationLocalData } from '../../utils/userConfirmation';
+import { getDate } from '../../../utils/date';
+import { 
+  confirmation, 
+  confirmationDate, 
+  confirmationCount, 
+  setEmailConfirmationLocalData 
+} from '../../../utils/userConfirmation';
 // images
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Logo } from '../../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 import Emoji from 'react-emojis';
 /** React Redux Hooks */
-//import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
+//import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { 
+  useAppDispatch, 
+  useAppSelector 
+} from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
 import {
   userRegister,
   userComponentScreenLoader,
@@ -33,12 +44,12 @@ import {
   fetchUserStatusRegister,
   fetchUserComponentScreenLoader,
   fetchUserStatusAccountConfirmEmail,
-} from '../../redux/slices/authSlice.ts';
+} from '../../../redux/slices/authSlice.ts';
 /** Constants */
-import { _DEFAULT_USER } from '../../utils/constants/constantsUser';
-import { _USER_ROUTE_ACCOUNT_CONFIRMATION } from '../../utils/constants/constantsRoutes';
+import { _DEFAULT_USER } from '../../../utils/constants/constantsUser';
+import { _USER_ROUTE_ACCOUNT_CONFIRMATION } from '../../../utils/constants/constantsRoutes';
 /** Components */
-import { LoadingDashboardXL } from './A_Loader.tsx';
+import { LoadingDashboardXL } from '../A_Loader.tsx';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 // import * as z from 'zod';

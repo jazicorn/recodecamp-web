@@ -10,28 +10,31 @@ import {
   useParams 
 } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 // hooks
-import useWindowSize from '../../hooks/useWindowSize';
-import Transition from '../../hooks/useTransition';
+import useWindowSize from '../../../hooks/useWindowSize';
+import Transition from '../../../hooks/useTransition';
 // images
-import { ReactComponent as Logo } from '../../assets/icons/logos/campfire-2-svgrepo-com.svg';
+import { ReactComponent as Logo } from '../../../assets/icons/logos/campfire-2-svgrepo-com.svg';
 /** Notifications */
 import { notifications } from '@mantine/notifications';
 import { IconX, IconCheck } from '@tabler/icons-react';
 import Emoji from 'react-emojis';
 /** React Redux Hooks */
-//import { useAppDispatch } from '../../redux/reduxHooks.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks.ts';
-import type { RootState } from '../../redux/store.ts';
+//import { useAppDispatch } from '../../../redux/reduxHooks.ts';
+import { 
+  useAppDispatch, 
+  useAppSelector 
+} from '../../../redux/reduxHooks.ts';
+import type { RootState } from '../../../redux/store.ts';
 import {
   userAccountValidation,
   fetchUserErrorAccountValidate,
   fetchUserStatusAccountValidate,
   fetchUserStatusAccountEmailConfirmed
-} from '../../redux/slices/authSlice.ts';
+} from '../../../redux/slices/authSlice.ts';
 /** Components */
-import { LoadingDashboardXL } from './A_Loader.tsx';
+import { LoadingDashboardXL } from '../A_Loader.tsx';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 // import * as z from 'zod';
