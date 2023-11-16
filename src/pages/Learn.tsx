@@ -47,7 +47,7 @@ import {
 } from '../redux/slices/authSlice.ts';
 /**Custom Helpers */
 import { _DEFAULT_USER } from '../utils/constants/constantsUser';
-import { LoadingDashboardXL } from '../components/dashboard/learn/L_loading';
+import { LoadingDashboardXL } from '../components/dashboard/learn/L_Loading';
 /** API url | Custom env mandatory to begin with VITE
  * https://vitejs.dev/guide/env-and-mode.html#env-files */
 const baseURL = import.meta.env.VITE_API_BASE_URL;
