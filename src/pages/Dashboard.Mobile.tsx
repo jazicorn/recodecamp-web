@@ -8,7 +8,7 @@ const Dashboard_Mobile = () => {
   const darkMode = state.darkMode;
 
   return (
-    <div className="tw-dark">
+    <>
       <div className={`${darkMode ? 'tw-bg-campfire-dark' : 'tw-bg-campfire-light'} tw-bg-campfire-container`} />
       <article
         className={`${
@@ -32,7 +32,7 @@ const Dashboard_Mobile = () => {
           </a>
         </footer>
       </article>
-    </div>
+    </>
   );
 }
 

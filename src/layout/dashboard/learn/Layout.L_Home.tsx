@@ -38,8 +38,8 @@ const Layout_L_Home = () => {
       {/**Page Content | Position: Relative */}
       {isDesktopMDXL || isDesktopXL ? (
         <main
-          className={`${darkMode ? 'layout-home-dark' : 'layout-home-light'} 
-            layout-home`}
+          className={`${darkMode ? 'layout-learn-home-dark' : 'layout-learn-home-light'} 
+            layout-learn-home`}
         >
           <section className="tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1">
             <L_Home_Header />
@@ -53,8 +53,8 @@ const Layout_L_Home = () => {
         </main>
       ) : (
         <main
-          className={`${darkMode ? 'layout-home-dark' : 'layout-home-light'} 
-          layout-home-mobile tw-px-2`}
+          className={`${darkMode ? 'layout-learn-home-dark' : 'layout-learn-home-light'} 
+          layout-learn-home-mobile tw-px-2`}
         >
           <section className="tw-row-start-1 tw-row-end-1">
             <L_Home_Header />

@@ -38,8 +38,7 @@ const Layout_L_Notes = () => {
       {/**Page Content | Position: Relative */}
       {isDesktopMDXL || isDesktopXL ? (
         <main
-          className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
-          tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
+          className={`tw-bg-transparent tw-w-full tw-h-full [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-notes tw-grid-cols-layout-dashboard-notes tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}
         >
           <section className="tw-h-full">
@@ -48,8 +47,7 @@ const Layout_L_Notes = () => {
         </main>
       ) : (
         <main
-          className={`${darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'} 
-          tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
+          className={`tw-bg-transparent tw-pb-1 tw-w-full tw-h-full tw-grow [&>*]:tw-backdrop-blur-sm
           tw-grid tw-grid-rows-layout-dashboard-notes-mobile tw-grid-cols-layout-dashboard-notes-mobile tw-gap-1 [&>*]:tw-rounded tw-border tw-border-transparent`}
         >
           <section className="tw-h-full">

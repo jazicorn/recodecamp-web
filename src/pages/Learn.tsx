@@ -217,7 +217,7 @@ const Learn = () => {
   return (
     <div className="tw-h-screen">
       {/**Background | Position: Absolute */}
-      <div className={`${darkMode ? 'home-bg-dark' : 'home-bg-light'} home-bg-container`} />
+      <div className={`${darkMode ? 'dashboard-bg-dark' : 'dashboard-bg-light'} dashboard-bg-container`} />
       {/**Page Content | Position: Relative */}
       <article
         className={`${isDesktopMDXL || isDesktopXL ? 'tw-min-w-[51.2em]' : 'tw-min-w-[28.5em]'} dashboard-article`}
@@ -225,7 +225,7 @@ const Learn = () => {
         <header className="tw-w-full">
           <L_Header />
         </header>
-        <header className="tw-w-full">{path !== '/learn' && <L_Header_Sub />}</header>
+        <header className="tw-w-full ">{path !== '/learn' && <L_Header_Sub />}</header>
         {loading || fetchScreenLoader ? (
           <div
             className={`${
@@ -241,16 +241,16 @@ const Learn = () => {
                 {path === '/learn' ? (
                   <main
                     className={`${
-                      darkMode ? 'dashboard-container-dark' : 'dashboard-container-light'
-                    } dashboard-container-desktop-learn`}
+                      darkMode ? 'dashboard-learn-container-dark' : 'dashboard-learn-container-light'
+                    } dashboard-learn-container-desktop-learn`}
                   >
                     <Outlet />
                   </main>
                 ) : (
                   <main
                     className={`${
-                      darkMode ? 'dashboard-container-dark' : 'dashboard-container-light'
-                    } dashboard-container-desktop`}
+                      darkMode ? 'dashboard-learn-container-dark' : 'dashboard-learn-container-light'
+                    } dashboard-learn-container-desktop tw-pt-1`}
                   >
                     <section className={`tw-row-start-1 tw-row-end-2 tw-col-start-1 tw-col-end-1 `}>
                       <L_Navigation />
@@ -264,8 +264,8 @@ const Learn = () => {
             ) : (
               <main
                 className={`${
-                  darkMode ? 'dashboard-container-dark' : 'dashboard-container-light'
-                } tw-px-5 tw-py-2 tw-w-full`}
+                  darkMode ? 'dashboard-learn-container-dark' : 'dashboard-learn-container-light'
+                } dashboard-learn-mobile-container tw-px-5 tw-py-2 tw-w-full`}
               >
                 <section className="tw-col-start-1 tw-col-end-1 tw-row-start-1 tw-row-end-1 tw-z-20">
                   <L_Navigation_Mobile />

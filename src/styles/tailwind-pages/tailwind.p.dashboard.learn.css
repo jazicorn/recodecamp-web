@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .dashboard-learn-article {
+    @apply tw-relative tw-z-10 tw-w-full tw-h-full tw-flex tw-flex-col tw-grow tw-place-items-center tw-font-space_mono;
+  }
+  .dashboard-learn-article > div {
+    @apply tw-w-full tw-h-full tw-pt-1;
+  }
+  .dashboard-learn-article > div > main > * {
+    @apply tw-border tw-border-tranparent tw-rounded tw-backdrop-blur-sm;
+  }
+  .dashboard-learn-container-desktop-learn {
+    @apply tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-border tw-border-transparent tw-rounded tw-gap-1 tw-px-5;
+  }
+  .dashboard-learn-container-desktop {
+    @apply tw-grid-row-dashboard tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-min-h-full tw-grid tw-gap-1 tw-px-5 tw-border tw-border-transparent tw-rounded;
+  }
+  .dashboard-learn-container-light > section {
+    @apply tw-bg-neutral-300/70 tw-border tw-border-transparent tw-rounded;
+  }
+  .dashboard-learn-container-dark > section {
+    @apply tw-bg-neutral-900/70 tw-border tw-border-transparent tw-rounded;
+  }
+  .dashboard-learn-mobile-container {
+    @apply tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-border tw-border-transparent tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-pt-1 tw-px-5;
+  }
+  .dashboard-learn-mobile-container > * {
+    @apply tw-rounded tw-backdrop-blur-sm;
+  }
+}

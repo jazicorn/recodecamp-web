@@ -3,31 +3,50 @@
 @tailwind utilities;
 
 @layer components {
+  .dashboard-container {
+    @apply tw-font-space_mono tw-min-h-[40em];
+  }
+  .dashboard-bg-container {
+    @apply tw-fixed tw-bg-cover tw-bg-center tw-bg-no-repeat tw-h-full tw-w-full;
+  }
+  .dashboard-bg-light {
+    @apply custom-bg-landscape tw-bg-blend-overlay tw-opacity-50;
+  }
+  .dashboard-bg-dark {
+    @apply custom-bg-landscape tw-bg-blend-overlay tw-bg-blend-darken tw-brightness-60;
+  }
   .dashboard-article {
-    @apply tw-relative tw-z-10 tw-w-full tw-h-full tw-flex tw-flex-col tw-grow tw-place-items-center tw-font-space_mono;
+    @apply tw-relative tw-bg-transparent tw-h-screen tw-w-screen tw-flex tw-flex-col tw-place-content-between tw-min-h-[40em];
   }
-  .dashboard-article > div {
-    @apply tw-w-full tw-h-full tw-pt-1;
+  .dashboard-outlet {
+    @apply tw-border-y-2 tw-h-full tw-flex tw-flex-row;
   }
-  .dashboard-article > div > main > * {
-    @apply tw-rounded tw-backdrop-blur-sm;
+  .dashboard-outlet-dark {
+    @apply tw-border-neutral-500;
   }
-  .dashboard-container-desktop-learn {
-    @apply tw-pb-5 tw-mt-1 tw-w-full tw-h-full tw-border tw-border-transparent tw-gap-1 tw-px-5;
+  .dashboard-outlet-light {
+    @apply tw-border-neutral-800;
   }
-  .dashboard-container-desktop {
-    @apply tw-grid-row-dashboard tw-grid-cols-dashboard tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-min-h-full tw-grid tw-gap-1 tw-px-5 tw-border tw-border-transparent;
+  .dashboard-outlet > div {
+    @apply tw-basis-9/12 tw-flex tw-flex-col;
   }
-  .dashboard-container-light > section {
-    @apply tw-bg-neutral-400/50;
+  .dashboard-outlet > aside {
+    @apply tw-border-l tw-flex tw-basis-3/12;
   }
-  .dashboard-container-dark > section {
-    @apply tw-bg-neutral-900/50;
+  .dashboard-outlet-dark > aside {
+    @apply tw-bg-neutral-700 tw-border-neutral-500 custom-bg-pattern-darker;
   }
-  .dashboard-mobile-container {
-    @apply tw-bg-transparent tw-pb-5 tw-w-full tw-h-full tw-border tw-border-transparent tw-grid tw-grid-rows-dashboard-mobile tw-grid-cols-dashboard-mobile tw-gap-1 tw-pt-1 tw-px-5;
+  .dashboard-outlet-light > aside {
+    @apply tw-bg-neutral-50 tw-border-neutral-800 custom-bg-pattern-lightest;
   }
-  .dashboard-mobile-container > * {
-    @apply tw-rounded tw-backdrop-blur-sm;
+  .dashboard-footer {
+    @apply tw-bg-campfire-neutral tw-flex tw-flex-col tw-place-items-center tw-w-full tw-h-[28px] tw-pr-3;
   }
+  .dashboard-footer-light {
+    @apply tw-bg-campfire-blue-100 hover:tw-text-neutral-400;
+  }
+  .dashboard-footer-dark {
+    @apply tw-bg-campfire-neutral-800 tw-text-campfire-neutral-200 hover:tw-text-campfire-blue;
+  }
+  /* ... */
 }

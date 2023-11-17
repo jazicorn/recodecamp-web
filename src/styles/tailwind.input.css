@@ -15,15 +15,15 @@
 @import './tailwind-style/tailwind.grid-row.css';
 /* Tailwind Pages */
 @import './tailwind-pages/tailwind.p.template.css';
-@import './tailwind-pages/tailwind.p.home.css';
 @import './tailwind-pages/tailwind.p.dashboard.css';
+@import './tailwind-pages/tailwind.p.dashboard.learn.css';
 /* Tailwind Layouts */
-@import './tailwind-layouts/tailwind.d.layout.template.css';
-@import './tailwind-layouts/tailwind.d.layout.code.css';
-@import './tailwind-layouts/tailwind.d.layout.home.css';
+@import './tailwind-layouts/tailwind.d.layout.learn.template.css';
+@import './tailwind-layouts/tailwind.d.layout.learn.code.css';
+@import './tailwind-layouts/tailwind.d.layout.learn.home.css';
 /* Tailwind Components*/
-@import './tailwind-components/tailwind.d.home.css';
-@import './tailwind-components/tailwind.d.settings.user.css';
+@import './tailwind-components/tailwind.d.learn.home.css';
+@import './tailwind-components/tailwind.d.learn.settings.user.css';
 
 :root {
   line-height: 1.5;

@@ -131,7 +131,7 @@ const Layout_L_Code = () => {
       <div className="tw-h-full">
         {/**Page Content | Position: Relative */}
         {isDesktopLG ? (
-          <main className={`${darkMode ? 'layout-container-dark' : 'layout-container-light'} layout-code`}>
+          <main className={`${darkMode ? 'layout-learn-container-dark' : 'layout-learn-container-light'} layout-learn-code`}>
             <section className="tw-col-start-1 tw-col-end-3 tw-row-start-1 tw-row-end-1">
               <L_Route />
             </section>
@@ -149,7 +149,7 @@ const Layout_L_Code = () => {
             </section>
           </main>
         ) : (
-          <main className={`${darkMode ? 'layout-container-dark' : 'layout-container-light'} layout-code-mobile`}>
+          <main className={`${darkMode ? 'layout-learn-container-dark' : 'layout-learn-container-light'} layout-learn-code-mobile`}>
             <section className="tw-row-start-1 tw-row-end-1">
               <L_Route />
             </section>

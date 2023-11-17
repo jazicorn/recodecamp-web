@@ -57,22 +57,22 @@ const L_Calendar = () => {
   }
 
   return (
-    <div className={`${darkMode ? '' : ''} layout-template-container`}>
-      <div className={`${darkMode ? 'layout-template-dark' : 'layout-template-light'} layout-template`}>
+    <div className={`${darkMode ? '' : ''} layout-learn-template-container`}>
+      <div className={`${darkMode ? 'layout-learn-template-dark' : 'layout-learn-template-light'} layout-learn-template`}>
         <article className={`${darkMode ? '' : ''}`}>
           <Transition>
-            <h3 className={`${darkMode ? '' : ''} layout-template-header`}>Calendar</h3>
+            <h3 className={`${darkMode ? '' : ''} layout-learn-template-header`}>Calendar</h3>
           </Transition>
           {!authenticated ? (
             <Transition>
               <main className={`${darkMode ? '' : ''} tw-pl-2.5`}>
                 <p>
                   Want to save your progress?
-                  <span id="dashboard-template-call-to-action" className={`${darkMode ? '' : ''}`}>
+                  <span id="dashboard-learn-template-call-to-action" className={`${darkMode ? '' : ''}`}>
                     <Link to="/auth/guest/login">Login</Link>
                   </span>
                   or
-                  <span id="dashboard-template-call-to-action" className={`${darkMode ? '' : ''}`}>
+                  <span id="dashboard-learn-template-call-to-action" className={`${darkMode ? '' : ''}`}>
                     <Link to="/auth/guest/signup">Register</Link>
                   </span>
                 </p>
@@ -80,7 +80,7 @@ const L_Calendar = () => {
             </Transition>
           ) : (
             <main className="tw-px-4">
-              <h4 id="dashboard-template-coming-soon" className="">
+              <h4 id="dashboard-learn-template-coming-soon" className="">
                 🏗️&nbsp;Coming Soon...
               </h4>
             </main>

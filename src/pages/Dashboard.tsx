@@ -21,19 +21,19 @@ const Dashboard = () => {
   if (isMobile) return <Dashboard_Mobile/>;
 
   return (
-    <div className="home-container">
-      <div className={`${darkMode ? 'home-bg-dark' : 'home-bg-light'} home-bg-container`} />
-      <article className="home-article">
+    <div className="dashboard-container">
+      <div className={`${darkMode ? 'dashboard-bg-dark' : 'dashboard-bg-light'} dashboard-bg-container`} />
+      <article className="dashboard-article">
         {/** Navigation */}
         <Header />
-        <div className={`${darkMode ? 'home-outlet-dark' : 'home-outlet-light'} home-outlet`}>
+        <div className={`${darkMode ? 'dashboard-outlet-dark' : 'dashboard-outlet-light'} dashboard-outlet`}>
           <div className={`${darkMode ? '' : ''} `}>
             <Layout_Dashboard/>
           </div>
           <aside className={`${darkMode ? '' : ''} `}>{''}</aside>
         </div>
         {/**Footer */}
-        <footer className={`${darkMode ? 'home-footer-dark' : 'home-footer-light'} home-footer `}>
+        <footer className={`${darkMode ? 'dashboard-footer-dark' : 'dashboard-footer-light'} dashboard-footer `}>
           <Transition>
             <a href="https://github.com/jazicorn" className="tw-pr-2">
               created by Jazicorn

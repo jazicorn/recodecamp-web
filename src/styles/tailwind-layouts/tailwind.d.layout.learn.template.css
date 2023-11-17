@@ -3,34 +3,34 @@
 @tailwind utilities;
 
 @layer components {
-  .layout-container-light > * {
+  .layout-learn-container-light > * {
     @apply tw-bg-neutral-300/50;
   }
-  .layout-container-dark > * {
+  .layout-learn-container-dark > * {
     @apply tw-bg-neutral-900/50;
   }
-  .layout-template-container {
-    @apply tw-w-full tw-h-full tw-p-2;
+  .layout-learn-template-container {
+    @apply tw-w-full tw-h-full tw-p-2 tw-border-transparent tw-rounded ;
   }
-  .layout-template-header {
+  .layout-learn-template-header {
     @apply tw-border-campfire-purple-light tw-border-b tw-text-2xl tw-h-[36px] tw-w-full tw-pl-2 tw-mb-4;
   }
-  .layout-template {
-    @apply tw-w-full tw-h-full;
+  .layout-learn-template {
+    @apply tw-w-full tw-h-full ;
   }
-  .layout-template-dark {
+  .layout-learn-template-dark {
     @apply tw-bg-campfire-neutral-600/50 tw-text-campfire-neutral-300;
   }
-  .layout-template-light {
+  .layout-learn-template-light {
     @apply tw-bg-campfire-neutral-200/50 tw-text-campfire-neutral-700;
   }
-  .layout-template > article {
+  .layout-learn-template > article {
     @apply tw-py-4 tw-h-full tw-w-full tw-flex tw-flex-col;
   }
-  #dashboard-template-call-to-action {
+  #dashboard-learn-template-call-to-action {
     @apply hover:tw-text-campfire-purple-light tw-text-campfire-blue tw-px-2;
   }
-  #dashboard-template-coming-soon {
+  #dashboard-learn-template-coming-soon {
     @apply tw-text-xl tw-text-campfire-blue;
   }
 }

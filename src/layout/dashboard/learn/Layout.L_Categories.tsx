@@ -153,9 +153,7 @@ const Layout_L_Categories = () => {
   if (isFetching || isLoading)
     return (
       <div
-        className={`${
-          darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'
-        } tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}
+        className={`tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}
       >
         <LoadingDashboardXL />
       </div>
@@ -166,9 +164,7 @@ const Layout_L_Categories = () => {
   if (isSuccess && loading) {
     return (
       <div
-        className={`${
-          darkMode ? '[&>*]:tw-bg-neutral-700/50' : '[&>*]:tw-bg-neutral-300/50'
-        } tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}
+        className={`tw-text-transparent tw-flex tw-flex-col tw-w-full tw-h-full tw-place-self-center tw-place-content-center tw-place-items-center`}
       >
         <LoadingDashboardXL />
       </div>
