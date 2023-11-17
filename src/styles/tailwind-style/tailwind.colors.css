@@ -12,19 +12,19 @@
     color: #a3a3a3;
   }
   .tw-campfire-neutral-50 {
-    color: #f5f5f5;
+    color: #fafafa;
   }
   .tw-campfire-neutral-100 {
-    color: #e5e5e5;
+    color: #f5f5f5;
   }
   .tw-campfire-neutral-200 {
-    color: #a3a3a3;
+    color: #e5e5e5;
   }
   .tw-campfire-neutral-300 {
-    color: #737373;
+    color: #d4d4d4;
   }
   .tw-campfire-neutral-400 {
-    color: #525252;
+    color: #a3a3a3;
   }
   .tw-campfire-neutral-500 {
     color: #737373;
@@ -112,8 +112,14 @@
   .tw-campfire-purple-500 {
     color: #8b5cf6;
   }
+  .tw-campfire-purple-600 {
+    color: #7c3aed;
+  }
   .tw-campfire-purple-700 {
     color: #6d28d9;
+  }
+  .tw-campfire-purple-800 {
+    color: #5b21b6;
   }
   .tw-campfire-purple-900 {
     color: #4c1d95;
