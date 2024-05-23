@@ -319,29 +319,7 @@ const defaultState: AuthState = {
     email: "",
     passcode: ""
   },
-  user: {
-    _ID: '123-456-789',
-    _CREATED_AT: new Date().toISOString(),
-    _UPDATED_AT: new Date().toISOString(),
-    _ACCESS_TOKEN: '',
-    _FIRST_LOGIN: false,
-    _ADMIN: false,
-    _SUBSCRIPTION: '1000, Unknown',
-    _IP_ADDRESS: '',
-    _PASSCODE: '',
-    _PASSCODE_CONFIRMED: false,
-    _EMAIL: 'john@doe.com',
-    _EMAIL_CONFIRMED: false,
-    _EMAIL_PASSCODE: '',
-    _PASSWORD: '',
-    _DEFAULT_LANGUAGE: 'javascript',
-    _DEFAULT_ROUTE: '',
-    _POINTS_TOTAL: 0,
-    _POINTS_JAVASCRIPT: 0,
-    _POINTS_JAVA: 0,
-    _POINTS_PYTHON: 0,
-    _COURSES: '',
-  },
+  user: _DEFAULT_USER,
   authenticated: false,
   status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusRegister: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
@@ -356,6 +334,7 @@ const defaultState: AuthState = {
   statusAccountPasswordReset: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusAccountEmailConfirmed: false, // true | false
   statusAccountEmailConfirmedResend: false, // true | false
+  statusResendPasswordEmailConfirmed: false, // true | false,
   error: null,
   errorRegister: null,
   errorLogin: null,
