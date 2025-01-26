@@ -18,7 +18,8 @@
 </p>
 
 <p id="about">
-API for Recodecamp can be found <a href="https://github.com/jazicorn/recodecamp-api" class="title">here</a>. 
+Auth API for Recodecamp can be found <a href="https://github.com/jazicorn/recodecamp-api" class="title">here</a>.
+Email API for Recodecamp can be found <a href="https://github.com/jazicorn/recodecamp-api-email" class="title">here</a>.  
 </p>
 
 ## Features
