@@ -12,30 +12,53 @@ export const dashboardLanguages = createAsyncThunk('dashboard/languages', async 
         'Content-Type': 'application/json',
         'Accept': 'application/json', 
       },
-      body: JSON.stringify(data),
     });
 
     const resJSON = await res.json();
+    //console.log("resJSON languages:\n", resJSON);
     return resJSON;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });
 
-export const dashboardCategories = createAsyncThunk('dashboard/categories', async (data, thunkAPI) => {
+export const dashboardCategories = createAsyncThunk('dashboard/categories', async (currentLanguage, thunkAPI) => {
   try {
-    const url = _CATEGORIES_ROUTE();
+    const url = _CATEGORIES_ROUTE(currentLanguage);
     const res = await fetch(url, {
       method: 'GET',
       headers: { 
         'Content-Type': 'application/json',
         'Accept': 'application/json', 
       },
-      body: JSON.stringify(data),
     });
 
     const resJSON = await res.json();
+    //console.log("resJSON categories:\n", resJSON)
     return resJSON;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const dashboardCategoriesMenu = createAsyncThunk('dashboard/categories/menu', async (data, thunkAPI) => {
+  try {
+    const url = _CATEGORIES_ROUTE(data.language);
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json', 
+      },
+    });
+
+    const resJSON = await res.json();
+    //console.log("resJSON categories:\n", resJSON)
+    return {
+      response: resJSON,
+      language: data.language,
+      category: data.category
+    };
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data);
   }
@@ -43,14 +66,13 @@ export const dashboardCategories = createAsyncThunk('dashboard/categories', asyn
 
 export const dashboardQuestion = createAsyncThunk('dashboard/question', async (data, thunkAPI) => {
   try {
-    const url = _QUESTION_ROUTE();
+    const url = _QUESTION_ROUTE(data.currentLanguage, data.getMenuRoute);
     const res = await fetch(url, {
       method: 'GET',
       headers: { 
         'Content-Type': 'application/json',
         'Accept': 'application/json', 
       },
-      body: JSON.stringify(data),
     });
 
     const resJSON = await res.json();
@@ -78,9 +100,11 @@ interface DashboardState {
   consoleMessage: string;
   statusDashboardQuestion: string;
   statusDashboardCategories: string;
+  statusDashboardCategoriesMenu: string;
   statusDashboardLanguages: string;
   errorDashboardQuestion: null | string;
   errorDashboardCategories: null | string;
+  errorDashboardCategoriesMenu: null | string;
   errorDashboardLanguages: null | string;
 }
 
@@ -101,9 +125,11 @@ const initialState: DashboardState = {
   consoleMessage: '',
   statusDashboardQuestion: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusDashboardCategories: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  statusDashboardCategoriesMenu: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   statusDashboardLanguages: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   errorDashboardQuestion: null,
   errorDashboardCategories: null,
+  errorDashboardCategoriesMenu: null,
   errorDashboardLanguages: null,
 };
 
@@ -165,6 +191,30 @@ export const dashboardSlice = createSlice({
       .addCase(dashboardCategories.rejected, (state, action) => {
         state.statusDashboardCategories = 'failed';
         state.errorDashboardCategories = action.error.message;
+      })
+      .addCase(dashboardCategoriesMenu.pending, (state, action) => {
+        state.statusDashboardCategoriesMenu = 'loading';
+      })
+      .addCase(dashboardCategoriesMenu.fulfilled, (state, action) => {
+        /** Set Language (Ex. Javascript) */
+        state.languages = action.payload.language;
+        /** Set Language (Ex. Javascript) Categories */
+        state.categories = action.payload.res.data;
+        /** Set Category Subject (Ex. Comments) */
+        const getMenuCategory = action.payload.category;
+        let results;
+        action.payload.response.data.find((item) => {
+          if (item.category[0] === getMenuCategory) {
+            results = item;
+          }
+        });
+        state.categoryInfo = results;
+        /** Set Categories Status */
+        state.statusDashboardCategoriesMenu = 'succeeded';
+      })
+      .addCase(dashboardCategoriesMenu.rejected, (state, action) => {
+        state.statusDashboardCategoriesMenu = 'failed';
+        state.errorDashboardCategoriesMenu = action.error.message;
       })
       .addCase(dashboardLanguages.pending, (state, action) => {
         state.statusDashboardLanguages = 'loading';
