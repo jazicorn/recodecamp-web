@@ -156,5 +156,5 @@
     "vite-plugin-cross-origin-isolation": "^0.1.6",
     "vite-tsconfig-paths": "^4.2.0"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@4.6.0"
 }
